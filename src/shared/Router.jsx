@@ -6,6 +6,7 @@ import ProfilePage from "../pages/profile/ProfilePage"
 import EditProfilePage from "../pages/profile/EditProfilePage"
 import DetailProfilePage from "../pages/profile/DetailProfilePage"
 import MainPage from "../pages/MainPage"
+import IntroPage from "../pages/IntroPage"
 
 const Router = () =>{
     return (
@@ -14,6 +15,7 @@ const Router = () =>{
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/sign_up" element={<SignUp/>}/>
             <Route path="/sign_up/email" element={<SignUpEmail/>}/>
             <Route path="/sign_up/email/nickname_set" element={<NicknameSet/>}/>
