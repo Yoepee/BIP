@@ -34,7 +34,7 @@ const Wrap = styled.div`
 const ItrText = styled.div`
   /* background-color: pink; */
   margin: 20%;
-  font-size: 1.3em;
+  font-size: 1.2em;
 `
 const Container = styled.div`
   /* background-color: whitesmoke; */
@@ -42,8 +42,7 @@ const Container = styled.div`
   margin: 20%;
 `
 const ItrBtn = styled.button`
-  background-color: skyblue;
-  margin: 10% 20%;
+  /* background-color: skyblue; */
   width: 100px;
   height: 30px;
   border: 1px solid gray;
