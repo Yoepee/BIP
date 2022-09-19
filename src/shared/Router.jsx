@@ -1,16 +1,16 @@
 import { Route, Routes } from "react-router-dom"
 import ProfilePage from "../pages/profile/ProfilePage"
-import DetailProfilePage from "../pages/profile/DetailProfile"
 import EditProfilePage from "../pages/profile/EditProfilePage"
+import DetailProfilePage from "../pages/profile/DetailProfilePage"
+import MainPage from "../pages/MainPage"
 
 const Router = () =>{
     return (
         <Routes>
-            <Route path="/" element={<div>헬로ㅇㅇ</div>}/>
-            <Route path="/profile" element={<ProfilePage/>}>
-                <Route path="detail" element={<DetailProfilePage/>}/>
-                <Route path="edit" element={<EditProfilePage/>}/>
-            </Route>
+            <Route path="/" element={<MainPage/>}/>
+            <Route path="/profile" exact element={<ProfilePage/>}/>
+            <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
+            <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
         </Routes>
     )
 }

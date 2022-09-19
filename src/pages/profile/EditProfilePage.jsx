@@ -1,13 +1,20 @@
-import base from "../../img/baseProfile.jpg"
+import { useParams } from "react-router-dom"
+import ProEditPicture from "../../components/editprofile/ProEditPicture"
+import ProEditText from "../../components/editprofile/ProEditText"
 
 const EditProfilePage = () => {
+    const {type} = useParams();
     return (
         <div>
-            <div>프로필 수정</div>
-            <div>
-                <img src={base} width="20%" style={{margin:"20px", borderRadius:"50%"}}/>
+            <div style={{display:"flex"}}>
+                <p>프로필 수정</p>
             </div>
-            <div> 닉네임수정 </div>
+            <div>
+                {type==="picture"?
+                <ProEditPicture/>
+                :<ProEditText/>
+                }
+            </div>
         </div>
     )
 }
