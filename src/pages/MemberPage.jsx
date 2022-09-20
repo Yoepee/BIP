@@ -5,7 +5,7 @@ const MemberPage = () =>{
   return (
     <>
     <Member/>
-    <Footer/>
+    <Footer foot={1}/>
     </>
   )
 }

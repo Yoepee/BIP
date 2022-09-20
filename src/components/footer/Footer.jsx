@@ -1,24 +1,54 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Footer = () =>{
+import HomeIcon from '@mui/icons-material/Home';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+
+import GroupIcon from '@mui/icons-material/Group';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import PermContactCalendarOutlinedIcon from '@mui/icons-material/PermContactCalendarOutlined';
+
+import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+const Footer = ({foot}) =>{
   const navigate = useNavigate();
   return (
-    <div style={{display:"flex"}}>
-        <div onClick={()=>{navigate("/")}}>
-          1번메뉴
+    <Menu>
+        <div onClick={()=>{navigate("/")}} style={{textAlign:"center"}}>
+          {foot===0?
+          <p><HomeIcon/></p>
+          :<p><HomeOutlinedIcon/></p>}
+          <p>약속</p>
         </div>
-        <div onClick={()=>{navigate("/member")}}>
-          2번메뉴
+        <div onClick={()=>{navigate("/member")}} style={{textAlign:"center"}}>
+        {foot===1?
+        <p><GroupIcon/></p>
+        :<p><GroupOutlinedIcon/></p>}
+          <p>친구</p>
         </div>
-        <div onClick={()=>{navigate("/profile")}}>
-          3번메뉴
+        <div onClick={()=>{navigate("/profile")}} style={{textAlign:"center"}}>
+        {foot===2?
+        <p><PermContactCalendarIcon/></p>
+        :<p><PermContactCalendarOutlinedIcon/></p>}
+          <p>프로필</p>
         </div>
-        <div onClick={()=>{navigate("/intro")}}>
-          4번메뉴
-        </div>
-    </div>
+        {/* <div onClick={()=>{navigate("/intro")}} style={{textAlign:"center"}}>
+        {foot===3?
+        <p><SettingsIcon/></p>
+        :<p><SettingsOutlinedIcon/></p>}
+          <p>테스트</p>
+        </div> */}
+    </Menu>
   )
 }
 
 export default Footer;
+
+const Menu = styled.div`
+width:100%;
+display:grid;
+grid-template-columns: repeat(3,1fr);
+place-items: center;
+`
