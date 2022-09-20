@@ -27,17 +27,19 @@ export default IntroPage;
 
 const Wrap = styled.div`
   /* background-color: yellowgreen; */
+  margin: 0 auto;
   text-align: center;
+  max-width: 500px;
 `
 const ItrText = styled.div`
   /* background-color: pink; */
-  margin: 20%;
+  margin: 20% 0 10% 0;
   font-size: 1.2em;
 `
 const Container = styled.div`
   /* background-color: whitesmoke; */
   overflow: hidden;
-  margin: 20%;
+  margin: 0 20% 20% 20%;
 `
 const ItrBtn = styled.button`
   /* background-color: skyblue; */
