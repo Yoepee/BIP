@@ -4,8 +4,6 @@ import useWeak from "../../hooks/useWeak"
 import styled from "styled-components";
 import { useState } from "react";
 
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 const Test = () => {
   const now = new Date();
@@ -25,37 +23,16 @@ const Test = () => {
     result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
   }
 
-  // 이전날로 선택 넘기기
-  const onPrev = () => {
-    let index = CalendarDay.findIndex((i) => i === chk)
-    if (index > 0) {
-      setChk(CalendarDay[index - 1]);
-    }
-  }
-  // 다음날로 선택 넘기기
-  const onNext = () => {
-    let index = CalendarDay.findIndex((i) => i === chk)
-    if (index < CalendarDay.length - 1) {
-      setChk(CalendarDay[index + 1]);
-    }
-  }
 
-  console.log(chk, oneday, onedayWeak, lastday);
-  console.log(CalendarDay);
-  console.log(CalendarWeak);
+
   return (
     <Wrap style={{ display: "flex", justifyContent: "center" }}>
       <div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", justifyContent: "center", marginBottom:"3%", fontWeight:"bold"}}>
           <p>{moment(now).format("YYYY년")}</p>
           <p>{moment(now).format("MM월")}</p>
         </div>
         <div style={{ display: "flex" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IconP onClick={() => { onPrev() }}>
-              <ArrowBackIosNewRoundedIcon />
-            </IconP>
-          </div>
           <Datediv>
             <div style={{fontWeight:"bold"}}>월</div>
             <div style={{fontWeight:"bold"}}>화</div>
@@ -66,7 +43,7 @@ const Test = () => {
             <div style={{ color: "red", fontWeight:"bold" }}>일</div>
             {onedayWeak === 0 ?
               null
-              : new Array(onedayWeak - 1).fill("").map((a) => {
+              : new Array(onedayWeak - 1).fill("　").map((a) => {
                 return (
                   <div>{a}</div>
                 )
@@ -92,11 +69,6 @@ const Test = () => {
               )
             })}
           </Datediv>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <IconP onClick={() => { onNext() }}>
-              <ArrowForwardIosRoundedIcon />
-            </IconP>
-          </div>
         </div>
       </div>
     </Wrap>
@@ -110,27 +82,23 @@ const Wrap = styled.div`
 `
 
 const DayDiv = styled.div`
-margin:20px;
-padding 10px;
-border-radius: 20px;
-cursor: pointer;
-font-weight: bold;
-&:hover{
-  color:white;
-  background-color:black;
+/* background-color: pink; */
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin: 1.5vw;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  &:hover{
+    color:white;
+    background-color:black;
 }
 `
 
-const IconP = styled.p`
-background-color:black;
-color:white;
-padding:5px;
-border-radius:50%;
-cursor:pointer;
-`
-
 const Datediv = styled.div`
-display:grid;
-grid-template-columns: repeat(7,1fr);
-place-items: center;
+  display:grid;
+  grid-template-columns: repeat(7,1fr);
+  place-items: center;
 `

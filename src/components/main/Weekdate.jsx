@@ -44,7 +44,7 @@ const Weekdate = () => {
   return (
     <Wrap style={{display:"flex", justifyContent:"center"}}>
       <div>
-        <div style={{ display: "flex", fontWeight:"bold" }}>
+        <div style={{ display: "flex", justifyContent:"center", fontWeight:"bold" }}>
           <p>{moment(now).format("YYYY년")}</p>
           <p>{moment(now).format("MM월")}</p>
         </div>

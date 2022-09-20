@@ -16,8 +16,8 @@ const MainPage = () => {
           <Carousel {...settings}>
             <div><Day /></div>
             <div><Weekdate/></div>
-            <div><Month /></div>
             <div><Test/></div>
+            <div><Month /></div>            
           </Carousel>
       </Wrap>
       <Footer foot={0}/>
