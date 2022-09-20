@@ -44,7 +44,7 @@ const Weekdate = () => {
   return (
     <Wrap style={{display:"flex", justifyContent:"center"}}>
       <div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", fontWeight:"bold" }}>
           <p>{moment(now).format("YYYY년")}</p>
           <p>{moment(now).format("MM월")}</p>
         </div>
@@ -102,14 +102,17 @@ export default Weekdate;
 
 const Wrap = styled.div`
   margin: 0 auto;
+  /* background-color: dodgerblue; */
 `
 
 const DayDiv = styled.div`
-margin:20px;
-padding 10px;
+width: 30%;
+margin: 1.5vw;
+padding: 10px;
 border-radius: 20px;
 cursor: pointer;
 font-weight: bold;
+text-align: center;
 &:hover{
   color:white;
   background-color:black;
@@ -117,9 +120,9 @@ font-weight: bold;
 `
 
 const IconP = styled.p`
-background-color:black;
-color:white;
-padding:5px;
-border-radius:50%;
-cursor:pointer;
+/* background-color: black; */
+color: black;
+/* padding: 5px; */
+border-radius: 50%;
+cursor: pointer;
 `

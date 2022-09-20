@@ -18,7 +18,7 @@ export default Day;
 const Today = styled.div`
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 0 2%;
+  padding: 1% 2%;
   margin: 0 10%;
   font-weight: bold;
 `
