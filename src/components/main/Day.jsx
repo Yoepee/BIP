@@ -3,7 +3,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 const Day = () => {
-  const today = moment().format('YYYY년 MM월 DD일');
+  const today = moment().format('YYYY년 MM월 DD일 ddd');
   return(
     <>
       <Today>
