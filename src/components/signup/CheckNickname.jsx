@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
-const NicknameSet = () => {
+const CheckNickname = () => {
   const navigate = useNavigate();
   
   return (
@@ -15,19 +15,19 @@ const NicknameSet = () => {
       <HeaderArea>
         <Button
           onClick={() => {
-            navigate("/sign_up/email");
+            navigate(-1);
           }}>
           <KeyboardArrowLeftIcon />
         </Button>
 
         <HeaderTitle>프로필 설정</HeaderTitle>
-        <Button className="next_btn">다음</Button>
+        <Button className="next_btn" onClick={()=>{navigate("/")}}>다음</Button>
       </HeaderArea>
 
       <Profile>
         <ImgArea>
         <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`}/>
-        <label className="input_file_button" for="input_file"><SearchIcon fontSize="large"/></label>
+        <label className="input_file_button" htmlFor="input_file"><SearchIcon fontSize="large"/></label>
         <input type="file" id="input_file" accept="image/jpg,/impge/png,image/jpeg" style={{display:"none"}}/></ImgArea>
 
         <TextField label="닉네임" placeholder="닉네임을 입력하세요" />
@@ -36,7 +36,7 @@ const NicknameSet = () => {
   );
 };
 
-export default NicknameSet;
+export default CheckNickname;
 
 const Wrapper = styled.div`
   display: flex;
