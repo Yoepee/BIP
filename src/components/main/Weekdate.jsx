@@ -13,16 +13,19 @@ const Weekdate = () => {
   const today = now.getDate();
   const lastday = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
-  const CalendarDay = useDate(today, lastday);
-  const CalendarWeak = useWeak(todayWeak);
 
+  const CalendarDay = useDate(today, lastday, 7);
+  const CalendarWeak = useWeak(todayWeak, 7);
+
+  // 선택한 날짜 확인
+  const [chk, setChk] = useState(today);
+  // 배열로 오브젝트 형식으로 요일, 날짜 저장 
   const result = [];
-
-  const [chk, setChk] = useState(today)
 
   for (let i = 0; i < 7; i++) {
     result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
   }
+  // 이전날로 선택 넘기기
   const onPrev = () =>{
     let index = CalendarDay.findIndex((i) => i===chk)
     if(index>0)
@@ -30,6 +33,7 @@ const Weekdate = () => {
       setChk(CalendarDay[index-1]);
     }
   }
+  // 다음날로 선택 넘기기
   const onNext = () =>{
     let index = CalendarDay.findIndex((i) => i===chk)
     if(index<CalendarDay.length-1)

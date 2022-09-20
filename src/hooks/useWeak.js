@@ -1,5 +1,5 @@
 // 요일을 계산하는 커스텀 훅
-const useWeak = (todayWeak) => {
+const useWeak = (todayWeak, date) => {
   // let strWeak = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let strWeak = ["일", "월", "화", "수", "목", "금", "토"];
   let weaklist = [];
@@ -8,7 +8,7 @@ const useWeak = (todayWeak) => {
 
   weaklist[0] = strWeak[todayWeak];
 
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 1; i < date; i++) {
     todayWeak++;
     if (todayWeak > 6) {
       todayWeak = 0;
