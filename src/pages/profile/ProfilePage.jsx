@@ -8,7 +8,7 @@ const ProfilePage = () =>{
             <div>나는 머리</div>
             <Profile/>
             <div>나는 메뉴</div>
-            <Footer/>
+            <Footer foot={2}/>
             </>
         </div>
     )

@@ -10,7 +10,8 @@ const Month = () => {
 
   return (
     <Wrap style={{display:"flex", justifyContent:"center"}}>
-      <Calendar onChange={setValue} value={value} />
+      <Calendar onChange={setValue} value={value} 
+      formatDay={(locale, date) => date.toLocaleString("en", {day: "numeric"})}/>
     </Wrap>
   );
 }
