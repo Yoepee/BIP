@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import ItrSwipe from "../components/intro/Intro";
 
-
-
 const IntroPage = () => {
   const navigate = useNavigate();
   
@@ -18,7 +16,7 @@ const IntroPage = () => {
           <ItrSwipe />
         </Container>
         <div>
-          <ItrBtn type="button" onClick={()=>navigate('/')}>시작하기</ItrBtn>   
+          <ItrBtn type="button" onClick={()=>navigate('/signup')}>시작하기</ItrBtn>   
         </div>        
       </Wrap>      
     </>

@@ -2,38 +2,38 @@ import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useNavigate } from "react-router-dom";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 
 
 
 
-const SignUpEmail = () => {
+const CheckPhone = () => {
   const [visble, setVisble] = useState(false);
-  const navigate = useNavigate()
-	
+  const [chkBtn,setChkBtn] = useState("인증하기 받기")
+	const navigate = useNavigate();
   return (
     <div>
       <Wrapper>
         <IconArea>
-          <Button onClick={()=>{navigate('/sign_up')}} >
+          <Button onClick={()=>{navigate('/')}}>
             <KeyboardArrowLeftIcon />
           </Button>
         </IconArea>
 
         <InfoArea>
           <p>
-            이메일 인증이 필요합니다.
+            휴대폰 인증으로 가입해요 번호는 안전하게 보안되어 어디에도 공개되지
+            않아요
           </p>
         </InfoArea>
           <form action="">
           <TextField
             id="outlined-basic"
-            label="이메일"
+            label="휴대폰 번호"
             variant="outlined"
-            placeholder="이메일을 입력해주세요"
+            placeholder="휴대폰 번호를 입력해주세요"
 						
           />
 
@@ -50,8 +50,16 @@ const SignUpEmail = () => {
             variant="contained" 
             onClick={() => {
               setVisble(!visble); 
+              if(!visble){
+                setChkBtn("인증번호 확인하기")
+              }else{
+                setChkBtn("인증하기 받기")
+              }
+              if(chkBtn==="인증번호 확인하기"){
+                navigate("/signup/email")
+              }
             }}>
-            {visble ? "인증번호 확인하기" : "인증하기 받기"}
+              {chkBtn}
           </Button>
         </BtnArea>
       </Wrapper>
@@ -59,7 +67,7 @@ const SignUpEmail = () => {
   );
 };
 
-export default SignUpEmail;
+export default CheckPhone;
 
 
 
