@@ -4,17 +4,20 @@ import { Paper, Button } from '@mui/material'
 import Month from "../components/main/Month"
 import Day from "../components/main/Day"
 import styled from "styled-components";
+import Weekdate from "../components/main/Weekdate";
 
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false})
     return (
+        <>
       <Wrap>
           <Carousel {...settings}>
             <div><Day /></div>
-            <div>주 단위</div>
+            <div><Weekdate/></div>
             <div><Month /></div>
           </Carousel>
-      </Wrap>        
+      </Wrap>
+      </>
     )
 }
 
