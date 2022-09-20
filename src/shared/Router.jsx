@@ -1,24 +1,26 @@
 import { Route, Routes } from "react-router-dom"
-import NicknameSet from "../pages/NicknameSet"
-import SignUp from "../pages/SignUp"
-import SignUpEmail from "../pages/SignUpEmail"
+import SignUpNickname from "../pages/signup/SignUpNickname"
+import SignUp from "../pages/signup/SignUp"
+import SignUpEmail from "../pages/signup/SignUpEmail"
 import ProfilePage from "../pages/profile/ProfilePage"
 import EditProfilePage from "../pages/profile/EditProfilePage"
 import DetailProfilePage from "../pages/profile/DetailProfilePage"
 import MainPage from "../pages/MainPage"
 import IntroPage from "../pages/IntroPage"
+import MemberPage from "../pages/MemberPage"
 
 const Router = () =>{
     return (
         <Routes>
             <Route path="/" element={<MainPage/>}/>
+            <Route path="/intro" element={<IntroPage/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/signup/email" element={<SignUpEmail/>}/>
+            <Route path="/signup/email/nickname" element={<SignUpNickname/>}/>
+            <Route path="/member" element={<MemberPage/>}/>
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
-            <Route path="/intro" element={<IntroPage/>}/>
-            <Route path="/sign_up" element={<SignUp/>}/>
-            <Route path="/sign_up/email" element={<SignUpEmail/>}/>
-            <Route path="/sign_up/email/nickname_set" element={<NicknameSet/>}/>
         </Routes>
     )
 }
