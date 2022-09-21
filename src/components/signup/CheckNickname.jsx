@@ -14,7 +14,7 @@ const CheckNickname = () => {
   }
   const [member, setMember] = useState(initialState)
   /** 닉네임 검사*/ 
-  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
 
   const onChangeHandler = (e) => {
     const {name, value} = e.target;
@@ -40,7 +40,7 @@ const CheckNickname = () => {
         <TextField label="닉네임" placeholder="닉네임을 입력하세요"  name="nickname"
             value={member.nickname}
             onChange={onChangeHandler}/>
-            {regexNickname.test(member.nickname)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 닉네임입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>사용가능한 닉네임이 아닙니다.</div>)}
+            {member.nickname=== "" ? null: regexNickname.test(member.nickname)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 닉네임입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>사용가능한 닉네임이 아닙니다.</div>)}
       </Profile>
     </Wrapper>
   );
