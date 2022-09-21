@@ -16,7 +16,7 @@ const DetailProfile = () => {
         </div>
       </TypeDiv>
       <TypeDiv>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex"}}>
           <p>닉네임</p>
           <div onClick={()=>{navigate("/editprofile/name")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>

@@ -26,8 +26,6 @@ const Test = () => {
     result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
   }
 
-  console.log(chk)
-
   return (
     <Wrap style={{ display: "flex", justifyContent: "center" }}>
       <div>
