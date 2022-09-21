@@ -8,7 +8,8 @@ import DetailProfilePage from "../pages/profile/DetailProfilePage"
 import MainPage from "../pages/MainPage"
 import IntroPage from "../pages/IntroPage"
 import MemberPage from "../pages/MemberPage"
-import AddPromisePage from "../pages/AddPromisePage"
+import AddPromisePage from "../pages/promise/AddPromisePage"
+import DetailPromisePage from "../pages/promise/DetailPromisePage"
 
 
 
@@ -25,6 +26,7 @@ const Router = () =>{
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
+            <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
         </Routes>
     )
 }
