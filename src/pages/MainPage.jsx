@@ -6,7 +6,7 @@ import Day from "../components/main/calendar/Day"
 import styled from "styled-components";
 import Weekdate from "../components/main/calendar/Weekdate";
 import Footer from "../components/footer/Footer";
-import Test from "../components/main/calendar/Test";
+import Monthdate from "../components/main/calendar/Monthdate";
 
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false})
@@ -16,7 +16,7 @@ const MainPage = () => {
           <Carousel {...settings}>
             <div><Day /></div>
             <div><Weekdate/></div>
-            <div><Test/></div>
+            <div><Monthdate/></div>
             <div><Month /></div>            
           </Carousel>
       </Wrap>
