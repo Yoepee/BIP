@@ -15,12 +15,6 @@ const AddPromise = () => {
   return(
     <>
       <Wrap>
-        <div className="header" style={{display:"flex", justifyContent:"space-between", margin:"5%"}}>
-          <div onClick={()=>{navigate("/")}}>
-            <p><HomeIcon/></p>
-          </div>
-          <p style={{fontWeight:"bold"}}>완료</p>
-        </div>
         <div>
           <Input type="text" placeholder="제목"/>
         </div>

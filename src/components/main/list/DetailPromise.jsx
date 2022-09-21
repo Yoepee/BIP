@@ -44,7 +44,7 @@ const Wrap = styled.div`
   margin: 0 auto;
   width: 100vw;
   min-width: 300px;
-  max-width: 800px;
+  max-width: 1200px;
   text-align: center;
   position: relative;
 `
