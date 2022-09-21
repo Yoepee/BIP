@@ -1,5 +1,6 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate } from 'react-router-dom';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const Header = ({ head, option, submit }) => {
   const navigate = useNavigate();
@@ -20,6 +21,11 @@ const Header = ({ head, option, submit }) => {
         <p><ArrowBackIosNewRoundedIcon /></p>
       </div>
       :null}
+      {option===3?
+      <div onClick={()=>{navigate("/")}}>
+        <p><ArrowBackIosNewRoundedIcon /></p>
+      </div>
+      :null}
       <div style={{marginLeft:"1%"}}>
         <p>{head}</p>
       </div>
@@ -31,6 +37,11 @@ const Header = ({ head, option, submit }) => {
       {option===2?
       <div onClick={()=>{submit();navigate("/")}} style={{marginLeft:"auto", marginRight:"2%"}}>
       <p>완료</p>
+    </div>
+      :null}
+      {option===3?
+      <div onClick={()=>{}} style={{marginLeft:"auto", marginRight:"2%"}}>
+      <p><MoreVertIcon/></p>
     </div>
       :null}
     </div>
