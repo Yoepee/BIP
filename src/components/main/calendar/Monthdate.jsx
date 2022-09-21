@@ -15,7 +15,10 @@ const Test = () => {
   const CalendarWeak = useWeak(onedayWeak, lastday);
 
   // 선택한 날짜 확인
-  const [chk, setChk] = useState(now.getDate());
+  const [chk, setChk] = useState({
+    day:now.getDate(),
+    weak:useWeak(now.getDay(), 1)[0]
+  });
   // 배열로 오브젝트 형식으로 요일, 날짜 저장 
   const result = [];
 
@@ -23,7 +26,7 @@ const Test = () => {
     result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
   }
 
-
+  console.log(chk)
 
   return (
     <Wrap style={{ display: "flex", justifyContent: "center" }}>
@@ -34,13 +37,20 @@ const Test = () => {
         </div>
         <div style={{ display: "flex" }}>
           <Datediv>
-            <div style={{fontWeight:"bold"}}>월</div>
-            <div style={{fontWeight:"bold"}}>화</div>
-            <div style={{fontWeight:"bold"}}>수</div>
-            <div style={{fontWeight:"bold"}}>목</div>
-            <div style={{fontWeight:"bold"}}>금</div>
-            <div style={{fontWeight:"bold"}}>토</div>
-            <div style={{ color: "red", fontWeight:"bold" }}>일</div>
+            {chk.weak==="월"?
+            <WeakDiv style={{backgroundColor:"pink"}}>월</WeakDiv>:<WeakDiv>월</WeakDiv>}
+            {chk.weak==="화"?
+            <WeakDiv style={{backgroundColor:"pink"}}>화</WeakDiv>:<WeakDiv>화</WeakDiv>}
+            {chk.weak==="수"?
+            <WeakDiv style={{backgroundColor:"pink"}}>수</WeakDiv>:<WeakDiv>수</WeakDiv>}
+            {chk.weak==="목"?
+            <WeakDiv style={{backgroundColor:"pink"}}>목</WeakDiv>:<WeakDiv>목</WeakDiv>}
+            {chk.weak==="금"?
+            <WeakDiv style={{backgroundColor:"pink"}}>금</WeakDiv>:<WeakDiv>금</WeakDiv>}
+            {chk.weak==="토"?
+            <WeakDiv style={{backgroundColor:"pink"}}>토</WeakDiv>:<WeakDiv>토</WeakDiv>}
+            {chk.weak==="일"?
+            <WeakDiv style={{backgroundColor:"pink", color: "red"}}>일</WeakDiv>:<WeakDiv style={{color: "red"}}>일</WeakDiv>}
             {onedayWeak === 0 ?
               null
               : new Array(onedayWeak - 1).fill("　").map((a,i) => {
@@ -52,15 +62,15 @@ const Test = () => {
             {result.map((calendar, index) => {
               return (
                 <div key={index}>
-                  {chk === calendar.day ?
+                  {chk.day === calendar.day ?
                     <DayDiv style={{ border: "1px solid black" }}
-                      onClick={() => { setChk(calendar.day) }}>
+                      onClick={() => { setChk({day:calendar.day, weak: calendar.weak}) }}>
                       {calendar.weak === "일" ?
                         <div style={{ color: "red" }}>{calendar.day}</div>
                         : <div>{calendar.day}</div>}
                     </DayDiv>
                     : <DayDiv
-                      onClick={() => { setChk(calendar.day) }}>
+                      onClick={() => { setChk({day:calendar.day, weak: calendar.weak}) }}>
                       {calendar.weak === "일" ?
                         <div style={{ color: "red" }}>{calendar.day}</div>
                         : <div>{calendar.day}</div>}
@@ -101,4 +111,16 @@ const Datediv = styled.div`
   display:grid;
   grid-template-columns: repeat(7,1fr);
   place-items: center;
+`
+
+const WeakDiv = styled.div`
+/* background-color: pink; */
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin: 1.5vw;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: default;
+  font-weight: bold;
 `
