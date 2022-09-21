@@ -1,9 +1,18 @@
 import styled from "styled-components";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { __getProfile } from "../../redux/modules/profile";
 
 const DetailProfile = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const profile = useSelector((state)=>state.profile);
+
+  //   useEffect(()=>{
+  //       dispatch(__getProfile());
+  //   },[dispatch])
   return (
     <div>
       <TypeDiv>
