@@ -34,12 +34,12 @@ const Footer = ({foot}) =>{
         :<p><PermContactCalendarOutlinedIcon/></p>}
           <p>프로필</p>
         </div>
-        <div onClick={()=>{navigate("/intro")}} style={{textAlign:"center"}}>
+        {/* <div onClick={()=>{navigate("/intro")}} style={{textAlign:"center"}}>
         {foot===3?
         <p><SettingsIcon/></p>
         :<p><SettingsOutlinedIcon/></p>}
           <p>테스트</p>
-        </div>
+        </div> */}
     </Menu>
   )
 }
@@ -51,4 +51,6 @@ width:100%;
 display:grid;
 grid-template-columns: repeat(3,1fr);
 place-items: center;
+position:fixed;
+bottom:0;
 `

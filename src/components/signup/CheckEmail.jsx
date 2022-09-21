@@ -19,7 +19,7 @@ const CheckEmail = () => {
     <div>
       <Wrapper>
         <IconArea>
-          <Button onClick={()=>{navigate('/sign_up')}} >
+          <Button onClick={()=>{navigate(-1)}} >
             <KeyboardArrowLeftIcon />
           </Button>
         </IconArea>

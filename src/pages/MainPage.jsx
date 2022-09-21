@@ -21,6 +21,7 @@ const MainPage = () => {
           </Carousel>
       </Wrap>
       <Footer foot={0}/>
+      <div style={{height:"50px"}}></div>
       </>
     )
 }
