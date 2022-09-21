@@ -43,9 +43,9 @@ const Test = () => {
             <div style={{ color: "red", fontWeight:"bold" }}>일</div>
             {onedayWeak === 0 ?
               null
-              : new Array(onedayWeak - 1).fill("　").map((a) => {
+              : new Array(onedayWeak - 1).fill("　").map((a,i) => {
                 return (
-                  <div>{a}</div>
+                  <div key={i}>{a}</div>
                 )
               })
             }
