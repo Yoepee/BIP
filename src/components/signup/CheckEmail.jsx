@@ -16,7 +16,7 @@ const CheckEmail = () => {
 	const navigate = useNavigate();
 	
   const initialState = {
-    phone:'',
+    email:''
   }
   const [member, setMember] = useState(initialState)
   /** 이메일 주소 유효검사*/ 
@@ -52,7 +52,7 @@ const CheckEmail = () => {
             placeholder="이메일을 입력해주세요"
 						
           />
-           {regexEmail.test(member.email)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 이메일입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>올바른 이메일이 아닙니다.</div>)}
+           {member.email===""?null: regexEmail.test(member.email)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 이메일입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>올바른 이메일이 아닙니다.</div>)}
 
           {visble && <TextField variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" />}
 					
@@ -62,7 +62,7 @@ const CheckEmail = () => {
          
 
         <BtnArea>
-				{visble &&<Button variant="contained" className="default_btn">인증번호 다시 받기</Button>}
+				{visble&&<Button variant="contained" className="default_btn">인증번호 다시 받기</Button>}
           <Button
             variant="contained" 
             onClick={() => {

@@ -30,12 +30,12 @@ const Header = ({ head, option, submit }) => {
         <p>{head}</p>
       </div>
       {option === 1?
-      <div onClick={()=>{submit();navigate("/detailprofile")}} style={{marginLeft:"auto", marginRight:"2%"}}>
+      <div onClick={()=>{navigate("/detailprofile")}} style={{marginLeft:"auto", marginRight:"2%"}}>
         <p>완료</p>
       </div>
       :null}
       {option===2?
-      <div onClick={()=>{submit();navigate("/")}} style={{marginLeft:"auto", marginRight:"2%"}}>
+      <div onClick={()=>{navigate("/detailpromise")}} style={{marginLeft:"auto", marginRight:"2%"}}>
       <p>완료</p>
     </div>
       :null}
