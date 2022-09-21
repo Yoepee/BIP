@@ -1,9 +1,11 @@
+import Header from "../../components/header/Header";
 import DetailProfile from "../../components/profile/DetailProfile";
 
-const DetailProfilePage = () =>{
+const DetailProfilePage = () => {
   return (
     <>
-        <DetailProfile/>
+      <Header head={"프로필 보기"} option={0} />
+      <DetailProfile />
     </>
   )
 }

@@ -1,14 +1,13 @@
 import { useParams } from "react-router-dom"
 import ProEditPicture from "../../components/editprofile/ProEditPicture"
 import ProEditText from "../../components/editprofile/ProEditText"
+import Header from "../../components/header/Header";
 
 const EditProfilePage = () => {
     const {type} = useParams();
     return (
         <div>
-            <div style={{display:"flex"}}>
-                <p>프로필 수정</p>
-            </div>
+            <Header head={"프로필 수정"} option={1} submit={"name"}/>
             <div>
                 {type==="picture"?
                 <ProEditPicture/>
