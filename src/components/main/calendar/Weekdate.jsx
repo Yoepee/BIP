@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import moment from "moment"
-import useDate from "../../hooks/useDate";
-import useWeak from "../../hooks/useWeak"
+import useDate from "../../../hooks/useDate";
+import useWeak from "../../../hooks/useWeak"
 import styled from "styled-components";
 
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
