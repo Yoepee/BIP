@@ -46,23 +46,12 @@ const ProEditPicture = () => {
     }
     return (
         <div>
-        <div style={{ backgroundColor: "gray", width:"100%" }}>
-            <div style={{backgroundColor:"red", textAlign:"center"}}>
-                <img src={base}/>
-                <Camera
-                onClick={()=>{photo.current.click()}}>
-                    <CameraAltIcon/>
-                </Camera>
-            </div>
-            <input  ref={photo}
-                        hidden
-                        multiple
-                        accept="image/*" type="file" onChange={onChange} />
-        </div>
-        <div>
-            <button onClick={()=>{
-                navigate("/detailprofile");
-            }}>프로필 업로드</button>
+        <div style={{ width:"100%" }}>
+        <ImgArea>
+        <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`}/>
+        <label className="input_file_button" htmlFor="input_file"><CameraAltIcon fontSize="large"/></label>
+        <input type="file" id="input_file" accept="image/jpg,/impge/png,image/jpeg" style={{display:"none"}}/>
+        </ImgArea>
         </div>
         </div>
     )
@@ -79,3 +68,34 @@ padding:5px;
 justify-content:center;
 position:fixed
 `
+
+const ImgArea = styled.div`
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #26a69a;
+  img{
+    margin: 45px 30px;
+    width: 70%;
+    height: 50%;
+    
+  }
+  .input_file_button{
+  display: flex;
+  justify-content: center;
+  width: 1%;
+  margin: -40px 0 0 135px;
+  box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+  padding: 6px 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  color:black;
+  
+  cursor: pointer;
+  
+  
+}
+  
+ 
+`;
