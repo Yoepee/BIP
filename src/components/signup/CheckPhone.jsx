@@ -13,6 +13,19 @@ const CheckPhone = () => {
   const [visble, setVisble] = useState(false);
   const [chkBtn,setChkBtn] = useState("인증하기 받기")
 	const navigate = useNavigate();
+  
+  const initialState = {
+    email:'',
+  }
+  const [member, setMember] = useState(initialState)
+  /** 휴대폰 번호 인증 유효검사*/ 
+  const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
+
+  const onChangeHandler = (e) => {
+    const {name, value} = e.target;
+    setMember({...member, [name]: value})
+  }
+
   return (
     <div>
       <Wrapper>
@@ -33,9 +46,15 @@ const CheckPhone = () => {
             id="outlined-basic"
             label="휴대폰 번호"
             variant="outlined"
+            name="phone"
+            value={member.phone}
+            onChange={onChangeHandler}
+            minLength={11}
+            maxLength={11}
             placeholder="휴대폰 번호를 입력해주세요"
 						
           />
+          {regexPhone.test(member.phone)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 휴대폰 번호입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>올바른 휴대폰 번호이 아닙니다.</div>)}
 
           {visble && <TextField variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" />}
 					
