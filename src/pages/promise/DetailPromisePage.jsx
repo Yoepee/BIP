@@ -1,5 +1,5 @@
-import Header from "../components/header/Header";
-import DetailPromise from "../components/main/list/DetailPromise";
+import Header from "../../components/header/Header";
+import DetailPromise from "../../components/main/list/DetailPromise";
 
 const DetailPromisePage = () =>{
   return (

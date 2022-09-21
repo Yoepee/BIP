@@ -1,4 +1,4 @@
-import AddPromise from "../components/main/list/AddPromise";
+import AddPromise from "../../components/main/list/AddPromise";
 
 const AddPromisePage = () =>{
   return (

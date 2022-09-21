@@ -8,8 +8,8 @@ import DetailProfilePage from "../pages/profile/DetailProfilePage"
 import MainPage from "../pages/MainPage"
 import IntroPage from "../pages/IntroPage"
 import MemberPage from "../pages/MemberPage"
-import AddPromisePage from "../pages/AddPromisePage"
-import DetailPromisePage from "../pages/DetailPromisePage"
+import AddPromisePage from "../pages/promise/AddPromisePage"
+import DetailPromisePage from "../pages/promise/DetailPromisePage"
 
 
 
