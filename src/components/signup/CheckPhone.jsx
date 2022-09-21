@@ -15,7 +15,7 @@ const CheckPhone = () => {
 	const navigate = useNavigate();
   
   const initialState = {
-    email:'',
+    phone:''
   }
   const [member, setMember] = useState(initialState)
   /** 휴대폰 번호 인증 유효검사*/ 
@@ -49,12 +49,13 @@ const CheckPhone = () => {
             name="phone"
             value={member.phone}
             onChange={onChangeHandler}
-            minLength={11}
+            minLength={10}
             maxLength={11}
             placeholder="휴대폰 번호를 입력해주세요"
 						
           />
-          {regexPhone.test(member.phone)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 휴대폰 번호입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>올바른 휴대폰 번호이 아닙니다.</div>)}
+          { member.phone=== "" ? null:
+          regexPhone.test(member.phone)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 휴대폰 번호입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>올바른 휴대폰 번호이 아닙니다.</div>)}
 
           {visble && <TextField variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" />}
 					
