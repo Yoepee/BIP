@@ -42,7 +42,7 @@ export default DetailPromise;
 const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
-  width: 80vw;
+  width: 100vw;
   min-width: 300px;
   max-width: 800px;
   text-align: center;
@@ -59,17 +59,17 @@ const Title = styled.div`
 
 const When = styled.div`
   /* background-color: skyblue; */
-  width: 70%;
+  width: 100%;
   display: flex;
   margin: 0 15%;
   font-weight: bold;
   p {
-    margin-right: 2%;
+    margin-right: 1%;
   }
 `
 
 const Where = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   margin: 0 15%;
   font-weight: bold;
@@ -81,13 +81,16 @@ const Where = styled.div`
 const Point = styled.div`
   /* background-color: green; */
   display: flex;
-  width: 70%;
+  width: 100%;
   margin: 0 15%;
   font-weight: bold;
+  p {
+    margin-right: 2%;
+  }
 `
 
 const Desc = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   margin: 0 15%;
   font-weight: bold;
