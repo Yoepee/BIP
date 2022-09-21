@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
-import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
@@ -25,10 +24,6 @@ const CheckNickname = () => {
       </HeaderArea>
 
       <Profile>
-        <ImgArea>
-        <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`}/>
-        <label className="input_file_button" htmlFor="input_file"><SearchIcon fontSize="large"/></label>
-        <input type="file" id="input_file" accept="image/jpg,/impge/png,image/jpeg" style={{display:"none"}}/></ImgArea>
 
         <TextField label="닉네임" placeholder="닉네임을 입력하세요" />
       </Profile>
