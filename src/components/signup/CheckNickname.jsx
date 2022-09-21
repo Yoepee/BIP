@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -8,6 +8,18 @@ import { useNavigate } from "react-router-dom";
 
 const CheckNickname = () => {
   const navigate = useNavigate();
+
+  const initialState = {
+    nickname:'',
+  }
+  const [member, setMember] = useState(initialState)
+  /** 닉네임 검사*/ 
+  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+
+  const onChangeHandler = (e) => {
+    const {name, value} = e.target;
+    setMember({...member, [name]: value})
+  }
   
   return (
     <Wrapper>
@@ -25,7 +37,10 @@ const CheckNickname = () => {
 
       <Profile>
 
-        <TextField label="닉네임" placeholder="닉네임을 입력하세요" />
+        <TextField label="닉네임" placeholder="닉네임을 입력하세요"  name="nickname"
+            value={member.nickname}
+            onChange={onChangeHandler}/>
+            {regexNickname.test(member.nickname)?(<div style={{color: "#00766c", fontSize:"14px"}}>사용가능한 닉네임입니다.</div>):(<div style={{color:"red", fonSizen:"14px"}}>사용가능한 닉네임이 아닙니다.</div>)}
       </Profile>
     </Wrapper>
   );
