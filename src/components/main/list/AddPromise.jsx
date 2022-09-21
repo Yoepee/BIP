@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 
-const AddList = () => {
+const AddPromise = () => {
   const navigate = useNavigate();
   return(
     <>
@@ -58,7 +58,7 @@ const AddList = () => {
   )
 }
 
-export default AddList;
+export default AddPromise;
 
 const Wrap = styled.div`
   /* background-color: pink; */
