@@ -1,7 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
+import profile from "./modules/profile";
 
 export default configureStore({
   reducer: {
-    // module : module.reducer
+    profile: profile.reducer,
   }
 });
