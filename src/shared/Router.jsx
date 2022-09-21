@@ -8,6 +8,7 @@ import DetailProfilePage from "../pages/profile/DetailProfilePage"
 import MainPage from "../pages/MainPage"
 import IntroPage from "../pages/IntroPage"
 import MemberPage from "../pages/MemberPage"
+import AddList from "../components/main/list/AddList"
 
 const Router = () =>{
     return (
@@ -21,6 +22,7 @@ const Router = () =>{
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            <Route path="/addlist" exact element={<AddList/>}/>
         </Routes>
     )
 }
