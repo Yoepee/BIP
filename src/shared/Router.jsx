@@ -9,6 +9,7 @@ import MainPage from "../pages/MainPage"
 import IntroPage from "../pages/IntroPage"
 import MemberPage from "../pages/MemberPage"
 import AddPromisePage from "../pages/AddPromisePage"
+import DetailPromisePage from "../pages/DetailPromisePage"
 
 
 
@@ -25,6 +26,7 @@ const Router = () =>{
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
+            <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
         </Routes>
     )
 }
