@@ -20,7 +20,7 @@ const Router = () =>{
             <Route path="/intro" element={<IntroPage/>}/>
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/signup/email" element={<SignUpEmail/>}/>
-            <Route path="/signup/email/nickname" element={<SignUpNickname/>}/>
+            <Route path="/signup/nickname" element={<SignUpNickname/>}/>
             <Route path="/member" element={<MemberPage/>}/>
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
