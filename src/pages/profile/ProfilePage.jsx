@@ -1,11 +1,12 @@
 import Profile from "../../components/profile/Profile";
 import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
 
 const ProfilePage = () =>{
     return (
         <div>
             <>
-            <div>나는 머리</div>
+            <Header head={"프로필"}/>
             <Profile/>
             <div>나는 메뉴</div>
             <Footer foot={2}/>

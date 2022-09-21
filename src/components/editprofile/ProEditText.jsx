@@ -9,12 +9,6 @@ const ProEditText = () => {
     return (
         <div>
             <ProEdit type={type} name={name} setName={setName}/>
-            <div>
-                <button
-                onClick={()=>{
-                    navigate("/detailprofile")
-                }}>프로필 변경</button>
-            </div>
         </div>
     )
 }
