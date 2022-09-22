@@ -13,7 +13,6 @@ const ChangePhone = () =>{
     value:'',
   }
   const [member, setMember] = useState(initialState);
-  const [chkname,setChkname] = useState("");
   const [ment,setMent]=useState("");
   /** 닉네임 검사*/ 
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
@@ -45,12 +44,13 @@ const ChangePhone = () =>{
   },[member])
 
   const __editPhone = async(payload)=>{
-    if(chkname==="사용 가능한 번호 입니다."){
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/nickname", payload,{
+    if(ment==="사용 가능한 번호 입니다."){
+      let a = await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/phonenumber", payload,{
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
       }}).then((response)=>{
+        console.log(response)
         navigate("/")
       })
     }

@@ -12,6 +12,7 @@ import AddPromisePage from "../pages/promise/AddPromisePage"
 import DetailPromisePage from "../pages/promise/DetailPromisePage"
 import SignUpChange from "../pages/signup/SignUpChange"
 import AddMemberPage from "../pages/AddMemberPage"
+import KakaoPage from "../pages/signup/KakaoPage"
 
 
 
@@ -31,6 +32,7 @@ const Router = () =>{
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
             <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
+            <Route path="/login/kakao" exact element={<KakaoPage/>}/>
         </Routes>
     )
 }

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
@@ -5,6 +6,14 @@ import ItrSwipe from "../components/intro/Intro";
 
 const IntroPage = () => {
   const navigate = useNavigate();
+
+  const kakao = () =>{
+    window.location.href=process.env.REACT_APP_KAKAO_URL
+  }
+
+  const naver = () =>{
+    
+  }
   
   return (
     <>
@@ -17,7 +26,13 @@ const IntroPage = () => {
         </Container>
         <div>
           <ItrBtn type="button" onClick={()=>navigate('/signup')}>시작하기</ItrBtn>   
-        </div>        
+        </div>
+        <div>
+          <button onClick={()=>{kakao()}}>카카오로그인</button>  
+        </div>
+        <div>
+          <button onClick={()=>{naver()}}>네이버로그인</button>  
+        </div>    
       </Wrap>      
     </>
   )
