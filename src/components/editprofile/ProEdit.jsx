@@ -98,7 +98,7 @@ const ProEdit = ({value, onChangeHandler, setChk}) => {
         value={value.value}
         onChange={(e)=>{onChangeHandler(e)}} />
         {value.value === "" ? null :
-            regexPhone.test(value.value) ? ment === "사용 가능한 번호입니다."?
+            regexPhone.test(value.value) ? ment === "사용 가능한 번호 입니다."?
             (<div style={{color: "#00766c", fontSize:"14px"}}>{ment}</div>)
             :(<div style={{color:"red", fonSizen:"14px"}}>{ment}</div>) 
             : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
