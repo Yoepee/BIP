@@ -10,6 +10,7 @@ import IntroPage from "../pages/IntroPage"
 import MemberPage from "../pages/MemberPage"
 import AddPromisePage from "../pages/promise/AddPromisePage"
 import DetailPromisePage from "../pages/promise/DetailPromisePage"
+import SignUpChange from "../pages/signup/SignUpChange"
 
 
 
@@ -21,6 +22,7 @@ const Router = () =>{
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/signup/email" element={<SignUpEmail/>}/>
             <Route path="/signup/nickname" element={<SignUpNickname/>}/>
+            <Route path="/signup/change" element={<SignUpChange/>}/>
             <Route path="/member" element={<MemberPage/>}/>
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>

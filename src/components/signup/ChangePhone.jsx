@@ -6,74 +6,80 @@ import { TextField } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const CheckNickname = () => {
+const ChangePhone = () =>{
   const navigate = useNavigate();
 
   const initialState = {
     value:'',
   }
-  const [member, setMember] = useState(initialState)
-  const [chkname,setChkname] = useState("")
+  const [member, setMember] = useState(initialState);
+  const [chkname,setChkname] = useState("");
+  const [ment,setMent]=useState("");
   /** 닉네임 검사*/ 
-  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
+  const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
 
   const onChangeHandler = (e) => {
     const {name, value} = e.target;
     setMember({...member, [name]: value})
   }
 
-  const __chkNickname = async(payload)=>{
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/member/chknickname", payload)
-    .then((response)=>{
-      setChkname(response.data.data)
-    });
+  const __chkPhone = async (payload) => {
+    if(regexPhone.test(member.value)){
+      let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
+        .then((response) => {
+          if(response.data.data){
+            setMent("사용 가능한 번호 입니다.")
+          }else{
+            setMent("중복되는 번호가 존재합니다.")
+          }
+        });
+      }
   }
   
   useEffect(()=>{
-    if(regexNickname.test(member.value)){
-      __chkNickname(member);
+    if(regexPhone.test(member.value)){
+      __chkPhone(member);
     }else{
-      setChkname("")
+      __chkPhone("")
     }
   },[member])
 
-  const __editNickname = async(payload)=>{
-    if(chkname==="사용 가능한 닉네임 입니다."){
+  const __editPhone = async(payload)=>{
+    if(chkname==="사용 가능한 번호 입니다."){
       let a = await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/nickname", payload,{
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
       }}).then((response)=>{
-        localStorage.setItem("name", response.data.data.nickname);
         navigate("/")
       })
     }
   }
-
+  
   return (
     <Wrapper>
       <HeaderArea>
 
-        <HeaderTitle>닉네임 설정</HeaderTitle>
-        <Button className="next_btn" onClick={()=>{__editNickname(member)}}>완료</Button>
+        <HeaderTitle>휴대폰 설정</HeaderTitle>
+        <Button className="next_btn" onClick={()=>{__editPhone(member)}}>완료</Button>
       </HeaderArea>
 
       <Profile>
 
-        <TextField label="닉네임" placeholder="닉네임을 입력하세요"  name="value"
+        <TextField label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요"  name="value"
             value={member.value}
             onChange={onChangeHandler}/>
-            {member.value=== "" ? null: regexNickname.test(member.value)?
-            chkname === "사용 가능한 닉네임 입니다."?
-            (<div style={{color: "#00766c", fontSize:"14px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px"}}>사용가능한 닉네임이 아닙니다.</div>)}
+            {member.value === "" ? null :
+            regexPhone.test(member.value) ? ment === "사용 가능한 번호 입니다."?
+            (<div style={{color: "#00766c", fontSize:"14px"}}>{ment}</div>)
+            :(<div style={{color:"red", fonSizen:"14px"}}>{ment}</div>) 
+            : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
       </Profile>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default CheckNickname;
+export default ChangePhone;
 
 const Wrapper = styled.div`
   display: flex;
