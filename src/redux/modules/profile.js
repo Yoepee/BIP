@@ -71,7 +71,7 @@ import axios from 'axios';
   );
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const profile = createSlice({
-    name:"login",
+    name:"profile",
     initialState: {
         data: [],
         success: false,
