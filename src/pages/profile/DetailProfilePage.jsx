@@ -4,7 +4,8 @@ import DetailProfile from "../../components/profile/DetailProfile";
 const DetailProfilePage = () => {
   return (
     <>
-      <Header head={"프로필 보기"} option={0} />
+      <Header head={"프로필 보기"} option={0}/>
+
       <DetailProfile />
     </>
   )

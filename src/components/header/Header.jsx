@@ -8,9 +8,11 @@ import Option2 from './Option2';
 import Option3 from './Option3';
 import Option4 from './Option4';
 import Option5 from './Option5';
+import Option6 from './Option6';
 
 
-const Header = ({ head, option, payload, chk }) => {
+
+const Header = ({ head, option, payload, chk}) => {
   const navigate = useNavigate();
   
   return (
@@ -39,7 +41,7 @@ const Header = ({ head, option, payload, chk }) => {
       {option===3?
       <Option3 head={head}/>
       :null}
-
+      
       {/* 친구목록 제목 친구추가 */}
       {option===4?
       <Option4 head={head}/>
@@ -49,6 +51,12 @@ const Header = ({ head, option, payload, chk }) => {
        {option===5?
       <Option5 head={head}/>
       :null}
+      
+      {/* 로그아웃 */}
+      {option===6?
+      <Option6 head={head}/>
+      :null}
+
 
     </div>
   )
