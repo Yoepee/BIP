@@ -1,81 +1,43 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { __editNickname, __editPhone, __editEmail } from '../../redux/modules/profile';
-import { useDispatch } from 'react-redux';
+import Option0 from './Option0';
+import Option from './Option';
+import Option1 from './Option1';
+import Option2 from './Option2';
+import Option3 from './Option3';
+
 
 const Header = ({ head, option, payload, chk }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {type} = useParams();
-  console.log(payload);
-  const editNickname = () => {
-    if(option===1 && chk){
-      dispatch(__editNickname(payload));
-      navigate("/detailprofile");
-    }
-  }
-  const editPhone = () => {
-    if(option===1 && chk){
-      dispatch(__editPhone(payload));
-      navigate("/detailprofile");
-    }
-  }
-  const editEmail = () => {
-    if(option===1 && chk){
-      dispatch(__editEmail(payload));
-      navigate("/detailprofile");
-    }
-  }
+
   return (
     <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0" }}>
+      {/* 제목만 */}
+      {!option?
+      <Option head={head}/>
+      :null}
+      
+      {/* 뒤로가기 제목 */}
       {option===0?
-      <div onClick={()=>{navigate(-1)}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
-      </div>
+      <Option0 head={head}/>
       :null}
+
+      {/* 프로필 변경 뒤로가기(프로필상세) 제목 완료 */}
       {option===1?
-      <div onClick={()=>{navigate(-1)}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
-      </div>
+      <Option1 head={head} payload={payload} chk={chk}/>
       :null}
+
+        {/* 약속생성 뒤로가기(홈) 제목 완료 */}
        {option===2?
-      <div onClick={()=>{navigate("/")}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
-      </div>
+      <Option2 head={head}/>
       :null}
+      
+      {/* 약속상세보기 뒤로가기(홈) 제목 메뉴 */}
       {option===3?
-      <div onClick={()=>{navigate("/")}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
-      </div>
+      <Option3 head={head}/>
       :null}
-      <div style={{marginLeft:"1%"}}>
-        <p>{head}</p>
-      </div>
-      {option === 1?
-      <div style={{marginLeft:"auto", marginRight:"2%"}}
-      onClick={()=>{
-        if(type==="name"){
-          editNickname();
-        }else if(type==="call"){
-          editPhone();
-        }else{
-          editEmail();
-        }
-      }}>
-        <p>완료</p>
-      </div>
-      :null}
-      {option===2?
-      <div onClick={()=>{navigate("/detailpromise")}} style={{marginLeft:"auto", marginRight:"2%"}}>
-      <p>완료</p>
-    </div>
-      :null}
-      {option===3?
-      <div onClick={()=>{}} style={{marginLeft:"auto", marginRight:"2%"}}>
-      <p><MoreVertIcon/></p>
-    </div>
-      :null}
+
     </div>
   )
 }
