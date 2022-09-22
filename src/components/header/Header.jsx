@@ -6,9 +6,11 @@ import Option from './Option';
 import Option1 from './Option1';
 import Option2 from './Option2';
 import Option3 from './Option3';
+import Option6 from './Option6';
 
 
-const Header = ({ head, option, payload, chk }) => {
+
+const Header = ({ head, option, payload, chk}) => {
   const navigate = useNavigate();
 
   return (
@@ -37,7 +39,11 @@ const Header = ({ head, option, payload, chk }) => {
       {option===3?
       <Option3 head={head}/>
       :null}
-
+      
+      {option===6?
+      <Option6 head={head}/>
+      :null}
+      
     </div>
   )
 }

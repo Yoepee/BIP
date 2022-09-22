@@ -6,7 +6,7 @@ const ProfilePage = () =>{
     return (
         <div>
             <>
-            <Header head={"프로필"}/>
+            <Header head={"프로필"} option={6}/>
             <Profile/>
             <div>나는 메뉴</div>
             <Footer foot={2}/>
