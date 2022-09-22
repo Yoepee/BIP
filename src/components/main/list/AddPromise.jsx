@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from "react-router-dom";
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';

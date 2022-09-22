@@ -1,8 +1,5 @@
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import { useNavigate } from 'react-router-dom';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Option0 from './Option0';
 import Option from './Option';
+import Option0 from './Option0';
 import Option1 from './Option1';
 import Option2 from './Option2';
 import Option3 from './Option3';
@@ -13,7 +10,6 @@ import Option6 from './Option6';
 
 
 const Header = ({ head, option, payload, chk}) => {
-  const navigate = useNavigate();
   
   return (
     <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0" }}>
