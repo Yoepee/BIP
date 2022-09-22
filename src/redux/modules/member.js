@@ -20,6 +20,29 @@ import axios from 'axios';
   );
 
 
+  export const __addMember =  createAsyncThunk(
+    "api/friends/nickname",
+     async(payload, thunkAPI) => {
+        try{
+          console.log(payload)
+            const data = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/friends/nickname",payload,{
+                headers: {
+                    Authorization:localStorage.getItem('Authorization'),
+                    RefreshToken:localStorage.getItem('RefreshToken')
+                }})
+
+                console.log(data)
+                return thunkAPI.fulfillWithValue(data.data);
+             } catch(error){
+                return thunkAPI.rejectWithValue(error)
+             }
+     }   
+        
+        
+    
+);
+
+
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const member = createSlice({
     name:"member",
@@ -45,7 +68,22 @@ export const member = createSlice({
           state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
         },
         
+        [__addMember.pending]:(state) =>{
+          state.isLoading = true;
+        },
+        [__addMember.fulfilled]: (state, action) => {
+          state.isLoading = false;
+          state.data.data?.push(action.payload.data);
+          
+        },
+        [__addMember.rejected]: (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        },
+        
       },
+      
+    
 })
 
 // export let {logout} = login.actions;
