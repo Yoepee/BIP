@@ -6,15 +6,17 @@ import Option from './Option';
 import Option1 from './Option1';
 import Option2 from './Option2';
 import Option3 from './Option3';
+import Option4 from './Option4';
+import Option5 from './Option5';
 
 
 const Header = ({ head, option, payload, chk }) => {
   const navigate = useNavigate();
-
+  
   return (
     <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0" }}>
       {/* 제목만 */}
-      {!option?
+      {!option&&option!==0?
       <Option head={head}/>
       :null}
       
@@ -36,6 +38,16 @@ const Header = ({ head, option, payload, chk }) => {
       {/* 약속상세보기 뒤로가기(홈) 제목 메뉴 */}
       {option===3?
       <Option3 head={head}/>
+      :null}
+
+      {/* 친구목록 제목 친구추가 */}
+      {option===4?
+      <Option4 head={head}/>
+      :null}
+
+       {/* 친구추가 뒤로가기(친구) 제목 완료 */}
+       {option===5?
+      <Option5 head={head}/>
       :null}
 
     </div>

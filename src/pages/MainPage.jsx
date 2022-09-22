@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false})
   const navigate = useNavigate();
+
     return (
         <>
       <Wrap>

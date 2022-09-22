@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { __editNickname, __editPhone, __editEmail } from '../../redux/modules/profile';
 
-const Option1 = ({ head, option, payload, chk }) =>{
+const Option1 = ({ head, payload, chk }) =>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {type} = useParams();
