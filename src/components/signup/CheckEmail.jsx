@@ -53,7 +53,7 @@ const CheckEmail = () => {
         localStorage.setItem("Authorization", response.headers.authorization);
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
         // localStorage.setItem("name", response.data.data);
-        navigate("/")
+        navigate("/signup/change")
       }else{
        alert(response.data.data) 
       }
