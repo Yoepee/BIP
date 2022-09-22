@@ -20,19 +20,19 @@ const Footer = ({foot}) =>{
           {foot===0?
           <p><HomeIcon/></p>
           :<p><HomeOutlinedIcon/></p>}
-          <p>약속</p>
+          {/* <p>약속</p> */}
         </div>
         <div onClick={()=>{navigate("/member")}} style={{textAlign:"center"}}>
         {foot===1?
         <p><GroupIcon/></p>
         :<p><GroupOutlinedIcon/></p>}
-          <p>친구</p>
+          {/* <p>친구</p> */}
         </div>
         <div onClick={()=>{navigate("/profile")}} style={{textAlign:"center"}}>
         {foot===2?
         <p><PermContactCalendarIcon/></p>
         :<p><PermContactCalendarOutlinedIcon/></p>}
-          <p>프로필</p>
+          {/* <p>프로필</p> */}
         </div>
         {/* <div onClick={()=>{navigate("/intro")}} style={{textAlign:"center"}}>
         {foot===3?
