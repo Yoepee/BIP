@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import moment from "moment";
-import 'moment/locale/ko';
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 const Day = () => {
-  const today = moment().format('YYYY년 MM월 DD일 dddd');
+  dayjs.locale('ko')
+  const today = dayjs().format('YYYY년 MM월 DD일 dddd');
   return(
     <>
       <Today>

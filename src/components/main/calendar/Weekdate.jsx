@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
-import moment from "moment"
+import { useState } from "react";
 import useDate from "../../../hooks/useDate";
 import useWeak from "../../../hooks/useWeak"
 import styled from "styled-components";
+import dayjs from "dayjs";
+
 
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
@@ -45,8 +46,8 @@ const Weekdate = () => {
     <Wrap style={{display:"flex", justifyContent:"center"}}>
       <div>
         <div style={{ display: "flex", justifyContent:"center", fontWeight:"bold" }}>
-          <p>{moment(now).format("YYYY년")}</p>
-          <p>{moment(now).format("MM월")}</p>
+          <p>{dayjs(now).format("YYYY년")}</p>
+          <p>{dayjs(now).format("MM월")}</p>
         </div>
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex", alignItems:"center"}}>
