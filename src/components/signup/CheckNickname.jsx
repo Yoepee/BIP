@@ -123,33 +123,3 @@ const Profile = styled.form`
     margin-top: 150px;
   }
 `;
-const ImgArea = styled.div`
-  margin: 0 auto;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: #26a69a;
-  img{
-    margin: 45px 30px;
-    width: 70%;
-    height: 50%;
-    
-  }
-  .input_file_button{
-  display: flex;
-  justify-content: center;
-  width: 1%;
-  margin: -40px 0 0 135px;
-  box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
-  padding: 6px 25px;
-  border-radius: 50%;
-  background-color: #fff;
-  color:black;
-  
-  cursor: pointer;
-  
-  
-}
-  
- 
-`;
