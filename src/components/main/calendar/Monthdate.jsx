@@ -1,8 +1,9 @@
-import moment from "moment"
 import useDate from "../../../hooks/useDate";
 import useWeak from "../../../hooks/useWeak"
 import styled from "styled-components";
 import { useState } from "react";
+import dayjs from "dayjs";
+
 
 
 const Test = () => {
@@ -30,8 +31,8 @@ const Test = () => {
     <Wrap style={{ display: "flex", justifyContent: "center" }}>
       <div>
         <div style={{ display: "flex", justifyContent: "center", marginBottom:"3%", fontWeight:"bold"}}>
-          <p>{moment(now).format("YYYY년")}</p>
-          <p>{moment(now).format("MM월")}</p>
+          <p>{dayjs(now).format("YYYY년")}</p>
+          <p>{dayjs(now).format("MM월")}</p>
         </div>
         <div style={{ display: "flex" }}>
           <Datediv>
