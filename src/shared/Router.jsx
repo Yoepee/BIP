@@ -11,6 +11,7 @@ import MemberPage from "../pages/MemberPage"
 import AddPromisePage from "../pages/promise/AddPromisePage"
 import DetailPromisePage from "../pages/promise/DetailPromisePage"
 import SignUpChange from "../pages/signup/SignUpChange"
+import AddMemberPage from "../pages/AddMemberPage"
 
 
 
@@ -24,6 +25,7 @@ const Router = () =>{
             <Route path="/signup/nickname" element={<SignUpNickname/>}/>
             <Route path="/signup/change" element={<SignUpChange/>}/>
             <Route path="/member" element={<MemberPage/>}/>
+            <Route path="/addmember" element={<AddMemberPage/>}/>
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
