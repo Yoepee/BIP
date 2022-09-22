@@ -1,5 +1,5 @@
 import useDate from "../../../hooks/useDate";
-import useWeak from "../../../hooks/useWeak"
+import useWeek from "../../../hooks/useWeek"
 import styled from "styled-components";
 import { useState } from "react";
 import dayjs from "dayjs";
@@ -8,23 +8,23 @@ import dayjs from "dayjs";
 
 const Test = () => {
   const now = new Date();
-  const onedayWeak = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+  const onedayWeek = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
   const oneday = new Date(now.getFullYear(), now.getMonth(), 1).getDate();
   const lastday = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
   const CalendarDay = useDate(oneday, lastday, lastday);
-  const CalendarWeak = useWeak(onedayWeak, lastday);
+  const CalendarWeek = useWeek(onedayWeek, lastday);
 
   // 선택한 날짜 확인
   const [chk, setChk] = useState({
     day:now.getDate(),
-    weak:useWeak(now.getDay(), 1)[0]
+    week:useWeek(now.getDay(), 1)[0]
   });
   // 배열로 오브젝트 형식으로 요일, 날짜 저장 
   const result = [];
 
   for (let i = 0; i < lastday; i++) {
-    result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
+    result.push({ week: CalendarWeek[i], day: CalendarDay[i] })
   }
 
   return (
@@ -36,23 +36,23 @@ const Test = () => {
         </div>
         <div style={{ display: "flex" }}>
           <Datediv>
-            {chk.weak==="월"?
-            <WeakDiv style={{backgroundColor:"pink"}}>월</WeakDiv>:<WeakDiv>월</WeakDiv>}
-            {chk.weak==="화"?
-            <WeakDiv style={{backgroundColor:"pink"}}>화</WeakDiv>:<WeakDiv>화</WeakDiv>}
-            {chk.weak==="수"?
-            <WeakDiv style={{backgroundColor:"pink"}}>수</WeakDiv>:<WeakDiv>수</WeakDiv>}
-            {chk.weak==="목"?
-            <WeakDiv style={{backgroundColor:"pink"}}>목</WeakDiv>:<WeakDiv>목</WeakDiv>}
-            {chk.weak==="금"?
-            <WeakDiv style={{backgroundColor:"pink"}}>금</WeakDiv>:<WeakDiv>금</WeakDiv>}
-            {chk.weak==="토"?
-            <WeakDiv style={{backgroundColor:"pink"}}>토</WeakDiv>:<WeakDiv>토</WeakDiv>}
-            {chk.weak==="일"?
-            <WeakDiv style={{backgroundColor:"pink", color: "red"}}>일</WeakDiv>:<WeakDiv style={{color: "red"}}>일</WeakDiv>}
-            {onedayWeak === 0 ?
+            {chk.week==="월"?
+            <WeekDiv style={{backgroundColor:"pink"}}>월</WeekDiv>:<WeekDiv>월</WeekDiv>}
+            {chk.week==="화"?
+            <WeekDiv style={{backgroundColor:"pink"}}>화</WeekDiv>:<WeekDiv>화</WeekDiv>}
+            {chk.week==="수"?
+            <WeekDiv style={{backgroundColor:"pink"}}>수</WeekDiv>:<WeekDiv>수</WeekDiv>}
+            {chk.week==="목"?
+            <WeekDiv style={{backgroundColor:"pink"}}>목</WeekDiv>:<WeekDiv>목</WeekDiv>}
+            {chk.week==="금"?
+            <WeekDiv style={{backgroundColor:"pink"}}>금</WeekDiv>:<WeekDiv>금</WeekDiv>}
+            {chk.week==="토"?
+            <WeekDiv style={{backgroundColor:"pink"}}>토</WeekDiv>:<WeekDiv>토</WeekDiv>}
+            {chk.week==="일"?
+            <WeekDiv style={{backgroundColor:"pink", color: "red"}}>일</WeekDiv>:<WeekDiv style={{color: "red"}}>일</WeekDiv>}
+            {onedayWeek === 0 ?
               null
-              : new Array(onedayWeak - 1).fill("　").map((a,i) => {
+              : new Array(onedayWeek - 1).fill("　").map((a,i) => {
                 return (
                   <div key={i}>{a}</div>
                 )
@@ -63,14 +63,14 @@ const Test = () => {
                 <div key={index}>
                   {chk.day === calendar.day ?
                     <DayDiv style={{ border: "1px solid black" }}
-                      onClick={() => { setChk({day:calendar.day, weak: calendar.weak}) }}>
-                      {calendar.weak === "일" ?
+                      onClick={() => { setChk({day:calendar.day, week: calendar.week}) }}>
+                      {calendar.week === "일" ?
                         <div style={{ color: "red" }}>{calendar.day}</div>
                         : <div>{calendar.day}</div>}
                     </DayDiv>
                     : <DayDiv
-                      onClick={() => { setChk({day:calendar.day, weak: calendar.weak}) }}>
-                      {calendar.weak === "일" ?
+                      onClick={() => { setChk({day:calendar.day, week: calendar.week}) }}>
+                      {calendar.week === "일" ?
                         <div style={{ color: "red" }}>{calendar.day}</div>
                         : <div>{calendar.day}</div>}
                     </DayDiv>}
@@ -112,7 +112,7 @@ const Datediv = styled.div`
   place-items: center;
 `
 
-const WeakDiv = styled.div`
+const WeekDiv = styled.div`
 /* background-color: pink; */
   width: 20px;
   height: 20px;

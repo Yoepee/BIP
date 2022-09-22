@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useDate from "../../../hooks/useDate";
-import useWeak from "../../../hooks/useWeak"
+import useWeek from "../../../hooks/useWeek"
 import styled from "styled-components";
 import dayjs from "dayjs";
 
@@ -10,13 +10,13 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 
 const Weekdate = () => {
   const now = new Date();
-  const todayWeak = now.getDay();
+  const todayWeek = now.getDay();
   const today = now.getDate();
   const lastday = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
 
   const CalendarDay = useDate(today, lastday, 7);
-  const CalendarWeak = useWeak(todayWeak, 7);
+  const CalendarWeek = useWeek(todayWeek, 7);
 
   // 선택한 날짜 확인
   const [chk, setChk] = useState(today);
@@ -24,7 +24,7 @@ const Weekdate = () => {
   const result = [];
 
   for (let i = 0; i < 7; i++) {
-    result.push({ weak: CalendarWeak[i], day: CalendarDay[i] })
+    result.push({ week: CalendarWeek[i], day: CalendarDay[i] })
   }
   // 이전날로 선택 넘기기
   const onPrev = () =>{
@@ -61,25 +61,25 @@ const Weekdate = () => {
                 {chk === calendar.day ?
                   <DayDiv style={{ border: "1px solid black" }}
                   onClick={()=>{setChk(calendar.day)}}>
-                    {calendar.weak === "일" ?                  
+                    {calendar.week === "일" ?                  
                       <div style={{ color: "red" }}>
-                        {calendar.weak}
+                        {calendar.week}
                       </div>
                     :
                       <div>
-                        {calendar.weak}
+                        {calendar.week}
                       </div>
                     }
                     <div>{calendar.day}</div>
                   </DayDiv>
                   : <DayDiv onClick={()=>{setChk(calendar.day)}}>
-                    {calendar.weak === "일" ?
+                    {calendar.week === "일" ?
                       <div style={{ color: "red" }}>
-                        {calendar.weak}
+                        {calendar.week}
                       </div>
                     :
                       <div>
-                        {calendar.weak}
+                        {calendar.week}
                       </div>
                     }
                     <div>{calendar.day}</div>
