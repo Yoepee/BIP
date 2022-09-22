@@ -30,7 +30,6 @@ const CheckPhone = () => {
     if (regexPhone.test(member.value)) {
       let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
         .then((response) => {
-          console.log(response);
           if(response.data.data){
             __signup({authCode:test, phoneNumber:payload.value})
           }else{
@@ -70,7 +69,7 @@ const CheckPhone = () => {
       if(response.data.success===true){
         localStorage.setItem("Authorization", response.headers.authorization);
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
-        // localStorage.setItem("name", response.data.data);
+        localStorage.setItem("name", response.data.data.nickname);
         navigate("/")
       }else{
        alert(response.data.data) 
