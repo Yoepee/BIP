@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
@@ -12,7 +11,8 @@ const IntroPage = () => {
   }
 
   const naver = () =>{
-    
+    console.log(process.env.REACT_APP_NAVER_URL)
+    window.location.href=process.env.REACT_APP_NAVER_URL
   }
   
   return (
