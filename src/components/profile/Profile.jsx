@@ -14,14 +14,14 @@ const Profile = () => {
     useEffect(()=>{
         dispatch(__getProfile());
     },[dispatch])
-    
+    console.log(profile)
     return (
         <div>
             <div>
                 <Prodiv onClick={() => { navigate("/detailprofile") }}>
-                    {!profile?.data?.data?.urlfileImgUrl?
+                    {!profile?.data?.data?.profileImgUrl?
                     <img src={base} width="20%" style={{ margin: "20px", borderRadius: "50%" }} />
-                    :<img src={profile?.data?.data?.urlfileImgUrl} width="20%" style={{ margin: "20px", borderRadius: "50%" }} />}
+                    :<img src={profile?.data?.data?.profileImgUrl} width="20%" style={{ margin: "20px", borderRadius: "50%" }} />}
                     <div>
                         <p>{profile?.data?.data?.nickname}</p>
                         <p>{profile?.data?.data?.phoneNumber}</p>
