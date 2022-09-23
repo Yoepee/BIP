@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
@@ -19,6 +19,28 @@ const CheckPhone = () => {
   /** 휴대폰 번호 인증 유효검사*/
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
   const regtest = /^[0-9]{6}$/;
+
+  const time = useRef(180);
+  const [min, setMin] = useState(parseInt(3));
+  const [sec, setSec] = useState(0);
+  const timer = useRef(null);
+
+
+  useEffect(()=>{
+    return () => clearInterval(timer.current);
+  },[])
+
+  useEffect(()=>{
+    if(time.current<0){
+      clearInterval(timer.current);
+    }
+  },[sec])
+
+  const countDown = () => {
+    setMin(parseInt(time.current/60));
+    setSec(time.current%60);
+    time.current-=1;
+  }
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -42,13 +64,11 @@ const CheckPhone = () => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", payload)
     .then((response)=>{
       console.log(response)
-      setVisble(!visble);
     });
   }
   const __examPhone = async (payload) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", payload)
     .then((response)=>{
-      setVisble(!visble);
     });
   }
   const __signup = async (payload) => {
@@ -115,7 +135,7 @@ const CheckPhone = () => {
 
 
         <BtnArea>
-          {visble && <Button variant="contained" className="default_btn">인증번호 다시 받기</Button>}
+          {visble && <Button variant="contained" className="default_btn" onClick={()=>{__testPhone(member);}}>인증번호 다시 받기({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
           <Button
             variant="contained"
             onClick={() => {
@@ -123,6 +143,9 @@ const CheckPhone = () => {
                 if (!visble) {
                   setChkBtn("인증번호 확인하기");
                   __testPhone(member);
+                  timer.current = setInterval(()=>{
+                    countDown();
+                  },1000);
                 } else {
                   if(regtest.test(test)){
                   __chkPhone(member);
