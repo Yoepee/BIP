@@ -13,6 +13,7 @@ import DetailPromisePage from "../pages/promise/DetailPromisePage"
 import SignUpChange from "../pages/signup/SignUpChange"
 import AddMemberPage from "../pages/AddMemberPage"
 import KakaoPage from "../pages/signup/KakaoPage"
+import NaverPage from "../pages/signup/NaverPage"
 
 
 
@@ -33,6 +34,7 @@ const Router = () =>{
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
             <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>
+            <Route path="/login/naver" exact element={<NaverPage/>}/>
         </Routes>
     )
 }
