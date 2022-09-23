@@ -14,27 +14,16 @@ const Member = () =>{
   return (
     <div>
       <div style={{ margin:"10px"}}>
-      
-        <div style={{display:"flex", border:"1px solid black", margin:"10px"}}>
-          <p>사진</p>
-          <p>이름</p>
-        </div>
-        <div style={{display:"flex", border:"1px solid black", margin:"10px"}}>
-          <p>사진</p>
-          <p>이름</p>
-        </div>
-        <div style={{display:"flex", border:"1px solid black", margin:"10px"}}>
-          <p>사진</p>
-          <p>이름</p>
-        </div>
-        <div style={{display:"flex", border:"1px solid black", margin:"10px"}}>
-          <p>사진</p>
-          <p>이름</p>
-        </div>
-        <div style={{display:"flex", border:"1px solid black", margin:"10px"}}>
-          <p>사진</p>
-          <p>이름</p>
-        </div>
+        {member?.data?.data?.map((friend, i)=>{
+          return (
+            <div style={{display:"flex", border:"1px solid black", margin:"10px"}} key={i}>
+            <p>/사진/</p>
+            <p>{friend.nickname}</p>
+            <p>/수정할 이름/</p>
+            <p style={{marginLeft:"auto", marginRight:"2%"}}>{friend.creditScore}</p>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

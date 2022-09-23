@@ -27,7 +27,7 @@ const Profile = () => {
                         <p>{profile?.data?.data?.phoneNumber}</p>
                         {profile?.data?.data?.email?
                         <p>{profile?.data?.data?.email}</p>
-                        :<p>이메일 정보가 없습니다.</p>}
+                        :<p>이메일 정보를 입력해야 <br/>휴대폰 분실 시 접속할 수 있습니다.</p>}
                     </div>
                     <div style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
                         <p><ArrowForwardIosRoundedIcon /></p>
