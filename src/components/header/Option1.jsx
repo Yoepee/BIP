@@ -1,9 +1,9 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { __editNickname, __editPhone, __editEmail } from '../../redux/modules/profile';
+import { __editNickname, __editPhone, __editEmail, __editPicture } from '../../redux/modules/profile';
 
-const Option1 = ({ head, payload, chk }) =>{
+const Option1 = ({ head, payload, chk, image }) =>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {type} = useParams();
@@ -26,6 +26,13 @@ const Option1 = ({ head, payload, chk }) =>{
       navigate("/detailprofile");
     }
   }
+  const editPicture = () => {
+    console.log(image)    
+    dispatch(__editPicture(image));
+    navigate("/detailprofile");    
+  }
+  console.log(image)
+
   return (
     <>
     <div onClick={()=>{navigate(-1)}}>
@@ -40,8 +47,10 @@ const Option1 = ({ head, payload, chk }) =>{
           editNickname();
         }else if(type==="call"){
           editPhone();
-        }else{
+        }else if(type==="mail"){
           editEmail();
+        }else {
+          editPicture();
         }
       }}>
         <p>완료</p>

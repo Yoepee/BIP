@@ -9,7 +9,7 @@ import Option6 from './Option6';
 
 
 
-const Header = ({ head, option, payload, chk}) => {
+const Header = ({ head, option, payload, chk, image}) => {
   
   return (
     <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0" }}>
@@ -25,7 +25,7 @@ const Header = ({ head, option, payload, chk}) => {
 
       {/* 프로필 변경 뒤로가기(프로필상세) 제목 완료 */}
       {option===1?
-      <Option1 head={head} payload={payload} chk={chk}/>
+      <Option1 head={head} payload={payload} chk={chk} image={image}/>
       :null}
 
         {/* 약속생성 뒤로가기(홈) 제목 완료 */}
