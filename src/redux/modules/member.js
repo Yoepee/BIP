@@ -20,7 +20,7 @@ import axios from 'axios';
   );
 
 
-  export const __addMember =  createAsyncThunk(
+  export const __addMemberName =  createAsyncThunk(
     "api/friends/nickname",
      async(payload, thunkAPI) => {
         try{
@@ -36,11 +36,26 @@ import axios from 'axios';
              } catch(error){
                 return thunkAPI.rejectWithValue(error)
              }
-     }   
-        
-        
-    
-);
+     }
+    );
+    export const __addMemberPhone =  createAsyncThunk(
+      "api/friends/nickname",
+       async(payload, thunkAPI) => {
+          try{
+            console.log(payload)
+              const data = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/friends/nickname",payload,{
+                  headers: {
+                      Authorization:localStorage.getItem('Authorization'),
+                      RefreshToken:localStorage.getItem('RefreshToken')
+                  }})
+  
+                  console.log(data)
+                  return thunkAPI.fulfillWithValue(data.data);
+               } catch(error){
+                  return thunkAPI.rejectWithValue(error)
+               }
+       }
+      );
 
 
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
@@ -68,15 +83,28 @@ export const member = createSlice({
           state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
         },
         
-        [__addMember.pending]:(state) =>{
+        [__addMemberName.pending]:(state) =>{
           state.isLoading = true;
         },
-        [__addMember.fulfilled]: (state, action) => {
+        [__addMemberName.fulfilled]: (state, action) => {
           state.isLoading = false;
           state.data.data?.push(action.payload.data);
           
         },
-        [__addMember.rejected]: (state, action) => {
+        [__addMemberName.rejected]: (state, action) => {
+          state.isLoading = false;
+          state.error = action.payload;
+        },
+
+        [__addMemberPhone.pending]:(state) =>{
+          state.isLoading = true;
+        },
+        [__addMemberPhone.fulfilled]: (state, action) => {
+          state.isLoading = false;
+          state.data.data?.push(action.payload.data);
+          
+        },
+        [__addMemberPhone.rejected]: (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
         },

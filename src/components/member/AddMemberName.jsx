@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { __addMemberPhone} from "../../redux/modules/member";
+import { __addMemberName} from "../../redux/modules/member";
 
-const AddMemberPhone = () => {
+const AddMemberName = () => {
   
   const initialState = {
    value:""
@@ -19,16 +19,16 @@ const AddMemberPhone = () => {
 
  const onSumbit = (e) => {
   e.preventDefault()
-  dispatch(__addMemberPhone(member));
+  dispatch(__addMemberName(member));
  }
   
   return (
     <form onSubmit={onSumbit}>
-      <p>휴대폰 번호</p>
+      <p>닉네임</p>
         <input type="text" onChange={onChangeHandle} name="value" value={member.value}/>
         <button>검색</button>
     </form>
   )
 }
 
-export default AddMemberPhone;
+export default AddMemberName;

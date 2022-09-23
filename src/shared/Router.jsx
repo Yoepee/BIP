@@ -20,19 +20,26 @@ import NaverPage from "../pages/signup/NaverPage"
 const Router = () =>{
     return (
         <Routes>
+            {/* 메인페이지 */}
             <Route path="/" element={<MainPage/>}/>
+            {/* 시작페이지 */}
             <Route path="/intro" element={<IntroPage/>}/>
+            {/* 회원가입 */}
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/signup/email" element={<SignUpEmail/>}/>
             <Route path="/signup/nickname" element={<SignUpNickname/>}/>
             <Route path="/signup/change" element={<SignUpChange/>}/>
+            {/* 친구목록 */}
             <Route path="/member" element={<MemberPage/>}/>
-            <Route path="/addmember" element={<AddMemberPage/>}/>
+            <Route path="/addmember/:type" element={<AddMemberPage/>}/>
+            {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            {/* 약속잡기 */}
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
             <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
+            {/* 소셜로그인 */}
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>
             <Route path="/login/naver" exact element={<NaverPage/>}/>
         </Routes>
