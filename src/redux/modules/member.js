@@ -86,6 +86,4 @@ export const member = createSlice({
     
 })
 
-// export let {logout} = login.actions;
-
 export default member;
