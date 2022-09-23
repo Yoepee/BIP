@@ -53,4 +53,5 @@ grid-template-columns: repeat(3,1fr);
 place-items: center;
 position:fixed;
 bottom:0;
+background-color:white;
 `

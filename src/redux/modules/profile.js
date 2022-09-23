@@ -132,6 +132,4 @@ export const profile = createSlice({
       },
 })
 
-// export let {logout} = login.actions;
-
 export default profile;
