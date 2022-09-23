@@ -141,6 +141,7 @@ const CheckPhone = () => {
             onClick={() => {
               if (regexPhone.test(member.value)) {
                 if (!visble) {
+                  setVisble(!visble);
                   setChkBtn("인증번호 확인하기");
                   __testPhone(member);
                   timer.current = setInterval(()=>{

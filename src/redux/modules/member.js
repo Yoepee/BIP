@@ -29,10 +29,13 @@ import axios from 'axios';
                 headers: {
                     Authorization:localStorage.getItem('Authorization'),
                     RefreshToken:localStorage.getItem('RefreshToken')
-                }})
-
-                console.log(data)
-                return thunkAPI.fulfillWithValue(data.data);
+                }}).then((response)=>{
+                  if(response.data.success===false){
+                    alert(response.data.data);
+                  }else{
+                    return thunkAPI.fulfillWithValue(response.data);
+                  }
+                })
              } catch(error){
                 return thunkAPI.rejectWithValue(error)
              }
