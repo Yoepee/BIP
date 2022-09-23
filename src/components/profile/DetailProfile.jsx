@@ -8,11 +8,11 @@ import { __getProfile } from "../../redux/modules/profile";
 const DetailProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const profile = useSelector((state)=>state.profile);
+  const profile = useSelector((state)=>state.profile);
 
-  //   useEffect(()=>{
-  //       dispatch(__getProfile());
-  //   },[dispatch])
+    useEffect(()=>{
+        dispatch(__getProfile());
+    },[dispatch])
   return (
     <div>
       <TypeDiv>
