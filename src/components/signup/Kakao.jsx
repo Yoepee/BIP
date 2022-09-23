@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { readSocial, __kakaologin } from "../../redux/modules/social";
 
 const Kakao = () => {
   const navigate= useNavigate();
+  const dispatch = useDispatch();
   let code = new URL(window.location.href).searchParams.get("code");
 
   const __kakaoLogin = async() => {
@@ -13,7 +16,13 @@ const Kakao = () => {
       if(response.data.success){
         localStorage.setItem("Authorization", response.headers.authorization);
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
-        navigate("/signup/change");
+        dispatch(readSocial(response.data.data));
+        if(response.data.data.nickname===null){
+          navigate("/signup/change");
+        }else{
+          navigate("/")
+        }
+
       }
     }).catch((error)=>{
       // alert(error.code)
