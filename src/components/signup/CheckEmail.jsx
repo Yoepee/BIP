@@ -118,6 +118,7 @@ const CheckEmail = () => {
 
         <BtnArea>
           {visble && <Button variant="contained" className="default_btn" onClick={()=>{__examEmail(member);}}>인증번호 다시 받기({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+          {!regexEmail.test(member.value)?
           <Button
             variant="contained"
             onClick={() => {
@@ -146,6 +147,36 @@ const CheckEmail = () => {
             }}>
             {chkBtn}
           </Button>
+          :<Button
+          variant="contained"
+          style={{backgroundColor: "#6D09D1"}}
+          onClick={() => {
+            if (regexEmail.test(member.value)) {
+              // if (chkmail==="사용중인 이메일 입니다.") {
+              if (!visble) {
+                setChkBtn("인증번호 확인하기");
+                setVisble(!visble);
+                __examEmail(member);
+                timer.current = setInterval(()=>{
+                  countDown();
+                },1000);
+              } else {
+                if (regtest.test(test)) {
+                  __emailLogin(member);
+                } else {
+                  alert("인증번호를 확인해주세요.")
+                }
+              }
+              // }else{
+              //     alert("등록되지 않은 메일입니다.")
+              //   }
+            } else {
+              alert("이메일을 확인해주세요.")
+            }
+          }}>
+          {chkBtn}
+        </Button>
+        }
         </BtnArea>
       </Wrapper>
     </div>
