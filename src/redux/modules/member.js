@@ -30,6 +30,7 @@ import axios from 'axios';
                     Authorization:localStorage.getItem('Authorization'),
                     RefreshToken:localStorage.getItem('RefreshToken')
                 }}).then((response)=>{
+                  console.log(response);
                   if(response.data.success===false){
                     alert(response.data.data);
                   }else{
@@ -42,18 +43,22 @@ import axios from 'axios';
      }
     );
     export const __addMemberPhone =  createAsyncThunk(
-      "api/friends/nickname",
+      "/api/friends/phonenumber",
        async(payload, thunkAPI) => {
           try{
             console.log(payload)
-              const data = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/friends/nickname",payload,{
+              const data = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/friends/phonenumber",payload,{
                   headers: {
                       Authorization:localStorage.getItem('Authorization'),
                       RefreshToken:localStorage.getItem('RefreshToken')
-                  }})
-  
-                  console.log(data)
-                  return thunkAPI.fulfillWithValue(data.data);
+                  }}).then((response)=>{
+                    console.log(response);
+                    if(response.data.success===false){
+                      alert(response.data.data);
+                    }else{
+                      return thunkAPI.fulfillWithValue(response.data);
+                    }
+                  })
                } catch(error){
                   return thunkAPI.rejectWithValue(error)
                }
@@ -91,7 +96,8 @@ export const member = createSlice({
         },
         [__addMemberName.fulfilled]: (state, action) => {
           state.isLoading = false;
-          state.data.data?.push(action.payload.data);
+          if(!action.payload)
+            state.data.data?.push(action.payload.data);
           
         },
         [__addMemberName.rejected]: (state, action) => {
@@ -104,7 +110,8 @@ export const member = createSlice({
         },
         [__addMemberPhone.fulfilled]: (state, action) => {
           state.isLoading = false;
-          state.data.data?.push(action.payload.data);
+          if(!action.payload)
+            state.data.data?.push(action.payload.data);
           
         },
         [__addMemberPhone.rejected]: (state, action) => {
