@@ -13,7 +13,7 @@ import PromiseList from "../components/main/list/PromiseList";
 import dayjs from "dayjs";
 
 const MainPage = () => {
-  const [settings, setSettings] = useState({autoPlay: false})
+  const [settings, setSettings] = useState({autoPlay: false, navButtonsAlwaysInvisible: true})
   const [day, setDay] = useState({unit:"day",date:dayjs().format('YYYY-MM-DD-00-00-00')})
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const MainPage = () => {
             <div><Day setDay={setDay} page={page}/></div>
             <div><Weekdate setDay={setDay} page={page}/></div>
             <div><Monthdate setDay={setDay} page={page}/></div>
-            <div><Month /></div>
+            {/* <div><Month /></div> */}
           </Carousel>
           <PromiseList day={day}/>
       </Wrap>
