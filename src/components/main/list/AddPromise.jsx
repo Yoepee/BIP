@@ -18,12 +18,34 @@ const AddPromise = ({promise, setPromise, onChangeHandler}) => {
   const [check, setCheck] = useState(false);
   const [date, setDate] = useState(new Date());
   const [am, setAm] = useState(true);
+
+  const initialState = {
+    hour:"",
+    min:""
+  }
+  const [time,setTime] = useState(initialState)
   useEffect(() => {
     setCheck(false);
   }, [date])
 
-  console.log(promise);
-
+  const onChange = (e) => {
+    const {name, value} = e.target;
+    setTime({...time, [name]: value.replace(/[^0-9]/g, "")})
+    if(check){
+    setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour+11}-${time.min}-00`)});
+    }else{
+      setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour}-${time.min}-00`)});
+    }
+  }
+  if(Number(time.min)>59){
+    setTime({...time, min: 59})
+  }
+  if(Number(time.hour)>12){
+    setTime({...time, hour: 12})
+  }else if(Number(time.hour)<1 && time.hour!==""){
+    setTime({...time, hour: 1})
+  }
+  console.log(promise)
   return (
     <>
       <Wrap>
@@ -49,8 +71,8 @@ const AddPromise = ({promise, setPromise, onChangeHandler}) => {
               </>}
             </div>
           </div>
-          <div><InputTime type="text"/>시</div>
-          <div><InputTime type="text"/>분</div>
+          <div><InputTime type="text" name="hour" value={time.hour} onChange={onChange} min={1} max={12} maxLength={2}/>시</div>
+          <div><InputTime type="text"name="min" value={time.min} onChange={onChange} min={0} max={60} maxLength={2}/>분</div>
         </When>
         {check ?
           <div style={{display:"flex", justifyContent:"center"}}>
@@ -108,11 +130,14 @@ const When = styled.div`
   align-items: center;
 `
 const InputTime = styled.input`
-  width: 20px;
+  width: 30px;
   text-align: center;
   border: none;
   border-bottom: 1px solid black;
   font-weight: bold;
+  &:focus{
+    outline: none;
+  }
 `
 
 const Point = styled.div`
