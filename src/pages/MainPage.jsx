@@ -9,20 +9,26 @@ import Footer from "../components/footer/Footer";
 import Monthdate from "../components/main/calendar/Monthdate";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
+import PromiseList from "../components/main/list/PromiseList";
+import dayjs from "dayjs";
 
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false})
+  const [day, setDay] = useState({unit:"day",date:dayjs().format('YYYY-MM-DD-00-00-00')})
+  const [page, setPage] = useState(0);
   const navigate = useNavigate();
-
     return (
         <>
       <Wrap>
-          <Carousel {...settings}>
-            <div><Day /></div>
-            <div><Weekdate/></div>
-            <div><Monthdate/></div>
-            <div><Month /></div>            
+          <Carousel 
+          onChange={(now, previous) => setPage(now)}
+          {...settings}>
+            <div><Day setDay={setDay} page={page}/></div>
+            <div><Weekdate setDay={setDay} page={page}/></div>
+            <div><Monthdate setDay={setDay} page={page}/></div>
+            <div><Month /></div>
           </Carousel>
+          <PromiseList day={day}/>
       </Wrap>
       <Plus>
           <IconBtn onClick={() => { navigate("/addpromise") }}><AddIcon /></IconBtn>

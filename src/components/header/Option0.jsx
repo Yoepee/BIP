@@ -5,8 +5,15 @@ const Option0 = ({head}) =>{
   const navigate = useNavigate();
   return (
     <>
-    <div onClick={()=>{navigate(-1)}}>
+    <div onClick={()=>{
+      if(head === "프로필 보기"){
+        navigate("/profile")
+      }else{
+        navigate(-1);
+      }
+    }}>
     <p><ArrowBackIosNewRoundedIcon style={{color:'#6D09D1'}} /></p>
+
     </div>
     <div style={{marginLeft:"1%"}}>
         <p>{head}</p>

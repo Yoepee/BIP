@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDate from "../../../hooks/useDate";
 import useWeek from "../../../hooks/useWeek"
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
-const Weekdate = () => {
+const Weekdate = ({setDay, page}) => {
   const now = new Date();
   const todayWeek = now.getDay();
   const today = now.getDate();
@@ -42,6 +42,24 @@ const Weekdate = () => {
       setChk(CalendarDay[index+1]);
     }
   }
+
+  useEffect(()=>{
+    if(page===1){
+    if(now.getDate()>chk){
+      setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+    }else{
+      setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+    }}
+  },[chk]);
+  useEffect(()=>{
+    if(page===1){
+      if(now.getDate()>chk){
+        setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      }else{
+        setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      }
+    }
+  },[page])
   return (
     <Wrap style={{display:"flex", justifyContent:"center"}}>
       <div>
