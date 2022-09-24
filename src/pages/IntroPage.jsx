@@ -51,7 +51,7 @@ export default IntroPage;
 
 const Wrap = styled.div`
   /* background-color: yellowgreen; */
-  margin: 0 auto;
+  margin: 20% auto;
   text-align: center;
   max-width: 500px;
 `
