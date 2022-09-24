@@ -12,7 +12,7 @@ import Option6 from './Option6';
 const Header = ({ head, option, payload, chk, image}) => {
   
   return (
-    <div style={{ display: "flex", borderBottom: "1px solid #e0e0e0" }}>
+    <div style={{ display: "flex" }}>
       {/* 제목만 */}
       {!option&&option!==0?
       <Option head={head}/>
