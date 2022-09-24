@@ -97,7 +97,7 @@ const Test = ({setDay, page}) => {
 
 export default Test;
 
-const Wrap = styled.div`
+const Wrap = styled.div` 
   margin: 0 auto;
 `
 
