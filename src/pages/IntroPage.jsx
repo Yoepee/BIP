@@ -65,7 +65,7 @@ const ItrBtn = styled.button`
   width: 200px;
   height: 30px;
   margin-bottom: 3px;
-  background-color: #A400BF;
+  background-color: #6D09D1;
   color: white;
   font-size: 12px;
   font-weight: bold;
