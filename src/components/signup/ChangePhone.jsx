@@ -111,7 +111,7 @@ const ChangePhone = () =>{
 
       <Profile>
 
-        <TextField  variant="outlined" label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요"  name="value"
+        <input  variant="outlined" label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요"  name="value"
             value={member.value}
             onChange={onChangeHandler}/>
             {member.value === "" ? null :
@@ -120,14 +120,16 @@ const ChangePhone = () =>{
             :(<div style={{color:"red", fonSizen:"14px"}}>{ment}</div>) 
             : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
 
-        {visble && <TextField variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e)=>{setTest(e.target.value)}} minLength={6} maxLength={6}/>}
+        {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e)=>{setTest(e.target.value)}} minLength={6} maxLength={6}/>}
           {test === "" ? null :
             regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
             <BtnArea>
           {visble && <Button variant="contained" className="default_btn" onClick={()=>{__testPhone(member);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
           {!visble&&
+          regexPhone.test(member.value)?
           <Button
             variant="contained"
+            style={{backgroundColor: "#6D09D1"}}
             onClick={() => {
               if (regexPhone.test(member.value)) {
                 if (!visble) {
@@ -149,7 +151,31 @@ const ChangePhone = () =>{
               }
             }}>
             {chkBtn}
-          </Button>}
+          </Button>
+          :visble?null:<Button
+          variant="contained"
+          onClick={() => {
+            if (regexPhone.test(member.value)) {
+              if (!visble) {
+                setChkBtn("인증번호 확인하기");
+                __testPhone(member);
+                timer.current = setInterval(()=>{
+                  countDown();
+                },1000);
+                setVisble(!visble);
+              } else {
+                if(regtest.test(test)){
+                __chkPhone(member);
+                }else{
+                  alert("인증번호를 확인해주세요.")
+                }
+              }
+            } else {
+              alert("휴대폰 번호를 확인해주세요.")
+            }
+          }}>
+          {chkBtn}
+        </Button>}
         </BtnArea>
       </Profile>
     </Wrapper>
@@ -180,6 +206,15 @@ const Wrapper = styled.div`
  form{
   display: flex;
   flex-direction: column;
+  input{
+    border:2px solid #D5C2F8;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 13px;
+    &:focus{
+      border-color:#6D09D1;
+      outline: none;
+    }
  }
 
 `;
@@ -224,19 +259,19 @@ const BtnArea = styled.div`
   margin-top: 20px;
   margin-bottom: 5px;
   .default_btn{
-    background-color: #ececec;
-    color: black;
+    background-color: #D5C2F8;
+    color:  white;
   }
   Button {
     width: 100%;
-		color: black;
-		background-color: #ececec;
+    color: white;
+    background-color: #D5C2F8;
     margin-bottom: 10px;
 		height: 50px;
 		font-weight: 600;
 		align-items: center;
     &:hover{
-      background-color: #00766c;
+      background-color: #6D09D1;
       color:white;
     }
   }

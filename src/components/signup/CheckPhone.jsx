@@ -131,6 +131,7 @@ const CheckPhone = () => {
 
         <BtnArea>
           {visble && <Button variant="contained" className="default_btn" onClick={()=>{__testPhone(member);}}>인증번호 다시 받기({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+          {!regexPhone.test(member.value)?
           <Button
             variant="contained"
             onClick={() => {
@@ -155,6 +156,32 @@ const CheckPhone = () => {
             }}>
             {chkBtn}
           </Button>
+          :<Button
+          style={{backgroundColor: "#6D09D1"}}
+          variant="contained"
+          onClick={() => {
+            if (regexPhone.test(member.value)) {
+              if (!visble) {
+                setVisble(!visble);
+                setChkBtn("인증번호 확인하기");
+                __testPhone(member);
+                timer.current = setInterval(()=>{
+                  countDown();
+                },1000);
+              } else {
+                if(regtest.test(test)){
+                __chkPhone(member);
+                }else{
+                  alert("인증번호를 확인해주세요.")
+                }
+              }
+            } else {
+              alert("휴대폰 번호를 확인해주세요.")
+            }
+          }}>
+          {chkBtn}
+        </Button>
+        }
         </BtnArea>
         <EmailDiv onClick={()=>{navigate("/signup/email")}}>
           <p>휴대폰 번호가 변경되었나요? </p>
