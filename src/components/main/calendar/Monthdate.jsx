@@ -1,12 +1,12 @@
 import useDate from "../../../hooks/useDate";
 import useWeek from "../../../hooks/useWeek"
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 
 
-const Test = () => {
+const Test = ({setDay, page}) => {
   const now = new Date();
   const onedayWeek = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
   const oneday = new Date(now.getFullYear(), now.getMonth(), 1).getDate();
@@ -26,6 +26,17 @@ const Test = () => {
   for (let i = 0; i < lastday; i++) {
     result.push({ week: CalendarWeek[i], day: CalendarDay[i] })
   }
+
+  useEffect(()=>{
+    if(page===2)
+      setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
+  },[chk]);
+
+  useEffect(()=>{
+    if(page===2){
+      setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
+    }
+  },[page])
 
   return (
     <Wrap style={{ display: "flex", justifyContent: "center" }}>
