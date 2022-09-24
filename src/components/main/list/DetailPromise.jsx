@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 
 
 const DetailPromise = () => {
+  const {id} = useParams();
+  const dispatch = useDispatch();
+  const promise = useSelector((state)=>state.detailPromise)
+
+  useEffect(()=>{
+    dispatch(__getDetailPromise(id))
+  },[dispatch])
   
   return(
     <>
       <Wrap>
         <Title>
-          <p>제목</p>
+          <p>{promise?.data?.data?.title}</p>
         </Title>
         <When>
-          <p>2022년 9월 22일</p>
+          {/* 시간 통일감 필요 */}
+          <p>{promise?.data?.data?.eventDateTime}</p>
           <p>오후</p>
           <p>2시</p>
           <p>30분</p>    
         </When>
         <Where>
-          <p>강원도 원주시 반곡동 투썸플레이스</p>
+          <p>{promise?.data?.data?.place}</p>
         </Where>
         <Point>
           <p>포인트</p>
-          <p>300</p>
+          <p>{promise?.data?.data?.point}</p>
         </Point>
         <Desc>
           <p>내용</p>

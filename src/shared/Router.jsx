@@ -38,7 +38,7 @@ const Router = () =>{
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
             {/* 약속잡기 */}
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
-            <Route path="/detailpromise" exact element={<DetailPromisePage/>}/>
+            <Route path="/detailpromise/:id" exact element={<DetailPromisePage/>}/>
             {/* 소셜로그인 */}
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>
             <Route path="/login/naver" exact element={<NaverPage/>}/>

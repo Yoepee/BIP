@@ -10,12 +10,32 @@ const PromiseList = ({day}) => {
     dispatch(__getPromise(day));
   },[day])
 
+  console.log(day)
+  console.log(promiseList)
   return (
     <>
       <Wrap>
         <div>
           <p style={{fontWeight:"bold"}}>약속 목록</p>
         </div>
+        {promiseList?.data?.data?.map((promise)=>{
+          return (
+            <PromiseCard key={promise.id}>
+          <div style={{display:"flex"}}>
+            <p style={{fontWeight:"bold"}}>{promise.title}</p>
+            {/* 포인트 받아야할듯 */}
+            <Point>P</Point>
+            <p style={{fontWeight:"400"}}>{promise.id}</p>
+          </div>
+          <div style={{display:"flex"}}>
+            {/* 날짜 통일감 없어서 구분하기 어렵 */}
+            <p style={{fontSize:"15px", marginRight:"10px"}}>{promise.eventDateTime}</p>
+            <p style={{fontSize:"15px"}}>{promise.place}</p>
+            <LastTime>{promise.lastTime}</LastTime>
+          </div>
+        </PromiseCard>
+          )
+        })}
         <PromiseCard>
           <div style={{display:"flex"}}>
             <p style={{fontWeight:"bold"}}>채원이 생일파티</p>
@@ -52,6 +72,12 @@ const Point = styled.p`
   color: white;
   border-radius: 50%;
   width: 20px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 2px;
+`
+
+const LastTime = styled.p`
   text-align: center;
   margin-left: auto;
   margin-right: 2px;
