@@ -9,13 +9,13 @@ const ItrSwipe = () => {
     return (
         <Carousel>
             <div>
-              <img src={logo} width="80%"/>
+              <img src={logo} width="200px"/>
             </div>
             <div>
-              <img src={logo2} width="80%"/>
+              <img src={logo2} width="200px"/>
             </div>
             <div>
-              <img src={logo3} width="80%"/>
+              <img src={logo3} width="200px"/>
             </div>
         </Carousel>
       )
