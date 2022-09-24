@@ -6,7 +6,7 @@ const Option0 = ({head}) =>{
   return (
     <>
     <div onClick={()=>{navigate(-1)}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{color:'#6D09D1'}} /></p>
     </div>
     <div style={{marginLeft:"1%"}}>
         <p>{head}</p>

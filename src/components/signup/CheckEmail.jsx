@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { TextField } from "@material-ui/core";
+
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -89,11 +89,7 @@ const CheckEmail = () => {
   return (
     <div>
       <Wrapper>
-        <IconArea>
-          <Button onClick={() => { navigate(-1) }} >
-            <KeyboardArrowLeftIcon />
-          </Button>
-        </IconArea>
+      <Header option={0} />
 
         <InfoArea>
           <p>
@@ -101,7 +97,7 @@ const CheckEmail = () => {
           </p>
         </InfoArea>
         <form action="">
-          <TextField
+          <input
             id="outlined-basic"
             name="value"
             value={member.value}
@@ -113,7 +109,7 @@ const CheckEmail = () => {
           />
           {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다.</div>)}
 
-          {visble && <TextField variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
+          {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
           {test === "" ? null :
             regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
 
@@ -162,19 +158,7 @@ export default CheckEmail;
 
 
 
-const IconArea = styled.div`
-  width: 1%;
-  Button {
-    width: 20%;
-    span {
-      padding: 0;
 
-      svg {
-        margin-right: 40px;
-      }
-    }
-  }
-`;
 
 const InfoArea = styled.div`
   display: flex;
@@ -200,6 +184,16 @@ const Wrapper = styled.div`
  form{
   display: flex;
   flex-direction: column;
+  input{
+    border:2px solid #D5C2F8;
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 13px;
+    &:focus{
+      border-color:#6D09D1;
+      outline: none;
+    }
+   }
  }
 
 `;
@@ -211,19 +205,19 @@ const BtnArea = styled.div`
   margin-top: 20px;
   margin-bottom: 5px;
   .default_btn{
-    background-color: #ececec;
-    color: black;
+    background-color:#D5C2F8;
+    color:  white;
   }
   Button {
     width: 100%;
-		color: black;
-		background-color: #ececec;
+		color: white;
+		background-color: #D5C2F8;
     margin-bottom: 10px;
 		height: 50px;
 		font-weight: 600;
 		align-items: center;
     &:hover{
-      background-color: #00766c;
+      background-color:#6D09D1;;
       color:white;
     }
   }

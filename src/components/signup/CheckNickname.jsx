@@ -59,15 +59,15 @@ const CheckNickname = () => {
       </HeaderArea>
 
       <Profile>
-
-        <TextField label="닉네임" placeholder="닉네임을 입력하세요"  name="value"
+        <label style={{fontWeight:'600', fontSize:'18px'}}>닉네임</label>
+        <input label="닉네임" placeholder="닉네임을 입력하세요"  name="value"
             value={member.value}
             onChange={onChangeHandler}/>
             {member.value=== "" ? null: regexNickname.test(member.value)?
             chkname === "사용 가능한 닉네임 입니다."?
-            (<div style={{color: "#00766c", fontSize:"14px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px"}}>사용가능한 닉네임이 아닙니다.</div>)}
+            (<div style={{color: "#00766c", fontSize:"14px",marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
+            :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
+            :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>사용가능한 닉네임이 아닙니다.</div>)}
       </Profile>
     </Wrapper>
   );
@@ -90,7 +90,7 @@ const HeaderArea = styled.div`
   height: 50px;
   
   justify-content: space-between;
-  border-bottom: 1px solid #b1acac;
+ 
 
   Button {
     width: 1%;
@@ -111,15 +111,27 @@ const HeaderTitle = styled.span`
 `;
 
 const Profile = styled.form`
-  margin: 150px auto 0 auto;
+  margin: 69px auto 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 500px;
   label {
-    margin-top: 100px;
+    margin-top: 10px;
+    
   }
   input {
-    margin-top: 150px;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    border-bottom: 1px solid #D5C2F8;
+    margin-top: 49px;
+    &::placeholder{
+      font-size: 15px;
+    }
+    &:focus{
+      border-bottom: 2px solid #6D09D1;
+    }
   }
 `;
