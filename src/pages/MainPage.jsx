@@ -58,9 +58,13 @@ display:flex;
 justify-content:center;
 align-items:center;
 border-radius:50%;
-background-color: black;
+background-color: #6D09D1;
 width: 50px;
 height: 50px;
 color:white;
 cursor:pointer;
+//위치 고정시키기
+position: fixed;
+right: 10%;
+bottom: 15%;
 `

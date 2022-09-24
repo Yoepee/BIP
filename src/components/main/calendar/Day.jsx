@@ -26,10 +26,13 @@ const Day = ({setDay, page}) => {
 export default Day;
 
 const Today = styled.div`
-  width: 60%;
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 0 2%;
+  width: 80%;
+  background-color: #F5EAFB;
+  border: 1px solid transparent;
+  border-radius: 4px;
   margin: 0 auto;
   font-weight: bold;
+  p{
+    text-align: center;
+  }
 `
