@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
@@ -6,47 +6,75 @@ import { useNavigate } from "react-router-dom";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'; // css import
 
-const AddPromise = () => {
+import dayjs from "dayjs";
+dayjs.locale("ko")
+
+const AddPromise = ({promise, setPromise, onChangeHandler}) => {
   const navigate = useNavigate();
-  return(
+  const [check, setCheck] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [am, setAm] = useState(true);
+  useEffect(() => {
+    setCheck(false);
+  }, [date])
+
+  console.log(promise);
+
+  return (
     <>
       <Wrap>
         <div>
-          <Input type="text" placeholder="제목"/>
+          <Input type="text" placeholder="제목" name="title" value={promise.title} onChange={onChangeHandler} />
         </div>
         <When>
-          <div>
+          <div onClick={()=>{setCheck(!check)}}>
             <p><CalendarMonthIcon /></p>
           </div>
           <div>
-            <ButtonGroup variant="text" aria-label="text button group" style={{height:"20px"}}>
-              <Button style={{color:"black"}}>오전</Button>
-              <Button style={{color:"black"}}>오후</Button>
-            </ButtonGroup>            
+            {dayjs(date).format('YYYY.MM.DD dd')}
           </div>
-          <div><InputTime type="text" />시</div>
-          <div><InputTime type="text" />분</div>         
+          <div>
+            <div>
+              {am?<>
+              <Button style={{ color: "black"  ,backgroundColor:"#F5EAFB" }} onClick={()=>{setAm(true)}}>오전</Button>
+              <Button style={{ color: "black" }} onClick={()=>{setAm(false)}}>오후</Button>
+              </>
+              :<>
+              <Button style={{ color: "black" }} onClick={()=>{setAm(true)}}>오전</Button>
+              <Button style={{ color: "black", backgroundColor:"#F5EAFB" }} onClick={()=>{setAm(false)}}>오후</Button>
+              </>}
+            </div>
+          </div>
+          <div><InputTime type="text"/>시</div>
+          <div><InputTime type="text"/>분</div>
         </When>
+        {check ?
+          <div style={{display:"flex", justifyContent:"center"}}>
+              <Calendar onChange={setDate} value={date} name="birthDate"/>
+          </div>
+          : null
+        }
         <div>
-          <Input type="text" placeholder="장소"/>
+          <Input type="text" placeholder="장소" name="place" value={promise.place} onChange={onChangeHandler} />
         </div>
         <Point>
-          <label style={{fontWeight:"bold"}}>포인트</label>
-          <select name="point">
-            <option value="0">0</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
+          <label style={{ fontWeight: "bold" }}>약속 대상</label>
+          <select name="point" value={promise.point} onChange={onChangeHandler}>
+            <option value="0">자신과의 약속</option>
+            <option value="100">타인과의 약속</option>
+            {/* <option value="200">200</option>
             <option value="300">300</option>
             <option value="400">400</option>
-            <option value="500">500</option>
+            <option value="500">500</option> */}
           </select>
         </Point>
-        <div><Input type="text" placeholder="내용"/></div>
+        <div><Input type="text" placeholder="내용" name="content" value={promise.content} onChange={onChangeHandler} /></div>
         <Map>지도(예정)</Map>
-      </Wrap>      
+      </Wrap>
     </>
   )
 }
