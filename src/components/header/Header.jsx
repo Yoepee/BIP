@@ -30,7 +30,7 @@ const Header = ({ head, option, payload, chk, image}) => {
 
         {/* 약속생성 뒤로가기(홈) 제목 완료 */}
        {option===2?
-      <Option2 head={head}/>
+      <Option2 head={head} payload={payload}/>
       :null}
       
       {/* 약속상세보기 뒤로가기(홈) 제목 메뉴 */}

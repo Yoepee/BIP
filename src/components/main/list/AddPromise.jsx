@@ -14,7 +14,6 @@ import dayjs from "dayjs";
 dayjs.locale("ko")
 
 const AddPromise = ({promise, setPromise, onChangeHandler}) => {
-  const navigate = useNavigate();
   const [check, setCheck] = useState(false);
   const [date, setDate] = useState(new Date());
   const [am, setAm] = useState(true);
@@ -31,11 +30,6 @@ const AddPromise = ({promise, setPromise, onChangeHandler}) => {
   const onChange = (e) => {
     const {name, value} = e.target;
     setTime({...time, [name]: value.replace(/[^0-9]/g, "")})
-    if(check){
-    setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour+11}-${time.min}-00`)});
-    }else{
-      setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour}-${time.min}-00`)});
-    }
   }
   if(Number(time.min)>59){
     setTime({...time, min: 59})
@@ -45,7 +39,22 @@ const AddPromise = ({promise, setPromise, onChangeHandler}) => {
   }else if(Number(time.hour)<1 && time.hour!==""){
     setTime({...time, hour: 1})
   }
-  console.log(promise)
+
+  useEffect(()=>{
+    if(!am){
+      if(time.hour==="12"){
+        setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${Number(time.hour)}-${time.min}-00`)});
+      }else{
+        setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${Number(time.hour)+12}-${time.min}-00`)});
+      }
+    }else{
+      if(time.hour==="12"){
+        setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${Number(time.hour)-12}-${time.min}-00`)});
+      }else{
+      setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour}-${time.min}-00`)});
+      }
+    }
+  },[time, date, am])
   return (
     <>
       <Wrap>
