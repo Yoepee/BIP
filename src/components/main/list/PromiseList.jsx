@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
 
 const PromiseList = ({day}) => {
+  const navigate = useNavigate();
   const dispatch= useDispatch();
   const promiseList = useSelector((state)=>state.promise);
   useEffect(()=>{
@@ -20,7 +22,7 @@ const PromiseList = ({day}) => {
         </div>
         {promiseList?.data?.data?.map((promise)=>{
           return (
-            <PromiseCard key={promise.id}>
+            <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
           <div style={{display:"flex"}}>
             <p style={{fontWeight:"bold"}}>{promise.title}</p>
             {/* 포인트 받아야할듯 */}
@@ -36,17 +38,6 @@ const PromiseList = ({day}) => {
         </PromiseCard>
           )
         })}
-        <PromiseCard>
-          <div style={{display:"flex"}}>
-            <p style={{fontWeight:"bold"}}>채원이 생일파티</p>
-            <Point>P</Point>
-            <p style={{fontWeight:"400"}}>100</p>
-          </div>
-          <div style={{display:"flex"}}>
-            <p style={{fontSize:"15px", marginRight:"10px"}}>오후 몇시 몇분</p>
-            <p style={{fontSize:"15px"}}>원주 반곡동 투썸플레이스</p>
-          </div>
-        </PromiseCard>
       </Wrap>
     </>    
   )

@@ -65,7 +65,10 @@ const Weekdate = ({setDay, page}) => {
       <div>
         <div style={{ display: "flex", justifyContent:"center", fontWeight:"bold" }}>
           <p>{dayjs(now).format("YYYY년")}</p>
-          <p>{dayjs(now).format("MM월")}</p>
+          {today>chk?
+          <p>{dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format("MM월")}</p>
+          :<p>{dayjs(now).format("MM월")}</p>
+          }
         </div>
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex", alignItems:"center"}}>
