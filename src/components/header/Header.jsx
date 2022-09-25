@@ -6,10 +6,11 @@ import Option3 from './Option3';
 import Option4 from './Option4';
 import Option5 from './Option5';
 import Option6 from './Option6';
+import Option7 from './Option7';
 
 
 
-const Header = ({ head, option, payload, chk, image}) => {
+const Header = ({ head, option, payload, chk, image, setType, type}) => {
   
   return (
     <div style={{ display: "flex" }}>
@@ -38,21 +39,25 @@ const Header = ({ head, option, payload, chk, image}) => {
       <Option3 head={head}/>
       :null}
       
-      {/* 친구목록 제목 친구추가 */}
+      {/* 친구목록 제목 검색 친구추가 메뉴(친구수정(별칭), 친구삭제)) */}
       {option===4?
-      <Option4 head={head}/>
+      <Option4 head={head} setType={setType} type={type}/>
       :null}
 
        {/* 친구추가 뒤로가기(친구) 제목 완료 */}
        {option===5?
-      <Option5 head={head}/>
+      <Option5 head={head} payload={payload}/>
       :null}
       
       {/* 로그아웃 */}
       {option===6?
       <Option6 head={head}/>
       :null}
-
+      
+      {/* 친구검색 */}
+      {option===7?
+      <Option7 head={head} setType={setType} type={type}/>
+      :null}
 
     </div>
   )
