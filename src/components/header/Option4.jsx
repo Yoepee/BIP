@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const Option4 = ({ head }) => {
+const Option4 = ({ head, setType, type }) => {
   const navigate = useNavigate();
   const [chk, setChk] = useState(0);
   return (
@@ -14,11 +14,16 @@ const Option4 = ({ head }) => {
       <ModalBack onClick={()=>{setChk(0)}} 
       style={{position:"absolute", backgroundColor:"black", opacity:"0.8"}}/>}
       <div style={{ marginLeft: "1%" }}>
+        {type==="none"?
         <p>{head}</p>
+        :type==="give"?
+        <p>별명 지어주기</p>
+        :type==="remove"?
+        <p>친구 삭제</p>:null}
       </div>
       <div style={{ marginLeft: "auto", marginRight: "2%", cursor: "pointer", display: "flex" }}>
         <div style={{ marginRight: "30px", cursor: "pointer" }}
-          onClick={() => {}}>
+          onClick={() => {setType("search");}}>
           <p><SearchIcon /></p>
         </div>
           <div style={{ marginRight: "30px", cursor: "pointer" }}
@@ -53,17 +58,17 @@ const Option4 = ({ head }) => {
               width: "150px",
               position: "absolute",
               backgroundColor: "white",
-              top: "50px", right: "70px",
+              top: "50px", right: "20px",
               textAlign: "center",
               borderRadius: "5px",
               border: "1px solid black"
             }}>
               <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  navigate("/addmember/name") }}>친구 수정</div>
+                onClick={() => {  setType("give"); setChk(0); }}>친구 수정</div>
               <div style={{borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  navigate("/addmember/phone") }}>친구 삭제</div>
+                onClick={() => {  setType("remove"); setChk(0); }}>친구 삭제</div>
                 <div style={{ padding: "3px", cursor: "pointer" }}
-                onClick={() => {  setChk(0); }}>취소</div>
+                onClick={() => {  setType("none"); setChk(0); }}>취소</div>
             </div>
           :null
         }
