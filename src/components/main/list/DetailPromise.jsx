@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
+import axios from "axios";
 
 
 const DetailPromise = () => {
   const {id} = useParams();
   const dispatch = useDispatch();
-  const promise = useSelector((state)=>state.detailPromise)
+  const promise = useSelector((state)=>state.detailPromise);
 
   useEffect(()=>{
-    dispatch(__getDetailPromise(id))
+    dispatch(__getDetailPromise(id));
   },[dispatch])
 
   console.log(promise)
