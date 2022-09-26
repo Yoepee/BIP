@@ -53,5 +53,15 @@ grid-template-columns: repeat(3,1fr);
 place-items: center;
 position:fixed;
 bottom:0;
-background-color:white;
+background-color: white;
+
+@media screen and (min-width: 769px) {
+    background-color: transparent;
+    width: 200px;
+    height: 10%;
+    position: fixed;
+    top: 0;
+    right: 5%;
+    z-index: 100;
+  }
 `
