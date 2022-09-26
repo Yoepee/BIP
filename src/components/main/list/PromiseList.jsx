@@ -29,8 +29,24 @@ const PromiseList = ({day}) => {
             <p style={{fontWeight:"400"}}>{promise.memberCount}</p>
           </div>
           <div style={{display:"flex"}}>
-            {/* 날짜 통일감 없어서 구분하기 어렵 */}
-            <p style={{fontSize:"15px", marginRight:"10px"}}>{promise.eventDateTime}</p>
+            <div style={{display:"flex"}}>
+          {Number(promise.eventDateTime.split("-")[3])<12?
+          <>
+          <p style={{fontSize:"15px"}}>오전</p>
+          <p style={{fontSize:"15px"}}>{promise.eventDateTime.split("-")[3]}시</p>
+          </>
+          :Number(promise.eventDateTime.split("-")[3])===12?
+          <>
+          <p style={{fontSize:"15px"}}>오후</p>
+          <p style={{fontSize:"15px"}}>{promise.eventDateTime.split("-")[3]}시</p>
+          </>
+          :<>
+          <p style={{fontSize:"15px"}}>오후</p>
+          <p style={{fontSize:"15px"}}>{Number(promise.eventDateTime.split("-")[3])-12}시</p>
+          </>
+          }
+          <p style={{fontSize:"15px", marginRight:"10px"}}>{promise.eventDateTime.split("-")[4]}분</p>
+          </div>
             <p style={{fontSize:"15px"}}>{promise.place}</p>
             <LastTime>{promise.lastTime}</LastTime>
           </div>
