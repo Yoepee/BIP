@@ -9,39 +9,25 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 dayjs.locale("ko")
 
-const AddPromise = ({promise, setPromise, onChangeHandler}) => {
+const AddPromise = ({promise, setPromise, onChangeHandler, onChange, time, am, setAm}) => {
   const [check, setCheck] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [am, setAm] = useState(true);
+  const now = new Date();
+  const [date, setDate] = useState(now);
+  const {id} = useParams();
 
-  const initialState = {
-    hour:"",
-    min:""
-  }
-  const [time,setTime] = useState(initialState)
   useEffect(() => {
     setCheck(false);
   }, [date])
 
-  const onChange = (e) => {
-    const {name, value} = e.target;
-    setTime({...time, [name]: value.replace(/[^0-9]/g, "")})
-  }
-  if(Number(time.min)>59){
-    setTime({...time, min: 59})
-  }
-  if(Number(time.hour)>12){
-    setTime({...time, hour: 12})
-  }else if(Number(time.hour)<1 && time.hour!==""){
-    setTime({...time, hour: 1})
-  }
 
   useEffect(()=>{
     if(!am){
       if(time.hour==="12"){
-        setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${Number(time.hour)}-${time.min}-00`)});
+        setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${time.hour}-${time.min}-00`)});
       }else{
         setPromise({...promise,eventDateTime: dayjs(date).format(`YYYY-MM-DD-${Number(time.hour)+12}-${time.min}-00`)});
       }
