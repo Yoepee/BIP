@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
+import PersonIcon from '@mui/icons-material/Person';
 
 const PromiseList = ({day}) => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const PromiseList = ({day}) => {
           <div style={{display:"flex"}}>
             <p style={{fontWeight:"bold"}}>{promise.title}</p>
             {/* 포인트 받아야할듯 */}
-            <Point>P</Point>
+            <Point><PersonIcon/></Point>
             <p style={{fontWeight:"400"}}>{promise.memberCount}</p>
           </div>
           <div style={{display:"flex"}}>
@@ -66,16 +67,15 @@ const Wrap = styled.div`
 `
 
 const PromiseCard = styled.div`
-  background-color: #F7FBF7;
+  background-color: #EDFFEB;
   margin: 10px 0;
   padding: 0 10px;
   border-radius: 4px; //4px로 주면 너무 각이 져 있는 느낌인뎅... 오또카지
 `
 
 const Point = styled.p`
-  background-color: #6D09D1;
-  color: white;
-  border-radius: 50%;
+  
+  color: #6D09D1;
   width: 20px;
   text-align: center;
   margin-left: auto;
