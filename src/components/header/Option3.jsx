@@ -11,7 +11,7 @@ const Option3 = ({ head }) => {
   const { id } = useParams();
 
   const bangjang = async () => {
-    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/event/master/check/${id}`, {
+    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
       headers: {
         Authorization: localStorage.getItem('Authorization'),
         RefreshToken: localStorage.getItem('RefreshToken')
@@ -20,7 +20,7 @@ const Option3 = ({ head }) => {
       console.log(response);
       if (response.data.success) {
         if(response.data.data.nickname === localStorage.getItem("name"))
-          setLeader(response.data.data)
+          setLeader(true)
       } else {
         return;
       }
