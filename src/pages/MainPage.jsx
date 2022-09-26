@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import PromiseList from "../components/main/list/PromiseList";
 import dayjs from "dayjs";
+import NextMonth from "../components/main/calendar/NextMonth";
 
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false, navButtonsAlwaysInvisible: true})
@@ -26,6 +27,7 @@ const MainPage = () => {
             <div><Day setDay={setDay} page={page}/></div>
             <div><Weekdate setDay={setDay} page={page}/></div>
             <div><Monthdate setDay={setDay} page={page}/></div>
+            <div><NextMonth setDay={setDay} page={page}/></div>
             {/* <div><Month /></div> */}
           </Carousel>
           <PromiseList day={day}/>
