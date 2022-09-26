@@ -79,7 +79,7 @@ const Option3 = ({ head }) => {
   return (
     <>
       <div onClick={() => { navigate("/") }}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{color:"#6D09D1"}}/></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
         <p>{head}</p>
@@ -87,7 +87,7 @@ const Option3 = ({ head }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", display:"flex" }}>
       {leader?
       <div onClick={() => { if(chk===0){setChk(2);} else{setChk(0)} }} style={{  marginRight: "20px" }}>
-        <p><ManageAccountsRoundedIcon /></p>
+        <p style={{color:"#A67EED"}}><ManageAccountsRoundedIcon /></p>
       </div>
       :null}
       {chk===2 ?
@@ -116,7 +116,7 @@ const Option3 = ({ head }) => {
         </div>
         : null}
       <div onClick={() => { if(chk===0){setChk(1);} else{setChk(0)} }} style={{  marginRight: "2%" }}>
-        <p><MoreVertIcon /></p>
+        <p style={{color:"#A67EED"}}><MoreVertIcon /></p>
       </div>
       {chk == 1?
         <div style={{

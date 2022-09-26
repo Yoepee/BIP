@@ -40,6 +40,10 @@ const DetailPromise = () => {
         <Title>
           <p>{promise?.data?.data?.title}</p>
         </Title>
+        <Desc>
+          <p>내용</p>
+          <p><span>P</span> 200</p>
+        </Desc>
         <When>
           <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
           <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
@@ -61,9 +65,6 @@ const DetailPromise = () => {
           }
           <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
         </When>
-        <Where>
-          <p>{promise?.data?.data?.place}</p>
-        </Where>
         <Point>
           <p>참여인원 : </p>
           {promise?.data?.data?.memberList?.map((member)=>{
@@ -76,9 +77,9 @@ const DetailPromise = () => {
           )}
           })}
         </Point>
-        <Desc>
-          <p>내용</p>
-        </Desc>
+        <Where>
+          <p>{promise?.data?.data?.place}</p>
+        </Where>
         <Map>지도(예정)</Map>
       </Wrap>      
     </>
@@ -99,10 +100,11 @@ const Wrap = styled.div`
 
 const Title = styled.div`
   width: 100%;
-  text-align: center;
+  display: flex;
   font-weight: bold;
   font-size: 24px;
-  margin: 10% 0;
+  margin: 10% 15%;
+  
 `
 
 const When = styled.div`
@@ -142,8 +144,10 @@ const Desc = styled.div`
   display: flex;
   margin: 0 15%;
   font-weight: bold;
+  justify-content: space-between;
   p {
     margin-right: 2%;
+    gap:1;
   }
 `
 

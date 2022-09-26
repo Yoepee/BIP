@@ -5,7 +5,7 @@ const Option = ({head}) =>{
   return (
     <>
     <div style={{marginLeft:"1%"}}>
-        <p>{head}</p>
+        <p style={{fontSize:"20px"}}>{head}</p>
         
       </div>
     </>
