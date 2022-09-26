@@ -106,7 +106,14 @@ const Option3 = ({ head }) => {
           <OptionMenu
             onClick={() => { console.log("아")}}>멤버 추방</OptionMenu>
           <OptionMenu
-            onClick={() => { navigate(`/addpromise/edit${id}`) }}>약속 수정</OptionMenu>
+            onClick={() => { 
+              if (window.confirm("약속을 수정하시겠습니까?")) {
+              navigate(`/addpromise/edit${id}`)
+              }else{
+                setChk(0);
+                return;
+              }
+            }}>약속 수정</OptionMenu>
           <OptionMenu
             onClick={() => { removePromist() }}>약속 삭제</OptionMenu>
           <OptionMenu style={{ borderBottom:"none" }}
