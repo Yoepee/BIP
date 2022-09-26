@@ -24,7 +24,6 @@ const DetailPromise = () => {
         RefreshToken: localStorage.getItem('RefreshToken')
       }
     }).then((response) => {
-      console.log(response);
       if (response.data.success) {
           setLeader(response.data.data.nickname)
       } else {
@@ -42,11 +41,25 @@ const DetailPromise = () => {
           <p>{promise?.data?.data?.title}</p>
         </Title>
         <When>
-          {/* 시간 통일감 필요 */}
-          <p>{promise?.data?.data?.eventDateTime}</p>
+          <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
+          <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
+          <p>{promise?.data?.data?.eventDateTime.split("-")[2]}일</p>
+          {Number(promise?.data?.data?.eventDateTime.split("-")[3])<12?
+          <>
+          <p>오전</p>
+          <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
+          </>
+          :Number(promise?.data?.data?.eventDateTime.split("-")[3])===12?
+          <>
           <p>오후</p>
-          <p>2시</p>
-          <p>30분</p>    
+          <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
+          </>
+          :<>
+          <p>오후</p>
+          <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])-12}시</p>
+          </>
+          }
+          <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
         </When>
         <Where>
           <p>{promise?.data?.data?.place}</p>
