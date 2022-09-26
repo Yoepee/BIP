@@ -46,17 +46,33 @@ const Weekdate = ({setDay, page}) => {
   useEffect(()=>{
     if(page===1){
     if(now.getDate()>chk){
-      setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      if(Number(chk)<10){
+        setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-0${chk}-00-00-00`)})
+      }else{
+      setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      }
     }else{
-      setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      if(Number(chk)<10){
+        setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-0${chk}-00-00-00`)})
+      }else{
+      setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+      }
     }}
   },[chk]);
   useEffect(()=>{
     if(page===1){
       if(now.getDate()>chk){
-        setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+        if(Number(chk)<10){
+          setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-0${chk}-00-00-00`)})
+        }else{
+        setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth() + 1, chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+        }
       }else{
-        setDay({unit:"week",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+        if(Number(chk)<10){
+          setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-0${chk}-00-00-00`)})
+        }else{
+        setDay({unit:"day",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk)).format(`YYYY-MM-${chk}-00-00-00`)})
+        }
       }
     }
   },[page])
