@@ -1,3 +1,4 @@
+import { Margin } from '@mui/icons-material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,10 +12,10 @@ const Option2 = ({ head, payload }) => {
   return (
     <>
       <div onClick={() => { navigate("/") }}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
+        <p style={{marginTop:"20px"}}><ArrowBackIosNewRoundedIcon style={{color:"#6D09D1"}}/></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
-        <p>{head}</p>
+        <p style={{fontWeight:"bold", fontSize:"20px"}}>{head}</p>
       </div>
       <div onClick={() => {
         if(id===undefined){
@@ -31,7 +32,7 @@ const Option2 = ({ head, payload }) => {
         })
         }}
         }} style={{ marginLeft: "auto", marginRight: "2%", cursor:"pointer" }}>
-        <p>완료</p>
+        <p style={{fontWeight:"bold", fontSize:"20px"}}>완료</p>
       </div>
     </>
   )

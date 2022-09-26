@@ -18,11 +18,13 @@ export default PromiseFooter;
 
 const Menu = styled.div`
 width:100%;
+
 display:grid;
 grid-template-columns: 1fr 2fr;
 place-items: center;
 position:fixed;
 bottom:0;
+margin-left: 15px;
 `
 
 const Invite = styled.div`
