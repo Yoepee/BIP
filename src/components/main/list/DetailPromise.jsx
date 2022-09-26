@@ -36,9 +36,7 @@ const DetailPromise = () => {
           <p>참여인원 : </p>
           {promise?.data?.data?.memberList?.map((member)=>{
             return (
-              <>
-                <p>{member.nickname}</p>
-              </>
+                <p key={member.id}>{member.nickname}</p>
             )
           })}
         </Point>
