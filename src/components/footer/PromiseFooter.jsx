@@ -1,9 +1,14 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const PromiseFooter = () => {
+  const navigate= useNavigate();
+  const promise = useSelector((state)=>state.detailPromise);
+
   return (
     <Menu>
-        <Invite>초대</Invite>
+        <Invite onClick={()=>{navigate(`/member/invite${promise?.data?.data?.id}`)}}>초대</Invite>
         <Chat>채팅하기</Chat>
     </Menu>
   )
