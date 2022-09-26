@@ -24,11 +24,12 @@ const Option2 = ({ head, payload }) => {
           navigate(`/detailpromise/${response.payload.data.id}`);
         })
         }else{
+          if (window.confirm("약속을 수정하시겠습니까?")) {
           dispatch(__editPromise({id:id,data:payload}))
         .then((response)=>{
           navigate(`/detailpromise/${id}`);
         })
-        }
+        }}
         }} style={{ marginLeft: "auto", marginRight: "2%", cursor:"pointer" }}>
         <p>완료</p>
       </div>

@@ -9,15 +9,12 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 import dayjs from "dayjs";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 dayjs.locale("ko")
 
 const AddPromise = ({promise, setPromise, onChangeHandler, onChange, time, am, setAm}) => {
   const [check, setCheck] = useState(false);
   const now = new Date();
   const [date, setDate] = useState(now);
-  const {id} = useParams();
 
   useEffect(() => {
     setCheck(false);
