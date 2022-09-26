@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -10,10 +10,28 @@ const DetailPromise = () => {
   const {id} = useParams();
   const dispatch = useDispatch();
   const promise = useSelector((state)=>state.detailPromise);
+  const [leader, setLeader] = useState("");
 
   useEffect(()=>{
     dispatch(__getDetailPromise(id));
+    bangjang();
   },[dispatch])
+
+  const bangjang = async () => {
+    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken')
+      }
+    }).then((response) => {
+      console.log(response);
+      if (response.data.success) {
+          setLeader(response.data.data.nickname)
+      } else {
+        return;
+      }
+    })
+  }
 
   console.log(promise)
   
@@ -36,9 +54,13 @@ const DetailPromise = () => {
         <Point>
           <p>참여인원 : </p>
           {promise?.data?.data?.memberList?.map((member)=>{
+            if(member.nickname===leader){
             return (
-                <p key={member.id}>{member.nickname}</p>
-            )
+                <p key={member.id}>💜{member.nickname}</p>
+            )}else{
+              return (
+                <p key={member.id}>💚{member.nickname}</p>
+          )}
           })}
         </Point>
         <Desc>
