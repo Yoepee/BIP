@@ -30,18 +30,18 @@ const NextMonth = ({setDay, page}) => {
   useEffect(()=>{
     if(page===3)
       if(Number(chk.day)<10){
-        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-0${chk.day}-00-00-00`)});
+        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth()+1, chk.day)).format(`YYYY-MM-0${chk.day}-00-00-00`)});
       }else{
-      setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
+      setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth()+1, chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
       }
   },[chk]);
 
   useEffect(()=>{
     if(page===3){
       if(Number(chk.day)<10){
-        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-0${chk.day}-00-00-00`)});
+        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth()+1, chk.day)).format(`YYYY-MM-0${chk.day}-00-00-00`)});
       }else{
-        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth(), chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
+        setDay({unit:"month",date:dayjs(new Date(now.getFullYear(), now.getMonth()+1, chk.day)).format(`YYYY-MM-${chk.day}-00-00-00`)})
       }
     }
   },[page])
