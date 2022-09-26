@@ -36,9 +36,10 @@ const Router = () =>{
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
-            <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/> 
             {/* 약속잡기 */}
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
+            <Route path="/addpromise/edit:id" exact element={<AddPromisePage/>}/>
             <Route path="/detailpromise/:id" exact element={<DetailPromisePage/>}/>
             {/* 소셜로그인 */}
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>

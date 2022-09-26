@@ -38,6 +38,24 @@ import dayjs from "dayjs";
     }
   );
 
+  export const __editPromise = createAsyncThunk(
+    "/api/events/{eventId}e",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/events/${payload.id}`,payload.data,{
+                headers: {
+                    Authorization: localStorage.getItem('Authorization'),
+                    RefreshToken: localStorage.getItem('RefreshToken'),
+              }})
+            if(data.data.success===false)
+              alert(data.data.error.message);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+
   export const __invitePromise = createAsyncThunk(
     "/api/events/{eventId}",
     async (payload, thunkAPI) => {
