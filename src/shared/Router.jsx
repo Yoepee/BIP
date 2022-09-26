@@ -31,6 +31,7 @@ const Router = () =>{
             <Route path="/signup/change" element={<SignUpChange/>}/>
             {/* 친구목록 */}
             <Route path="/member" element={<MemberPage/>}/>
+            <Route path="/member/invite:id" element={<MemberPage/>}/>
             <Route path="/addmember/:type" element={<AddMemberPage/>}/>
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>

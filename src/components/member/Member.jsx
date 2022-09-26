@@ -1,11 +1,17 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { __invitePromise } from "../../redux/modules/detailPromise";
 import { __getMember, removeFriend } from "../../redux/modules/member";
 
 const Member = ({type, setType}) =>{
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const member = useSelector((state)=>state.member);
+  const {id} = useParams();
+
+  console.log(id)
 
   useEffect(()=>{
     dispatch(__getMember());
@@ -39,6 +45,18 @@ const Member = ({type, setType}) =>{
       return;
   }
 
+  const inviteMember = async(nickname)=>{
+    if(window.confirm(`${nickname}님을 약속에 초대하시겠습니까?`)){
+    dispatch(__invitePromise({id:id, nickname:nickname}))
+      .then((response)=>{
+        navigate(`/detailpromise/${id}`)
+      })
+      return;
+    }else{
+      return;
+    }
+  }
+
   return (
     <div>
       <div style={{ margin:"10px"}}>
@@ -47,14 +65,15 @@ const Member = ({type, setType}) =>{
             <div style={{display:"flex", border:"1px solid black", margin:"10px"}} key={i} 
             onClick={()=>{
               if(type==="none"){
+                if(id!==undefined){
+                  inviteMember(friend.nickname);
+                }
                 return;
               }else if(type==="give"){
-                giveName(friend.nickname)
+                giveName(friend.nickname);
                 }
               else if(type==="remove"){
-                removeMember(friend.id)
-              }else if(type===3){
-
+                removeMember(friend.id);
               }
             }}>
             {friend.profileImgUrl===null?

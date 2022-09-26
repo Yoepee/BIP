@@ -37,6 +37,24 @@ import dayjs from "dayjs";
           }
     }
   );
+
+  export const __invitePromise = createAsyncThunk(
+    "/api/events/{eventId}",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/events/${payload.id}`,{nickname:payload.nickname},{
+                headers: {
+                    Authorization: localStorage.getItem('Authorization'),
+                    RefreshToken: localStorage.getItem('RefreshToken'),
+              }})
+              if(!data.data.success)
+                alert(data.data.data)
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
   
 
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음

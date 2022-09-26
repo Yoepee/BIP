@@ -12,8 +12,6 @@ const PromiseList = ({day}) => {
     dispatch(__getPromise(day));
   },[day])
 
-  console.log(day)
-  console.log(promiseList)
   return (
     <>
       <Wrap>
@@ -27,7 +25,7 @@ const PromiseList = ({day}) => {
             <p style={{fontWeight:"bold"}}>{promise.title}</p>
             {/* 포인트 받아야할듯 */}
             <Point>P</Point>
-            <p style={{fontWeight:"400"}}>{promise.id}</p>
+            <p style={{fontWeight:"400"}}>{promise.memberCount}</p>
           </div>
           <div style={{display:"flex"}}>
             {/* 날짜 통일감 없어서 구분하기 어렵 */}

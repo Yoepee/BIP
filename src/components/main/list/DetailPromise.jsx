@@ -13,6 +13,8 @@ const DetailPromise = () => {
   useEffect(()=>{
     dispatch(__getDetailPromise(id))
   },[dispatch])
+
+  console.log(promise)
   
   return(
     <>
@@ -31,8 +33,14 @@ const DetailPromise = () => {
           <p>{promise?.data?.data?.place}</p>
         </Where>
         <Point>
-          <p>포인트</p>
-          <p>{promise?.data?.data?.point}</p>
+          <p>참여인원 : </p>
+          {promise?.data?.data?.memberList?.map((member)=>{
+            return (
+              <>
+                <p>{member.nickname}</p>
+              </>
+            )
+          })}
         </Point>
         <Desc>
           <p>내용</p>
