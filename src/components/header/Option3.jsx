@@ -5,6 +5,7 @@ import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import zIndex from '@mui/material/styles/zIndex';
+import styled from 'styled-components';
 
 const Option3 = ({ head }) => {
   const navigate = useNavigate();
@@ -100,16 +101,16 @@ const Option3 = ({ head }) => {
           border: "1px solid black",
           zIndex:"10"
         }}>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { console.log("아")}}>방장 위임</div>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { console.log("아")}}>멤버 추방</div>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { navigate(`/addpromise/edit${id}`) }}>약속 수정</div>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { removePromist() }}>약속 삭제</div>
-          <div style={{ padding: "3px", cursor: "pointer" }}
-            onClick={() => { setChk(0); }}>취소</div>
+          <OptionMenu
+            onClick={() => { console.log("아")}}>방장 위임</OptionMenu>
+          <OptionMenu
+            onClick={() => { console.log("아")}}>멤버 추방</OptionMenu>
+          <OptionMenu
+            onClick={() => { navigate(`/addpromise/edit${id}`) }}>약속 수정</OptionMenu>
+          <OptionMenu
+            onClick={() => { removePromist() }}>약속 삭제</OptionMenu>
+          <OptionMenu style={{ borderBottom:"none" }}
+            onClick={() => { setChk(0); }}>취소</OptionMenu>
         </div>
         : null}
       <div onClick={() => { if(chk===0){setChk(1);} else{setChk(0)} }} style={{  marginRight: "2%" }}>
@@ -126,10 +127,10 @@ const Option3 = ({ head }) => {
           border: "1px solid black",
           zIndex:"10"
         }}>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { exitPromist() }}>약속 나가기</div>
-          <div style={{ padding: "3px", cursor: "pointer" }}
-            onClick={() => { setChk(!chk); }}>취소</div>
+          <OptionMenu
+            onClick={() => { exitPromist() }}>약속 나가기</OptionMenu>
+          <OptionMenu sstyle={{ borderBottom:"0px solid black" }}
+            onClick={() => { setChk(!chk); }}>취소</OptionMenu>
         </div>
         : null
       }
@@ -139,3 +140,11 @@ const Option3 = ({ head }) => {
 }
 
 export default Option3;
+
+const OptionMenu = styled.div`
+padding: 3px;
+cursor: pointer;
+&:hover{
+  background-color:#6D09D1;
+  color:white;
+}`

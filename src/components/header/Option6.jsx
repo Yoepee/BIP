@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import styled from "styled-components";
 
 const Option6 = ({ head }) => {
   const navigate = useNavigate();
@@ -70,12 +71,12 @@ const Option6 = ({ head }) => {
           borderRadius: "5px",
           border: "1px solid black"
         }}>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { logout(); }}>로그아웃</div>
-          <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-            onClick={() => { quit(); }}>회원 탈퇴</div>
-          <div style={{ padding: "3px", cursor: "pointer" }}
-            onClick={() => { setChk(!chk); }}>취소</div>
+          <OptionMenu
+            onClick={() => { logout(); }}>로그아웃</OptionMenu>
+          <OptionMenu
+            onClick={() => { quit(); }}>회원 탈퇴</OptionMenu>
+          <OptionMenu
+            onClick={() => { setChk(!chk); }}>취소</OptionMenu>
         </div>
         : null
       }
@@ -84,3 +85,11 @@ const Option6 = ({ head }) => {
 }
 
 export default Option6;
+
+const OptionMenu = styled.div`
+padding: 3px;
+cursor: pointer;
+&:hover{
+  background-color:#6D09D1;
+  color:white;
+}`

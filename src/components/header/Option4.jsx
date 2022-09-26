@@ -41,12 +41,12 @@ const Option4 = ({ head, setType, type }) => {
               border: "1px solid black",
               zIndex:"10"
             }}>
-              <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  navigate("/addmember/name") }}>닉네임으로 추가</div>
-              <div style={{borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  navigate("/addmember/phone") }}>연락처로 추가</div>
-                <div style={{ padding: "3px", cursor: "pointer" }}
-                onClick={() => {  setChk(0); }}>취소</div>
+              <OptionMenu
+                onClick={() => {  navigate("/addmember/name") }}>닉네임으로 추가</OptionMenu>
+              <OptionMenu
+                onClick={() => {  navigate("/addmember/phone") }}>연락처로 추가</OptionMenu>
+                <OptionMenu
+                onClick={() => {  setChk(0); }}>취소</OptionMenu>
             </div>
           :null
         }
@@ -65,12 +65,12 @@ const Option4 = ({ head, setType, type }) => {
               border: "1px solid black",
               zIndex:"10"
             }}>
-              <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  setType("give"); setChk(0); }}>친구 수정</div>
-              <div style={{borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-                onClick={() => {  setType("remove"); setChk(0); }}>친구 삭제</div>
-                <div style={{ padding: "3px", cursor: "pointer" }}
-                onClick={() => {  setType("none"); setChk(0); }}>취소</div>
+              <OptionMenu 
+                onClick={() => {  setType("give"); setChk(0); }}>친구 수정</OptionMenu>
+              <OptionMenu
+                onClick={() => {  setType("remove"); setChk(0); }}>친구 삭제</OptionMenu>
+                <OptionMenu
+                onClick={() => {  setType("none"); setChk(0); }}>취소</OptionMenu>
             </div>
           :null
         }
@@ -85,3 +85,10 @@ const ModalBack= styled.div`
 width:100%;
 height:100%;
 `
+const OptionMenu = styled.div`
+padding: 3px;
+cursor: pointer;
+&:hover{
+  background-color:#6D09D1;
+  color:white;
+}`
