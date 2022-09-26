@@ -12,7 +12,7 @@ const Option4 = ({ head, setType, type }) => {
     <>
       {chk===0?null:
       <ModalBack onClick={()=>{setChk(0)}} 
-      style={{position:"absolute", backgroundColor:"black", opacity:"0.8"}}/>}
+      style={{position:"absolute", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
       <div style={{ marginLeft: "1%" }}>
         {type==="none"?
         <p>{head}</p>
@@ -38,7 +38,8 @@ const Option4 = ({ head, setType, type }) => {
               top: "50px", right: "70px",
               textAlign: "center",
               borderRadius: "5px",
-              border: "1px solid black"
+              border: "1px solid black",
+              zIndex:"10"
             }}>
               <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
                 onClick={() => {  navigate("/addmember/name") }}>닉네임으로 추가</div>
@@ -61,7 +62,8 @@ const Option4 = ({ head, setType, type }) => {
               top: "50px", right: "20px",
               textAlign: "center",
               borderRadius: "5px",
-              border: "1px solid black"
+              border: "1px solid black",
+              zIndex:"10"
             }}>
               <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
                 onClick={() => {  setType("give"); setChk(0); }}>친구 수정</div>
