@@ -21,6 +21,7 @@ const Naver = () => {
         if(response.data.data.nickname===null){
           navigate("/signup/change");
         }else{
+          localStorage.setItem("name", response.data.data.nickname);
           navigate("/")
         }
       }
