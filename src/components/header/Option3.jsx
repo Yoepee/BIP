@@ -102,17 +102,12 @@ const Option3 = ({ head }) => {
           zIndex:"10"
         }}>
           <OptionMenu
-            onClick={() => { console.log("아")}}>방장 위임</OptionMenu>
+            onClick={() => { navigate(`/promiseleader/id=${id}/type=leader`)}}>방장 위임</OptionMenu>
           <OptionMenu
-            onClick={() => { console.log("아")}}>멤버 추방</OptionMenu>
+            onClick={() => { navigate(`/promiseleader/id=${id}/type=kick`)}}>멤버 조정</OptionMenu>
           <OptionMenu
             onClick={() => { 
-              if (window.confirm("약속을 수정하시겠습니까?")) {
               navigate(`/addpromise/edit${id}`)
-              }else{
-                setChk(0);
-                return;
-              }
             }}>약속 수정</OptionMenu>
           <OptionMenu
             onClick={() => { removePromist() }}>약속 삭제</OptionMenu>
