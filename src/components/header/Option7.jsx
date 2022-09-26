@@ -38,15 +38,15 @@ const Option7 = ({ head, setType, type }) => {
             width: "120px",
             position: "absolute",
             backgroundColor: "white",
-            top: "50px", left: "-10px",
+            top: "50px", left: "5px",
             textAlign: "center",
             borderRadius: "5px",
             border: "1px solid black"
           }}>
-            <div style={{ borderBottom: "1px solid black", padding: "3px", cursor: "pointer" }}
-              onClick={() => { setSort("닉네임"); setChk(!chk); }}>닉네임</div>
-            <div style={{ padding: "3px", cursor: "pointer" }}
-              onClick={() => { setSort("연락처"); setChk(!chk) }}>연락처</div>
+            <OptionMenu
+              onClick={() => { setSort("닉네임"); setChk(!chk); }}>닉네임</OptionMenu>
+            <OptionMenu
+              onClick={() => { setSort("연락처"); setChk(!chk) }}>연락처</OptionMenu>
           </div>
         </>
       }
@@ -85,4 +85,10 @@ margin-top: 20px;
 }
 `
 
-
+const OptionMenu = styled.div`
+padding: 3px;
+cursor: pointer;
+&:hover{
+  background-color:#6D09D1;
+  color:white;
+}`
