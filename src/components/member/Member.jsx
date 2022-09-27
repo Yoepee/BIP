@@ -10,9 +10,8 @@ const Member = ({type, setType}) =>{
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const member = useSelector((state)=>state.member);
-  const {id} = useParams();
+  const {id, add} = useParams();
 
-  console.log(id)
 
   useEffect(()=>{
     dispatch(__getMember());
@@ -60,12 +59,16 @@ const Member = ({type, setType}) =>{
 
   const __addFriendCredit = async(nickname,num) =>{
     if(window.confirm(`${nickname}님의 신용점수를 ${num}점 구매하시겠습니까?`)){
-    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:1000*num, nickname:localStorage.getItem("name")},{
+    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:2000*num, nickname:nickname},{
       headers: {
           Authorization:localStorage.getItem('Authorization'),
           RefreshToken:localStorage.getItem('RefreshToken')
       }}).then((response)=>{
-        console.log(response)
+        console.log(response);
+        if(response.data.success){
+          alert(response.data.data.context);
+        navigate("/addcredit");
+        }
       })
       return;
     }else{
@@ -83,6 +86,8 @@ const Member = ({type, setType}) =>{
               if(type==="none"){
                 if(id!==undefined){
                   inviteMember(friend.nickname);
+                }else if(add!==undefined){
+                  __addFriendCredit(friend.nickname, add)
                 }
                 return;
               }else if(type==="give"){
