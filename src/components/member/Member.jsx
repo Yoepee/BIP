@@ -68,6 +68,7 @@ const Member = ({type, setType}) =>{
         if(response.data.success){
           alert(response.data.data.context);
         navigate("/addcredit");
+        setType("none");
         }
       })
       return;

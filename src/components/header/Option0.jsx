@@ -8,6 +8,8 @@ const Option0 = ({head}) =>{
     <div onClick={()=>{
       if(head === "프로필 보기"){
         navigate("/profile")
+      }else if(head==="신용점수 구매"){
+        navigate("/profile")
       }else{
         navigate(-1);
       }
