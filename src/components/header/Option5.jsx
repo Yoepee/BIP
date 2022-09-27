@@ -17,7 +17,7 @@ const Option5 = ({ head, payload }) => {
   return (
     <>
       <div onClick={() => { navigate("/member") }}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{color:"#6D09D1"}} /></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
         <p>{head}</p>
