@@ -50,19 +50,29 @@ const AddPromise = ({
         setPromise({
           ...promise,
           eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-${Number(time.hour) - 12}-${time.min}-00`
+            `YYYY-MM-DD-0${Number(time.hour) - 12}-${time.min}-00`
           ),
         });
       } else {
+        if(Number(time.hour)<10){
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-0${time.hour}-${time.min}-00`
+            ),
+          });
+        }else{
         setPromise({
           ...promise,
           eventDateTime: dayjs(date).format(
             `YYYY-MM-DD-${time.hour}-${time.min}-00`
           ),
         });
-      }
+        }}
     }
   }, [time, date, am]);
+
+  console.log(promise)
   return (
     <>
       <Wrap>
@@ -89,10 +99,6 @@ const AddPromise = ({
           <select name="point" value={promise.point} onChange={onChangeHandler}>
             <option value="0">자신과의 약속</option>
             <option value="100">타인과의 약속</option>
-            {/* <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="500">500</option> */}
           </select>
         </Point>
         <When>
