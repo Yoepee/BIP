@@ -17,10 +17,13 @@ const PromiseList = ({day}) => {
     <>
       <Wrap>
         <div>
-          <p style={{fontWeight:"bold"}}>약속 목록</p>
+          <p style={{fontWeight:"bold"}}>오늘 해야할 일</p>
         </div>
         <Cards>
           {promiseList?.data?.data?.map((promise)=>{
+            if(promise.lastTime === "이미 지난 약속입니다."){
+              return;
+            }
             return (
               <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
                 <div style={{display:"flex"}}>
@@ -51,6 +54,52 @@ const PromiseList = ({day}) => {
                     }
                     <p style={{marginRight:"10px"}}>{promise.eventDateTime.split("-")[4]}분</p>
                     <p className="lastTime">{promise.lastTime}</p>
+                  </div>             
+                </div>
+              </PromiseCard>
+            )
+          })}
+        </Cards>        
+      </Wrap>
+      <Wrap>
+        <div>
+          <p style={{fontWeight:"bold"}}>오늘 했어야 할 일</p>
+        </div>
+        <Cards>
+          {promiseList?.data?.data?.map((promise)=>{
+            if(promise.lastTime !== "이미 지난 약속입니다."){
+              return;
+            }
+            return (
+              <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
+                <div style={{display:"flex"}}>
+                  <p style={{fontSize:"15px", fontWeight:"bold"}}>{promise.title}</p>
+                  {/* 포인트 받아야할듯 */}
+                  <People><PersonIcon/></People>
+                  <p style={{fontWeight:"500"}}>{promise.memberCount}</p>
+                </div>
+                <div>
+                  <p className="place" style={{ marginTop:"0", marginBottom:"0" }}>{promise.place}</p>
+                </div>                
+                <div>
+                  <div style={{display:"flex"}}>
+                    {Number(promise.eventDateTime.split("-")[3])<12?
+                    <>
+                    <p>오전</p>
+                    <p>{promise.eventDateTime.split("-")[3]}시</p>
+                    </>
+                    :Number(promise.eventDateTime.split("-")[3])===12?
+                    <>
+                    <p>오후</p>
+                    <p>{promise.eventDateTime.split("-")[3]}시</p>
+                    </>
+                    :<>
+                    <p>오후</p>
+                    <p>{Number(promise.eventDateTime.split("-")[3])-12}시</p>
+                    </>
+                    }
+                    <p style={{marginRight:"10px"}}>{promise.eventDateTime.split("-")[4]}분</p>
+                    <p className="lastTime">종료</p>
                   </div>             
                 </div>
               </PromiseCard>
