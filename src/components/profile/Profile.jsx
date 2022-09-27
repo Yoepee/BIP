@@ -34,8 +34,8 @@ const Profile = () => {
                     </div>
                 </Prodiv>
                 <div style={{borderBottom:"1px solid black"}}>
-                    <p>점수 : {profile?.data?.data?.point}</p>
-                    <p>신용도 : {profile?.data?.data?.creditScore}</p>
+                    <p>포인트 : {profile?.data?.data?.point}</p>
+                    <p>신용 점수 : {profile?.data?.data?.creditScore}</p>
                     <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
                 </div>
                 <Prodiv>

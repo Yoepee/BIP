@@ -57,6 +57,21 @@ const Member = ({type, setType}) =>{
     }
   }
 
+  const __addFriendCredit = async(nickname,num) =>{
+    if(window.confirm(`${nickname}님의 신용점수를 ${num}점 구매하시겠습니까?`)){
+    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:1000*num, nickname:localStorage.getItem("name")},{
+      headers: {
+          Authorization:localStorage.getItem('Authorization'),
+          RefreshToken:localStorage.getItem('RefreshToken')
+      }}).then((response)=>{
+        console.log(response)
+      })
+      return;
+    }else{
+      return;
+    }
+  }
+
   return (
     <div>
       <div style={{ margin:"10px"}}>

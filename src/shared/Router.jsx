@@ -15,6 +15,7 @@ import AddMemberPage from "../pages/AddMemberPage"
 import KakaoPage from "../pages/signup/KakaoPage"
 import NaverPage from "../pages/signup/NaverPage"
 import PromiseLeaderPage from "../pages/promise/PromiseLeaderPage"
+import AddCreditPage from "../pages/profile/AddCreditPage"
 
 
 
@@ -33,11 +34,13 @@ const Router = () =>{
             {/* 친구목록 */}
             <Route path="/member" element={<MemberPage/>}/>
             <Route path="/member/invite:id" element={<MemberPage/>}/>
+            <Route path="/member/add:add" element={<MemberPage/>}/>
             <Route path="/addmember/:type" element={<AddMemberPage/>}/>
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
-            <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/> 
+            <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            <Route path="/addcredit" exact element={<AddCreditPage/>}/>
             {/* 약속잡기 */}
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
             <Route path="/addpromise/edit:id" exact element={<AddPromisePage/>}/>
