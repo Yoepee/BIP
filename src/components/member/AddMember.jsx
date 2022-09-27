@@ -40,15 +40,15 @@ const AddMember = ({member,onChangeHandle}) => {
     <>
     <div>
       {type==="name"?
-      <p>닉네임</p>
-      :<p>연락처</p>}
-        <input type="text" onChange={onChangeHandle} name="value" value={member.value}/>
+      <Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 닉네임을 입력하세요" name="value" value={member.value}/>
+      :<Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 연락처를 입력하세요"name="value" value={member.value}/>}
+        
     </div>
     {user?.data?.success?
-    <div style={{ display: "flex", border: "1px solid black", margin: "10px" }}>
+    <Card>
         {user?.data?.data?.profileImgUrl === null ?
-          <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{ width: "50px" }} />
-          : <img src={user?.data?.data?.profileImgUrl} style={{ width: "50px" }} />
+          <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
+          : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}} />
         }
         <p>{user?.data?.data?.nickname}</p>
         <p>({user?.data?.data?.nickname})</p>
@@ -58,8 +58,8 @@ const AddMember = ({member,onChangeHandle}) => {
           }else{
             addMemberPhone(member);
           }
-        }}>친구추가</AddFriend>
-    </div>
+        }}>추가</AddFriend>
+    </Card>
     :null}
     </>
   )
@@ -68,11 +68,37 @@ const AddMember = ({member,onChangeHandle}) => {
 export default AddMember;
 
 const AddFriend = styled.p`
+display: flex;
+
 margin-left:auto;
-margin-right:2%;
+width: 45px;
+height: 22px;
+margin-right:20px;
+align-items: center;
+justify-content: center;
 background-color:#6D09D1;
+font-weight: bold;
 color:white;
+padding: 10px;
 border-radius:6px;
-padding:5px;
 cursor:pointer;
+
+`
+const Card = styled.div`
+display:flex;
+height: 80px;
+border:none;
+border-radius: 8px;
+background-color: #F5EAFB;
+margin:10px
+
+`
+
+const Input = styled.input`
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  width: 350px;
+  border-bottom: 1px solid  #F5EAFB;
+  margin-bottom: 31px;
 `

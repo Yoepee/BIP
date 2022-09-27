@@ -15,7 +15,7 @@ const Option4 = ({ head, setType, type }) => {
       style={{position:"absolute", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
       <div style={{ marginLeft: "1%" }}>
         {type==="none"?
-        <p>{head}</p>
+        <p style={{fontWeight:"bold", fontSize:"20px", marginLeft:"12px"}}>{head}</p>
         :type==="give"?
         <p>별명 지어주기</p>
         :type==="remove"?
@@ -24,11 +24,11 @@ const Option4 = ({ head, setType, type }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", cursor: "pointer", display: "flex" }}>
         <div style={{ marginRight: "30px", cursor: "pointer" }}
           onClick={() => {setType("search");}}>
-          <p><SearchIcon /></p>
+          <p><SearchIcon style={{color:"#A67EED"}} /></p>
         </div>
           <div style={{ marginRight: "30px", cursor: "pointer" }}
             onClick={() => { if(chk!==0){setChk(0)}else{setChk(1)} }}>
-            <p><PersonAddRoundedIcon /></p>
+            <p><PersonAddRoundedIcon style={{color:"#A67EED"}}/></p>
           </div>
           {chk  === 1 ?
             <div style={{
@@ -52,7 +52,7 @@ const Option4 = ({ head, setType, type }) => {
         }
         <div style={{ cursor: "pointer" }}
           onClick={() => {if(chk!==0){setChk(0)}else{setChk(2)}}}>
-          <p><MoreVertIcon /></p>
+          <p><MoreVertIcon style={{color:"#A67EED"}}/></p>
         </div>
         {chk  === 2 ?
             <div style={{

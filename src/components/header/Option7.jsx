@@ -61,7 +61,7 @@ const Option7 = ({ head, setType, type }) => {
             searchMemberPhone(value.value);
           }
         }}>
-        <p><SearchIcon /></p>
+        <p><SearchIcon style={{color:"#A67EED"}}/></p>
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
         onClick={() => { setType("none"); }}>
