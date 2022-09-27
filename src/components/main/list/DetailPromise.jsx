@@ -65,7 +65,7 @@ const DetailPromise = () => {
           }
           <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
         </When>
-        <Point>
+        <People>
           <p>참여인원 : </p>
           {promise?.data?.data?.memberList?.map((member)=>{
             if(member.nickname===leader){
@@ -76,7 +76,7 @@ const DetailPromise = () => {
                 <p key={member.id}>💚{member.nickname}</p>
           )}
           })}
-        </Point>
+        </People>
         <Where>
           <p>{promise?.data?.data?.place}</p>
         </Where>
@@ -109,7 +109,7 @@ const When = styled.div`
   /* background-color: skyblue; */
   width: 100%;
   display: flex;
-  margin: 10% 15%
+  /* margin: 10% 15%; */
   font-weight: bold;
   p {
     margin-right: 1%;
@@ -119,19 +119,20 @@ const When = styled.div`
 const Where = styled.div`
   width: 100%;
   display: flex;
-  margin: 10% 15%
+  /* margin: 10% 15%; */
   font-weight: bold;
   p {
     margin-right: 2%;
   }
 `
 
-const Point = styled.div`
+const People = styled.div`
   /* background-color: green; */
   display: flex;
   width: 100%;
   font-weight: bold;
-  margin: 10% 15%
+  font-size: 15px;
+  /* margin: 10% 15%; */
   p {
     margin-right: 2%;
   }
