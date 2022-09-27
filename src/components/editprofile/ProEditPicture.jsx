@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios"
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-const ProEditPicture = ({setImg}) => {
+const ProEditPicture = ({setImg, img}) => {
    
 
     let a;
@@ -44,7 +44,10 @@ const ProEditPicture = ({setImg}) => {
         <div>
         <div style={{ width:"100%" }}>
         <ImgArea>
+        {img.imgUrl===""?
         <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`}/>
+        :<img src={img.imgUrl}/>
+        }
         <label className="input_file_button" htmlFor="input_file"><CameraAltIcon fontSize="large"/></label>
         <input type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" style={{display:"none"}}/>
         </ImgArea>
