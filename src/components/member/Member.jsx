@@ -1,4 +1,5 @@
 import axios from "axios";
+import styled from "styled-components"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -62,7 +63,7 @@ const Member = ({type, setType}) =>{
       <div style={{ margin:"10px"}}>
         {member?.data?.data?.map((friend, i)=>{
           return (
-            <div style={{display:"flex", border:"1px solid black", margin:"10px"}} key={i} 
+            <Card key={i} 
             onClick={()=>{
               if(type==="none"){
                 if(id!==undefined){
@@ -77,13 +78,13 @@ const Member = ({type, setType}) =>{
               }
             }}>
             {friend.profileImgUrl===null?
-            <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px"}}/>
-            :<img src={friend.profileImgUrl} style={{width:"50px"}}/>
+            <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
+            :<img src={friend.profileImgUrl} style={{width:"50px", height:"50px", borderRadius:"100%", margin:"15px"}}/>
             }
             <p>{friend.nickname}</p>
             <p>({friend.nickname})</p>
             <p style={{marginLeft:"auto", marginRight:"2%"}}>{friend.creditScore}</p>
-            </div>
+            </Card>
           )
         })}
       </div>
@@ -92,3 +93,13 @@ const Member = ({type, setType}) =>{
 }
 
 export default Member;
+
+const Card = styled.div`
+display:flex;
+height: 80px;
+border:none;
+border-radius: 8px;
+background-color: #F5EAFB;
+margin:10px
+
+`
