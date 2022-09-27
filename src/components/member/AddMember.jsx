@@ -5,33 +5,27 @@ import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 
-const AddMember = ({member,onChangeHandle}) => {
+const AddMember = ({member,onChangeHandle, type, setChk}) => {
   const dispatch = useDispatch();
-  const navigate= useNavigate();
-  const {type} = useParams();
   const user = useSelector((state)=>state.searchMember);
   
   const addMemberName = (member) => {
     dispatch(__addMemberName(member))
     .then((response)=>{
-      console.log(response)
       if(response.payload.success===false){
         alert(response.payload.data);
         return;
       }
-      navigate("/member");
     })
     dispatch(clearSearch());
    }
    const addMemberPhone = (member) => {
     dispatch(__addMemberPhone(member))
     .then((response)=>{
-      console.log(response)
       if(response.payload.success===false){
         alert(response.payload.data);
         return;
       }
-      navigate("/member");
     })
     dispatch(clearSearch());
    }
@@ -55,8 +49,10 @@ const AddMember = ({member,onChangeHandle}) => {
         <AddFriend onClick={()=>{
           if(type==="name"){
             addMemberName(member);
+            setChk(0);
           }else{
             addMemberPhone(member);
+            setChk(0);
           }
         }}>추가</AddFriend>
     </Card>
