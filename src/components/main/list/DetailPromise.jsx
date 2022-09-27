@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
+import CheckIn from "./CheckIn";
 
 
 const DetailPromise = () => {
@@ -11,6 +12,7 @@ const DetailPromise = () => {
   const dispatch = useDispatch();
   const promise = useSelector((state)=>state.detailPromise);
   const [leader, setLeader] = useState("");
+  const [chk,setChk] = useState(false);
 
   useEffect(()=>{
     dispatch(__getDetailPromise(id));
@@ -68,7 +70,10 @@ const DetailPromise = () => {
             }
             <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
           </When>
-          <People>
+          <People onClick={()=>{setChk(!chk)}}>
+            {!chk?
+            <p >▼</p>
+            :<p>▲</p>}
             <p>참여인원 : </p>
             {promise?.data?.data?.memberList?.map((member)=>{
               if(member.nickname===leader){
@@ -80,6 +85,9 @@ const DetailPromise = () => {
             )}
             })}
           </People>
+          {chk?
+          <CheckIn/>
+          :null}
         </LeftItem>
         <RightItem>
           <Where>
@@ -150,6 +158,7 @@ const People = styled.div`
   /* margin: 10% 15%; */
   p {
     margin-right: 2%;
+    cursor:pointer;
   }
 `
 
