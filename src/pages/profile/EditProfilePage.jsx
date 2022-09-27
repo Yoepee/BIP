@@ -7,26 +7,29 @@ import axios from "axios";
 
 const EditProfilePage = () => {
     const {type} = useParams();
-    const [value, setValue] = useState({value:""});
+    const initialState = {
+        value:"",
+        email:"",
+        phonenumber:"",
+        authCode:""
+    }
+    const [set, setSet] = useState(initialState);
     const [chk, setChk] = useState(false);
     const [img, setImg] = useState({imgUrl:""});
-
-    console.log(value)
-    console.log(img)
     
     const onChangeHandler = (e) => {
-        const { value } = e.target;
-        setValue({ value: e.target.value })
+        const {name, value} = e.target;
+        setSet({...set, [name]: value})
       }
     
 
     return (
         <div>
-            <Header head={"프로필 수정"} option={1} payload={value} chk={chk} image={img} />
+            <Header head={"프로필 수정"} option={1} payload={set} chk={chk} image={img} />
             <div>
                 {type==="picture"?
-                <ProEditPicture setImg={setImg} />
-                :<ProEditText value={value} onChangeHandler={onChangeHandler} setChk={setChk} />
+                <ProEditPicture setImg={setImg} img={img} />
+                :<ProEditText set={set} onChangeHandler={onChangeHandler} setChk={setChk} />
                 }
             </div>
         </div>

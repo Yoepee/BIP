@@ -34,7 +34,7 @@ const Header = ({ head, option, payload, chk, image, setType, type}) => {
       <Option2 head={head} payload={payload}/>
       :null}
       
-      {/* 약속상세보기 뒤로가기(홈) 제목 메뉴(방장-, 방장x- 약속나가기, 취소) */}
+      {/* 약속상세보기 뒤로가기(홈) 제목 메뉴(방장-방장위임, 멤버 조정, 방장x- 약속나가기, 취소) */}
       {option===3?
       <Option3 head={head}/>
       :null}

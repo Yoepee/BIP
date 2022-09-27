@@ -65,8 +65,10 @@ import dayjs from "dayjs";
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
-              if(!data.data.success)
+              if(!data.data.success){
                 alert(data.data.data)
+                return;
+              }
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

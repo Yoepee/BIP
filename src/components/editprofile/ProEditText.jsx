@@ -1,9 +1,9 @@
 import ProEdit from "./ProEdit";
 
-const ProEditText = ({value, onChangeHandler, setChk}) => {
+const ProEditText = ({set, onChangeHandler, setChk}) => {
     return (
         <div>
-            <ProEdit value={value} onChangeHandler={onChangeHandler} setChk={setChk}/>
+            <ProEdit set={set} onChangeHandler={onChangeHandler} setChk={setChk}/>
         </div>
     )
 }

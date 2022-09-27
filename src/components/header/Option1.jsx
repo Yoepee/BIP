@@ -7,31 +7,54 @@ const Option1 = ({ head, payload, chk, image }) =>{
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {type} = useParams();
-
+  const regtest = /^[0-9]{6}$/;
+  console.log(payload)
   const editNickname = () => {
     if(chk){
       dispatch(__editNickname(payload));
-      navigate("/detailprofile");
+      navigate("/profile");
     }
   }
   const editPhone = () => {
     if(chk){
-      dispatch(__editPhone(payload));
-      navigate("/detailprofile");
+      if(regtest.test(payload.authCode)){
+        dispatch(__editPhone({phoneNumber:payload.phonenumber,authCode:payload.authCode}))
+        .then((response)=>{
+          console.log(response);
+          if(response.payload.success){
+            navigate("/profile"); 
+          }else{
+            alert(response.payload.data);
+          }
+      });
+      }else{
+        alert("인증번호를 확인해주세요.")
+      }
     }
   }
   const editEmail = () => {
     if(chk){
-      dispatch(__editEmail(payload));
-      navigate("/detailprofile");
+      if(regtest.test(payload.authCode)){
+      dispatch(__editEmail({email:payload.eamil,authCode:payload.authCode}))
+      .then((response)=>{
+        console.log(response);
+        if(response.payload.success){
+          navigate("/profile"); 
+        }else{
+          alert(response.payload.data);
+        }
+      });
+    }else{
+      alert("인증번호를 확인해주세요.")
+    }
     }
   }
   const editPicture = () => {
     console.log(image)    
     dispatch(__editPicture(image));
-    navigate("/detailprofile");    
+    navigate("/profile");    
   }
-  console.log(image)
+  console.log(chk)
 
   return (
     <>
