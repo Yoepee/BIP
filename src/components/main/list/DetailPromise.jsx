@@ -41,7 +41,7 @@ const DetailPromise = () => {
           <p>{promise?.data?.data?.title}</p>
         </Title>
         <Desc>
-          <p>내용</p>
+          <p>{promise?.data?.data?.content}</p>
           <p><span>P</span> 200</p>
         </Desc>
         <When>
@@ -51,7 +51,7 @@ const DetailPromise = () => {
           {Number(promise?.data?.data?.eventDateTime.split("-")[3])<12?
           <>
           <p>오전</p>
-          <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
+          <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])}시</p>
           </>
           :Number(promise?.data?.data?.eventDateTime.split("-")[3])===12?
           <>
@@ -91,9 +91,7 @@ export default DetailPromise;
 const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
-  width: 100vw;
-  min-width: 300px;
-  max-width: 1200px;
+  width: 70%;
   text-align: center;
   position: relative;
 `
@@ -103,7 +101,7 @@ const Title = styled.div`
   display: flex;
   font-weight: bold;
   font-size: 24px;
-  margin: 10% 15%;
+  margin-top: 66px;
   
 `
 
@@ -111,7 +109,7 @@ const When = styled.div`
   /* background-color: skyblue; */
   width: 100%;
   display: flex;
-  margin: 0 15%;
+  margin: 10% 15%
   font-weight: bold;
   p {
     margin-right: 1%;
@@ -121,7 +119,7 @@ const When = styled.div`
 const Where = styled.div`
   width: 100%;
   display: flex;
-  margin: 0 15%;
+  margin: 10% 15%
   font-weight: bold;
   p {
     margin-right: 2%;
@@ -132,8 +130,8 @@ const Point = styled.div`
   /* background-color: green; */
   display: flex;
   width: 100%;
-  margin: 0 15%;
   font-weight: bold;
+  margin: 10% 15%
   p {
     margin-right: 2%;
   }
@@ -142,19 +140,27 @@ const Point = styled.div`
 const Desc = styled.div`
   width: 100%;
   display: flex;
-  margin: 0 15%;
+  
   font-weight: bold;
   justify-content: space-between;
   p {
     margin-right: 2%;
     gap:1;
+   span{
+     border-radius: 100%;
+     background-color: #6D09D1;
+     padding: 3px 8px;
+     height: 5px;
+     width: 5px;
+     color: white;
+   }
   }
+  
 `
 
 const Map = styled.div`
   /* position: absolute; */
-  width: 50%;
+  width: 99%;
   height: 25vh;
-  margin: 10% 25%;
   background-color: wheat;
 `
