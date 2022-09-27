@@ -37,50 +37,56 @@ const DetailPromise = () => {
   return(
     <>
       <Wrap>
-        <Title>
-          <p>{promise?.data?.data?.title}</p>
-        </Title>
-        <Desc>
-          <p>{promise?.data?.data?.content}</p>
-          <p><span>P</span> 200</p>
-        </Desc>
-        <When>
-          <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
-          <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
-          <p>{promise?.data?.data?.eventDateTime.split("-")[2]}일</p>
-          {Number(promise?.data?.data?.eventDateTime.split("-")[3])<12?
-          <>
-          <p>오전</p>
-          <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])}시</p>
-          </>
-          :Number(promise?.data?.data?.eventDateTime.split("-")[3])===12?
-          <>
-          <p>오후</p>
-          <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
-          </>
-          :<>
-          <p>오후</p>
-          <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])-12}시</p>
-          </>
-          }
-          <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
-        </When>
-        <People>
-          <p>참여인원 : </p>
-          {promise?.data?.data?.memberList?.map((member)=>{
-            if(member.nickname===leader){
-            return (
-                <p key={member.id}>💜{member.nickname}</p>
-            )}else{
+        <LeftItem>
+          <Title>
+            <p style={{fontSize:"24px"}}>{promise?.data?.data?.title}</p>
+            <div style={{margin:"20px 15% 0 0"}}>
+            <p style={{fontSize:"13px"}}><span>P</span>{promise?.data?.data?.point}</p>
+            </div>
+          </Title>
+          <Desc>
+            <p>{promise?.data?.data?.content}</p>
+          </Desc>
+          <When>
+            <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
+            <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
+            <p>{promise?.data?.data?.eventDateTime.split("-")[2]}일</p>
+            {Number(promise?.data?.data?.eventDateTime.split("-")[3])<12?
+            <>
+            <p>오전</p>
+            <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])}시</p>
+            </>
+            :Number(promise?.data?.data?.eventDateTime.split("-")[3])===12?
+            <>
+            <p>오후</p>
+            <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
+            </>
+            :<>
+            <p>오후</p>
+            <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])-12}시</p>
+            </>
+            }
+            <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
+          </When>
+          <People>
+            <p>참여인원 : </p>
+            {promise?.data?.data?.memberList?.map((member)=>{
+              if(member.nickname===leader){
               return (
-                <p key={member.id}>💚{member.nickname}</p>
-          )}
-          })}
-        </People>
-        <Where>
-          <p>{promise?.data?.data?.place}</p>
-        </Where>
-        <Map>지도(예정)</Map>
+                  <p key={member.id}>💜{member.nickname}</p>
+              )}else{
+                return (
+                  <p key={member.id}>💚{member.nickname}</p>
+            )}
+            })}
+          </People>
+        </LeftItem>
+        <RightItem>
+          <Where>
+            <p>{promise?.data?.data?.place}</p>
+          </Where>
+          <Map>지도(예정)</Map>
+        </RightItem>        
       </Wrap>      
     </>
   )
@@ -91,18 +97,37 @@ export default DetailPromise;
 const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
-  width: 70%;
+  width: 80%;
   text-align: center;
   position: relative;
 `
 
+
+
 const Title = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-between;
   font-weight: bold;
-  font-size: 24px;
-  margin-top: 66px;
-  
+  p {    
+    /* margin-right: 10%; */
+   span{
+     background-color: #6D09D1;
+     border-radius: 50%;
+     padding: 0 3px;
+     margin-right: 2px;
+     color: white;
+   }
+  }
+`
+const Desc = styled.div`
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+  p {
+    margin-right: 2%;
+  }
 `
 
 const When = styled.div`
@@ -113,16 +138,6 @@ const When = styled.div`
   font-weight: bold;
   p {
     margin-right: 1%;
-  }
-`
-
-const Where = styled.div`
-  width: 100%;
-  display: flex;
-  /* margin: 10% 15%; */
-  font-weight: bold;
-  p {
-    margin-right: 2%;
   }
 `
 
@@ -138,30 +153,46 @@ const People = styled.div`
   }
 `
 
-const Desc = styled.div`
+const Where = styled.div`
   width: 100%;
   display: flex;
-  
+  /* margin: 10% 15%; */
   font-weight: bold;
-  justify-content: space-between;
-  p {
-    margin-right: 2%;
-    gap:1;
-   span{
-     border-radius: 100%;
-     background-color: #6D09D1;
-     padding: 3px 8px;
-     height: 5px;
-     width: 5px;
-     color: white;
+
+  @media screen and (min-width: 769px) {
+   float: right;
+   p{
+    margin: 80px auto;
    }
   }
-  
 `
 
 const Map = styled.div`
   /* position: absolute; */
-  width: 99%;
-  height: 25vh;
-  background-color: wheat;
+  width: 300px;
+  height: 200px;
+  /* margin-bottom: 100px; */
+  background-color: #F5EAFB;
+  @media screen and (min-width: 769px) {
+   margin: 110px auto;
+   margin-bottom: 0;
+  }
+`
+
+const LeftItem = styled.div`
+  @media screen and (min-width: 769px) {
+    /* background-color: pink; */
+    width: 50%;
+    height: 250px;
+    float: left;
+    margin-top: 50px;
+    /* border-right: 1px solid #F5EAFB; */
+  }
+`
+const RightItem = styled.div`
+  @media screen and (min-width: 769px) {
+    /* background-color: skyblue; */
+    width: 49%;
+    float: right;
+  }
 `

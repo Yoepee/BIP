@@ -23,27 +23,40 @@ display:grid;
 grid-template-columns: 1fr 2fr;
 place-items: center;
 position:fixed;
-bottom:0;
-margin-left: 15px;
+bottom: 0;
+margin: 0 auto;
 `
 
 const Invite = styled.div`
-background-color:#6D09D1;
-color:white;
-cursor:pointer;
-width:80%;
+background-color:#EDFFEB;
+cursor: pointer;
+width:100%;
 text-align:center;
 padding:10px;
-margin: 15px;
 font-weight:bold;
+@media screen and (min-width: 769px) {
+    width: 100px;
+    position: fixed;
+    right: 30px;
+    bottom: 120px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
 `
 
 const Chat = styled.div`
 background-color:#F5EAFB;
 cursor:pointer;
-width:80%;
+width:100%;
 text-align:center;
 padding:10px;
-margin: 15px;
 font-weight:bold;
+@media screen and (min-width: 769px) {
+    width: 100px;
+    position: fixed;
+    right: 30px;
+    bottom: 80px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 `
