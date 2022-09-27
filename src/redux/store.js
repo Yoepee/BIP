@@ -5,6 +5,7 @@ import social from "./modules/social";
 import promise from "./modules/promise";
 import detailPromise from "./modules/detailPromise";
 import searchMember from "./modules/searchMember";
+import checkIn from "./modules/checkIn";
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     promise: promise.reducer,
     detailPromise: detailPromise.reducer,
     searchMember: searchMember.reducer,
+    checkIn:checkIn.reducer,
   }
 });
