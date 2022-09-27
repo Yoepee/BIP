@@ -68,6 +68,27 @@ const Option3 = ({ head }) => {
       setChk(0);
     }
   }
+  const __endPromise = async() =>{
+    if (window.confirm("약속을 마치시겠습니까?")) {
+      const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/events/confirm/${id}`, null,{
+        headers: {
+          Authorization: localStorage.getItem('Authorization'),
+          RefreshToken: localStorage.getItem('RefreshToken'),
+        }
+      }).then((response) => {
+        console.log(response)
+        if (response.data.success) {
+          alert(response.data.data)
+          setChk(0);
+        } else {
+          alert(response.data.data);
+          setChk(0);
+        }
+      })
+    } else {
+      setChk(0);
+    }
+  }
 
   useEffect(() => {
     bangjang();
@@ -98,6 +119,8 @@ const Option3 = ({ head }) => {
           border: "1px solid black",
           zIndex:"10"
         }}>
+          <OptionMenu
+            onClick={() => { __endPromise()}}>약속 종료</OptionMenu>
           <OptionMenu
             onClick={() => { navigate(`/promiseleader/id=${id}/type=leader`)}}>방장 위임</OptionMenu>
           <OptionMenu
