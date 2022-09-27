@@ -23,6 +23,7 @@ const AddPromise = ({
   const [check, setCheck] = useState(false);
   const now = new Date();
   const [date, setDate] = useState(now);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     setCheck(false);
@@ -96,10 +97,43 @@ const AddPromise = ({
         </UnderLine>
         <Point>
           <label style={{ fontWeight: "bold" }}>약속 대상</label>
-          <select name="point" value={promise.point} onChange={onChangeHandler}>
+          {/* <select name="point" value={promise.point} onChange={onChangeHandler}>
             <option value="0">자신과의 약속</option>
             <option value="100">타인과의 약속</option>
-          </select>
+          </select> */}
+          {promise.point==="0" && !modal?
+          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
+            <div>자신과의 약속　</div><div style={{color:"#A67EED"}}>▼</div>
+          </div>
+          :promise.point==="0" && modal?
+          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
+            <div>자신과의 약속　</div><div style={{color:"#A67EED"}}>▲</div>
+          </div>
+          :promise.point=="100" && !modal?
+          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
+            <div>타인과의 약속　</div><div style={{color:"#A67EED"}}>▼</div>
+            </div>
+            :<div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
+            <div>타인과의 약속　</div><div style={{color:"#A67EED"}}>▲</div>
+            </div>}
+          {modal  === true ?
+            <div style={{
+              width: "150px",
+              position: "relative",
+              backgroundColor: "white",
+              top: "30px", right: "110px",
+              textAlign: "center",
+              borderRadius: "5px",
+              border: "1px solid black",
+              zIndex:"10"
+            }}>
+              <OptionMenu 
+                onClick={() => {  setPromise({...promise,point:"0"}); setModal(false); }}>자신과의 약속</OptionMenu>
+              <OptionMenu
+                onClick={() => {  setPromise({...promise,point:"100"}); setModal(false); }}>타인과의 약속</OptionMenu>
+            </div>
+          :null
+        }
         </Point>
         <When>
           <div
@@ -271,3 +305,10 @@ const Map = styled.div`
   margin: 0 25%;
   background-color: wheat;
 `;
+const OptionMenu = styled.div`
+padding: 3px;
+cursor: pointer;
+&:hover{
+  background-color:#6D09D1;
+  color:white;
+}`
