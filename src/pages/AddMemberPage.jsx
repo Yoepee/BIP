@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import Header from "../components/header/Header"
 import AddMember from "../components/member/AddMember";
 
-const AddMemberPage = ()=>{
-  const {type} = useParams();
+const AddMemberPage = ({type, setChk})=>{
   const initialState = {
     value:""
    }
@@ -20,11 +18,11 @@ const AddMemberPage = ()=>{
     {type==="phone"?
     <>
     <Header head={"연락처로 친구 추가"} option={5} payload={member}/>
-    <AddMember member={member} onChangeHandle={onChangeHandle}/>
+    <AddMember member={member} onChangeHandle={onChangeHandle} type={type} setChk={setChk}/>
     </>
     :<>
     <Header head={"닉네임으로 친구 추가"} option={5} payload={member}/>
-    <AddMember member={member} onChangeHandle={onChangeHandle}/>
+    <AddMember member={member} onChangeHandle={onChangeHandle} type={type} setChk={setChk}/>
     </>}
     </>
   )

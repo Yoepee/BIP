@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { __searchName, __searchPhone } from '../../redux/modules/searchMember';
 
 const Option5 = ({ head, payload }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   
   const searchMemberName = () => {
@@ -16,9 +15,6 @@ const Option5 = ({ head, payload }) => {
 
   return (
     <>
-      <div onClick={() => { navigate("/member") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{color:"#6D09D1"}} /></p>
-      </div>
       <div style={{ marginLeft: "1%" }}>
         <p>{head}</p>
       </div>

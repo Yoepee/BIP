@@ -11,7 +11,6 @@ import MemberPage from "../pages/MemberPage"
 import AddPromisePage from "../pages/promise/AddPromisePage"
 import DetailPromisePage from "../pages/promise/DetailPromisePage"
 import SignUpChange from "../pages/signup/SignUpChange"
-import AddMemberPage from "../pages/AddMemberPage"
 import KakaoPage from "../pages/signup/KakaoPage"
 import NaverPage from "../pages/signup/NaverPage"
 import PromiseLeaderPage from "../pages/promise/PromiseLeaderPage"
@@ -35,7 +34,6 @@ const Router = () =>{
             <Route path="/member" element={<MemberPage/>}/>
             <Route path="/member/invite:id" element={<MemberPage/>}/>
             <Route path="/member/add:add" element={<MemberPage/>}/>
-            <Route path="/addmember/:type" element={<AddMemberPage/>}/>
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>

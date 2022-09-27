@@ -4,14 +4,21 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
+import AddMemberPage from '../../pages/AddMemberPage';
 
 const Option4 = ({ head, setType, type }) => {
   const navigate = useNavigate();
   const [chk, setChk] = useState(0);
+  const [chktype, setChktype] = useState("name");
   return (
-    <>
+    <>{chk===3?
+      <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
+        <AddMemberPage type={chktype} setChk={setChk} setChktype={setChktype} />
+      </div>
+      :null
+      }
       {chk===0?null:
-      <ModalBack onClick={()=>{setChk(0)}} 
+      <ModalBack onClick={()=>{setChk(0)}}
       style={{position:"absolute", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
       <div style={{ marginLeft: "1%" }}>
         {type==="none"?
@@ -42,9 +49,9 @@ const Option4 = ({ head, setType, type }) => {
               zIndex:"10"
             }}>
               <OptionMenu
-                onClick={() => {  navigate("/addmember/name") }}>닉네임으로 추가</OptionMenu>
+                onClick={() => {  setChktype("name");setChk(3); }}>닉네임으로 추가</OptionMenu>
               <OptionMenu
-                onClick={() => {  navigate("/addmember/phone") }}>연락처로 추가</OptionMenu>
+                onClick={() => {  setChktype("phone");setChk(3); }}>연락처로 추가</OptionMenu>
                 <OptionMenu
                 onClick={() => {  setChk(0); }}>취소</OptionMenu>
             </div>
