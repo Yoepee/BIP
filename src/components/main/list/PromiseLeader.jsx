@@ -34,7 +34,7 @@ const PromiseLeader = () =>{
   }
   const __kickMember = async (member, nickname) => {
     if (window.confirm(`${nickname}님을 제외하시겠습니까?`)) {
-    let a = await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/events/master/${id}`, {targetId:member}, {
+    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/events/master/deport/${id}`, {targetId:member}, {
       headers: {
         Authorization: localStorage.getItem('Authorization'),
         RefreshToken: localStorage.getItem('RefreshToken')

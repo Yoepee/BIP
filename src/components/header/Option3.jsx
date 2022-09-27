@@ -4,7 +4,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import zIndex from '@mui/material/styles/zIndex';
 import styled from 'styled-components';
 
 const Option3 = ({ head }) => {
@@ -73,8 +72,6 @@ const Option3 = ({ head }) => {
   useEffect(() => {
     bangjang();
   }, [])
-
-  console.log(leader)
 
   return (
     <>
