@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-  const regexNickname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
+  const regexNickname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,8}$/;
   const regexEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   const regtest = /^[0-9]{6}$/;
   const { type } = useParams();
@@ -113,7 +113,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
 
   const __examEmail = async (payload) => {
     console.log(payload)
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", {value:payload})
+    let a = await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", {value:payload})
       .then((response) => {
         console.log(response)
       });

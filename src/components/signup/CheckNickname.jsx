@@ -15,7 +15,7 @@ const CheckNickname = () => {
   const [member, setMember] = useState(initialState)
   const [chkname,setChkname] = useState("")
   /** 닉네임 검사*/ 
-  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
+  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,8}$/;
 
   const onChangeHandler = (e) => {
     const {name, value} = e.target;
