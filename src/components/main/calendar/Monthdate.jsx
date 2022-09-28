@@ -56,19 +56,19 @@ const Test = ({setDay, page}) => {
         <div style={{ display: "flex" }}>
           <Datediv>
             {chk.week==="월"?
-            <WeekDiv style={{backgroundColor:"pink"}}>월</WeekDiv>:<WeekDiv>월</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>월</WeekDiv>:<WeekDiv>월</WeekDiv>}
             {chk.week==="화"?
-            <WeekDiv style={{backgroundColor:"pink"}}>화</WeekDiv>:<WeekDiv>화</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>화</WeekDiv>:<WeekDiv>화</WeekDiv>}
             {chk.week==="수"?
-            <WeekDiv style={{backgroundColor:"pink"}}>수</WeekDiv>:<WeekDiv>수</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>수</WeekDiv>:<WeekDiv>수</WeekDiv>}
             {chk.week==="목"?
-            <WeekDiv style={{backgroundColor:"pink"}}>목</WeekDiv>:<WeekDiv>목</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>목</WeekDiv>:<WeekDiv>목</WeekDiv>}
             {chk.week==="금"?
-            <WeekDiv style={{backgroundColor:"pink"}}>금</WeekDiv>:<WeekDiv>금</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>금</WeekDiv>:<WeekDiv>금</WeekDiv>}
             {chk.week==="토"?
-            <WeekDiv style={{backgroundColor:"pink"}}>토</WeekDiv>:<WeekDiv>토</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB"}}>토</WeekDiv>:<WeekDiv>토</WeekDiv>}
             {chk.week==="일"?
-            <WeekDiv style={{backgroundColor:"pink", color: "red"}}>일</WeekDiv>:<WeekDiv style={{color: "red"}}>일</WeekDiv>}
+            <WeekDiv style={{backgroundColor:"#F5EAFB", color: "red"}}>일</WeekDiv>:<WeekDiv style={{color: "red"}}>일</WeekDiv>}
             {onedayWeek === 0 ?
               null
               : new Array(onedayWeek - 1).fill("　").map((a,i) => {
@@ -81,7 +81,7 @@ const Test = ({setDay, page}) => {
               return (
                 <div key={index}>
                   {chk.day === calendar.day ?
-                    <DayDiv style={{ border: "1px solid black" }}
+                    <DayDiv style={{ backgroundColor:"#EDFFEB" }}
                       onClick={() => { setChk({day:calendar.day, week: calendar.week}) }}>
                       {calendar.week === "일" ?
                         <div style={{ color: "red" }}>{calendar.day}</div>
@@ -120,8 +120,8 @@ const DayDiv = styled.div`
   cursor: pointer;
   font-weight: bold;
   &:hover{
-    color:white;
-    background-color:black;
+    color: black;
+    background-color: #EDFFEB;
 }
 `
 
