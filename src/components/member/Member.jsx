@@ -120,6 +120,13 @@ const Wrap = styled.div`
   width: 80%;
   margin: 50px auto;
   /* font-family: "NotoSansKR-Regular"; */
+  /* font-family: "YUniverse-B"; */
+  /* font-family: "YiSunShin-B"; */
+  /* font-family: "Hambak"; */
+  font-family: "GowunDodum";
+  /* font-family: "Mimiworld-B"; */
+  /* font-family: "Mimiworld-R"; */
+
   @media screen and (min-width: 769px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -166,6 +173,7 @@ const ProfileImg = styled.img`
 const Username = styled.p`
   @media screen and (min-width: 769px) {
     font-size: 12px;
+    font-weight: bold;
     position: absolute;
     left: 48px;
     top: 12px;

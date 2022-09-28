@@ -7,11 +7,11 @@ import styled from "styled-components";
 import Weekdate from "../components/main/calendar/Weekdate";
 import Footer from "../components/footer/Footer";
 import Monthdate from "../components/main/calendar/Monthdate";
-import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import PromiseList from "../components/main/list/PromiseList";
 import dayjs from "dayjs";
 import NextMonth from "../components/main/calendar/NextMonth";
+import CreateIcon from '@mui/icons-material/Create';
 
 const MainPage = () => {
   const [settings, setSettings] = useState({autoPlay: false, navButtonsAlwaysInvisible: true})
@@ -33,7 +33,7 @@ const MainPage = () => {
           <PromiseList day={day}/>
       </Wrap>
       <Plus>
-          <IconBtn onClick={() => { navigate("/addpromise") }}><AddIcon /></IconBtn>
+          <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon /></IconBtn>
         </Plus>
       <Footer foot={0}/>
       <div style={{height:"50px"}}></div>
@@ -47,6 +47,13 @@ export default MainPage;
 const Wrap = styled.div`
   /* background-color: whitesmoke; */
   padding: 10% 0;
+  /* font-family: "NotoSansKR-Regular"; */
+  /* font-family: "YUniverse-B"; */
+  /* font-family: "YiSunShin-M"; */
+  /* font-family: "Hambak"; */
+  font-family: "GowunDodum";
+  /* font-family: "Mimiworld-B"; */
+  /* font-family: "Mimiworld-R"; */
 `
 const Plus = styled.div`
 position : fixed;
