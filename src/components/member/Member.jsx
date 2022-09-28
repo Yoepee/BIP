@@ -119,6 +119,7 @@ const Wrap = styled.div`
   /* background-color: green; */
   width: 80%;
   margin: 50px auto;
+  /* font-family: "NotoSansKR-Regular"; */
   @media screen and (min-width: 769px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
