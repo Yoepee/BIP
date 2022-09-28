@@ -28,7 +28,7 @@ const Chat = () => {
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: process.env.REACT_APP_CHAT_HOST + "/ws-stomp/websocket",
+      brokerURL: process.env.REACT_APP_CHAT_HOST + "/websocket",
       connectHeaders: {
         Authorization: localStorage.getItem('Authorization'),
         RefreshToken: localStorage.getItem('RefreshToken'),
@@ -43,14 +43,14 @@ const Chat = () => {
         //구독요청
         subscribe();
         client.current.publish({
-          destination: "/pub/chat/message",
+          destination: "/pub/chat/enter",
           headers: {
             Authorization: localStorage.getItem('Authorization'),
             RefreshToken: localStorage.getItem('RefreshToken'),
           },
           //전송할 데이터를 입력
           body: JSON.stringify({
-            type: 0,
+            message:"",
             roomId: Number(id),
           }),
         });
@@ -132,8 +132,7 @@ const Chat = () => {
       submit();
     }
   }
-  console.log(messages)
-  console.log(inputRef.current.value)
+
   return (
     <>
       <div style={{border:"1px solid black", margin:"2%"}}>
