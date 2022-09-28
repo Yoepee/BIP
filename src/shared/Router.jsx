@@ -15,6 +15,7 @@ import KakaoPage from "../pages/signup/KakaoPage"
 import NaverPage from "../pages/signup/NaverPage"
 import PromiseLeaderPage from "../pages/promise/PromiseLeaderPage"
 import AddCreditPage from "../pages/profile/AddCreditPage"
+import ChatPage from "../pages/ChatPage"
 
 
 
@@ -47,6 +48,8 @@ const Router = () =>{
             {/* 소셜로그인 */}
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>
             <Route path="/login/naver" exact element={<NaverPage/>}/>
+            {/* 채팅 */}
+            <Route path="/chat/:id" exact element={<ChatPage/>}/>
         </Routes>
     )
 }

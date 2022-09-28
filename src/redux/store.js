@@ -6,6 +6,7 @@ import promise from "./modules/promise";
 import detailPromise from "./modules/detailPromise";
 import searchMember from "./modules/searchMember";
 import checkIn from "./modules/checkIn";
+import chat from "./modules/chat";
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     detailPromise: detailPromise.reducer,
     searchMember: searchMember.reducer,
     checkIn:checkIn.reducer,
+    chat:chat.reducer,
   }
 });

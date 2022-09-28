@@ -1,15 +1,16 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const PromiseFooter = () => {
   const navigate= useNavigate();
   const promise = useSelector((state)=>state.detailPromise);
+  const {id} = useParams();
 
   return (
     <Menu>
         <Invite onClick={()=>{navigate(`/member/invite${promise?.data?.data?.id}`)}}>초대</Invite>
-        <Chat>채팅하기</Chat>
+        <Chat onClick={()=>{navigate(`/chat/${id}`)}}>채팅하기</Chat>
     </Menu>
   )
 }
