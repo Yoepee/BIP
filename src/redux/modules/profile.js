@@ -46,6 +46,9 @@ import axios from 'axios';
                   RefreshToken: localStorage.getItem('RefreshToken'),
               }})
               console.log(data)
+              if(data.data.success){
+                localStorage.setItem("name",data.data.data.nickname)
+              }
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
