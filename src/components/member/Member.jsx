@@ -119,11 +119,11 @@ const Wrap = styled.div`
   /* background-color: green; */
   width: 80%;
   margin: 50px auto;
-  /* font-family: "NotoSansKR-Regular"; */
+  font-family: "NotoSansKR-Regular";
   /* font-family: "YUniverse-B"; */
   /* font-family: "YiSunShin-B"; */
   /* font-family: "Hambak"; */
-  font-family: "GowunDodum";
+  /* font-family: "GowunDodum"; */
   /* font-family: "Mimiworld-B"; */
   /* font-family: "Mimiworld-R"; */
 
