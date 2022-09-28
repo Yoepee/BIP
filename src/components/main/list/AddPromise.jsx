@@ -303,7 +303,7 @@ const Map = styled.div`
   width: 50%;
   height: 25vh;
   margin: 0 25%;
-  background-color: wheat;
+  background-color: #f5eafb;
 `;
 const OptionMenu = styled.div`
 padding: 3px;
