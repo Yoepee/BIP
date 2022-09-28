@@ -9,6 +9,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 
 import dayjs from "dayjs";
+import KaKaoMap from "../../naverMap/KakaoMap";
+import DaumPostcode from 'react-daum-postcode';
 dayjs.locale("ko");
 
 const AddPromise = ({
@@ -24,6 +26,46 @@ const AddPromise = ({
   const now = new Date();
   const [date, setDate] = useState(now);
   const [modal, setModal] = useState(false);
+  const { naver } = window;
+  // 주소 검색 함수에 넘겨줄 address 상태 관리
+  const initialState = {address:""}
+  const [address, setAddress] = useState(initialState);
+  const [roadAddress, setRoadAddress] = useState(null);
+  // 위도 경도 변경되는 값을 받을 수 있도록 상태 관리.
+  const [lat, setLat] = useState(37.5656);
+  const [lng, setLng] = useState(126.9769);
+  const [openAddr,setOpenAddr] = useState(false)
+  
+  const searchChange = (e) =>{
+    const {name, value} = e.target;
+    setAddress({[name]:value});
+  }
+
+  const searchAddressToCoordinate = (address) =>{
+    console.log(address);
+    naver.maps.Service.geocode(
+      {
+        query:address,
+      },
+      (status, response)=>{
+        if(status!==naver.maps.Service.Status.OK)
+          return alert("Something wrong!");
+        
+        let result = response.v2;
+        let items = result.addresses;
+
+        let x = parseFloat(items[0].x);
+        let y = parseFloat(items[0].y);
+
+        console.log(x, y)
+
+        setLat(y);
+        setLng(x);
+        setRoadAddress(items[0].roadAddress);
+        setPromise({...promise,place:items[0].roadAddress})
+      }
+    )
+  }
 
   useEffect(() => {
     setCheck(false);
@@ -32,34 +74,11 @@ const AddPromise = ({
   useEffect(() => {
     if (!am) {
       if (time.hour === "12") {
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-${time.hour}-${time.min}-00`
-          ),
-        });
-      } else {
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-${Number(time.hour) + 12}-${time.min}-00`
-          ),
-        });
-      }
-    } else {
-      if (time.hour === "12") {
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-0${Number(time.hour) - 12}-${time.min}-00`
-          ),
-        });
-      } else {
-        if(Number(time.hour)<10){
+        if(Number(time.min)<10||time.min==="0"){
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
-              `YYYY-MM-DD-0${time.hour}-${time.min}-00`
+              `YYYY-MM-DD-${time.hour}-0${time.min}-00`
             ),
           });
         }else{
@@ -68,11 +87,78 @@ const AddPromise = ({
           eventDateTime: dayjs(date).format(
             `YYYY-MM-DD-${time.hour}-${time.min}-00`
           ),
-        });
+        });}
+      } else {
+        if(Number(time.min)<10||time.min==="0"){
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-${Number(time.hour) + 12}-0${time.min}-00`
+            ),
+          });
+        }else{
+        setPromise({
+          ...promise,
+          eventDateTime: dayjs(date).format(
+            `YYYY-MM-DD-${Number(time.hour) + 12}-${time.min}-00`
+          ),
+        });}
+      }
+    } else {
+      if (time.hour === "12") {
+        if(Number(time.min)<10||time.min==="0"){
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-0${Number(time.hour) - 12}-0${time.min}-00`
+            ),
+          });
+        }else{
+        setPromise({
+          ...promise,
+          eventDateTime: dayjs(date).format(
+            `YYYY-MM-DD-0${Number(time.hour) - 12}-${time.min}-00`
+          ),
+        });}
+      } else {
+        if(Number(time.hour)<10){
+          if(Number(time.min)<10||time.min==="0"){
+            setPromise({
+              ...promise,
+              eventDateTime: dayjs(date).format(
+                `YYYY-MM-DD-0${time.hour}-0${time.min}-00`
+              ),
+            });
+          }else{
+            setPromise({
+              ...promise,
+              eventDateTime: dayjs(date).format(
+                `YYYY-MM-DD-0${time.hour}-${time.min}-00`
+              ),
+            });
+          }
+        }else{
+          if(Number(time.min)<10||time.min==="0"){
+            setPromise({
+              ...promise,
+              eventDateTime: dayjs(date).format(
+                `YYYY-MM-DD-${time.hour}-0${time.min}-00`
+              ),
+            });
+          }else{
+            setPromise({
+              ...promise,
+              eventDateTime: dayjs(date).format(
+                `YYYY-MM-DD-${time.hour}-${time.min}-00`
+              ),
+            });
+          }
         }}
     }
   }, [time, date, am]);
 
+  console.log("lat는",lat,"lng는", lng)
+  console.log(roadAddress);
   console.log(promise)
   return (
     <>
@@ -214,7 +300,7 @@ const AddPromise = ({
             <Calendar onChange={setDate} value={date} name="birthDate" />
           </div>
         ) : null}
-        <div>
+        {/* <div>
           <Input
             type="text"
             placeholder="장소"
@@ -222,9 +308,32 @@ const AddPromise = ({
             value={promise.place}
             onChange={onChangeHandler}
           />
+        </div> */}
+        <div>
+          {openAddr?null:
+          <Input
+            type="text"
+            placeholder="주소 검색"
+            name="address"
+            value={roadAddress}
+            onChange={searchChange}
+            onClick={()=>{setOpenAddr(!openAddr)}}
+          />
+          }
+          {openAddr?
+          <div style={{position:"relative"}}>
+          <button style={{display:"flex", justifyContent:"flex-end"}}
+          onClick={()=>{setOpenAddr(false)}}>닫기</button>
+          <DaumPostcode
+          autoClose={false}
+          onComplete={(data)=>{searchAddressToCoordinate(data.address); setOpenAddr(false)}}/>
+          </div>
+          :null}
+          {/* <button onClick = {()=>{searchAddressToCoordinate(address.address)}}
+          >검색</button> */}
         </div>
 
-        <Map>지도(예정)</Map>
+        <Map><KaKaoMap lat={lat} lng={lng}/></Map>
       </Wrap>
     </>
   );
