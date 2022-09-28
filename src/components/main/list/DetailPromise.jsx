@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
 import CheckIn from "./CheckIn";
+import NaverMap from "../../naverMap/NaverMap";
 
 
 const DetailPromise = () => {
@@ -93,7 +94,7 @@ const DetailPromise = () => {
           <Where>
             <p>{promise?.data?.data?.place}</p>
           </Where>
-          <Map>지도(예정)</Map>
+          <Map><NaverMap/></Map>
         </RightItem>        
       </Wrap>      
     </>
@@ -149,7 +150,7 @@ const When = styled.div`
   }
 `
 
-const People = styled.div`
+const People = styled.div`cd
   /* background-color: green; */
   display: flex;
   width: 100%;
