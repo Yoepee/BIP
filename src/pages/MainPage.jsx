@@ -33,7 +33,7 @@ const MainPage = () => {
           <PromiseList day={day}/>
       </Wrap>
       <Plus>
-          <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon /></IconBtn>
+          <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
         </Plus>
       <Footer foot={0}/>
       <div style={{height:"50px"}}></div>
@@ -47,11 +47,11 @@ export default MainPage;
 const Wrap = styled.div`
   /* background-color: whitesmoke; */
   padding: 10% 0;
-  /* font-family: "NotoSansKR-Regular"; */
+  font-family: "NotoSansKR-Regular";
   /* font-family: "YUniverse-B"; */
   /* font-family: "YiSunShin-M"; */
   /* font-family: "Hambak"; */
-  font-family: "GowunDodum";
+  /* font-family: "GowunDodum"; */
   /* font-family: "Mimiworld-B"; */
   /* font-family: "Mimiworld-R"; */
 `
@@ -66,8 +66,9 @@ const IconBtn = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
+border: 1.5px solid #6D09D1;
 border-radius:50%;
-background-color: #6D09D1;
+background-color: white;
 width: 50px;
 height: 50px;
 color:white;
