@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
 import CheckIn from "./CheckIn";
-import NaverMap from "../../naverMap/NaverMap";
+import KaKaoMap from "../../naverMap/KakaoMap";
 
 
 const DetailPromise = () => {
@@ -94,7 +94,7 @@ const DetailPromise = () => {
           <Where>
             <p>{promise?.data?.data?.place}</p>
           </Where>
-          <Map><NaverMap/></Map>
+          <Map><KaKaoMap lat={37.5656} lng={126.9769} /></Map>
         </RightItem>        
       </Wrap>      
     </>
