@@ -19,24 +19,24 @@ const MainPage = () => {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
     return (
-        <>
-      <Wrap>
-          <Carousel 
-          onChange={(now, previous) => setPage(now)}
-          {...settings}>
-            <div><Day setDay={setDay} page={page}/></div>
-            <div><Weekdate setDay={setDay} page={page}/></div>
-            <div><Monthdate setDay={setDay} page={page}/></div>
-            <div><NextMonth setDay={setDay} page={page}/></div>
-            {/* <div><Month /></div> */}
-          </Carousel>
-          <PromiseList day={day}/>
-      </Wrap>
-      <Plus>
-          <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
-        </Plus>
-      <Footer foot={0}/>
-      <div style={{height:"50px"}}></div>
+      <>
+        <Wrap>
+            <Carousel 
+            onChange={(now, previous) => setPage(now)}
+            {...settings}>
+              <div><Day setDay={setDay} page={page}/></div>
+              <div><Weekdate setDay={setDay} page={page}/></div>
+              <div><Monthdate setDay={setDay} page={page}/></div>
+              <div><NextMonth setDay={setDay} page={page}/></div>
+              {/* <div><Month /></div> */}
+            </Carousel>
+            <PromiseList day={day}/>
+        </Wrap>
+        <Plus>
+            <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
+          </Plus>
+        <Footer foot={0}/>
+        <div style={{height:"50px"}}></div>
       </>
     )
 }
@@ -69,8 +69,8 @@ align-items:center;
 border: 1.5px solid #6D09D1;
 border-radius:50%;
 background-color: white;
-width: 50px;
-height: 50px;
+width: 40px;
+height: 40px;
 color:white;
 cursor:pointer;
 //위치 고정시키기
