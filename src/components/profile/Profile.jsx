@@ -32,6 +32,7 @@ const Profile = () => {
             <div>
                 <Prodiv onClick={() => { navigate("/detailprofile") }}>
                     {!profile?.data?.data?.profileImgUrl?
+                    
                     <Img src={base} />
                     :<Img src={profile?.data?.data?.profileImgUrl}/>}
                     <div>
@@ -45,7 +46,7 @@ const Profile = () => {
                         <p><ArrowForwardIosRoundedIcon style={{color:"#6D09D1"}}/></p>
                     </div>
                 </Prodiv>
-                <Prodiv style={{borderBottom:"1px solid #F5EAFB"}}>
+                <Prodiv style={{flexDirection: "column"}}>
                     <p>포인트 : {profile?.data?.data?.point}</p>
                     <p>신용 점수 : {profile?.data?.data?.creditScore}</p>
                     <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
@@ -64,13 +65,13 @@ export default Profile;
 const Prodiv = styled.div`
 display:flex;
 margin: 0 auto;
-
 width: 80%;
 border-bottom:1px solid #F5EAFB;
 `
 
 const Img =styled.img`
+    border-radius: 50%;
     width:20%;
     margin: 20px 10px 20px 0;
-    border-radius: 50% ;
+    
 `
