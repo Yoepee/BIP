@@ -5,14 +5,26 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getProfile } from "../../redux/modules/profile";
+import axios from "axios";
 
 const Profile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const profile = useSelector((state)=>state.profile);
+    let a;
+
+    const __activity = async() => {
+        a = await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/user/event/`,{
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+          }})
+          console.log(a)
+    }
 
     useEffect(()=>{
         dispatch(__getProfile());
+        __activity();
     },[dispatch])
     console.log(profile)
     return (
@@ -40,6 +52,7 @@ const Profile = () => {
                 </Prodiv>
                 <Prodiv>
                     <p>활동 내역</p>
+
                 </Prodiv>
             </div>
         </div>
