@@ -79,7 +79,7 @@ const Member = ({type, setType}) =>{
 
   return (
     <div>
-      <div style={{ margin:"10px"}}>
+      <Wrap>
         {member?.data?.data?.map((friend, i)=>{
           return (
             <Card key={i} 
@@ -99,21 +99,41 @@ const Member = ({type, setType}) =>{
               }
             }}>
             {friend.profileImgUrl===null?
-            <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
-            :<img src={friend.profileImgUrl} style={{width:"50px", height:"50px", borderRadius:"100%", margin:"15px"}}/>
+            <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
+            :<ProfileImg src={friend.profileImgUrl} />
             }
-            <p>{friend.nickname}</p>
-            <p>({friend.nickname})</p>
-            <p style={{marginLeft:"auto", marginRight:"2%"}}>{friend.creditScore}</p>
+            <Username>{friend.nickname}</Username>
+            <Nickname>({friend.nickname})</Nickname>
+            <Credit><span>C</span>{friend.creditScore}</Credit>
             </Card>
           )
         })}
-      </div>
+      </Wrap>
     </div>
   )
 }
 
 export default Member;
+
+const Wrap = styled.div`
+  /* background-color: green; */
+  width: 80%;
+  margin: 50px auto;
+  font-family: "NotoSansKR-Regular";
+  /* font-family: "YUniverse-B"; */
+  /* font-family: "YiSunShin-B"; */
+  /* font-family: "Hambak"; */
+  /* font-family: "GowunDodum"; */
+  /* font-family: "Mimiworld-B"; */
+  /* font-family: "Mimiworld-R"; */
+
+  @media screen and (min-width: 769px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    
+  }
+`
 
 const Card = styled.div`
 display:flex;
@@ -121,6 +141,74 @@ height: 80px;
 border:none;
 border-radius: 8px;
 background-color: #F5EAFB;
-margin:10px
+margin:10px;
+padding-right: 10px;
+position: relative;
 
+  @media screen and (min-width: 769px) {
+    width: 150px;
+    font-size: 12px;
+    box-shadow: 0px 5px 5px 0px rgba(144, 144, 144, 0.5);
+    :hover{
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 10px 2px rgba(144, 144, 144, 0.25);
+    }
+  }
+`
+
+const ProfileImg = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 15px;
+  @media screen and (min-width: 769px) {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: auto 0;
+    margin-left: 10px;
+  }
+`
+
+const Username = styled.p`
+  @media screen and (min-width: 769px) {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    left: 48px;
+    top: 12px;
+  }
+`
+
+const Nickname = styled.p`
+  @media screen and (min-width: 769px) {
+      font-size: 11px;
+      position: absolute;
+      left: 48px;
+      top: 28px;
+  }
+`
+
+const Credit = styled.p`  
+  /* background-color: blue; */
+  height: 20px;
+  margin-left: auto;
+  margin-right: 2%;
+  display: flex;
+  span {
+    background-color: #EDFFEB;
+    border-radius: 50%;
+    width: 20px;
+    text-align: center;
+    margin-right: 1px;
+  }
+  @media screen and (min-width: 769px) {
+    font-size: 10px;
+    position: absolute;
+    right: 5px;
+    height: 12px;
+    span {
+      width: 12px;
+    }
+  }
 `
