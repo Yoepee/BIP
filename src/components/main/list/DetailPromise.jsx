@@ -94,7 +94,9 @@ const DetailPromise = () => {
           <Where>
             <p>{promise?.data?.data?.place}</p>
           </Where>
+          {promise?.data?.data?.coordinate===null?
           <Map><KaKaoMap lat={37.5656} lng={126.9769} /></Map>
+          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} /></Map>}
         </RightItem>        
       </Wrap>      
     </>
