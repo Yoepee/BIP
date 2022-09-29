@@ -12,7 +12,8 @@ const AddPromisePage = () =>{
     eventDateTime: "",
     place: "",
     content: "",
-    point: "0"
+    point: "0",
+    coordinate:""
   }
   const initialState2 = {
     hour:"",

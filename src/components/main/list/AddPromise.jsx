@@ -62,7 +62,7 @@ const AddPromise = ({
         setLat(y);
         setLng(x);
         setRoadAddress(items[0].roadAddress);
-        setPromise({...promise,place:items[0].roadAddress})
+        setPromise({...promise,place:items[0].roadAddress, coordinate:(String(y)+","+String(x))})
       }
     )
   }
@@ -311,14 +311,9 @@ const AddPromise = ({
         </div> */}
         <div>
           {openAddr?null:
-          <Input
-            type="text"
-            placeholder="주소 검색"
-            name="address"
-            value={roadAddress}
-            onChange={searchChange}
-            onClick={()=>{setOpenAddr(!openAddr)}}
-          />
+          roadAddress===null?
+          <div onClick={()=>{setOpenAddr(!openAddr)}}>주소검색</div>
+          :<div onClick={()=>{setOpenAddr(!openAddr)}}>{roadAddress}</div>
           }
           {openAddr?
           <div style={{position:"relative"}}>
