@@ -35,7 +35,7 @@ const Option1 = ({ head, payload, chk, image }) =>{
   const editEmail = () => {
     if(chk){
       if(regtest.test(payload.authCode)){
-      dispatch(__editEmail({email:payload.eamil,authCode:payload.authCode}))
+      dispatch(__editEmail({email:payload.email,authCode:payload.authCode}))
       .then((response)=>{
         console.log(response);
         if(response.payload.success){
