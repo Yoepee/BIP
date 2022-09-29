@@ -7,7 +7,7 @@ const ProfilePage = () =>{
     return (
         <div>
             <>
-            <Header head={"프로필"} option={6}/>
+            <Header  head={"프로필"} option={6}/>
             <Profile/>
             <ProfileMenu/>
             <div style={{height:"50px"}}></div>

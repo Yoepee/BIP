@@ -32,8 +32,8 @@ const Profile = () => {
             <div>
                 <Prodiv onClick={() => { navigate("/detailprofile") }}>
                     {!profile?.data?.data?.profileImgUrl?
-                    <img src={base} width="20%" style={{ margin: "20px", borderRadius: "50%" }} />
-                    :<img src={profile?.data?.data?.profileImgUrl} width="20%" style={{ margin: "20px", borderRadius: "50%" }} />}
+                    <Img src={base} />
+                    :<Img src={profile?.data?.data?.profileImgUrl}/>}
                     <div>
                         <p>{profile?.data?.data?.nickname}</p>
                         <p>{profile?.data?.data?.phoneNumber}</p>
@@ -42,10 +42,10 @@ const Profile = () => {
                         :<p>이메일 정보를 입력해야 <br/>휴대폰 분실 시 접속할 수 있습니다.</p>}
                     </div>
                     <div style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-                        <p><ArrowForwardIosRoundedIcon /></p>
+                        <p><ArrowForwardIosRoundedIcon style={{color:"#6D09D1"}}/></p>
                     </div>
                 </Prodiv>
-                <Prodiv style={{borderBottom:"1px solid black"}}>
+                <Prodiv style={{borderBottom:"1px solid #F5EAFB"}}>
                     <p>포인트 : {profile?.data?.data?.point}</p>
                     <p>신용 점수 : {profile?.data?.data?.creditScore}</p>
                     <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
@@ -64,6 +64,13 @@ export default Profile;
 const Prodiv = styled.div`
 display:flex;
 margin: 0 auto;
+
 width: 80%;
-border-bottom:1px solid black;
+border-bottom:1px solid #F5EAFB;
+`
+
+const Img =styled.img`
+    width:20%;
+    margin: 20px 10px 20px 0;
+    border-radius: 50% ;
 `
