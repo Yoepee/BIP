@@ -38,7 +38,7 @@ const Option3 = ({ head }) => {
         }
       }).then(async(response) => {
         if (response.data.success) {
-          const chat = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/chat/message/${id}`,{
+          const chat = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/chat/member/${id}`,{
             headers: {
               Authorization: localStorage.getItem('Authorization'),
               RefreshToken: localStorage.getItem('RefreshToken'),
