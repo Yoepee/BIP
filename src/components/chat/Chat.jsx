@@ -19,12 +19,27 @@ const Chat = () => {
   const inputRef = useRef("");
   const [ment, setMent] = useState("");
 
+  const scrollRef = useRef(null);
+  console.log(scrollRef);
+
   useEffect(() => {
     connect();
     dispatch(__getChat(id));
     return () =>
       disconnect();
   }, []);
+
+  //스크롤 하단 고정
+  
+
+  useEffect(()=>{
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages]);
+  
+  useEffect(()=>{
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, []);
+  
 
   const connect = () => {
     client.current = new StompJs.Client({
@@ -201,6 +216,8 @@ const Chat = () => {
             }
           }
         })}
+        
+
       </div>
       <div>
         <input ref={inputRef}
@@ -208,7 +225,7 @@ const Chat = () => {
           value={ment} onChange={(e) => { setMent(e.target.value) }} />
         <button onClick={() => { submit() }}>전송</button>
       </div>
-
+      <div ref={scrollRef}/>
     </>
   )
 }
