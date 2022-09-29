@@ -11,6 +11,7 @@ import "react-calendar/dist/Calendar.css"; // css import
 import dayjs from "dayjs";
 import KaKaoMap from "../../naverMap/KakaoMap";
 import DaumPostcode from 'react-daum-postcode';
+
 dayjs.locale("ko");
 
 const AddPromise = ({
@@ -28,29 +29,29 @@ const AddPromise = ({
   const [modal, setModal] = useState(false);
   const { naver } = window;
   // 주소 검색 함수에 넘겨줄 address 상태 관리
-  const initialState = {address:""}
+  const initialState = { address: "" }
   const [address, setAddress] = useState(initialState);
   const [roadAddress, setRoadAddress] = useState(null);
   // 위도 경도 변경되는 값을 받을 수 있도록 상태 관리.
   const [lat, setLat] = useState(37.5656);
   const [lng, setLng] = useState(126.9769);
-  const [openAddr,setOpenAddr] = useState(false)
-  
-  const searchChange = (e) =>{
-    const {name, value} = e.target;
-    setAddress({[name]:value});
+  const [openAddr, setOpenAddr] = useState(false)
+
+  const searchChange = (e) => {
+    const { name, value } = e.target;
+    setAddress({ [name]: value });
   }
 
-  const searchAddressToCoordinate = (address) =>{
+  const searchAddressToCoordinate = (address) => {
     console.log(address);
     naver.maps.Service.geocode(
       {
-        query:address,
+        query: address,
       },
-      (status, response)=>{
-        if(status!==naver.maps.Service.Status.OK)
+      (status, response) => {
+        if (status !== naver.maps.Service.Status.OK)
           return alert("Something wrong!");
-        
+
         let result = response.v2;
         let items = result.addresses;
 
@@ -62,7 +63,7 @@ const AddPromise = ({
         setLat(y);
         setLng(x);
         setRoadAddress(items[0].roadAddress);
-        setPromise({...promise,place:items[0].roadAddress, coordinate:(String(y)+","+String(x))})
+        setPromise({ ...promise, place: items[0].roadAddress, coordinate: (String(y) + "," + String(x)) })
       }
     )
   }
@@ -74,62 +75,65 @@ const AddPromise = ({
   useEffect(() => {
     if (!am) {
       if (time.hour === "12") {
-        if(Number(time.min)<10||time.min==="0"){
+        if (Number(time.min) < 10 || time.min === "0") {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
               `YYYY-MM-DD-${time.hour}-0${time.min}-00`
             ),
           });
-        }else{
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-${time.hour}-${time.min}-00`
-          ),
-        });}
+        } else {
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-${time.hour}-${time.min}-00`
+            ),
+          });
+        }
       } else {
-        if(Number(time.min)<10||time.min==="0"){
+        if (Number(time.min) < 10 || time.min === "0") {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
               `YYYY-MM-DD-${Number(time.hour) + 12}-0${time.min}-00`
             ),
           });
-        }else{
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-${Number(time.hour) + 12}-${time.min}-00`
-          ),
-        });}
+        } else {
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-${Number(time.hour) + 12}-${time.min}-00`
+            ),
+          });
+        }
       }
     } else {
       if (time.hour === "12") {
-        if(Number(time.min)<10||time.min==="0"){
+        if (Number(time.min) < 10 || time.min === "0") {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
               `YYYY-MM-DD-0${Number(time.hour) - 12}-0${time.min}-00`
             ),
           });
-        }else{
-        setPromise({
-          ...promise,
-          eventDateTime: dayjs(date).format(
-            `YYYY-MM-DD-0${Number(time.hour) - 12}-${time.min}-00`
-          ),
-        });}
+        } else {
+          setPromise({
+            ...promise,
+            eventDateTime: dayjs(date).format(
+              `YYYY-MM-DD-0${Number(time.hour) - 12}-${time.min}-00`
+            ),
+          });
+        }
       } else {
-        if(Number(time.hour)<10){
-          if(Number(time.min)<10||time.min==="0"){
+        if (Number(time.hour) < 10) {
+          if (Number(time.min) < 10 || time.min === "0") {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
                 `YYYY-MM-DD-0${time.hour}-0${time.min}-00`
               ),
             });
-          }else{
+          } else {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
@@ -137,15 +141,15 @@ const AddPromise = ({
               ),
             });
           }
-        }else{
-          if(Number(time.min)<10||time.min==="0"){
+        } else {
+          if (Number(time.min) < 10 || time.min === "0") {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
                 `YYYY-MM-DD-${time.hour}-0${time.min}-00`
               ),
             });
-          }else{
+          } else {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
@@ -153,16 +157,30 @@ const AddPromise = ({
               ),
             });
           }
-        }}
+        }
+      }
     }
   }, [time, date, am]);
 
-  console.log("lat는",lat,"lng는", lng)
+  console.log("lat는", lat, "lng는", lng)
   console.log(roadAddress);
   console.log(promise)
   return (
     <>
       <Wrap>
+        {openAddr ?
+          <div style={{ position: "relative", background: "gray", justifyContent:"center" }}>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div style={{backgroundColor:"black", color: "white"}}
+                onClick={() => { setOpenAddr(false) }}>닫기</div>
+            </div>
+            <div>
+              <DaumPostcode
+                autoClose={false}
+                onComplete={(data) => { searchAddressToCoordinate(data.address); setOpenAddr(false) }} />
+            </div>
+          </div>
+          : null}
         <UnderLine>
           <Input
             type="text"
@@ -187,22 +205,22 @@ const AddPromise = ({
             <option value="0">자신과의 약속</option>
             <option value="100">타인과의 약속</option>
           </select> */}
-          {promise.point==="0" && !modal?
-          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
-            <div>자신과의 약속　</div><div style={{color:"#A67EED"}}>▼</div>
-          </div>
-          :promise.point==="0" && modal?
-          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
-            <div>자신과의 약속　</div><div style={{color:"#A67EED"}}>▲</div>
-          </div>
-          :promise.point=="100" && !modal?
-          <div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
-            <div>타인과의 약속　</div><div style={{color:"#A67EED"}}>▼</div>
+          {promise.point === "0" && !modal ?
+            <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
+              <div>자신과의 약속　</div><div style={{ color: "#A67EED" }}>▼</div>
             </div>
-            :<div onClick={()=>{setModal(!modal);}} style={{display:"flex"}}>
-            <div>타인과의 약속　</div><div style={{color:"#A67EED"}}>▲</div>
-            </div>}
-          {modal  === true ?
+            : promise.point === "0" && modal ?
+              <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
+                <div>자신과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
+              </div>
+              : promise.point == "100" && !modal ?
+                <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
+                  <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▼</div>
+                </div>
+                : <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
+                  <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
+                </div>}
+          {modal === true ?
             <div style={{
               width: "150px",
               position: "relative",
@@ -211,15 +229,15 @@ const AddPromise = ({
               textAlign: "center",
               borderRadius: "5px",
               border: "1px solid black",
-              zIndex:"10"
+              zIndex: "10"
             }}>
-              <OptionMenu 
-                onClick={() => {  setPromise({...promise,point:"0"}); setModal(false); }}>자신과의 약속</OptionMenu>
               <OptionMenu
-                onClick={() => {  setPromise({...promise,point:"100"}); setModal(false); }}>타인과의 약속</OptionMenu>
+                onClick={() => { setPromise({ ...promise, point: "0" }); setModal(false); }}>자신과의 약속</OptionMenu>
+              <OptionMenu
+                onClick={() => { setPromise({ ...promise, point: "100" }); setModal(false); }}>타인과의 약속</OptionMenu>
             </div>
-          :null
-        }
+            : null
+          }
         </Point>
         <When>
           <div
@@ -227,7 +245,7 @@ const AddPromise = ({
               setCheck(!check);
             }}>
             <p>
-              <CalendarMonthIcon style={{color:"#A67EED"}}/>
+              <CalendarMonthIcon style={{ color: "#A67EED" }} />
             </p>
           </div>
           <div>{dayjs(date).format("YYYY.MM.DD dd")}</div>
@@ -309,26 +327,19 @@ const AddPromise = ({
             onChange={onChangeHandler}
           />
         </div> */}
-        <div>
-          {openAddr?null:
-          roadAddress===null?
-          <div onClick={()=>{setOpenAddr(!openAddr)}}>주소검색</div>
-          :<div onClick={()=>{setOpenAddr(!openAddr)}}>{roadAddress}</div>
+        <When>
+          <div>장소</div>
+          {openAddr ? null :
+            roadAddress === null ?
+              <div style={{color:"#D9D9D9"}} 
+              onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
+              : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
           }
-          {openAddr?
-          <div style={{position:"relative"}}>
-          <button style={{display:"flex", justifyContent:"flex-end"}}
-          onClick={()=>{setOpenAddr(false)}}>닫기</button>
-          <DaumPostcode
-          autoClose={false}
-          onComplete={(data)=>{searchAddressToCoordinate(data.address); setOpenAddr(false)}}/>
-          </div>
-          :null}
           {/* <button onClick = {()=>{searchAddressToCoordinate(address.address)}}
           >검색</button> */}
-        </div>
-
-        <Map><KaKaoMap lat={lat} lng={lng}/></Map>
+        </When>
+          
+        <Map><KaKaoMap lat={lat} lng={lng} /></Map>
       </Wrap>
     </>
   );
