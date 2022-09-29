@@ -32,24 +32,6 @@
 }
 
 @font-face {
-  font-family: "YiSunShin-B";
-  src: url("./assets/fonts/YiSunShin/이순신돋움체B.otf");
-}
-@font-face {
-  font-family: "YiSunShin-M";
-  src: url("./assets/fonts/YiSunShin/이순신돋움체M.otf");
-}
-@font-face {
-  font-family: "YiSunShin-L";
-  src: url("./assets/fonts/YiSunShin/이순신돋움체L.otf");
-}
-
-@font-face {
-  font-family: "Hambak";
-  src: url("./assets/fonts/Hambak/SF함박눈-OTF.otf");
-}
-
-@font-face {
   font-family: "GowunDodum";
   src: url("./assets/fonts/GowunDodum-Regular.ttf");
 }
