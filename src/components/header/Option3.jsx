@@ -36,8 +36,15 @@ const Option3 = ({ head }) => {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
-      }).then((response) => {
+      }).then(async(response) => {
         if (response.data.success) {
+          const chat = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/chat/message/${id}`,{
+            headers: {
+              Authorization: localStorage.getItem('Authorization'),
+              RefreshToken: localStorage.getItem('RefreshToken'),
+            }
+          })
+          console.log(chat)
           navigate("/")
         } else {
           alert(response.data.data);

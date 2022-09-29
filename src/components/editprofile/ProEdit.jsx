@@ -113,7 +113,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
 
   const __examEmail = async (payload) => {
     console.log(payload)
-    let a = await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", {value:payload})
+    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/user/auth/email", {value:payload})
       .then((response) => {
         console.log(response)
       });
