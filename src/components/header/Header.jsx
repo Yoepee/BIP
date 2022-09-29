@@ -1,3 +1,4 @@
+import { Margin, WidthFull } from '@mui/icons-material';
 import Option from './Option';
 import Option0 from './Option0';
 import Option1 from './Option1';
@@ -13,7 +14,7 @@ import Option7 from './Option7';
 const Header = ({ head, option, payload, chk, image, setType, type}) => {
   
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", margin:"0 auto", width:"80%" }}>
       {/* 제목만 */}
       {!option&&option!==0?
       <Option head={head}/>

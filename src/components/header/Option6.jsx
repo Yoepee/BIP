@@ -54,12 +54,12 @@ const Option6 = ({ head }) => {
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
-        <p>{head}</p>
+        <p style={{fontWeight:"bold", fontSize:"20px"}}>{head}</p>
 
       </div>
       <div onClick={() => { setChk(!chk); }}
         style={{ marginLeft: "auto", marginRight: "2%" }}>
-        <p><SettingsOutlinedIcon /></p>
+        <p><SettingsOutlinedIcon style={{color:"#A67EED"}}/></p>
       </div>
       {chk ?
         <div style={{
