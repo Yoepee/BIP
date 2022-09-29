@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
+import { width } from "@mui/system";
 
 const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -119,11 +120,11 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       });
   }
   return (
-    <div>
+    <div style={{ display:"flex", flexDirection:"column", margin:"0 auto", width:"80%"}}>
       {type === "name" ?
-        <>
+        <div style={{ margin:"0 auto", width:"80%",borderBottom: "1px solid #F5EAFB"}}>
           <p>닉네임</p>
-          <input placeholder="닉네임"
+          <Input placeholder="닉네임"
             name="value"
             type="text"
             value={set.value}
@@ -133,7 +134,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
               : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
             : (<div style={{ color: "red", fonSizen: "14px" }}>사용가능한 닉네임이 아닙니다.</div>)}
-        </>
+        </div>
         : type === "call" ?
           <>
             <p>전화번호</p>
@@ -305,3 +306,10 @@ const BtnArea = styled.div`
     }
   }
 `;
+
+const Input = styled.input`
+
+  outline: none;
+  border:none;
+  
+`

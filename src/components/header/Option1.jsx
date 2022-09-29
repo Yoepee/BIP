@@ -59,10 +59,10 @@ const Option1 = ({ head, payload, chk, image }) =>{
   return (
     <>
     <div onClick={()=>{navigate(-1)}}>
-        <p><ArrowBackIosNewRoundedIcon /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{color:'#6D09D1', marginTop:"7px"}}/></p>
       </div>
     <div style={{marginLeft:"1%"}}>
-        <p>{head}</p>
+        <p style={{fontWeight:"bold", fontSize:"20px"}}>{head}</p>
       </div>
       <div style={{marginLeft:"auto", marginRight:"2%", cursor:"pointer"}}
       onClick={()=>{
@@ -76,7 +76,7 @@ const Option1 = ({ head, payload, chk, image }) =>{
           editPicture();
         }
       }}>
-        <p>완료</p>
+        <p style={{fontWeight:"bold", fontSize:"20px"}}>완료</p>
       </div>
     </>
   )
