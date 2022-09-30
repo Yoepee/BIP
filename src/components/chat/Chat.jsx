@@ -11,6 +11,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const client = useRef({});
   const chatList = useSelector((state)=>state.chat)
+  const [page,setPage] = useState(0);
 
   const [messages, setMessages] = useState([{
     message: "",
@@ -21,7 +22,7 @@ const Chat = () => {
 
   useEffect(() => {
     connect();
-    dispatch(__getChat(id));
+    dispatch(__getChat({id,page}));
     return () =>
       disconnect();
   }, []);

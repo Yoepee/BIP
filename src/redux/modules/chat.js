@@ -5,7 +5,7 @@ import axios from 'axios';
     "/api/chat/message/{eventId}",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/chat/message/${payload}`,{
+            const data =  await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/chat/message?eventId=${payload.id}&page=${payload.page}`,{
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
