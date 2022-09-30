@@ -120,11 +120,11 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       });
   }
   return (
-    <div style={{ display:"flex", flexDirection:"column", margin:"0 auto", width:"80%"}}>
+    <div style={{ display:"flex", flexDirection:"column", margin:"0 auto", width:"76%"}}>
       {type === "name" ?
-        <div style={{ margin:"0 auto", width:"80%",borderBottom: "1px solid #F5EAFB"}}>
+        <div style={{ margin:"0 auto", width:"100%",borderBottom: "1px solid #F5EAFB"}}>
           <p>닉네임</p>
-          <Input placeholder="닉네임"
+          <input style={{outline: "none",border:"none"}} placeholder="닉네임"
             name="value"
             type="text"
             value={set.value}
@@ -138,7 +138,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
         : type === "call" ?
           <>
             <p>전화번호</p>
-            <input placeholder="전화번호"
+            <Input placeholder="전화번호"
               name="phonenumber"
               type="text"
               value={set.phonenumber}
@@ -150,13 +150,14 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                 : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
                 : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
                 <BtnArea>
-            {visible && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
+            {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
           {set.authCode === "" ? null :
             regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
-            {visible && <Button variant="contained" className="default_btn" onClick={()=>{__testPhone(set.phonenumber);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+            {visible && <Button style={{marginTop:"15px",width:"100px"}}variant="contained" className="default_btn" onClick={()=>{__testPhone(set.phonenumber);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
           {!visible&&
           regexPhone.test(set.phonenumber)?
           <Button
+          
             variant="contained"
             style={{backgroundColor: "#6D09D1"}}
             onClick={() => {
@@ -209,7 +210,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
           </>
           : <>
             <p>이메일</p>
-            <input placeholder="이메일"
+            <Input placeholder="이메일"
               name="email"
               type="text"
               value={set.email}
@@ -221,10 +222,10 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                 : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
               : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다.</div>)}
               <BtnArea>
-            {visible && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
+            {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
           {set.authCode === "" ? null :
             regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
-            {visible && <Button variant="contained" className="default_btn" onClick={()=>{__examEmail(set.email);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+            {visible && <Button style ={{marginTop:"20px"}} variant="contained" className="default_btn" onClick={()=>{__examEmail(set.email);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
           {!visible&&
           regexEmail.test(set.email)?
           <Button
@@ -308,8 +309,9 @@ const BtnArea = styled.div`
 `;
 
 const Input = styled.input`
-
   outline: none;
-  border:none;
-  
+  border-radius: 8px;
+  padding: 15px 0; 
+  border:2px solid #F5EAFB; 
+  width:99.5%;
 `
