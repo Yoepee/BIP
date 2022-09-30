@@ -1,16 +1,20 @@
 import SockJS from 'sockjs-client'
 import * as StompJs from '@stomp/stompjs'
 import { useParams } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { __getChat } from '../../redux/modules/chat';
 import { useDispatch, useSelector } from 'react-redux';
+
+
+
 
 const Chat = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const client = useRef({});
   const chatList = useSelector((state)=>state.chat)
+  const [page,setPage] = useState(0);
 
   const [messages, setMessages] = useState([{
     message: "",
@@ -18,20 +22,21 @@ const Chat = () => {
   }]);
   const inputRef = useRef("");
   const [ment, setMent] = useState("");
+  let index=0;
+  
+  const scrollRef = useRef(null); //스크롤 하단 고정
 
-  const scrollRef = useRef(null);
-  console.log(scrollRef);
 
+  
   useEffect(() => {
     connect();
-    dispatch(__getChat(id));
+    dispatch(__getChat({id,page}));
     return () =>
       disconnect();
   }, []);
 
-  //스크롤 하단 고정
-  
 
+  //스크롤 하단 고정
   useEffect(()=>{
     scrollRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages]);
@@ -40,6 +45,7 @@ const Chat = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" })
   }, []);
   
+
 
   const connect = () => {
     client.current = new StompJs.Client({
@@ -151,13 +157,24 @@ const Chat = () => {
   return (
     <>
       <div style={{border:"1px solid black", margin:"2%"}}>
-        {chatList?.data?.data?.map((chat,i)=>{
+        {chatList?.data?.map((chat,i)=>{
           if(chat.message === null){
             return;
           }else{
             if (chat.sender === localStorage.getItem("name")) {
-              return (
-                <div key={i}>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
+                  <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <MyChat>{chat.message}</MyChat>
+                  </ChatMessage>
+                </div>
+                )
+              }else{
+                index=i;
+                return(
+                  <div key={i}>
                   <ChatMessage>
                     <MyNick>{chat.sender}</MyNick>
                   </ChatMessage>
@@ -165,10 +182,21 @@ const Chat = () => {
                     <MyChat>{chat.message}</MyChat>
                   </ChatMessage>
                 </div>
-              )
+                )}
             } else {
-              return (
-                <div key={i}>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
+                  <ChatMessage>
+                    <Chatting>{chat.message}</Chatting>
+                  </ChatMessage>
+                </div>
+                )
+              }else{
+                index=i;
+                return (
+                  <div key={i}>
                   <ChatMessage>
                     <NickName>{chat.sender}</NickName>
                   </ChatMessage>
@@ -176,7 +204,7 @@ const Chat = () => {
                     <Chatting>{chat.message}</Chatting>
                   </ChatMessage>
                 </div>
-              )
+                )}
             }
           }
         })}
@@ -216,8 +244,6 @@ const Chat = () => {
             }
           }
         })}
-        
-
       </div>
       <div>
         <input ref={inputRef}
