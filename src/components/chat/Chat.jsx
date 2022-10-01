@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { __getChat } from '../../redux/modules/chat';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useInView } from 'react-intersection-observer';
 
 
 
@@ -14,7 +14,9 @@ const Chat = () => {
   const dispatch = useDispatch();
   const client = useRef({});
   const chatList = useSelector((state)=>state.chat)
-  const [page,setPage] = useState(0);
+  const page = useRef(0);
+  const [ref, inView] = useInView();
+  const [hasNextPage, setHasNextPage] = useState(true);
 
   const [messages, setMessages] = useState([{
     message: "",
@@ -30,10 +32,16 @@ const Chat = () => {
   
   useEffect(() => {
     connect();
-    dispatch(__getChat({id,page}));
+    dispatch(__getChat({id,page:page.current}));
     return () =>
       disconnect();
   }, []);
+  const fetch = useCallback(()=>{dispatch(__getChat({id, page:page.current})); page.current+=1;}, []);
+  useEffect(()=>{
+    if (inView && hasNextPage) {
+      fetch();
+    }
+  }, [fetch, hasNextPage, inView])
 
 
   //스크롤 하단 고정
@@ -156,6 +164,7 @@ const Chat = () => {
 
   return (
     <>
+    <div ref={ref} style={{position:"absolute", top:"600px"}}/>
       <div style={{border:"1px solid black", margin:"2%"}}>
         {chatList?.data?.map((chat,i)=>{
           if(chat.message === null){
