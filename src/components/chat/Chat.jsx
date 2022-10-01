@@ -178,7 +178,7 @@ const Chat = () => {
                   <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                     <MyChat>{chat.message}</MyChat>
                   </ChatMessage>
-                </div>
+                  </div>
                 )
               }else{
                 index=i;
@@ -229,28 +229,48 @@ const Chat = () => {
           }
           else {
             if (msg.sender === localStorage.getItem("name")) {
-              return (
-                <div key={i}>
-                  <ChatMessage>
-                    <MyNick>{msg.sender}</MyNick>
-                  </ChatMessage>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
                   <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                     <MyChat>{msg.message}</MyChat>
                   </ChatMessage>
-                </div>
-              )
+                  </div>
+                )
+              } else {
+                return (
+                  <div key={i}>
+                    <ChatMessage>
+                      <MyNick>{msg.sender}</MyNick>
+                    </ChatMessage>
+                    <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                      <MyChat>{msg.message}</MyChat>
+                    </ChatMessage>
+                  </div>
+                )}              
             } else {
-              return (
-                <div key={i}>
-                  <ChatMessage>
-                    <NickName>{msg.sender}</NickName>
-                  </ChatMessage>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
                   <ChatMessage>
                     <Chatting>{msg.message}</Chatting>
                   </ChatMessage>
                 </div>
-              )
-            }
+                )}else{
+                  index=i;
+                  return (
+                    <div key={i}>
+                      <ChatMessage>
+                        <NickName>{msg.sender}</NickName>
+                      </ChatMessage>
+                      <ChatMessage>
+                        <Chatting>{msg.message}</Chatting>
+                      </ChatMessage>
+                    </div>
+                  )}
+              }
           }
         })}
       </div>
