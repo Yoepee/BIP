@@ -38,7 +38,7 @@ export const chat = createSlice({
         },
         [__getChat.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+          state.data.unshift( ...action.payload.data); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__getChat.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

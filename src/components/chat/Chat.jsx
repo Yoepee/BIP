@@ -1,17 +1,21 @@
 import SockJS from 'sockjs-client'
 import * as StompJs from '@stomp/stompjs'
 import { useParams } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { __getChat } from '../../redux/modules/chat';
 import { useDispatch, useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
+
 
 const Chat = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const client = useRef({});
   const chatList = useSelector((state)=>state.chat)
-  const [page,setPage] = useState(0);
+  const page = useRef(0);
+  const [ref,inView] = useInView();
+  const [hasNextPage, setHasNextPage] = useState(true);
 
   const [messages, setMessages] = useState([{
     message: "",
@@ -19,13 +23,21 @@ const Chat = () => {
   }]);
   const inputRef = useRef("");
   const [ment, setMent] = useState("");
+  let index=0;
 
   useEffect(() => {
     connect();
-    dispatch(__getChat({id,page}));
+    dispatch(__getChat({id,page:page.current}));
     return () =>
       disconnect();
   }, []);
+  const fetch = useCallback(()=>{dispatch(__getChat({id,page:page.current})); page.current+=1;},[]);
+  useEffect(()=>{
+    console.log(inView,hasNextPage)
+    if (inView && hasNextPage) {
+      fetch();
+    }
+  },[fetch,hasNextPage,inView])
 
   const connect = () => {
     client.current = new StompJs.Client({
@@ -136,14 +148,26 @@ const Chat = () => {
 
   return (
     <>
+    <div ref={ref} style={{ position: 'absolute', top: '600px' }} />
       <div style={{border:"1px solid black", margin:"2%"}}>
-        {chatList?.data?.data?.map((chat,i)=>{
+        {chatList?.data?.map((chat,i)=>{
           if(chat.message === null){
             return;
           }else{
             if (chat.sender === localStorage.getItem("name")) {
-              return (
-                <div key={i}>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
+                  <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <MyChat>{chat.message}</MyChat>
+                  </ChatMessage>
+                </div>
+                )
+              }else{
+                index=i;
+                return(
+                  <div key={i}>
                   <ChatMessage>
                     <MyNick>{chat.sender}</MyNick>
                   </ChatMessage>
@@ -151,10 +175,21 @@ const Chat = () => {
                     <MyChat>{chat.message}</MyChat>
                   </ChatMessage>
                 </div>
-              )
+                )}
             } else {
-              return (
-                <div key={i}>
+              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
+                index=i;
+                return(
+                  <div key={i}>
+                  <ChatMessage>
+                    <Chatting>{chat.message}</Chatting>
+                  </ChatMessage>
+                </div>
+                )
+              }else{
+                index=i;
+                return (
+                  <div key={i}>
                   <ChatMessage>
                     <NickName>{chat.sender}</NickName>
                   </ChatMessage>
@@ -162,7 +197,7 @@ const Chat = () => {
                     <Chatting>{chat.message}</Chatting>
                   </ChatMessage>
                 </div>
-              )
+                )}
             }
           }
         })}
