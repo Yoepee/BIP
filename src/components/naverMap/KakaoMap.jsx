@@ -11,7 +11,7 @@ const KaKaoMap = (props) => {
     const mapOptions: kakao.maps.MapOptions = {
       center: location,
       level: 3,
-      zoomControl: true,
+      // zoomControl: true,
       // zoomControlOptions: {
       //   position: kakao.maps.Position.TOP_RIGHT,
       // },
@@ -25,7 +25,7 @@ const KaKaoMap = (props) => {
 
 
   return (
-  <div ref={mapElement} style={{ width: "500px", height: "400px" }} />
+  <div ref={mapElement} style={{ width: props.width, height: props.height }} />
   )
 }
 

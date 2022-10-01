@@ -43,7 +43,6 @@ const AddPromise = ({
   }
 
   const searchAddressToCoordinate = (address) => {
-    console.log(address);
     naver.maps.Service.geocode(
       {
         query: address,
