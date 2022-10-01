@@ -14,10 +14,10 @@ const Option0 = ({head}) =>{
         navigate(-1);
       }
     }}>
-    <p><ArrowBackIosNewRoundedIcon style={{color:'#6D09D1'}} /></p>
+    <p><ArrowBackIosNewRoundedIcon style={{color:'#6D09D1', marginTop:"7px"}} /></p>
 
     </div>
-    <div style={{marginLeft:"1%"}}>
+    <div style={{marginLeft:"1%", fontWeight:"bold", fontSize:"20px"}}>
         <p>{head}</p>
       </div>
     </>

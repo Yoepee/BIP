@@ -1,4 +1,3 @@
-import { Margin } from '@mui/icons-material';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,6 +8,20 @@ const Option2 = ({ head, payload }) => {
   const dispatch = useDispatch();
   const {id} = useParams();
 
+  const isEmptyObj = (obj)=>{
+    console.log(Object.keys(obj).length)
+    if(obj.constructor===Object){
+      for(const key in obj){
+        if(obj[key]==="")
+          return true;
+      }
+    }
+    return false;
+  }
+  // useEffect(()=>{
+
+  // },[payload])
+  console.log(isEmptyObj(payload))
   return (
     <>
       <div onClick={() => { navigate("/") }}>
@@ -19,16 +32,28 @@ const Option2 = ({ head, payload }) => {
       </div>
       <div onClick={() => {
         if(id===undefined){
+          if(isEmptyObj(payload)){
+            alert("작성하지 않은 내용이 있습니다.")
+            return;
+          }
         dispatch(__addPromise(payload))
         .then((response)=>{
           console.log(response)
-          navigate(`/detailpromise/${response.payload.data.id}`);
+          if(response?.payload?.data === "약속 시간을 미래로 설정해주세요."){
+            alert(response?.payload?.data);
+          }else{
+            navigate(`/detailpromise/${response.payload.data.id}`);
+          }
         })
         }else{
           if (window.confirm("약속을 수정하시겠습니까?")) {
           dispatch(__editPromise({id:id,data:payload}))
         .then((response)=>{
-          navigate(`/detailpromise/${id}`);
+          if(response?.payload?.data === "약속 시간을 미래로 설정해주세요."){
+            alert(response?.payload?.data);
+          }else{
+            navigate(`/detailpromise/${id}`);
+          }
         })
         }}
         }} style={{ marginLeft: "auto", marginRight: "2%", cursor:"pointer" }}>

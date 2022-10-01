@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -10,9 +10,13 @@ const PromiseList = ({day}) => {
   const dispatch= useDispatch();
   const promiseList = useSelector((state)=>state.promise);
   useEffect(()=>{
-    dispatch(__getPromise(day));
+    dispatch(__getPromise(day))
+    .then((response)=>{
+      console.log(response)
+      })
   },[day])
 
+  
   return (
     <>
       <Wrap>
@@ -20,7 +24,7 @@ const PromiseList = ({day}) => {
           <p style={{fontWeight:"bold"}}>오늘 해야할 일</p>
         </div>
         <Cards>
-          {promiseList?.data?.data?.map((promise)=>{
+          {promiseList?.data?.data?.map((promise,i)=>{
             if(promise.lastTime === "이미 지난 약속입니다."){
               return;
             }

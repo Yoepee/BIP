@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
 
-
 const Chat = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -29,6 +28,7 @@ const Chat = () => {
   const scrollRef = useRef(null); //스크롤 하단 고정
 
 
+
   
   useEffect(() => {
     connect();
@@ -36,6 +36,7 @@ const Chat = () => {
     return () =>
       disconnect();
   }, []);
+  
   const fetch = useCallback(()=>{dispatch(__getChat({id, page:page.current})); page.current+=1;}, []);
   useEffect(()=>{
     if (inView && hasNextPage) {
@@ -53,6 +54,7 @@ const Chat = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" })
   }, []);
   
+
 
 
   const connect = () => {
@@ -164,7 +166,9 @@ const Chat = () => {
 
   return (
     <>
+
     <div ref={ref} style={{position:"absolute", top:"600px"}}/>
+
       <div style={{border:"1px solid black", margin:"2%"}}>
         {chatList?.data?.map((chat,i)=>{
           if(chat.message === null){
@@ -178,7 +182,9 @@ const Chat = () => {
                   <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                     <MyChat>{chat.message}</MyChat>
                   </ChatMessage>
+
                   </div>
+
                 )
               }else{
                 index=i;

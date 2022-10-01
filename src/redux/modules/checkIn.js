@@ -31,9 +31,12 @@ import axios from 'axios';
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
               console.log(data)
-            if(data.data.success===false)
-              alert(data.data.error.message);
-            return thunkAPI.fulfillWithValue(data.data);
+            if(data.data.success===false){
+              alert(data.data.data);
+              return thunkAPI.fulfillWithValue(data.data);
+            }else{
+              return thunkAPI.fulfillWithValue(data.data);
+            }
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
           }
@@ -73,7 +76,11 @@ export const checkIn = createSlice({
         },
         [__CheckIn.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+          console.log(action.payload)
+          if(action.payload.success){
+            state.data = action.payload;
+          }else{
+          }
         },
         [__CheckIn.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

@@ -17,8 +17,8 @@ const NextMonth = ({setDay, page}) => {
 
   // 선택한 날짜 확인
   const [chk, setChk] = useState({
-    day:now.getDate(),
-    week:useWeek(now.getDay(), 1)[0]
+    day:oneday,
+    week:useWeek(onedayWeek, 1)[0]
   });
   // 배열로 오브젝트 형식으로 요일, 날짜 저장 
   const result = [];

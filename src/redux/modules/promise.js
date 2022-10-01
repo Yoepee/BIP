@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-import dayjs from "dayjs";
 
   export const __getPromise = createAsyncThunk(
     "/api/events/list/{unit}",

@@ -6,7 +6,7 @@ const AddCredit = () =>{
   const navigate = useNavigate();
   const __getMyCredit = async(num) =>{
     if(window.confirm(`신용점수를 ${num}점 구매하시겠습니까?`)){
-    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:4000*num, nickname:localStorage.getItem("name")},{
+    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:2000*num, nickname:localStorage.getItem("name")},{
       headers: {
           Authorization:localStorage.getItem('Authorization'),
           RefreshToken:localStorage.getItem('RefreshToken')
