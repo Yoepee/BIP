@@ -6,6 +6,7 @@ import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
 import CheckIn from "./CheckIn";
 import KaKaoMap from "../../naverMap/KakaoMap";
+import { margin } from "@mui/system";
 
 
 const DetailPromise = () => {
@@ -43,8 +44,8 @@ const DetailPromise = () => {
         <LeftItem>
           <Title>
             <p style={{fontSize:"24px"}}>{promise?.data?.data?.title}</p>
-            <div style={{margin:"20px 15% 0 0"}}>
-            <p style={{fontSize:"13px"}}><span>P</span>{promise?.data?.data?.point}</p>
+            <div style={{margin:"20px 8px 0 0"}}>
+            <p style={{fontSize:"13px", marginLeft:"250px"}}><span>P</span>{promise?.data?.data?.point}</p>
             </div>
           </Title>
           <Desc>
@@ -95,8 +96,8 @@ const DetailPromise = () => {
             <p>{promise?.data?.data?.place}</p>
           </Where>
           {promise?.data?.data?.coordinate===null?
-          <Map><KaKaoMap lat={37.5656} lng={126.9769} /></Map>
-          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} /></Map>}
+          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"400px"} height={"400px"}/></Map>
+          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"400px"} height={"400px"}/></Map>}
         </RightItem>        
       </Wrap>      
     </>
@@ -121,11 +122,11 @@ const Title = styled.div`
   justify-content: space-between;
   font-weight: bold;
   p {    
-    /* margin-right: 10%; */
+    /* margin-right: 10%;  */
    span{
      background-color: #6D09D1;
      border-radius: 50%;
-     padding: 0 3px;
+     padding: 0 4px;
      margin-right: 2px;
      color: white;
    }
