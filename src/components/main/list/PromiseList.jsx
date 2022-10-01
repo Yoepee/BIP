@@ -3,53 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
-import { __getWeather } from "../../../redux/modules/weather";
 import PersonIcon from '@mui/icons-material/Person';
 
 const PromiseList = ({day}) => {
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const promiseList = useSelector((state)=>state.promise);
-  const weatherList = useSelector((state)=>state.weather);
   useEffect(()=>{
     dispatch(__getPromise(day))
     .then((response)=>{
-      for(let place of response?.payload?.data){
-        console.log(place)
-        getCoordinate(place.place);
-      }
-    });
+      console.log(response)
+      })
   },[day])
-  const getCoordinate = (address) => {
-    const { naver } = window;
-    naver.maps.Service.geocode(
-      {
-        query: address,
-      },
-      (status, response) => {
-        if (status !== naver.maps.Service.Status.OK)
-          return alert("Something wrong!");
+
   
-        let result = response.v2;
-        let items = result.addresses;
-  
-        let x = parseFloat(items[0].x);
-        let y = parseFloat(items[0].y);
-  
-        // console.log(x, y)
-        // console.log(String(y) + "," + String(x))
-  
-        // setLat(y);
-        // setLng(x);
-        // setRoadAddress(items[0].roadAddress);
-        // setPromise({ ...promise, place: items[0].roadAddress, coordinate: (String(y) + "," + String(x)) })
-        console.log(String(y) + "," + String(x))
-        dispatch(__getWeather(String(y) + "," + String(x)))
-      }
-    )
-  }
-  
-  console.log(weatherList)
   return (
     <>
       <Wrap>
@@ -61,7 +28,6 @@ const PromiseList = ({day}) => {
             if(promise.lastTime === "이미 지난 약속입니다."){
               return;
             }
-            getCoordinate(promise.place);
             return (
               <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
                 <div style={{display:"flex"}}>

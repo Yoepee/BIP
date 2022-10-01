@@ -152,7 +152,7 @@ const When = styled.div`
   }
 `
 
-const People = styled.div`cd
+const People = styled.div`
   /* background-color: green; */
   display: flex;
   width: 100%;
