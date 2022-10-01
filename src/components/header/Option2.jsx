@@ -39,13 +39,21 @@ const Option2 = ({ head, payload }) => {
         dispatch(__addPromise(payload))
         .then((response)=>{
           console.log(response)
-          navigate(`/detailpromise/${response.payload.data.id}`);
+          if(response?.payload?.data === "약속 시간을 미래로 설정해주세요."){
+            alert(response?.payload?.data);
+          }else{
+            navigate(`/detailpromise/${response.payload.data.id}`);
+          }
         })
         }else{
           if (window.confirm("약속을 수정하시겠습니까?")) {
           dispatch(__editPromise({id:id,data:payload}))
         .then((response)=>{
-          navigate(`/detailpromise/${id}`);
+          if(response?.payload?.data === "약속 시간을 미래로 설정해주세요."){
+            alert(response?.payload?.data);
+          }else{
+            navigate(`/detailpromise/${id}`);
+          }
         })
         }}
         }} style={{ marginLeft: "auto", marginRight: "2%", cursor:"pointer" }}>

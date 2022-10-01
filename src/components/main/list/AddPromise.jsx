@@ -161,7 +161,7 @@ const AddPromise = ({
     }
   }, [time, date, am]);
 
-  console.log("lat는", lat, "lng는", lng)
+  console.log(String(lat)+","+String( lng))
   console.log(roadAddress);
   console.log(promise)
   return (
@@ -338,7 +338,7 @@ const AddPromise = ({
           >검색</button> */}
         </When>
           
-        <Map><KaKaoMap lat={lat} lng={lng} /></Map>
+        <Map><KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"} /></Map>
       </Wrap>
     </>
   );
