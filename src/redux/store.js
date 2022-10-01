@@ -7,7 +7,6 @@ import detailPromise from "./modules/detailPromise";
 import searchMember from "./modules/searchMember";
 import checkIn from "./modules/checkIn";
 import chat from "./modules/chat";
-import weather from "./modules/weather";
 
 export default configureStore({
   reducer: {
@@ -19,6 +18,5 @@ export default configureStore({
     searchMember: searchMember.reducer,
     checkIn:checkIn.reducer,
     chat:chat.reducer,
-    weather:weather.reducer,
   }
 });
