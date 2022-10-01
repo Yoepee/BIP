@@ -12,11 +12,10 @@ const PromiseList = ({day}) => {
   useEffect(()=>{
     dispatch(__getPromise(day))
     .then((response)=>{
-      console.log(response)
       })
   },[day])
 
-  
+  console.log(promiseList)
   return (
     <>
       <Wrap>
@@ -28,8 +27,19 @@ const PromiseList = ({day}) => {
             if(promise.lastTime === "이미 지난 약속입니다."){
               return;
             }
+            let iconurl = "http://openweathermap.org/img/w/" + promise.weatherResponseDto.icon + ".png";
             return (
               <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
+                <div style={{display:"flex"}}>
+                  <p> 현재날씨</p>
+                  <img  src={iconurl}/>
+                  <div>
+                  <p>날씨 : {promise.weatherResponseDto.sky}</p>
+                  <p>현재온도 : {promise.weatherResponseDto.temperature}</p>
+                  <p>최고/최저 : {promise.weatherResponseDto.minTemp} / {promise.weatherResponseDto.maxTemp} </p>
+                  <p>강수확률 : {promise.weatherResponseDto.probability}</p>
+                  </div>
+                </div>
                 <div style={{display:"flex"}}>
                   <p style={{fontSize:"15px", fontWeight:"bold"}}>{promise.title}</p>
                   {/* 포인트 받아야할듯 */}
