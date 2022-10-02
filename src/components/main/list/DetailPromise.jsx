@@ -5,8 +5,7 @@ import styled from "styled-components";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
 import CheckIn from "./CheckIn";
-import KaKaoMap from "../../naverMap/KakaoMap";
-import { margin } from "@mui/system";
+import KaKaoMap from "../../map/KakaoMap";
 
 
 const DetailPromise = () => {
