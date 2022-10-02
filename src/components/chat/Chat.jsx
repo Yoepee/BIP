@@ -24,6 +24,7 @@ const Chat = () => {
   const inputRef = useRef("");
   const [ment, setMent] = useState("");
   let index=0;
+  let index2= 0;
   
   const scrollRef = useRef(null); //스크롤 하단 고정
 
@@ -163,7 +164,7 @@ const Chat = () => {
       submit();
     }
   }
-
+  console.log(messages);
   return (
     <>
 
@@ -235,8 +236,8 @@ const Chat = () => {
           }
           else {
             if (msg.sender === localStorage.getItem("name")) {
-              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
-                index=i;
+              if(i>0&&messages[i]?.sender===messages[index2]?.sender){
+                index2=i;
                 return(
                   <div key={i}>
                   <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -245,6 +246,7 @@ const Chat = () => {
                   </div>
                 )
               } else {
+                index2=i;
                 return (
                   <div key={i}>
                     <ChatMessage>
@@ -256,8 +258,8 @@ const Chat = () => {
                   </div>
                 )}              
             } else {
-              if(i>0&&chatList?.data[i]?.sender===chatList?.data[index]?.sender){
-                index=i;
+              if(i>0&&messages[i]?.sender===messages[index2]?.sender){
+                index2=i;
                 return(
                   <div key={i}>
                   <ChatMessage>
@@ -265,7 +267,7 @@ const Chat = () => {
                   </ChatMessage>
                 </div>
                 )}else{
-                  index=i;
+                  index2=i;
                   return (
                     <div key={i}>
                       <ChatMessage>

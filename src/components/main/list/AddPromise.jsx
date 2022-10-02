@@ -74,7 +74,7 @@ const AddPromise = ({
   useEffect(() => {
     if (!am) {
       if (time.hour === "12") {
-        if (Number(time.min) < 10 || time.min === "0") {
+        if (time.min.length===1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -90,7 +90,7 @@ const AddPromise = ({
           });
         }
       } else {
-        if (Number(time.min) < 10 || time.min === "0") {
+        if (time.min.length===1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -108,7 +108,7 @@ const AddPromise = ({
       }
     } else {
       if (time.hour === "12") {
-        if (Number(time.min) < 10 || time.min === "0") {
+        if (time.min.length===1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -141,7 +141,7 @@ const AddPromise = ({
             });
           }
         } else {
-          if (Number(time.min) < 10 || time.min === "0") {
+          if (time.min.length===1) {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
