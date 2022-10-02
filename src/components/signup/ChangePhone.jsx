@@ -48,18 +48,18 @@ const ChangePhone = () =>{
     setMember({...member, [name]: value})
   }
 
-  const __chkPhone = async (payload) => {
-    if(regexPhone.test(member.value)){
-      let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
-        .then((response) => {
-          if(response.data.data){
-            setMent("사용 가능한 번호 입니다.")
-          }else{
-            setMent("중복되는 번호가 존재합니다.")
-          }
-        });
-      }
-  }
+  // const __chkPhone = async (payload) => {
+  //   if(regexPhone.test(member.value)){
+  //     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
+  //       .then((response) => {
+  //         if(response.data.data){
+  //           setMent("사용 가능한 번호 입니다.")
+  //         }else{
+  //           setMent("중복되는 번호가 존재합니다.")
+  //         }
+  //       });
+  //     }
+  // }
 
   const __testPhone = async (payload) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", payload)
@@ -73,16 +73,17 @@ const ChangePhone = () =>{
     });
   }
   
-  useEffect(()=>{
-    if(regexPhone.test(member.value)){
-      __chkPhone(member);
-    }else{
-      __chkPhone("")
-    }
-  },[member])
+  // useEffect(()=>{
+  //   if(regexPhone.test(member.value)){
+  //     __chkPhone(member);
+  //   }else{
+  //     __chkPhone("")
+  //   }
+  // },[member])
 
   const __editPhone = async(payload)=>{
-    if(ment==="사용 가능한 번호 입니다."){
+    // if(ment==="사용 가능한 번호 입니다."){
+      console.log({authCode:test, phoneNumber:payload.value})
       let a = await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/phonenumber", {authCode:test, phoneNumber:payload.value},{
         headers: {
           Authorization: localStorage.getItem('Authorization'),
@@ -98,7 +99,7 @@ const ChangePhone = () =>{
           alert(response.data.data)
         }
       })
-    }
+    // }
   }
   
   return (
@@ -141,7 +142,7 @@ const ChangePhone = () =>{
                   setVisble(!visble);
                 } else {
                   if(regtest.test(test)){
-                  __chkPhone(member);
+                  // __chkPhone(member);
                   }else{
                     alert("인증번호를 확인해주세요.")
                   }
@@ -165,7 +166,7 @@ const ChangePhone = () =>{
                 setVisble(!visble);
               } else {
                 if(regtest.test(test)){
-                __chkPhone(member);
+                // __chkPhone(member);
                 }else{
                   alert("인증번호를 확인해주세요.")
                 }
