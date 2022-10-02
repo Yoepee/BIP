@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 import AddMemberPage from '../../pages/AddMemberPage';
+import ReceiveMember from '../member/ReceiveMember';
 
 const Option4 = ({ head, setType, type }) => {
   const navigate = useNavigate();
@@ -14,6 +15,11 @@ const Option4 = ({ head, setType, type }) => {
     <>{chk===3?
       <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
         <AddMemberPage type={chktype} setChk={setChk} setChktype={setChktype} />
+      </div>
+      :null}
+      {chk===4?
+      <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
+        <ReceiveMember type={chktype} setChk={setChk} setChktype={setChktype} />
       </div>
       :null
       }
@@ -52,6 +58,8 @@ const Option4 = ({ head, setType, type }) => {
                 onClick={() => {  setChktype("name");setChk(3); }}>닉네임으로 추가</OptionMenu>
               <OptionMenu
                 onClick={() => {  setChktype("phone");setChk(3); }}>연락처로 추가</OptionMenu>
+                <OptionMenu
+                onClick={() => {  setChk(4); }}>친구요청으로 추가</OptionMenu>
                 <OptionMenu
                 onClick={() => {  setChk(0); }}>취소</OptionMenu>
             </div>
