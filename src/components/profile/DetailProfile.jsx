@@ -59,6 +59,6 @@ export default DetailProfile;
 
 const TypeDiv = styled.div`
 border-bottom: 1px solid #F5EAFB;
-width: 80%;
+width: 90%;
 margin: 0 auto;
 `
