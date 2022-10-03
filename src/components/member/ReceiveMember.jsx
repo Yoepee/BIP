@@ -55,8 +55,11 @@ const ReceiveMember = ({ type, setChk }) => {
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
           : <img src={info.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}} />
         }
-        <p>{info.nickname}</p>
-        <p>({info.nickname})</p>
+        <p>{info.nicknameByFriend}</p>
+        {info.nicknameByOwner === null?
+        null
+        :<p>({info.nicknameByOwner})</p>
+        }
         {/* 추가 버튼 클릭시 친구 추가 */}
         <AddFriend onClick={()=>{
           if(type==="name"){
