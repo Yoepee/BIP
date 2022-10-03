@@ -13,7 +13,7 @@ import axios from 'axios';
               console.log(data);
             if(data.data.success===false)
               alert(data.data.error.message);
-            return thunkAPI.fulfillWithValue(data.data);
+            return thunkAPI.fulfillWithValue({data:data.data, page:payload.page});
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
           }
@@ -38,7 +38,10 @@ export const chat = createSlice({
         },
         [__getChat.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.data.unshift( ...action.payload.data); // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+          if(action.payload.page===0){
+            state.data = action.payload.data.data
+          }else{
+          state.data.unshift( ...action.payload.data.data);} // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__getChat.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
