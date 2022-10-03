@@ -5,7 +5,7 @@ import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 
-const AddMember = ({member,onChangeHandle, type, setChk}) => {
+const AddMember = ({member, type, setChk}) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.searchMember);
   
@@ -29,23 +29,18 @@ const AddMember = ({member,onChangeHandle, type, setChk}) => {
     })
     dispatch(clearSearch());
    }
-  
   return (
     <>
-    {/* <div>
-      {type==="name"?
-      <Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 닉네임을 입력하세요" name="value" value={member.value}/>
-      :<Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 연락처를 입력하세요"name="value" value={member.value}/>}
-        
-    </div> */}
     {user?.data?.success?
     <Card>
         {user?.data?.data?.profileImgUrl === null ?
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
           : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}} />
         }
-        <p>{user?.data?.data?.nickname}</p>
-        <p>({user?.data?.data?.nickname})</p>
+        <p>{user?.data?.data?.nicknameByFriend}</p>
+        {user?.data?.data?.nicknameByOwner===null?
+        null
+        :<p>({user?.data?.data?.nicknameByOwner})</p>}
         <AddFriend onClick={()=>{
           if(type==="name"){
             addMemberName(member);

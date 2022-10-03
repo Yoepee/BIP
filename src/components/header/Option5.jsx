@@ -5,29 +5,20 @@ import { __searchName, __searchPhone } from '../../redux/modules/searchMember';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const Option5 = ({ head, payload }) => {
+const Option5 = ({ head, payload, onChangeHandle }) => {
   const dispatch = useDispatch();
-  const initialState = {value:""}
-  const [value, setValue] = useState(initialState);
-
-  const onChangeHandle = (e) => {
-    const {name, value} = e.target;
-    setValue({...value, [name]: value})
-  }
   
   const searchMemberName = () => {
-    dispatch(__searchName(value));
+    dispatch(__searchName(payload));
    }
    const searchMemberPhone = () => {
-    dispatch(__searchPhone(value));
+    dispatch(__searchPhone(payload));
    }
 
-   console.log(value.value)
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
-        {/* <p>{head}</p> */}
-        <Input  placeholder={head} name="value" value={value.value} onChange={onChangeHandle}/>
+        <Input  placeholder={head} name="value" value={payload.value} onChange={(e)=>{onChangeHandle(e)}}/>
       </div>
       <div onClick={() => {
         if(head==="닉네임으로 친구 추가"){

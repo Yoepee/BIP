@@ -2,35 +2,35 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { __searchFriendName, __searchFriendPhone } from '../../redux/modules/member';
+import { __searchFriendName, __searchFriendPhone, __getMember } from '../../redux/modules/member';
 import { useDispatch } from 'react-redux';
 const Option7 = ({ head, setType, type }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("닉네임");
   const [chk, setChk] = useState(false);
   const initialState = {
-    value:""
+    value: ""
   }
-  const [value,setValue] =useState(initialState);
+  const [value, setValue] = useState(initialState);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setValue({...value, [name]: value})
+    setValue({ ...value, [name]: value })
   }
 
   const searchMemberName = (member) => {
     dispatch(__searchFriendName(member));
-   }
-   const searchMemberPhone = (member) => {
+  }
+  const searchMemberPhone = (member) => {
     dispatch(__searchFriendPhone(member));
-   }
+  }
   return (
     <>
       {!chk ?
-      <>
-        <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▼</p>
-        {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#6D09D1" }}>▼</p> */}
-      </>
+        <>
+          <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▼</p>
+          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#6D09D1" }}>▼</p> */}
+        </>
         : <>
           <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▲</p>
           {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#6D09D1" }}>▲</p> */}
@@ -51,17 +51,25 @@ const Option7 = ({ head, setType, type }) => {
         </>
       }
       <div>
-        <SearchInput placeholder='친구검색' name='value' value={value.value} onChange={onChangeHandler}/>
+        <SearchInput placeholder='친구검색' name='value' value={value.value} onChange={onChangeHandler} />
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
-        onClick={() => { 
-          if(sort==="닉네임"){
-            searchMemberName(value.value);
-          }else{
-            searchMemberPhone(value.value);
+        onClick={() => {
+          if (sort === "닉네임") {
+            if (value.value === "") {
+              dispatch(__getMember());
+            } else {
+              searchMemberName(value.value);
+            }
+          } else {
+            if (value.value === "") {
+              searchMemberPhone(value.value);
+            } else {
+              searchMemberName(value.value);
+            }
           }
         }}>
-        <p><SearchIcon style={{color:"#A67EED"}}/></p>
+        <p><SearchIcon style={{ color: "#A67EED" }} /></p>
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
         onClick={() => { setType("none"); }}>

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { __invitePromise } from "../../redux/modules/detailPromise";
-import { __getMember, removeFriend } from "../../redux/modules/member";
+import { __getMember, removeFriend, __secondName } from "../../redux/modules/member";
 
 const Member = ({type, setType}) =>{
   const dispatch = useDispatch();
@@ -12,11 +12,12 @@ const Member = ({type, setType}) =>{
   const member = useSelector((state)=>state.member);
   const {id, add} = useParams();
 
-
   useEffect(()=>{
     dispatch(__getMember());
   },[dispatch])
+
   console.log(member)
+
   const removeMember = async(id) =>{
     if(window.confirm("정말로 친구삭제 하시겠습니까?")){
     let a = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/friends/${id}`,{
@@ -35,14 +36,16 @@ const Member = ({type, setType}) =>{
 
   const giveName =async(nickname)=>{
     let name = prompt("변경할 별명을 지어주세요.");
-    let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/friends/secondName`,{friendNickname:nickname, secondName:name},{
-      headers: {
-          Authorization:localStorage.getItem('Authorization'),
-          RefreshToken:localStorage.getItem('RefreshToken')
-      }}).then((response)=>{
-        console.log(response);
-      })
-      return;
+    console.log({friendNickname:nickname, secondName:name})
+    dispatch(__secondName({friendNickname:nickname, secondName:name}))
+    // let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/friends/secondname`,{friendNickname:nickname, secondName:name},{
+    //   headers: {
+    //       Authorization:localStorage.getItem('Authorization'),
+    //       RefreshToken:localStorage.getItem('RefreshToken')
+    //   }}).then((response)=>{
+    //     console.log(response);
+    //   })
+    //   return;
   }
 
   const inviteMember = async(nickname)=>{
@@ -86,13 +89,13 @@ const Member = ({type, setType}) =>{
             onClick={()=>{
               if(type==="none"){
                 if(id!==undefined){
-                  inviteMember(friend.nickname);
+                  inviteMember(friend.nicknameByFriend);
                 }else if(add!==undefined){
-                  __addFriendCredit(friend.nickname, add)
+                  __addFriendCredit(friend.nicknameByFriend, add)
                 }
                 return;
               }else if(type==="give"){
-                giveName(friend.nickname);
+                giveName(friend.nicknameByFriend);
                 }
               else if(type==="remove"){
                 removeMember(friend.id);
@@ -102,8 +105,8 @@ const Member = ({type, setType}) =>{
             <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
             :<ProfileImg src={friend.profileImgUrl} />
             }
-            <Username>{friend.nickname}</Username>
-            <Nickname>({friend.nickname})</Nickname>
+            <Username>{friend.nicknameByFriend}</Username>
+            <Nickname>({friend.nicknameByOwner})</Nickname>
             <Credit><span>C</span>{friend.creditScore}</Credit>
             </Card>
           )
