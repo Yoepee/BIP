@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
  
-// createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
+//카카오 네이버 로그인시 정보 수집용도
 export const social = createSlice({
     name:"social",
     initialState: {
@@ -11,6 +10,7 @@ export const social = createSlice({
         isLoading: false
       },
     reducers:{
+      // 소셜로그인 시, 데이터 저장용도 (닉네임, 번호 유무 확인)
       readSocial(state,action){
         state.data = action.payload
       }
