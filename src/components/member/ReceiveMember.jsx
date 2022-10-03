@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 import axios from "axios";
 import Header from "../header/Header";
 
-const ReceiveMember = ({member, type, setChk}) => {
+// 친구요청 받은 친구목록 컴포넌트
+const ReceiveMember = ({ type, setChk }) => {
   const dispatch = useDispatch();
+  // 친구 리스트 값 받는 state
   const [user,setUser] = useState();
 
+  // 랜더링시 친구 요청 리스트 출력
   useEffect(()=>{
     __getReceive();
   },[])
 
+  // 본인을 추가한 친구리스트 값 받아오기
   const __getReceive = async()=>{
     let a = await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/friends/recommandlist`,{
       headers: {
@@ -26,6 +29,7 @@ const ReceiveMember = ({member, type, setChk}) => {
       })
   }
   
+  // 친구 요청리스트에서 친구 추가
   const addMemberName = (member) => {
     dispatch(__addMemberName({value:member}))
     .then((response)=>{
@@ -41,7 +45,9 @@ const ReceiveMember = ({member, type, setChk}) => {
   return (
     <>
     <Header head={"친구요청으로 추가"}/>
+    {/* 친구 요청 목록이 비었는지 체크 */}
     {user?.data?.length!==0?
+    // 목록에 대상이 존재하면 목록 리스트 출력
     user?.data?.map((info)=>{
       return(
         <Card key={info.id}>
@@ -51,6 +57,7 @@ const ReceiveMember = ({member, type, setChk}) => {
         }
         <p>{info.nickname}</p>
         <p>({info.nickname})</p>
+        {/* 추가 버튼 클릭시 친구 추가 */}
         <AddFriend onClick={()=>{
           if(type==="name"){
             addMemberName(info.nickname);
@@ -60,6 +67,7 @@ const ReceiveMember = ({member, type, setChk}) => {
     </Card>
       )
     })
+    // 요청 목록이 없으면 문구 출력
     :<p>친구요청 목록이 없습니다.</p>
     }
     </>

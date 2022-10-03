@@ -6,10 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { __invitePromise } from "../../redux/modules/detailPromise";
 import { __getMember, removeFriend, __secondName } from "../../redux/modules/member";
 
+// 친구목록 컴포넌트
+// type = none - 무반응, give - 별칭 주기, remove - 삭제
 const Member = ({type, setType}) =>{
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // 친구목록 받아오기
   const member = useSelector((state)=>state.member);
+  // 친구목록에서 동작하는 기능 체크용도 (add = 신용도 추가, id = 약속 목록 초대(게시글 번호))
   const {id, add} = useParams();
 
   useEffect(()=>{
@@ -18,6 +22,7 @@ const Member = ({type, setType}) =>{
 
   console.log(member)
 
+  // 친구 삭제 함수
   const removeMember = async(id) =>{
     if(window.confirm("정말로 친구삭제 하시겠습니까?")){
     let a = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/friends/${id}`,{
@@ -34,20 +39,14 @@ const Member = ({type, setType}) =>{
     }
   }
 
+  // 별칭 주기 함수
   const giveName =async(nickname)=>{
     let name = prompt("변경할 별명을 지어주세요.");
     console.log({friendNickname:nickname, secondName:name})
     dispatch(__secondName({friendNickname:nickname, secondName:name}))
-    // let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/friends/secondname`,{friendNickname:nickname, secondName:name},{
-    //   headers: {
-    //       Authorization:localStorage.getItem('Authorization'),
-    //       RefreshToken:localStorage.getItem('RefreshToken')
-    //   }}).then((response)=>{
-    //     console.log(response);
-    //   })
-    //   return;
   }
 
+  // 약속 초대 함수
   const inviteMember = async(nickname)=>{
     if(window.confirm(`${nickname}님을 약속에 초대하시겠습니까?`)){
     dispatch(__invitePromise({id:id, nickname:nickname}))
@@ -60,6 +59,7 @@ const Member = ({type, setType}) =>{
     }
   }
 
+  // 신용도 추가 함수
   const __addFriendCredit = async(nickname,num) =>{
     if(window.confirm(`${nickname}님의 신용점수를 ${num}점 구매하시겠습니까?`)){
     let a = await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/user/point`,{point:2000*num, nickname:nickname},{
@@ -87,26 +87,35 @@ const Member = ({type, setType}) =>{
           return (
             <Card key={i} 
             onClick={()=>{
+              // 타입이 none이면 기능 동작 x
               if(type==="none"){
+                // 기능 없을 때 id값이 존재하면 약속 초대
                 if(id!==undefined){
                   inviteMember(friend.nicknameByFriend);
+                  // add 값이 존재하면 신용점수 추가
                 }else if(add!==undefined){
                   __addFriendCredit(friend.nicknameByFriend, add)
                 }
                 return;
+                // type이 give이면 선택 멤버 별칭 추가
               }else if(type==="give"){
                 giveName(friend.nicknameByFriend);
                 }
+                // type이 remove이면 선택 멤버 삭제
               else if(type==="remove"){
                 removeMember(friend.id);
               }
             }}>
+              {/* 사진이 업으면 기본이미지, 있다면 프로필 사진 출력 */}
             {friend.profileImgUrl===null?
             <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
             :<ProfileImg src={friend.profileImgUrl} />
             }
+            {/* 닉네임 출력 */}
             <Username>{friend.nicknameByFriend}</Username>
+            {/* 별칭 출력 */}
             <Nickname>({friend.nicknameByOwner})</Nickname>
+            {/* 신용도 출력 */}
             <Credit><span>C</span>{friend.creditScore}</Credit>
             </Card>
           )

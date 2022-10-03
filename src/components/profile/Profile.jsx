@@ -7,12 +7,14 @@ import { useEffect } from "react";
 import { __getProfile } from "../../redux/modules/profile";
 import axios from "axios";
 
+// 프로필 페이지
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
   let a;
 
+  // 활동내역 조회
   const __activity = async () => {
     a = await axios.get(
       process.env.REACT_APP_SERVER_HOST + `/api/user/event/`,
@@ -26,18 +28,22 @@ const Profile = () => {
     console.log(a);
   };
 
+  // 활동내역 받는 함수 동작
   useEffect(() => {
     dispatch(__getProfile());
     __activity();
   }, [dispatch]);
   console.log(profile);
+
   return (
     <div>
       <div>
+        {/* 프로필 수정연결된 상세페이지 이동 */}
         <Prodiv
           onClick={() => {
             navigate("/detailprofile");
           }}>
+            {/* 이미지 파일 없으면 기본 이미지 출력 */}
           {!profile?.data?.data?.profileImgUrl ? (
             <ImgArea>
               <Img src={base} />

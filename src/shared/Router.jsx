@@ -41,6 +41,7 @@ const Router = () =>{
             <Route path="/member" exact element={<MemberPage/>}/>
             {/* 약속 멤버 초대하기 */}
             <Route path="/member/invite:id" exact element={<MemberPage/>}/>
+            {/* 친구 신용도 점수 주기 기능 */}
             <Route path="/member/add:add" exact element={<MemberPage/>}/>
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>

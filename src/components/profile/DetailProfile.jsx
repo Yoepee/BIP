@@ -8,8 +8,10 @@ import { __getProfile } from "../../redux/modules/profile";
 const DetailProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // 프로필 정보 받아오기
   const profile = useSelector((state)=>state.profile);
 
+  // 프로필 정보 받아서 출력하기 필요
     useEffect(()=>{
         dispatch(__getProfile());
     },[dispatch])
