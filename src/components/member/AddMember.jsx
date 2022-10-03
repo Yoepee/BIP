@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
 import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 
+// 친구 추가 컴포넌트
 const AddMember = ({member, type, setChk}) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.searchMember);
   
+  // 닉네임으로 친구 추가
   const addMemberName = (member) => {
     dispatch(__addMemberName(member))
     .then((response)=>{
@@ -17,8 +18,11 @@ const AddMember = ({member, type, setChk}) => {
         return;
       }
     })
+    // 검색 목록 초기화
     dispatch(clearSearch());
    }
+
+  // 휴대폰번호로 친구 추가
    const addMemberPhone = (member) => {
     dispatch(__addMemberPhone(member))
     .then((response)=>{
@@ -27,20 +31,25 @@ const AddMember = ({member, type, setChk}) => {
         return;
       }
     })
+    // 검색 목록 초기화
     dispatch(clearSearch());
    }
   return (
     <>
     {user?.data?.success?
     <Card>
+      {/* 프로필 사진이 없으면 기본이미지 출력 */}
         {user?.data?.data?.profileImgUrl === null ?
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}}/>
           : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px",  backgroundColor:"#C7FEC1"}} />
         }
+        {/* 친구 닉네임 */}
         <p>{user?.data?.data?.nicknameByFriend}</p>
+        {/* 별칭이 있다면 별칭 출력 */}
         {user?.data?.data?.nicknameByOwner===null?
         null
         :<p>({user?.data?.data?.nicknameByOwner})</p>}
+        {/* type값에 따라 휴대폰 번호인지 닉네임인지 선별하여 함수 동작 */}
         <AddFriend onClick={()=>{
           if(type==="name"){
             addMemberName(member);

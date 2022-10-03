@@ -1,19 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import styled from "styled-components";
 import axios from "axios";
 
+//약속 방장 기능 (방장위임, 멤버 조정)
 const PromiseLeader = () =>{
   const navigate=useNavigate();
   const dispatch=useDispatch();
+  // 약속 상세정보 받아오기 (멤버리스트 활용)
   const promise = useSelector((state)=>state.detailPromise);
   const {id, type}= useParams();
   useEffect(()=>{
     dispatch(__getDetailPromise(id));
   },[dispatch])
 
+  // 방장위임
   const __giveLeader = async (member) => {
     if (window.confirm("방장을 위임하시겠습니까?")) {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/events/master/${id}`, {targetId:member}, {
@@ -32,6 +35,7 @@ const PromiseLeader = () =>{
       return;
     }
   }
+  // 멤버 조정
   const __kickMember = async (member, nickname) => {
     if (window.confirm(`${nickname}님을 제외하시겠습니까?`)) {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/events/master/deport/${id}`, {targetId:member}, {
@@ -53,6 +57,7 @@ const PromiseLeader = () =>{
   
   return (
     <>
+    {/* 멤버목록에서 방장 제외 리스트 출력 */}
     {promise?.data?.data?.memberList?.map((member)=>{
       if(member.nickname===localStorage.getItem("name")){
         return;

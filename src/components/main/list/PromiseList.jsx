@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
 import PersonIcon from '@mui/icons-material/Person';
 
+// 약속목록 컴포넌트
 const PromiseList = ({day}) => {
   const navigate = useNavigate();
   const dispatch= useDispatch();
+  // 약속 목록
   const promiseList = useSelector((state)=>state.promise);
+  // 약속값 받아오기
   useEffect(()=>{
     dispatch(__getPromise(day))
     .then((response)=>{
       })
   },[day])
 
-  console.log(promiseList)
   return (
     <>
       <Wrap>
@@ -23,15 +25,19 @@ const PromiseList = ({day}) => {
           <p style={{fontWeight:"bold"}}>오늘 해야할 일</p>
         </div>
         <Cards>
+          {/* 약속시간까지 시간이 아직 남은 약속들 */}
           {promiseList?.data?.data?.map((promise,i)=>{
             if(promise.lastTime === "이미 지난 약속입니다."){
               return;
             }
+            // 날씨 아이콘 받아오기
             let iconurl = "http://openweathermap.org/img/w/" + promise.weatherResponseDto.icon + ".png";
             return (
+              // 카드 선택시 상세 페이지
               <PromiseCard key={promise.id} onClick={()=>{navigate(`/detailpromise/${promise.id}`)}}>
                 <div style={{display:"flex"}}>
                   <p> 현재날씨</p>
+                  {/* 날씨 아이콘 */}
                   <img  src={iconurl}/>
                   <div>
                   <p>날씨 : {promise.weatherResponseDto.sky}</p>
@@ -51,6 +57,7 @@ const PromiseList = ({day}) => {
                 </div>                
                 <div>
                   <div style={{display:"flex"}}>
+                    {/* 시간값 split으로 잘라서 사용 */}
                     {Number(promise.eventDateTime.split("-")[3])<12?
                     <>
                     <p>오전</p>
@@ -80,6 +87,7 @@ const PromiseList = ({day}) => {
           <p style={{fontWeight:"bold"}}>오늘 했어야 할 일</p>
         </div>
         <Cards>
+          {/* 약속시간이 지난 약속들 */}
           {promiseList?.data?.data?.map((promise)=>{
             if(promise.lastTime !== "이미 지난 약속입니다."){
               return;
@@ -97,6 +105,7 @@ const PromiseList = ({day}) => {
                 </div>                
                 <div>
                   <div style={{display:"flex"}}>
+                    {/* 시간값 split으로 잘라서 사용 */}
                     {Number(promise.eventDateTime.split("-")[3])<12?
                     <>
                     <p>오전</p>
