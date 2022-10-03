@@ -4,26 +4,22 @@ import { useDispatch } from "react-redux";
 import styled from 'styled-components';
 import { __searchName, __searchPhone } from "../../redux/modules/searchMember";
 
-const Option5 = ({ head, payload }) => {
+const Option5 = ({ head, payload, onChangeHandle }) => {
   const dispatch = useDispatch();
-  const initialState = { value: "" };
-  const [input, setInput] = useState(initialState);
-  const onChangeHandle = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+
+  
   const searchMemberName = () => {
-    dispatch(__searchName(input));
-  };
-  const searchMemberPhone = () => {
-    dispatch(__searchPhone(input));
-  };
+    dispatch(__searchName(payload));
+   }
+   const searchMemberPhone = () => {
+    dispatch(__searchPhone(payload));
+   }
 
 
-   console.log(value.value)
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
+
 
         <input
           type="text"
@@ -34,10 +30,12 @@ const Option5 = ({ head, payload }) => {
             marginTop: "20px",
             width: "250px",
           }}
+          placeholder={head}
           name="value"
-          value={input.value}
-          onChange={onChangeHandle}
+          value={payload.value}
+          onChange={(e)=>{onChangeHandle(e)}}
         />
+
 
       </div>
       <div

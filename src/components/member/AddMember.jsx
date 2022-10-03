@@ -5,7 +5,7 @@ import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 
-const AddMember = ({member,onChangeHandle, type, setChk}) => {
+const AddMember = ({member, type, setChk}) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.searchMember);
   
@@ -29,7 +29,6 @@ const AddMember = ({member,onChangeHandle, type, setChk}) => {
     })
     dispatch(clearSearch());
    }
-  
   return (
     <>
     {user?.data?.success?
@@ -38,8 +37,10 @@ const AddMember = ({member,onChangeHandle, type, setChk}) => {
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}}/>
           : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px",  backgroundColor:"#C7FEC1"}} />
         }
-        <p>{user?.data?.data?.nickname}</p>
-        <p>({user?.data?.data?.nickname})</p>
+        <p>{user?.data?.data?.nicknameByFriend}</p>
+        {user?.data?.data?.nicknameByOwner===null?
+        null
+        :<p>({user?.data?.data?.nicknameByOwner})</p>}
         <AddFriend onClick={()=>{
           if(type==="name"){
             addMemberName(member);

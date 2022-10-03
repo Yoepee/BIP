@@ -11,7 +11,7 @@ import Option7 from './Option7';
 
 
 
-const Header = ({ head, option, payload, chk, image, setType, type}) => {
+const Header = ({ head, option, payload, chk, image, setType, type, onChangeHandle}) => {
   
   return (
     <div style={{ display: "flex", margin:"0 auto", width:"90%" }}>
@@ -47,7 +47,7 @@ const Header = ({ head, option, payload, chk, image, setType, type}) => {
 
        {/* 친구추가 뒤로가기(친구) 제목 완료 */}
        {option===5?
-      <Option5 head={head} payload={payload}/>
+      <Option5 head={head} payload={payload} onChangeHandle={onChangeHandle}/>
       :null}
       
       {/* 로그아웃 */}
