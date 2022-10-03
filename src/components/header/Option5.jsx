@@ -1,7 +1,7 @@
-import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
 import { __searchName, __searchPhone } from "../../redux/modules/searchMember";
 
 const Option5 = ({ head, payload }) => {
@@ -19,9 +19,12 @@ const Option5 = ({ head, payload }) => {
     dispatch(__searchPhone(input));
   };
 
+
+   console.log(value.value)
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
+
         <input
           type="text"
           style={{
@@ -35,6 +38,7 @@ const Option5 = ({ head, payload }) => {
           value={input.value}
           onChange={onChangeHandle}
         />
+
       </div>
       <div
         onClick={() => {
@@ -52,3 +56,13 @@ const Option5 = ({ head, payload }) => {
 };
 
 export default Option5;
+
+
+const Input = styled.input`
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  width: 200px;
+  border-bottom: 1px solid  #F5EAFB;
+  margin-bottom: 31px;
+`

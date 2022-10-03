@@ -32,12 +32,6 @@ const AddMember = ({member,onChangeHandle, type, setChk}) => {
   
   return (
     <>
-    <div>
-      {/* {type==="name"?
-      <Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 닉네임을 입력하세요" name="value" value={member.value}/>
-      :<Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 연락처를 입력하세요"name="value" value={member.value}/>}
-         */}
-    </div>
     {user?.data?.success?
     <Card>
         {user?.data?.data?.profileImgUrl === null ?
