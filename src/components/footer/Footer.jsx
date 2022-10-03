@@ -34,12 +34,12 @@ const Footer = ({foot}) =>{
         :<p style={{color:"#A67EED"}}><PermContactCalendarOutlinedIcon/></p>}
           {/* <p>프로필</p> */}
         </div>
-        {/* <div onClick={()=>{navigate("/intro")}} style={{textAlign:"center"}}>
+        <div onClick={()=>{navigate("/donation")}} style={{textAlign:"center"}}>
         {foot===3?
-        <p><SettingsIcon/></p>
-        :<p><SettingsOutlinedIcon/></p>}
-          <p>테스트</p>
-        </div> */}
+        <p style={{color:"#A67EED"}}><SettingsIcon/></p>
+        :<p style={{color:"#A67EED"}}><SettingsOutlinedIcon/></p>}
+          {/* <p>테스트</p> */}
+        </div>
     </Menu>
   )
 }
@@ -49,7 +49,7 @@ export default Footer;
 const Menu = styled.div`
 width:100%;
 display:grid;
-grid-template-columns: repeat(3,1fr);
+grid-template-columns: repeat(4,1fr);
 place-items: center;
 position:fixed;
 bottom:0;
