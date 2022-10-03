@@ -2,24 +2,28 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { readSocial, __kakaologin } from "../../redux/modules/social";
+import { readSocial } from "../../redux/modules/social";
 
+// 카카오 로그인
 const Kakao = () => {
   const navigate= useNavigate();
   const dispatch = useDispatch();
+  // 네이버 로그인시 받아와야하는 값 존재 (code)
   let code = new URL(window.location.href).searchParams.get("code");
 
   const __kakaoLogin = async() => {
+    // 경로에서 받아온 값을 서버로 전달
     let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/kakaologin?code=${code}`)
     .then((response)=>{
-      console.log(response)
       if(response.data.success){
         localStorage.setItem("Authorization", response.headers.authorization);
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
         dispatch(readSocial(response.data.data));
-        if(response.data.data.nickname===null){
-          navigate("/signup/change");
+        // 닉네임이나 휴대폰 번호가 없으면 번호수정 후 닉네임 수정하도록 이동
+        if(response.data.data.nickname===null|| response.data.data.phoneNumber===null){
+          navigate("/signup/change/kakao");
         }else{
+          // 닉네임이 있다면, 닉네임을 로컬스토리지 저장
           localStorage.setItem("name", response.data.data.nickname);
           navigate("/")
         }
@@ -29,13 +33,12 @@ const Kakao = () => {
       // alert(error.code)
     })
   }
-
+// 랜더링 시 카카오 로그인 함수 동작
   useEffect(()=>{
     __kakaoLogin();
   },[])
 
-  return (null
-  )
+  return (null)
 }
 
 export default Kakao;

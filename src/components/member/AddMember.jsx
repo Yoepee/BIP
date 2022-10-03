@@ -32,17 +32,11 @@ const AddMember = ({member,onChangeHandle, type, setChk}) => {
   
   return (
     <>
-    {/* <div>
-      {type==="name"?
-      <Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 닉네임을 입력하세요" name="value" value={member.value}/>
-      :<Input type="text" onChange={onChangeHandle} placeholder="친구 추가할 연락처를 입력하세요"name="value" value={member.value}/>}
-        
-    </div> */}
     {user?.data?.success?
     <Card>
         {user?.data?.data?.profileImgUrl === null ?
-          <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}}/>
-          : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"100%",margin:"15px"}} />
+          <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}}/>
+          : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px",  backgroundColor:"#C7FEC1"}} />
         }
         <p>{user?.data?.data?.nickname}</p>
         <p>({user?.data?.data?.nickname})</p>
@@ -92,9 +86,18 @@ margin:10px
 
 const Input = styled.input`
   margin-left: 20px;
+  margin-bottom: 50px;
   border: none;
   outline: none;
-  width: 350px;
+  width: 70%;
   border-bottom: 1px solid  #F5EAFB;
   margin-bottom: 31px;
+`
+
+const Img = styled.img`
+width:50px; 
+height:50px;  
+border-radius:50%;
+margin:15px; 
+background-color:#C7FEC1
 `

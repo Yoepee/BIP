@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CreateIcon from '@mui/icons-material/Create';
 import { useNavigate } from "react-router-dom";
 
+// 재능 기부 목록 페이지
 const DonationPage = () =>{
   const navigate = useNavigate();
   return (

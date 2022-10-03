@@ -13,9 +13,9 @@ const Option4 = ({ head, setType, type }) => {
   const [chktype, setChktype] = useState("name");
   return (
     <>{chk===3?
-      <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
+      <AddMemberArea>
         <AddMemberPage type={chktype} setChk={setChk} setChktype={setChktype} />
-      </div>
+      </AddMemberArea>
       :null}
       {chk===4?
       <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
@@ -25,7 +25,7 @@ const Option4 = ({ head, setType, type }) => {
       }
       {chk===0?null:
       <ModalBack onClick={()=>{setChk(0)}}
-      style={{position:"absolute", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
+      style={{position:"fixed", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
       <div style={{ marginLeft: "1%" }}>
         {type==="none"?
         <p style={{fontWeight:"bold", fontSize:"20px", marginLeft:"12px"}}>{head}</p>
@@ -99,6 +99,7 @@ export default Option4;
 const ModalBack= styled.div`
 width:100%;
 height:100%;
+left:0%;
 `
 const OptionMenu = styled.div`
 padding: 3px;
@@ -107,3 +108,15 @@ cursor: pointer;
   background-color:#6D09D1;
   color:white;
 }`
+
+const AddMemberArea = styled.div`
+  width:400px; 
+  height:225px; 
+  position:absolute;
+  background:white;
+  margin:50px auto;
+  left:0;
+  right:0;
+  z-index:20;
+  border-radius: 8px;
+`
