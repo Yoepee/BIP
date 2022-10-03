@@ -1,5 +1,6 @@
 import Header from "../../components/header/Header";
 
+// 재능기부 상세 페이지
 const DetailDonationPage = () =>{
   return (
     <>

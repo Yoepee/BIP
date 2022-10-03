@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-
+// 유저 검색 api (닉네임 검색)
   export const __searchName = createAsyncThunk(
     "/api/search/?q=name&type=name",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
+          // payload의 value값을 검색 용도로 사용
             const data =  await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/search/?q=${payload.value}&type=name`, {
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
-              console.log(data)
+              // 데이터 받아오기 실패시 alert 출력
             if(data.data.success===false)
               alert(data.data.data);
             return thunkAPI.fulfillWithValue(data.data);
@@ -22,15 +22,18 @@ import axios from 'axios';
     }
   );
 
+  // 유저 검색 api (전화번호 검색)
   export const __searchPhone = createAsyncThunk(
     "/api/search/?q=phone&type=phone",
     async (payload, thunkAPI) => {
         try {
+          // payload의 value값을 검색 용도로 사용
             const data =  await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/search/?q=${payload.value}&type=phone`, {
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
+              // 데이터 받아오기 실패시 alert 출력
               if(data.data.success===false)
               alert(data.data.data);
             return thunkAPI.fulfillWithValue(data.data);
@@ -74,7 +77,7 @@ export const searchMember = createSlice({
         },
         [__searchPhone.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+          state.data = action.payload; //전체 유저검색에서 내용을 받아서 리스트로 담음
         },
         [__searchPhone.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

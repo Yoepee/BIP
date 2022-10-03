@@ -1,4 +1,5 @@
 // 날짜를 계산하는 커스텀 훅
+// 파라미터 today = 오늘 날짜, lastday = 월말 날짜, date = 날짜 개수
 const useDate = (today, lastday, date) => {
   let dates = [];
 

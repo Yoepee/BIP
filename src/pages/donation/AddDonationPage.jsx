@@ -1,5 +1,6 @@
 import Header from "../../components/header/Header";
 
+// 재능기부 수정 삭제 페이지
 const AddDonationPage = () =>{
   return (
     <>
