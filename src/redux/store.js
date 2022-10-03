@@ -10,13 +10,21 @@ import chat from "./modules/chat";
 
 export default configureStore({
   reducer: {
+    // 프로필 내용
     profile: profile.reducer,
+    // 친구목록
     member: member.reducer,
+    // 소셜로그인시 (닉네임, 휴대폰 번호 조회용)
     social: social.reducer,
+    // 약속 리스트
     promise: promise.reducer,
+    // 약속 상세보기
     detailPromise: detailPromise.reducer,
+    // 친구추가 목록에서 검색
     searchMember: searchMember.reducer,
+    // 체크인 버튼 결과창
     checkIn:checkIn.reducer,
+    // 채팅 내역 받아오기
     chat:chat.reducer,
   }
 });

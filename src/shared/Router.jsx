@@ -31,27 +31,40 @@ const Router = () =>{
             <Route path="/intro" exact element={<IntroPage/>}/>
             {/* 회원가입 */}
             <Route path="/signup" exact element={<SignUp/>}/>
+            {/* 전화번호 변경시 이메일 로그인 */}
             <Route path="/signup/email" exact element={<SignUpEmail/>}/>
+            {/* 닉네임 설정이 안된 계정 닉네임 설정 페이지 */}
             <Route path="/signup/nickname" exact element={<SignUpNickname/>}/>
-            <Route path="/signup/change" exact element={<SignUpChange/>}/>
+            {/* 카카오 최초 로그인시 휴대폰 번호 설정하도록, 이메일 계정시에는 별도 동작 */}
+            <Route path="/signup/change/:type" exact element={<SignUpChange/>}/>
             {/* 친구목록 */}
             <Route path="/member" exact element={<MemberPage/>}/>
+            {/* 약속 멤버 초대하기 */}
             <Route path="/member/invite:id" exact element={<MemberPage/>}/>
             <Route path="/member/add:add" exact element={<MemberPage/>}/>
             {/* 마이페이지 */}
             <Route path="/profile" exact element={<ProfilePage/>}/>
+            {/* 프로필 상세페이지 */}
             <Route path="/detailprofile" exact element={<DetailProfilePage/>}/>
+            {/* 프로필 수정 */}
             <Route path="/editprofile/:type" exact element={<EditProfilePage/>}/>
+            {/* 신용도 구매 */}
             <Route path="/addcredit" exact element={<AddCreditPage/>}/>
             {/* 약속잡기 */}
             <Route path="/addpromise" exact element={<AddPromisePage/>}/>
+            {/* 약속 수정하기 */}
             <Route path="/addpromise/edit:id" exact element={<AddPromisePage/>}/>
+            {/* 약속 상세보기 */}
             <Route path="/detailpromise/:id" exact element={<DetailPromisePage/>}/>
+            {/* 약속 방장권한 기능 */}
             <Route path="/promiseleader/id=:id/type=:type" exact element={<PromiseLeaderPage/>}/>
             {/* 재능기부 */}
             <Route path="/donation" exact element={<DonationPage/>}/>
+            {/* 재능기부 추가 */}
             <Route path="/adddonation" exact element={<AddDonationPage/>}/>
+            {/* 재능기부 수정 */}
             <Route path="/adddonation/edit:id" exact element={<AddDonationPage/>}/>
+            {/* 재능기부 상세페이지 */}
             <Route path="/detaildonation/:id" exact element={<DetailDonationPage/>}/>
             {/* 소셜로그인 */}
             <Route path="/login/kakao" exact element={<KakaoPage/>}/>

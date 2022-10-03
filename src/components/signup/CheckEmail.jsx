@@ -1,76 +1,71 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { readSocial } from "../../redux/modules/social";
+
+// 이메일로 로그인 요청시 이동
 const CheckEmail = () => {
+  // 인증번호 받기 버튼을 클릭 여부 조사하는 변수들
   const [visble, setVisble] = useState(false);
   const [chkBtn, setChkBtn] = useState("인증하기 받기")
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // 이메일을 인식하는 초기값
   const initialState = {
     value: ''
   }
   const [member, setMember] = useState(initialState);
-  const [chkmail, setChkmail] = useState("사용 가능한 이메일 입니다.")
+  // 인증코드 입력 변수
   const [test, setTest] = useState("");
   /** 이메일 주소 유효검사*/
   const regexEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  // 인증코드 유효성 검사
   const regtest = /^[0-9]{6}$/;
 
+  // 타이머 동작 변수
   const time = useRef(180);
   const [min, setMin] = useState(parseInt(3));
   const [sec, setSec] = useState(0);
   const timer = useRef(null);
 
-
+  // 랜더링 시 타이머 초기화
   useEffect(()=>{
     return () => clearInterval(timer.current);
   },[])
 
+  // 시간이 0보다 작아지면 타이머 종료
   useEffect(()=>{
     if(time.current<0){
       clearInterval(timer.current);
     }
   },[sec])
 
+  // 시간이 흐를때마다 시간출력부가 동작됨
   const countDown = () => {
     setMin(parseInt(time.current/60));
     setSec(time.current%60);
     time.current-=1;
   }
 
+  // 이메일 입력칸 동작
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setMember({ ...member, [name]: value })
   }
 
-  const __chkEmail = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkemail", payload)
-      .then((response) => {
-      });
-  }
-
+  // 이메일 인증코드 발급 함수
   const __examEmail = async (payload) => {
-    console.log(payload)
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
       .then((response) => {
-        console.log(response)
-        setChkmail(response.data.data)
       });
   }
 
-  useEffect(() => {
-    if (regexEmail.test(member.value)) {
-      __chkEmail(member);
-    }
-  }, [member])
-
+  // 이메일 로그인
   const __emailLogin = async (payload) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/login/email", { authCode: test, email: payload.value })
       .then((response) => {
@@ -79,12 +74,14 @@ const CheckEmail = () => {
           localStorage.setItem("RefreshToken", response.headers.refreshtoken);
           // localStorage.setItem("name", response.data.data);
           dispatch(readSocial(response.data.data))
-          navigate("/signup/change")
+          // 메일에서 휴대폰 변경으로 이동
+          navigate("/signup/change/mail")
         } else {
           alert(response.data.data)
         }
       });
   }
+
   return (
     <div>
       <Wrapper>
@@ -102,12 +99,12 @@ const CheckEmail = () => {
             onChange={onChangeHandler}
             label="이메일"
             variant="outlined"
-            placeholder="이메일을 입력해주세요"
-
-          />
+            placeholder="이메일을 입력해주세요"/>
+            {/* 이메일 입력 오류시 경고문구 */}
           {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다.</div>)}
-
+          {/* 인증번호 받기 클릭 후 입력창 출력 */}
           {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
+          {/* 인증번호 오류 시 경고 문구 */}
           {test === "" ? null :
             regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
 
@@ -117,13 +114,15 @@ const CheckEmail = () => {
 
 
         <BtnArea>
+          {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
           {visble && <Button variant="contained" className="default_btn" onClick={()=>{__examEmail(member);}}>인증번호 다시 받기({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+          {/* 이메일 이상이 없을 시 버튼 색깔 변경 */}
           {!regexEmail.test(member.value)?
           <Button
             variant="contained"
             onClick={() => {
+              // 이메일 이상여부 검사
               if (regexEmail.test(member.value)) {
-                // if (chkmail==="사용중인 이메일 입니다.") {
                 if (!visble) {
                   setChkBtn("인증번호 확인하기");
                   setVisble(!visble);
@@ -138,9 +137,7 @@ const CheckEmail = () => {
                     alert("인증번호를 확인해주세요.")
                   }
                 }
-                // }else{
-                //     alert("등록되지 않은 메일입니다.")
-                //   }
+              // 이메일 이상여부 검사
               } else {
                 alert("이메일을 확인해주세요.")
               }
@@ -151,8 +148,8 @@ const CheckEmail = () => {
           variant="contained"
           style={{backgroundColor: "#6D09D1"}}
           onClick={() => {
+            // 이메일 이상여부 검사
             if (regexEmail.test(member.value)) {
-              // if (chkmail==="사용중인 이메일 입니다.") {
               if (!visble) {
                 setChkBtn("인증번호 확인하기");
                 setVisble(!visble);
@@ -167,9 +164,7 @@ const CheckEmail = () => {
                   alert("인증번호를 확인해주세요.")
                 }
               }
-              // }else{
-              //     alert("등록되지 않은 메일입니다.")
-              //   }
+            // 이메일 이상여부 검사
             } else {
               alert("이메일을 확인해주세요.")
             }

@@ -1,4 +1,5 @@
 // 요일을 계산하는 커스텀 훅
+// 파라미터 todayWeek = 요일, date = 날짜 개수
 const useWeek = (todayWeek, date) => {
   // let strWeak = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let strWeek = ["일", "월", "화", "수", "목", "금", "토"];
