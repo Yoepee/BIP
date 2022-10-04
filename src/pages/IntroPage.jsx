@@ -65,7 +65,7 @@ const Wrap = styled.div`
 const Container = styled.div`
   /* background-color: whitesmoke; */
   overflow: hidden;
-  margin: 0 0 10px 0;
+  margin-bottom: 20px;
 `
 const ItrBtn = styled.button`
   width: 200px;
