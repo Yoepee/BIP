@@ -6,6 +6,7 @@ import { __getPromise } from "../../../redux/modules/promise";
 import PersonIcon from '@mui/icons-material/Person';
 
 // 약속목록 컴포넌트
+// day = 약속 날짜 선택값
 const PromiseList = ({day}) => {
   const navigate = useNavigate();
   const dispatch= useDispatch();

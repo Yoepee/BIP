@@ -1,15 +1,14 @@
-import base from "../../img/baseProfile.jpg"
 import styled from "styled-components";
 import axios from "axios"
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
+// 프로필 사진 수정 컴포넌트
+// setImg, img 이미지 url을 담는 값
 const ProEditPicture = ({setImg, img}) => {
-   
-
     let a;
     const onChange = async (e) => {
         // input file에서 선택된 file을 img로 지정
-        const img = e.target.files[0];
+        const image = e.target.files[0];
         // 이미지 파일이 아니면 이후 동작을 생략하고 경고문구 출력
         // if (!img?.name.match(fileForm)) {
         //   alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.");
@@ -17,19 +16,23 @@ const ProEditPicture = ({setImg, img}) => {
         // }
         // 폼데이터 형식 선언
         const formData = new FormData();
+
+        //폼데이터 값 (key : file, value : img)  
         // api에서 요구하는 key값과 value값 지정 (key : "image", value: 이미지파일)
-        // formData.append("image", img);
+        formData.append("file", image); // 반복문을 활용하여 파일들을 formData 객체에 추가한다
         // 이미지만 보내면되기때문에 더이상 append하지않고 이미지파일 전송
 
-       
-        formData.append("file", img); // 반복문을 활용하여 파일들을 formData 객체에 추가한다
+        // form데이터를 보내주면 이미지가 저장되는 url경로를 불러주는 api
         a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
             headers: {
                 Authorization: localStorage.getItem("Authorization"),
                 RefreshToken: localStorage.getItem("RefreshToken"),
                 "Content-Type": "multipart/form-data",
             },
-        }).then((res)=>{setImg({imgUrl:res.data.data})})
+        }).then(
+          // url호출 성공시 img값에 url값 저장
+          (res)=>{setImg({imgUrl:res.data.data})}
+          )
         
         
         

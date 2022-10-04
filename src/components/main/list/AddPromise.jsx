@@ -10,10 +10,17 @@ import "react-calendar/dist/Calendar.css"; // css import
 
 import dayjs from "dayjs";
 import KaKaoMap from "../../map/KakaoMap";
+// 주소검색 라이브러리 (다음 우편번호 검색)
 import DaumPostcode from 'react-daum-postcode';
-
+// 달력 날짜표시 한국어 세팅
 dayjs.locale("ko");
 
+// promise = 약속 생성시 필요 값 (출력)
+// setPromise = 약송 생성 값 수정 용도 (시간)
+// onChangeHandler = 입력창 입력시 promise값 수정 용도,
+// onChange = 시간값 수정 용도
+// time = 시간 받아오기
+// am, setAm = 오전 오후 설정
 const AddPromise = ({
   promise,
   setPromise,
@@ -23,26 +30,25 @@ const AddPromise = ({
   am,
   setAm,
 }) => {
+  // 날짜 선택 달력 출력 여부 결정
   const [check, setCheck] = useState(false);
+  // 오늘 날짜 기본 세팅
   const now = new Date();
   const [date, setDate] = useState(now);
+  // 약속 선택 (자신과의 약속, 타인과의 약속)
   const [modal, setModal] = useState(false);
   const { naver } = window;
-  // 주소 검색 함수에 넘겨줄 address 상태 관리
-  const initialState = { address: "" }
-  const [address, setAddress] = useState(initialState);
+  // 주소 검색 후 나온 결과 주소값 지정
   const [roadAddress, setRoadAddress] = useState(null);
   // 위도 경도 변경되는 값을 받을 수 있도록 상태 관리.
   const [lat, setLat] = useState(37.5656);
   const [lng, setLng] = useState(126.9769);
+  // 주소검색 출력 여부 확인값
   const [openAddr, setOpenAddr] = useState(false)
 
-  const searchChange = (e) => {
-    const { name, value } = e.target;
-    setAddress({ [name]: value });
-  }
-
+  // 주소 값을 통해 좌표를 찾는 함수
   const searchAddressToCoordinate = (address) => {
+    // 네이버 geocode 사용 (index.html에 자바스크립트 선언)
     naver.maps.Service.geocode(
       {
         query: address,
@@ -51,29 +57,36 @@ const AddPromise = ({
         if (status !== naver.maps.Service.Status.OK)
           return alert("Something wrong!");
 
+        // 결과값 = response.v2.addresses에 나오는 걸 나눠서 작성된 내용
         let result = response.v2;
         let items = result.addresses;
 
+        // 경도, 위도 값
         let x = parseFloat(items[0].x);
         let y = parseFloat(items[0].y);
 
-        console.log(x, y)
-
         setLat(y);
         setLng(x);
+        // 주소값 지정
         setRoadAddress(items[0].roadAddress);
+        // 좌표값을 약속 생성 변수 값으로 입력
         setPromise({ ...promise, place: items[0].roadAddress, coordinate: (String(y) + "," + String(x)) })
       }
     )
   }
 
+  // 날짜 선택시 달력 미출력
   useEffect(() => {
     setCheck(false);
   }, [date]);
 
+  // 시간 값 변동 시 약속생성 시간 값 설정 변경
   useEffect(() => {
+    // 오후 조건
     if (!am) {
+      // 오후 12시 (정오)
       if (time.hour === "12") {
+        // 분 입력 값이 1자리 일때 0부착
         if (time.min.length===1) {
           setPromise({
             ...promise,
@@ -81,6 +94,7 @@ const AddPromise = ({
               `YYYY-MM-DD-${time.hour}-0${time.min}-00`
             ),
           });
+        // 그 외 분 정상입력
         } else {
           setPromise({
             ...promise,
@@ -89,7 +103,9 @@ const AddPromise = ({
             ),
           });
         }
+        // 12시 외에는 작성시간 +12시간 ex) 오후 1시 => 13시
       } else {
+        // 분 입력 값이 1자리 일때 0부착
         if (time.min.length===1) {
           setPromise({
             ...promise,
@@ -98,6 +114,7 @@ const AddPromise = ({
             ),
           });
         } else {
+          // 그 외 분 정상입력
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -106,8 +123,11 @@ const AddPromise = ({
           });
         }
       }
+      // 오전일 때 식별
     } else {
+      // 오전 12시(자정) 00시로 변경
       if (time.hour === "12") {
+        // 분 입력 값이 1자리 일때 0부착
         if (time.min.length===1) {
           setPromise({
             ...promise,
@@ -115,6 +135,7 @@ const AddPromise = ({
               `YYYY-MM-DD-0${Number(time.hour) - 12}-0${time.min}-00`
             ),
           });
+          // 그 외 분 정상입력
         } else {
           setPromise({
             ...promise,
@@ -123,15 +144,18 @@ const AddPromise = ({
             ),
           });
         }
+        // 시간 값이 1자리 일때 0부착
       } else {
         if (Number(time.hour) < 10) {
-          if (Number(time.min) < 10 || time.min === "0") {
+          // 분 입력 값이 1자리 일때 0부착
+          if (time.min.length===1) {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
                 `YYYY-MM-DD-0${time.hour}-0${time.min}-00`
               ),
             });
+            // 그 외 분 정상입력
           } else {
             setPromise({
               ...promise,
@@ -140,7 +164,9 @@ const AddPromise = ({
               ),
             });
           }
+          // 시간 값이 2자리 이상일 때 정상 동작
         } else {
+          // 분 입력 값이 1자리 일때 0부착
           if (time.min.length===1) {
             setPromise({
               ...promise,
@@ -148,6 +174,7 @@ const AddPromise = ({
                 `YYYY-MM-DD-${time.hour}-0${time.min}-00`
               ),
             });
+            // 그 외 분 정상입력
           } else {
             setPromise({
               ...promise,
@@ -161,12 +188,10 @@ const AddPromise = ({
     }
   }, [time, date, am]);
 
-  console.log(String(lat)+","+String( lng))
-  console.log(roadAddress);
-  console.log(promise)
   return (
     <>
       <Wrap>
+        {/* 주소 검색창 출력 여부에 따라 표시 */}
         {openAddr ?
           <div style={{ position: "relative", background: "gray", justifyContent:"center" }}>
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -180,6 +205,7 @@ const AddPromise = ({
             </div>
           </div>
           : null}
+          {/* 제목 */}
         <UnderLine>
           <Input
             type="text"
@@ -189,6 +215,7 @@ const AddPromise = ({
             onChange={onChangeHandler}
           />
         </UnderLine>
+        {/* 내용 */}
         <UnderLine>
           <Input
             type="text"
@@ -198,12 +225,10 @@ const AddPromise = ({
             onChange={onChangeHandler}
           />
         </UnderLine>
+        {/* 약속 대상 선택 */}
         <Point>
+          {/* 선택값에 따른 div표시 변경 */}
           <label style={{ fontWeight: "bold" }}>약속 대상</label>
-          {/* <select name="point" value={promise.point} onChange={onChangeHandler}>
-            <option value="0">자신과의 약속</option>
-            <option value="100">타인과의 약속</option>
-          </select> */}
           {promise.point === "0" && !modal ?
             <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
               <div>자신과의 약속　</div><div style={{ color: "#A67EED" }}>▼</div>
@@ -219,6 +244,7 @@ const AddPromise = ({
                 : <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
                   <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
                 </div>}
+                {/* 선택에 따른 약속 생성 값 수정 */}
           {modal === true ?
             <div style={{
               width: "150px",
@@ -238,7 +264,9 @@ const AddPromise = ({
             : null
           }
         </Point>
+        {/* 시간 선택 */}
         <When>
+          {/* 클릭 시 달력 출력 (달력 아이콘) */}
           <div
             onClick={() => {
               setCheck(!check);
@@ -247,9 +275,11 @@ const AddPromise = ({
               <CalendarMonthIcon style={{ color: "#A67EED" }} />
             </p>
           </div>
+          {/* 선택된 날짜 출력 */}
           <div>{dayjs(date).format("YYYY.MM.DD dd")}</div>
           <div>
             <div>
+              {/* 오전 오후 여부 확인하여 표시 조정 */}
               {am ? (
                 <>
                   <Button
@@ -287,6 +317,7 @@ const AddPromise = ({
               )}
             </div>
           </div>
+          {/* 시간 입력칸 */}
           <div>
             <InputTime
               type="text"
@@ -312,20 +343,13 @@ const AddPromise = ({
             분
           </div>
         </When>
+        {/* 달력 아이콘 클릭시 출력되는 달력 */}
         {check ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Calendar onChange={setDate} value={date} name="birthDate" />
           </div>
         ) : null}
-        {/* <div>
-          <Input
-            type="text"
-            placeholder="장소"
-            name="place"
-            value={promise.place}
-            onChange={onChangeHandler}
-          />
-        </div> */}
+        {/* 장소 입력인데 동일 styled적용 확인후 수정필요 여부 결정 */}
         <When>
           <div>장소</div>
           {openAddr ? null :
@@ -334,10 +358,9 @@ const AddPromise = ({
               onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
               : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
           }
-          {/* <button onClick = {()=>{searchAddressToCoordinate(address.address)}}
-          >검색</button> */}
         </When>
-          
+          {/* 카카오 지도 출력 부, 위도경도는 주소 검색 시 자동 선정 */}
+          {/* 크키값 width, height 값으로 지정필요 */}
         <Map><KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"} /></Map>
       </Wrap>
     </>

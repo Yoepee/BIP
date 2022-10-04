@@ -7,7 +7,7 @@ import intro4 from '../../img/004.png'
 import intro5 from '../../img/005.png'
 
 
-
+// intro페이지 소개 출력 슬라이드
 const ItrSwipe = () => {
     return (
         <Carousel>
