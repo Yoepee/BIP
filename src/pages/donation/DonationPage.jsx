@@ -3,6 +3,7 @@ import Header from "../../components/header/Header";
 import styled from "styled-components";
 import CreateIcon from '@mui/icons-material/Create';
 import { useNavigate } from "react-router-dom";
+import Donation from "../../components/donation/Donation";
 
 // 재능 기부 목록 페이지
 const DonationPage = () =>{
@@ -11,6 +12,7 @@ const DonationPage = () =>{
     <>
       <Header head={"재능기부"}/>
       <p onClick={()=>{navigate("/detaildonation/1")}}>나는 기부페이지</p>
+      <Donation/>
       <Plus>
           <IconBtn onClick={() => { navigate("/adddonation") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
       </Plus>

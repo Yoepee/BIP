@@ -7,6 +7,8 @@ import detailPromise from "./modules/detailPromise";
 import searchMember from "./modules/searchMember";
 import checkIn from "./modules/checkIn";
 import chat from "./modules/chat";
+import donation from "./modules/donation";
+import detailDonation from "./modules/detailDonation";
 
 export default configureStore({
   reducer: {
@@ -26,5 +28,9 @@ export default configureStore({
     checkIn:checkIn.reducer,
     // 채팅 내역 받아오기
     chat:chat.reducer,
+    // 재능기부 리스트
+    donation: donation.reducer,
+    // 재능기부 상세보기
+    detailDonation: detailDonation.reducer,
   }
 });
