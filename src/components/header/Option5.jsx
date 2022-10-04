@@ -1,12 +1,10 @@
-
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { __searchName, __searchPhone } from '../../redux/modules/searchMember';
 import styled from 'styled-components';
-import { __searchName, __searchPhone } from "../../redux/modules/searchMember";
 
+// 친구추가 뒤로가기(친구) 제목 완료
 const Option5 = ({ head, payload, onChangeHandle }) => {
   const dispatch = useDispatch();
-
   
   const searchMemberName = () => {
     dispatch(__searchName(payload));
@@ -15,13 +13,10 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
     dispatch(__searchPhone(payload));
    }
 
-
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
-
-
-        <input
+      <input
           type="text"
           style={{
             outline: "none",
@@ -35,8 +30,6 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
           value={payload.value}
           onChange={(e)=>{onChangeHandle(e)}}
         />
-
-
       </div>
       <div
         onClick={() => {
@@ -50,11 +43,10 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
         <p>찾기</p>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default Option5;
-
 
 const Input = styled.input`
   margin-left: 20px;

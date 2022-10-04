@@ -7,15 +7,15 @@ import styled from 'styled-components';
 import AddMemberPage from '../../pages/AddMemberPage';
 import ReceiveMember from '../member/ReceiveMember';
 
+{/* 친구목록 제목 검색 친구추가 메뉴(친구수정(별칭), 친구삭제)) */}
 const Option4 = ({ head, setType, type }) => {
-  const navigate = useNavigate();
   const [chk, setChk] = useState(0);
   const [chktype, setChktype] = useState("name");
   return (
     <>{chk===3?
       <AddMemberArea>
         <AddMemberPage type={chktype} setChk={setChk} setChktype={setChktype} />
-      </AddMemberArea>
+        </AddMemberArea>
       :null}
       {chk===4?
       <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid black", left:"30%", top:"20%", zIndex:"20"}}>
