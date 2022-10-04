@@ -20,8 +20,10 @@ const Kakao = () => {
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
         dispatch(readSocial(response.data.data));
         // 닉네임이나 휴대폰 번호가 없으면 번호수정 후 닉네임 수정하도록 이동
-        if(response.data.data.nickname===null|| response.data.data.phoneNumber===null){
+        if( response.data.data.phoneNumber===null){
           navigate("/signup/change/kakao");
+        }else if(response.data.data.nickname===null){
+          navigate("/signup/nickname");
         }else{
           // 닉네임이 있다면, 닉네임을 로컬스토리지 저장
           localStorage.setItem("name", response.data.data.nickname);
