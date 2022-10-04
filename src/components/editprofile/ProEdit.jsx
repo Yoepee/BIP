@@ -3,18 +3,30 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
-import { width } from "@mui/system";
 
+// 프로필 수정 사진 외 (닉네임, 휴대폰번호, 이메일) 수정
+// set = 입력값 담는 변수
+// onChangeHandler 입력값 수정하는 함수 (input용)
+// setChk 중복여부 확인하여 결과값 저장 함수
 const ProEdit = ({ set, onChangeHandler, setChk }) => {
+  // 휴대폰 번호 정규식
   const regexPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+  // 닉네임 정규식
   const regexNickname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,8}$/;
+  // 이메일 정규식
   const regexEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  // 인증코드 정규식
   const regtest = /^[0-9]{6}$/;
+
+  // 수정하는 값 선택 ( 닉네임, 휴대폰번호, 이메일)
   const { type } = useParams();
+  // 경고문구 출력
   const [ment, setMent] = useState("");
+  // 입력코드 입력창 출력여부 및 버튼 조정
   const [visible, setVisible] = useState(false);
   const [chkBtn, setChkBtn] = useState("인증하기 받기")
 
+  // 
   useEffect(() => {
     if (type === "name") {
       if (regexNickname.test(set.value)) {

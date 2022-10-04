@@ -7,19 +7,24 @@ import axios from "axios";
 import CheckIn from "./CheckIn";
 import KaKaoMap from "../../map/KakaoMap";
 
-
+// 약속 상세 페이지
 const DetailPromise = () => {
   const {id} = useParams();
   const dispatch = useDispatch();
+  // 상세보기 정보 받아오기
   const promise = useSelector((state)=>state.detailPromise);
+  // 방장 닉네임 확인
   const [leader, setLeader] = useState("");
+  // 체크인 창을 숨길지 드러낼지 결정하는 변수
   const [chk,setChk] = useState(false);
 
+  // 상세보기 정보와 방장 정보를 확인함
   useEffect(()=>{
     dispatch(__getDetailPromise(id));
     bangjang();
   },[dispatch])
 
+  // 방장 누구인지 확인하는 함수
   const bangjang = async () => {
     let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
       headers: {
@@ -27,6 +32,7 @@ const DetailPromise = () => {
         RefreshToken: localStorage.getItem('RefreshToken')
       }
     }).then((response) => {
+      // 방장을 식별하면 leader에 방장 닉네임을 보관
       if (response.data.success) {
           setLeader(response.data.data.nickname)
       } else {
@@ -41,15 +47,18 @@ const DetailPromise = () => {
     <>
       <Wrap>
         <LeftItem>
+          {/* 제목 */}
           <Title>
             <p style={{fontSize:"24px"}}>{promise?.data?.data?.title}</p>
             <div style={{margin:"20px 8px 0 0"}}>
             <p style={{fontSize:"13px", marginLeft:"250px"}}><span>P</span>{promise?.data?.data?.point}</p>
             </div>
           </Title>
+          {/* 내용 */}
           <Desc>
             <p>{promise?.data?.data?.content}</p>
           </Desc>
+          {/* 시간 (split을 이용한 값 구분) */}
           <When>
             <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
             <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
@@ -71,6 +80,7 @@ const DetailPromise = () => {
             }
             <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
           </When>
+          {/* 참여 인원, 클릭시 체크인 창 꺼냄 */}
           <People onClick={()=>{setChk(!chk)}}>
             {!chk?
             <p >▼</p>
@@ -86,10 +96,13 @@ const DetailPromise = () => {
             )}
             })}
           </People>
+          {/* chk값을 확인하여 체크인 컴포넌트를 부를지 결정 */}
           {chk?
           <CheckIn/>
           :null}
         </LeftItem>
+        {/* 장소 - 좌표값을 받아와서 지도에 표시 */}
+        {/* 초기값으로 서울시청이 지정되어 있으나 장소가 없으면 약속이 없으므로 불필요 문구 (차후 삭제 예정) */}
         <RightItem>
           <Where>
             <p>{promise?.data?.data?.place}</p>
