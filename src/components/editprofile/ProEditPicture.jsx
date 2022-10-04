@@ -33,20 +33,17 @@ const ProEditPicture = ({setImg, img}) => {
           // url호출 성공시 img값에 url값 저장
           (res)=>{setImg({imgUrl:res.data.data})}
           )
-        
-        
-        
-        
+          
         // 폼데이터 들어가는 형식을 보기위한 내용
         for (var pair of formData.entries()) {
           console.log(pair[0] + ", " + pair[1]);
         }
-
     }
     return (
         <div>
         <div style={{ width:"100%" }}>
         <ImgArea>
+        {/* 사진 미리보기 (수정 필요) */}
         {img.imgUrl===""?
         <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`}/>
         :<img src={img.imgUrl}/>

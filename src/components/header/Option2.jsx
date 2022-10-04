@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { __addPromise, __editPromise } from '../../redux/modules/detailPromise';
 
+// 약속생성 뒤로가기(홈) 제목 완료
 const Option2 = ({ head, payload }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

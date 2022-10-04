@@ -4,6 +4,7 @@ import { useState } from "react";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import styled from "styled-components";
 
+// 로그아웃
 const Option6 = ({ head }) => {
   const navigate = useNavigate();
 
