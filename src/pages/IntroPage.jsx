@@ -35,7 +35,7 @@ const IntroPage = () => {
         <div>
           <Naver_login>
             <a id="naver-login-btn" onClick={()=>{naver()}}>
-              <img src={naver_login} width="100px" />
+              <img src={naver_login} width="120px" />
             </a>
           </Naver_login>          
         </div>
@@ -43,7 +43,7 @@ const IntroPage = () => {
         <div>
           <Kakao_login>
           <a id="kakao-login-btn" onClick={()=>{kakao()}}>
-            <img src={kakao_login} width="120px" />            
+            <img src={kakao_login} width="130px" />            
           </a>
           </Kakao_login>
         </div>
@@ -65,12 +65,12 @@ const Wrap = styled.div`
 const Container = styled.div`
   /* background-color: whitesmoke; */
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `
 const ItrBtn = styled.button`
   width: 200px;
-  height: 30px;
-  margin-bottom: 3px;
+  height: 45px;
+  margin-bottom: 8px;
   background-color: #6D09D1;
   color: white;
   font-size: 12px;
@@ -83,22 +83,27 @@ const ItrBtn = styled.button`
 const Naver_login = styled.div`
   background-color: #03C75A;
   width: 200px;
-  height: 30px;
+  height: 45px;
   margin: 0 auto;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   border-radius: 4px;
   cursor: pointer;
+  line-height: 42px;
   img {
-    margin: 2px auto;
+    vertical-align: middle;
   }
 `
 
 const Kakao_login = styled.div`
   background-color: #FEE500;
   width: 200px;
-  height: 30px;
+  height: 45px;
   margin: 0 auto;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
   border-radius: 4px;
   cursor: pointer;
+  line-height: 42px;
+  img {
+    vertical-align: middle;
+  }
 `
