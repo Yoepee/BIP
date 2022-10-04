@@ -25,20 +25,38 @@ const CheckIn = () =>{
          {checkList?.data?.data?.map((member)=>{
           // 결과값이 ontime이면 정상 표시
           if(member.attendance==="ONTIME"){
-            return (
-              <OntimeCard key={member.id}>{member.nickname}</OntimeCard>
-            )
+            if(member.nicknameByOwner!== null){
+              return (
+                <OntimeCard key={member.id}>{member.nicknameByOwner}</OntimeCard>
+              )
+            }else{
+              return (
+                <OntimeCard key={member.id}>{member.nicknameByFriend}</OntimeCard>
+              )
+            }
           }
           // 결과값이 late이면 지각 표시
           else if(member.attendance==="LATE"){
-            return (
-              <LateCard key={member.id}>{member.nickname}</LateCard>
-            )
+            if(member.nicknameByOwner!== null){
+              return (
+                <LateCard key={member.id}>{member.nicknameByOwner}</LateCard>
+              )
+            }else{
+              return (
+                <LateCard key={member.id}>{member.nicknameByFriend}</LateCard>
+              )
+            }
             // 결과값이 noshow이면 미출석 표시
           }else{
-            return (
-              <NoshowCard key={member.id}>{member.nickname}</NoshowCard>
-            )
+            if(member.nicknameByOwner!== null){
+              return (
+                <LateCard key={member.id}>{member.nicknameByOwner}</LateCard>
+              )
+            }else{
+              return (
+                <NoshowCard key={member.id}>{member.nicknameByFriend}</NoshowCard>
+              )
+            }
           }
          })}
     </div>

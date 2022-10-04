@@ -40,8 +40,6 @@ const DetailPromise = () => {
       }
     })
   }
-
-  console.log(promise)
   
   return(
     <>
@@ -87,13 +85,27 @@ const DetailPromise = () => {
             :<p>▲</p>}
             <p>참여인원 : </p>
             {promise?.data?.data?.memberList?.map((member)=>{
-              if(member.nickname===leader){
-              return (
-                  <p key={member.id}>💜{member.nickname}</p>
-              )}else{
-                return (
-                  <p key={member.id}>💚{member.nickname}</p>
-            )}
+              if(member.nicknameByFriend===leader){
+                if(member.nicknameByOwner!==null){
+                  return (
+                    <p key={member.id}>💜{member.nicknameByOwner}</p>
+                  )
+                }else{
+                  return (
+                    <p key={member.id}>💜{member.nicknameByFriend}</p>
+                  )
+                }
+              }else{
+                if(member.nicknameByOwner!==null){
+                  return (
+                    <p key={member.id}>💚{member.nicknameByOwner}</p>
+                  )
+                }else{
+                  return (
+                    <p key={member.id}>💚{member.nicknameByFriend}</p>
+                  )
+                }
+              }
             })}
           </People>
           {/* chk값을 확인하여 체크인 컴포넌트를 부를지 결정 */}
