@@ -57,7 +57,7 @@ export default IntroPage;
 
 const Wrap = styled.div`
   /* background-color: yellowgreen; */
-  margin: 15% auto;
+  margin: 0 auto;
   text-align: center;
   max-width: 500px;
 `
@@ -65,7 +65,7 @@ const Wrap = styled.div`
 const Container = styled.div`
   /* background-color: whitesmoke; */
   overflow: hidden;
-  margin: 10%;
+  margin: 0 0 10px 0;
 `
 const ItrBtn = styled.button`
   width: 200px;

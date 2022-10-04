@@ -1,8 +1,10 @@
 import Carousel from 'react-material-ui-carousel'
 import styled from "styled-components"
-import logo from '../../img/logo.jpg'
-import logo2 from '../../img/logo2.jpeg'
-import logo3 from '../../img/logo3.png'
+import intro1 from '../../img/001.png'
+import intro2 from '../../img/002.png'
+import intro3 from '../../img/003.png'
+import intro4 from '../../img/004.png'
+import intro5 from '../../img/005.png'
 
 
 
@@ -10,16 +12,19 @@ const ItrSwipe = () => {
     return (
         <Carousel>
             <div>
-              <img src={logo} width="200px"/>
-              <p style={{fontSize:"13px", fontWeight:"bold"}}>더 이상 약속을 깨지 않게 도와드릴게요</p>
+              <img src={intro1} width="400px"/>
             </div>
             <div>
-              <img src={logo2} width="200px"/>
-              <p style={{fontSize:"13px", fontWeight:"bold"}}>더 이상 약속을 깨지 않게 도와드릴게요</p>
+              <img src={intro2} width="400px"/>
             </div>
             <div>
-              <img src={logo3} width="200px"/>
-              <p style={{fontSize:"13px", fontWeight:"bold"}}>더 이상 약속을 깨지 않게 도와드릴게요</p>
+              <img src={intro3} width="400px"/>
+            </div>
+            <div>
+              <img src={intro4} width="400px"/>
+            </div>
+            <div>
+              <img src={intro5} width="400px"/>
             </div>
         </Carousel>
       )
