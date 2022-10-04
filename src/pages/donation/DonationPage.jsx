@@ -11,7 +11,6 @@ const DonationPage = () =>{
   return (
     <>
       <Header head={"재능기부"}/>
-      <p onClick={()=>{navigate("/detaildonation/1")}}>나는 기부페이지</p>
       <Donation/>
       <Plus>
           <IconBtn onClick={() => { navigate("/adddonation") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
