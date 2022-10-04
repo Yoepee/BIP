@@ -9,6 +9,7 @@ import checkIn from "./modules/checkIn";
 import chat from "./modules/chat";
 import donation from "./modules/donation";
 import detailDonation from "./modules/detailDonation";
+import comment from "./modules/comment";
 
 export default configureStore({
   reducer: {
@@ -32,5 +33,7 @@ export default configureStore({
     donation: donation.reducer,
     // 재능기부 상세보기
     detailDonation: detailDonation.reducer,
+    // 댓글 내용 불러오기
+    comment: comment.reducer,
   }
 });

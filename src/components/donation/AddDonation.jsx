@@ -81,7 +81,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       console.log(pair[0] + ", " + pair[1]);
     }
 }
-  console.log(donate)
+
   return (
     <div>
       {openAddr ?
@@ -129,9 +129,6 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       <div>
         제목
         <input placeholder="제목" name="title" value={donate.title} onChange={(e) => { onChangeHandler(e) }} />
-      </div>
-      <div>내용
-        <input placeholder="제목" name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </div>
       <div>사진
       <input type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg"/>
