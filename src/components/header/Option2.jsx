@@ -10,7 +10,6 @@ const Option2 = ({ head, payload }) => {
   const {id} = useParams();
 
   const isEmptyObj = (obj)=>{
-    console.log(Object.keys(obj).length)
     if(obj.constructor===Object){
       for(const key in obj){
         if(obj[key]==="")
@@ -19,10 +18,7 @@ const Option2 = ({ head, payload }) => {
     }
     return false;
   }
-  // useEffect(()=>{
 
-  // },[payload])
-  console.log(isEmptyObj(payload))
   return (
     <>
       <div onClick={() => { navigate("/") }}>

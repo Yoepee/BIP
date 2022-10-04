@@ -11,7 +11,6 @@ import axios from 'axios';
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
-              console.log(data)
             if(data.data.success===false)
               alert(data.data.data);
             return thunkAPI.fulfillWithValue(data.data);
