@@ -25,7 +25,7 @@ import axios from 'axios';
     "/api/posts/{postId}",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/posts/${payload}`, payload,{
+            const data =  await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/posts`, payload,{
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),

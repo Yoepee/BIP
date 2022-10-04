@@ -7,6 +7,7 @@ import Option4 from './Option4';
 import Option5 from './Option5';
 import Option6 from './Option6';
 import Option7 from './Option7';
+import Option8 from './Option8';
 
 // 헤더 옵션에 따른 차등 헤더 부여
 // head - 헤더 제목
@@ -63,6 +64,11 @@ const Header = ({ head, option, payload, chk, image, setType, type, onChangeHand
       {/* 친구검색 */}
       {option===7?
       <Option7 head={head} setType={setType} type={type}/>
+      :null}
+
+      {/* 재능기부생성 뒤로가기(홈) 제목 완료 */}
+      {option===8?
+      <Option8 head={head} payload={payload}/>
       :null}
 
     </div>
