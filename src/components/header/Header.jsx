@@ -8,8 +8,14 @@ import Option5 from './Option5';
 import Option6 from './Option6';
 import Option7 from './Option7';
 
-
-
+// 헤더 옵션에 따른 차등 헤더 부여
+// head - 헤더 제목
+// option - 헤더 아이콘 및 기능별 옵션 번호 (번호는 하단 참조)
+// payload - 입력값이 필요한 헤더에 보내지는 함수 매개값
+// chk - 프로필 수정시 중복체크 여부 검사 값
+// image - 프로필 수정시 보내지는 image값
+// type, setType - 헤더에서 기능을 나누는 변수값
+// onChangeHandle - 헤더에서 입력창 수정구문이 생길 때 사용하는 변수 값
 const Header = ({ head, option, payload, chk, image, setType, type, onChangeHandle}) => {
   
   return (

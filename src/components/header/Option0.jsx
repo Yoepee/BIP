@@ -1,6 +1,7 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate } from 'react-router-dom';
 
+//  뒤로가기 제목 
 const Option0 = ({head}) =>{
   const navigate = useNavigate();
   return (

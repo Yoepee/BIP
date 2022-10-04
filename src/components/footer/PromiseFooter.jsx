@@ -2,15 +2,19 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
+// 게시물 상세보기 푸터
 const PromiseFooter = () => {
-  const navigate= useNavigate();
-  const promise = useSelector((state)=>state.detailPromise);
-  const {id} = useParams();
+  const navigate = useNavigate();
+  const promise = useSelector((state) => state.detailPromise);
+  // 게시글 번호
+  const { id } = useParams();
 
   return (
     <Menu>
-        <Invite onClick={()=>{navigate(`/member/invite${promise?.data?.data?.id}`)}}>초대</Invite>
-        <Chat onClick={()=>{navigate(`/chat/${id}`)}}>채팅하기</Chat>
+      {/* 약속 멤버 초대 */}
+      <Invite onClick={() => { navigate(`/member/invite${promise?.data?.data?.id}`) }}>초대</Invite>
+      {/* 채팅하기 방으로 이동 */}
+      <Chat onClick={() => { navigate(`/chat/${id}`) }}>채팅하기</Chat>
     </Menu>
   )
 }

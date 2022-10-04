@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { __editNickname, __editPhone, __editEmail, __editPicture } from '../../redux/modules/profile';
 
+// 프로필 변경 뒤로가기(프로필상세) 제목 완료
 const Option1 = ({ head, payload, chk, image }) =>{
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { __searchFriendName, __searchFriendPhone, __getMember } from '../../redux/modules/member';
 import { useDispatch } from 'react-redux';
+
+// 친구검색
 const Option7 = ({ head, setType, type }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("닉네임");
