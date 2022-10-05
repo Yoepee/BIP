@@ -14,6 +14,7 @@ import NextMonth from "../components/main/calendar/NextMonth";
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
+import Week from "../components/main/calendar/Week";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -27,19 +28,13 @@ const MainPage = () => {
   useEffect(()=>{
     dispatch(__getPromise(day));
   },[day])
+  console.log(day)
     return (
       <>
         <Wrap>
-          {/* 캐로셀 : 옆으로 넘어가는 슬라이드메뉴 */}
-            <Carousel 
-            onChange={(now, previous) => setPage(now)}
-            {...settings}>
-              <div><Day setDay={setDay} page={page}/></div>
-              <div><Weekdate setDay={setDay} page={page}/></div>
-              <div><Monthdate setDay={setDay} page={page}/></div>
-              <div><NextMonth setDay={setDay} page={page}/></div>
-              {/* <div><Month /></div> */}
-            </Carousel>
+            <StHeaderContainer>
+            <Week day={day} setDay={setDay}/>
+            </StHeaderContainer>
             {/* 약속 리스트 불러오기 */}
             {day.unit!=="month"?
             <PromiseList day={day}/>
@@ -93,3 +88,34 @@ position: fixed;
 right: 10%;
 bottom: 15%;
 `
+const StHeaderContainer = styled.div`
+  max-width: 450px;
+  height: 214px;
+  position: relative;
+  margin-bottom: 20px;
+
+  & .topContainer {
+    display: flex;
+    justify-content: center;
+    & .headerTitle {
+      color: #ffffff;
+      position: absolute;
+      top: 47px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 21px;
+    }
+  }
+
+  & .calendarContainer {
+    position: relative;
+    top: -165px;
+    right: -85%;
+    background-color: #fff;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    padding-left: 4px;
+    padding-top: 4px;
+  }
+`;
