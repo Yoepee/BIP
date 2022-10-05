@@ -15,11 +15,29 @@ const CommentFooter = () =>{
     const {name, value} = e.target;
     setComment({...comment,[name]:value});
   }
+
+  const AddComment= () =>{
+    if (comment.content=== "") {
+      return;
+    }
+    dispatch(__addComment({id:id,data:comment}))
+    .then((res)=>{
+      setComment(initialState);
+    })
+  }
+
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      AddComment();
+    }
+  }
+
   return (
     <div style={{display:"flex"}}>
-      <input placeholder="댓글 작성" name="content" value={comment.content} onChange={onChangeHandler}/>
-      <div onClick={()=>{
-        dispatch(__addComment({id:id,data:comment}));
+      <input onKeyPress={handleKeyPress} placeholder="댓글 작성" name="content" value={comment.content} onChange={onChangeHandler}/>
+      <div
+      onClick={()=>{
+        AddComment()
       }}>작성</div>
     </div>
   )

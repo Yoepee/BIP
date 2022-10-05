@@ -39,16 +39,14 @@ import axios from 'axios';
   );
   // 댓글 수정 
   export const __editComment = createAsyncThunk(
-    "/api/comment/delete/{commentId}",
+    "/api/comment/update/{commentId}",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
-            const data =  await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/comment/delete/${payload.id}`,payload.data,{
+            const data =  await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/comment/update/${payload.id}`,payload.data,{
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
-              console.log(data)
               if(data.data.success===false)
               alert(data.data.data);
             return thunkAPI.fulfillWithValue(data.data);
@@ -63,7 +61,7 @@ import axios from 'axios';
     async (payload, thunkAPI) => {
         try {
           console.log(payload)
-            const data =  await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/comment/delete/${payload.id}`, payload.data,{
+            const data =  await axios.put(process.env.REACT_APP_SERVER_HOST+`/api/comment/delete/${payload}`,null,{
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
@@ -71,7 +69,7 @@ import axios from 'axios';
               console.log(data)
               if(data.data.success===false)
               alert(data.data.data);
-            return thunkAPI.fulfillWithValue(payload.id);
+            return thunkAPI.fulfillWithValue(payload);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
           }
@@ -134,8 +132,9 @@ export const comment = createSlice({
         },
         [__removeComment.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
+          console.log(action.payload)
           const index = state.data.data.findIndex(user=>user.id === action.payload);
-          state.data.data.splice(index,1)
+          state.data.data.splice(index,1,{...state.data.data[index], content:"댓글 작성자가 삭제한 댓글입니다."})
         },
         [__removeComment.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
