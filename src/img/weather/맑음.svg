@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.7 80.17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffb317;
+      }
+    </style>
+  </defs>
+  <g>
+    <path d="M40.12,27.24c-7.18,0-13,5.82-13,13s5.82,13,13,13,13-5.82,13-13-5.82-13-13-13Zm0,24c-6.07,0-11-4.94-11-11s4.93-11,11-11,11,4.94,11,11-4.93,11-11,11Z"/>
+    <rect x="39.11" y="14.24" width="2" height="10"/>
+    <rect x="39.11" y="56.24" width="2" height="10"/>
+    <rect x="14.12" y="39.24" width="9.99" height="2"/>
+    <rect x="56.11" y="39.24" width="10.01" height="2"/>
+    <rect x="49.61" y="24.53" width="10.41" height="2" transform="translate(-2 46.24) rotate(-45)"/>
+    <rect x="20.2" y="53.94" width="10.41" height="2" transform="translate(-31.41 34.06) rotate(-45)"/>
+    <rect x="24.41" y="20.34" width="2" height="10.41" transform="translate(-10.62 25.45) rotate(-45)"/>
+    <rect x="53.83" y="49.75" width="2" height="10.41" transform="translate(-22.8 54.87) rotate(-45)"/>
+  </g>
+  <path class="cls-1" d="M40.11,51.24c-6.07,0-11-4.94-11-11s4.93-11,11-11,11,4.94,11,11-4.93,11-11,11Z"/>
+</svg>

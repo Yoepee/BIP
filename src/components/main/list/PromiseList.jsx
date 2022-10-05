@@ -4,18 +4,17 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
 import PersonIcon from "@mui/icons-material/Person";
-import 맑음 from "../../../img/weather/맑음.png";
-import 흐림 from "../../../img/weather/흐림.png";
-import 이슬비 from "../../../img/weather/이슬비.png";
-import 안개 from "../../../img/weather/안개.png";
-import 비 from "../../../img/weather/비.png";
-import 천둥번개 from "../../../img/weather/천둥번개.png";
-import 돌풍 from "../../../img/weather/돌풍.png";
-import 눈 from "../../../img/weather/돌풍.png";
+import 맑음 from "../../../img/weather/맑음.svg";
+import 흐림 from "../../../img/weather/흐림.svg";
+import 이슬비 from "../../../img/weather/이슬비.svg";
+import 안개 from "../../../img/weather/안개.svg";
+import 비 from "../../../img/weather/비.svg";
+import 천둥번개 from "../../../img/weather/천둥번개.svg";
+import 돌풍 from "../../../img/weather/돌풍.svg";
+import 눈 from "../../../img/weather/눈.svg";
 
-const weatherIcon = {
-  weather: [맑음, 흐림,비,눈, 이슬비, 안개,  천둥번개, 돌풍],
-};
+
+
 
 // 약속목록 컴포넌트
 // day = 약속 날짜 선택값
@@ -53,10 +52,20 @@ const PromiseList = ({ day }) => {
                 }}>
                 <div style={{ display: "flex" }}>
                   <p> 현재날씨</p>
-                  {weatherIcon.weather.map((icon) => {
-                    if (icon ===흐림)
-                      return <img src={icon} width={"70px"} height={"70px"} />;
-                  })}
+                  {promise.weatherResponseDto.sky ==="맑음"&& <img src={맑음} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="흐림"&& <img src={흐림} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="비"&& <img src={비} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="이슬비"&& <img src={이슬비} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="천둥번개"&& <img src={천둥번개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="약한 안개"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="옅은 안개"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="안개"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="짙은 안개"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="약한 황사"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="짙은 황사"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="재"&& <img src={안개} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="돌풍"&& <img src={돌풍} width={"70px"} height={"70px"}/> }
+                  {promise.weatherResponseDto.sky ==="폭풍"&& <img src={돌풍} width={"70px"} height={"70px"}/> }
                    
                   <div>
                     <p>날씨 : {promise.weatherResponseDto.sky}</p>
