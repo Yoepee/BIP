@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __getPromise } from "../../../redux/modules/promise";
 import PersonIcon from "@mui/icons-material/Person";
-import 맑음 from "../../../img/weather/맑음.png";
-import 흐림 from "../../../img/weather/흐림.png";
-import 이슬비 from "../../../img/weather/이슬비.png";
-import 안개 from "../../../img/weather/안개.png";
-import 비 from "../../../img/weather/비.png";
-import 천둥번개 from "../../../img/weather/천둥번개.png";
-import 돌풍 from "../../../img/weather/돌풍.png";
-import 눈 from "../../../img/weather/돌풍.png";
+import 맑음 from "../../../img/weather/맑음.svg";
+import 흐림 from "../../../img/weather/흐림.svg";
+import 이슬비 from "../../../img/weather/이슬비.svg";
+import 안개 from "../../../img/weather/안개.svg";
+import 비 from "../../../img/weather/비.svg";
+import 천둥번개 from "../../../img/weather/천둥번개.svg";
+import 돌풍 from "../../../img/weather/돌풍.svg";
+import 눈 from "../../../img/weather/눈.svg";
 
 // 약속목록 컴포넌트
 // day = 약속 날짜 선택값
