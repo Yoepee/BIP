@@ -43,7 +43,7 @@ const DetailDonation = () => {
           <p>포인트 : {donation?.data?.data?.point}</p>
           :null
           }
-          <p>제목 : {donation?.data?.data?.title}</p>
+          <p>내용 : {donation?.data?.data?.content}</p>
         </div>
         <div>
           <div>관심 : {donation?.data?.data?.likes}, 댓글 : {donation?.data?.data?.numOfComment} </div>
