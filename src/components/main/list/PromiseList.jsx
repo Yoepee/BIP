@@ -48,7 +48,7 @@ const PromiseList = ({ day }) => {
                   navigate(`/detailpromise/${promise.id}`);
                 }}>
                 <div style={{ display: "flex" }}>
-                  <p> 현재날씨</p>
+                  {/* <p> 현재날씨</p> */}
                   {promise.weatherResponseDto.sky==="맑음"&&<img src={맑음} width={"70px"} height={"70px"} />}
                   {promise.weatherResponseDto.sky==="흐림"&&<img src={흐림} width={"70px"} height={"70px"} />}
                   {promise.weatherResponseDto.sky==="비"&&<img src={비} width={"70px"} height={"70px"} />}
@@ -64,14 +64,14 @@ const PromiseList = ({ day }) => {
                   {promise.weatherResponseDto.sky==="재 주의"&&<img src={안개} width={"70px"} height={"70px"} />}
                    {promise.weatherResponseDto.sky==="돌풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
                   {promise.weatherResponseDto.sky==="폭풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
-                  <div>
-                    <p>날씨 : {promise.weatherResponseDto.sky}</p>
-                    <p>현재온도 : {promise.weatherResponseDto.temperature}</p>
-                    <p>
+                  <div style={{display:"flex"}}>
+                    {/* <p>날씨 : {promise.weatherResponseDto.sky}</p> */}
+                    <p> {promise.weatherResponseDto.temperature}　</p>
+                    {/* <p>
                       최고/최저 : {promise.weatherResponseDto.minTemp} /{" "}
                       {promise.weatherResponseDto.maxTemp}{" "}
-                    </p>
-                    <p>강수확률 : {promise.weatherResponseDto.probability}</p>
+                    </p> */}
+                    <p>💧{promise.weatherResponseDto.probability}</p>
                   </div>
                 </div>
                 <div style={{ display: "flex" }}>

@@ -15,7 +15,7 @@ const DonationPage = () =>{
       <Plus>
           <IconBtn onClick={() => { navigate("/adddonation") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
       </Plus>
-      <Footer foot={3}/>
+      <Footer foot={1}/>
       
     </>
   )
