@@ -17,7 +17,7 @@ const ProfilePage = () =>{
             {/* 푸터 무시공간 */}
             <div style={{height:"50px"}}></div>
             {/* 푸터 */}
-            <Footer foot={2}/>
+            <Footer foot={3}/>
             </>
         </div>
     )

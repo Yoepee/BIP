@@ -15,7 +15,7 @@ const MemberPage = () =>{
     {/* 친구목록 */}
     <Member type={type} setType={setType}/>
     {/* 푸터메뉴 2번째 항목 선택 (0,1,2,3) */}
-    <Footer foot={1}/>
+    <Footer foot={2}/>
     <div style={{height:"50px"}}></div>
     </>
   )
