@@ -42,7 +42,7 @@ const AddPromisePage = () =>{
         // 받아오는 시간 값 split으로 나누어서 연도, 달, 일 맞춰서 날짜 데이터값으로 변경)
         eventDateTime:dayjs(new Date(response.payload.data.eventDateTime.split("-")[0], Number(response.payload.data.eventDateTime.split("-")[1])-1, response.payload.data.eventDateTime.split("-")[2])).format(`YYYY-MM-DD-${response.payload.data.eventDateTime.split("-")[3]}-${response.payload.data.eventDateTime.split("-")[4]}-00`),
         point:response.payload.data.point});
-        setTime({...initialState2, hour:response.payload.data.eventDateTime.split("-")[3], min:response.payload.data.eventDateTime.split("-")[4]});
+        setTime({...initialState2, hour:Number(response.payload.data.eventDateTime.split("-")[3]), min:response.payload.data.eventDateTime.split("-")[4]});
         // 시간값을 확인하여 오전 오후 식별
         if(Number(response.payload.data.eventDateTime.split("-")[3])>12){
           setAm(false);

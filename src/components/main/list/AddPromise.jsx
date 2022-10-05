@@ -146,7 +146,7 @@ const AddPromise = ({
         }
         // 시간 값이 1자리 일때 0부착
       } else {
-        if (Number(time.hour) < 10) {
+        if (time.hour.length===1) {
           // 분 입력 값이 1자리 일때 0부착
           if (time.min.length===1) {
             setPromise({
