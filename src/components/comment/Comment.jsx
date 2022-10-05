@@ -5,6 +5,9 @@ import { __editComment, __getComment, __removeComment } from "../../redux/module
 import CommentFooter from "../footer/CommentFooter";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import styled from'styled-components'
 
 const Comment = () => {
   const { id } = useParams();
@@ -47,37 +50,41 @@ const Comment = () => {
 
   return (
     <>
-      <div>
+      <div style={{width:"80%", margin:"10px auto"}}>
         댓글 목록
-        <CommentFooter />
+        <CommentFooter/>
         {commentList?.data?.data?.map((comment) => {
           if (comment.id === chkEdit) {
             return (
-              <div key={comment.id} style={{ display: "flex", border: "1px solid black" }}>
-                <div style={{ fontWeight: "bold" }}>{comment.nickname}</div>
-                <input name="content" value={edit.content} onChange={onChangeHandler}/>
-                {/* <div style={{ marginLeft: "auto" }}>{comment.createdAt}</div> */}
-                {comment.nickname === localStorage.getItem("name") ?
+              <CommentCard  key={comment.id}>
+                <div style={{display:"flex", fontWeight: "bold",marginLeft:"10px"}}> <div>{comment.nickname}</div> {comment.nickname === localStorage.getItem("name") ?
                   <div style={{ display: "flex", marginLeft:"auto" }}>
-                    <div onClick={() => { editComment(comment.id) }}>수정하기</div>
-                    <div onClick={() => { setChkEdit(0)}}>취소</div>
+                    <div onClick={() => { editComment(comment.id) }}><CheckIcon/></div>
+                    <div onClick={() => { setChkEdit(0)}}><CloseIcon/></div>
                   </div>
-                  : null}
-              </div>
+                  : null} </div>
+                
+                <EditInput name="content" value={edit.content} onChange={onChangeHandler}/>
+                {/* <div style={{ marginLeft: "auto" }}>{comment.createdAt}</div> */}
+               
+              </CommentCard>
             )
           } else {
             return (
-              <div key={comment.id} style={{ display: "flex", border: "1px solid black" }}>
-                <div style={{ fontWeight: "bold" }}>{comment.nickname}</div>
-                <div>{comment.content}</div>
-                <div style={{ marginLeft: "auto" }}>{comment.createdAt}</div>
-                {comment.nickname === localStorage.getItem("name") ?
-                  <div style={{ display: "flex" }}>
+              <CommentCard key={comment.id}>
+                <div style={{ display:"flex",fontWeight: "bold",marginLeft:"10px" }}> <div>{comment.nickname}</div>
+                 
+                  {comment.nickname === localStorage.getItem("name") ?
+                  <div style={{ display: "flex", marginLeft:"auto"}}>
                     <div onClick={() => { setChkEdit(comment.id); setEdit({...edit,content:comment.content}) }}><EditIcon /></div>
                     <div onClick={() => { removeComment(comment.id) }}><DeleteIcon /></div>
                   </div>
                   : null}
-              </div>
+                 </div>
+                <div style={{marginLeft:"10px"}}>{comment.content}</div>
+                <div style={{ marginLeft: "10px", marginRight:"10px", color:"#757575", fontSize:"14px"}}>{comment.createdAt}</div>
+               
+              </CommentCard>
             )
           }
         })}
@@ -87,3 +94,25 @@ const Comment = () => {
 }
 
 export default Comment;
+
+const EditInput = styled.input`
+  width: 90%; 
+  margin-left: 10px; 
+  margin-top:10px;
+  border:none; 
+  background-color:#e9e9e9;
+  outline: none;  
+  height: 35px;
+  border-radius:10px;
+  
+`
+const CommentCard = styled.div`
+  display: flex; 
+  flex-direction: column;
+  width: 100%; 
+  margin: 10px auto;
+  padding:10px 5px; 
+  border: none; 
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+`

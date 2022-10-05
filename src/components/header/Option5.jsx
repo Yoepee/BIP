@@ -13,6 +13,16 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
     dispatch(__searchPhone(payload));
    }
 
+   // 엔터로 채팅하기
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      if (head === "닉네임으로 친구 추가") {
+        searchMemberName();
+      } else {
+        searchMemberPhone();
+      }
+    }
+  }
   return (
     <>
       <div style={{ marginLeft: "1%" }}>
@@ -25,6 +35,7 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
             marginTop: "20px",
             width: "250px",
           }}
+          onKeyPress={handleKeyPress}
           placeholder={head}
           name="value"
           value={payload.value}

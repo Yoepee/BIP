@@ -1,15 +1,23 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate, useParams } from 'react-router-dom';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import {useState } from 'react';
+import {useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getDetailDonation } from '../../redux/modules/detailDonation';
 
 // 약속상세보기 뒤로가기(홈) 제목 메뉴(방장-방장위임, 멤버 조정, 방장x- 약속나가기, 취소)
 const Option9 = ({ head }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [chk, setChk] = useState(false);
   const { id } = useParams();
+  const donate = useSelector((state)=>state.detailDonation)
+
+  useEffect(()=>{
+    dispatch(__getDetailDonation);
+  },[dispatch])
 
 
   const removeDonation = async () => {
@@ -20,7 +28,6 @@ const Option9 = ({ head }) => {
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
       }).then((response) => {
-        console.log(response)
         if (response.data.success) {
           navigate("/donation")
         } else {
@@ -32,20 +39,20 @@ const Option9 = ({ head }) => {
       setChk(0);
     }
   }
-
-
   return (
     <>
       <div onClick={() => { navigate("/donation") }}>
         <p><ArrowBackIosNewRoundedIcon style={{color:"#6D09D1"}}/></p>
       </div>
-      <div style={{ marginLeft: "1%" }}>
-        <p>{head}</p>
+      <div style={{ marginLeft: "1%", fontWeight:"bold", fontSize:"20px" }}>
+        <p style={{ marginTop:"16px"}}>{head}</p>
       </div>
       <div style={{ marginLeft: "auto", marginRight: "2%", display:"flex" }}>
+      {donate?.data?.data?.nickname === localStorage.getItem("name")?
       <div onClick={() => { setChk(!chk)}} style={{  marginRight: "2%" }}>
         <p style={{color:"#A67EED"}}><MoreVertIcon /></p>
       </div>
+      :null}
       {chk == 1?
         <div style={{
           width: "150px",
@@ -64,8 +71,7 @@ const Option9 = ({ head }) => {
           <OptionMenu sstyle={{ borderBottom:"0px solid black" }}
             onClick={() => { setChk(!chk); }}>취소</OptionMenu>
         </div>
-        : null
-      }
+        : null}
       </div>
     </>
   )
