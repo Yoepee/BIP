@@ -16,6 +16,7 @@ const CheckIn = () =>{
     dispatch(__getCheckIn(id));
   },[dispatch]);
 
+  console.log(checkList)
   return (
     <>
     {/* 클릭시 체크인 함수 동작 */}
@@ -50,7 +51,7 @@ const CheckIn = () =>{
           }else{
             if(member.nicknameByOwner!== null){
               return (
-                <LateCard key={member.id}>{member.nicknameByOwner}</LateCard>
+                <NoshowCard key={member.id}>{member.nicknameByOwner}</NoshowCard>
               )
             }else{
               return (
