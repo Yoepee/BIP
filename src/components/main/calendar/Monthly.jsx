@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import previous from '../../../img/calendar/previous_arrow.svg';
-import next from '../../../img/calendar/next_arrow.svg';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
