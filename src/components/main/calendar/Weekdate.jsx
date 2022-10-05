@@ -14,7 +14,6 @@ const Weekdate = ({setDay, page}) => {
   const today = now.getDate();
   const lastday = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
 
-
   const CalendarDay = useDate(today, lastday, 7);
   const CalendarWeek = useWeek(todayWeek, 7);
 

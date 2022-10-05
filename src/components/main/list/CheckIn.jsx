@@ -15,8 +15,7 @@ const CheckIn = () =>{
   useEffect(()=>{
     dispatch(__getCheckIn(id));
   },[dispatch]);
-
-  console.log(checkList)
+  
   return (
     <>
     {/* 클릭시 체크인 함수 동작 */}

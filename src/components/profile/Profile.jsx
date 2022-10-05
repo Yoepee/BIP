@@ -25,7 +25,6 @@ const Profile = () => {
         },
       }
     );
-    console.log(a);
   };
 
   // 활동내역 받는 함수 동작

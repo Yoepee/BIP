@@ -130,10 +130,6 @@ const Member = ({type, setType}) =>{
             <Username>{friend.nicknameByOwner}</Username> 
             <div style={{color:"#a4a4a4"}}>{friend.nicknameByFriend}</div>
             </div>}
-            {/* 닉네임 출력
-            <Username>{friend.nicknameByFriend}</Username>
-            별칭 출력
-            <Nickname>({friend.nicknameByOwner})</Nickname> */}
             {/* 신용도 출력 */}
             <Credit><span>C</span>{friend.creditScore}</Credit>
             </Card>

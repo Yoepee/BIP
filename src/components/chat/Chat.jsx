@@ -178,7 +178,7 @@ const Chat = () => {
 
   };
 
-  // 엔터로 채팅하기
+  // 엔터로 댓글쓰기
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
       submit();
