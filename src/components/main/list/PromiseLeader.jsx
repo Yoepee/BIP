@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { __getDetailPromise } from "../../../redux/modules/detailPromise";
+import { __getCheckIn } from "../../../redux/modules/checkIn";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -10,12 +10,13 @@ const PromiseLeader = () =>{
   const navigate=useNavigate();
   const dispatch=useDispatch();
   // 약속 상세정보 받아오기 (멤버리스트 활용)
-  const promise = useSelector((state)=>state.detailPromise);
+  const promise = useSelector((state)=>state.checkIn);
   const {id, type}= useParams();
   useEffect(()=>{
-    dispatch(__getDetailPromise(id));
+    dispatch(__getCheckIn(id));
   },[dispatch])
 
+  console.log(promise)
   // 방장위임
   const __giveLeader = async (member) => {
     if (window.confirm("방장을 위임하시겠습니까?")) {
@@ -58,23 +59,33 @@ const PromiseLeader = () =>{
   return (
     <>
     {/* 멤버목록에서 방장 제외 리스트 출력 */}
-    {promise?.data?.data?.memberList?.map((member)=>{
-      if(member.nickname===localStorage.getItem("name")){
+    {promise?.data?.data?.map((member)=>{
+      if(promise?.data?.data?.length === 1){
+        return (
+          <div>
+            다른 멤버가 없습니다.
+        </div>
+        )
+      }
+      if(member.nicknameByFriend===localStorage.getItem("name")){
         return;
       }else{
       return (
         <div style={{ display: "flex", border: "1px solid black", margin: "10px" }} key={member.id}>
-        {member.profileImgUrl === null ?
+        {member.profileImageUrl === null ?
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{ width: "50px" }} />
-          : <img src={member.profileImgUrl} style={{ width: "50px" }} />
+          : <img src={member.profileImageUrl} style={{ width: "50px" }} />
         }
-        <p>{member.nickname}</p>
-        <p>({member.nickname})</p>
+        <p>{member.nicknameByFriend}</p>
+        {member.nicknameByOwner === null?
+        null
+        :<p>({member.nicknameByOwner})</p>
+        }
         <AddFriend onClick={()=>{
           if(type==="leader"){
             __giveLeader(member.id);
           }else{
-            __kickMember(member.id, member.nickname);
+            __kickMember(member.id, member.nicknameByFriend);
           }
         }}>선택</AddFriend>
     </div>
