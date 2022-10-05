@@ -76,10 +76,12 @@ const PromiseLeader = () =>{
           <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{ width: "50px" }} />
           : <img src={member.profileImageUrl} style={{ width: "50px" }} />
         }
-        <p>{member.nicknameByFriend}</p>
         {member.nicknameByOwner === null?
-        null
-        :<p>({member.nicknameByOwner})</p>
+        <p>{member.nicknameByFriend}</p>
+        :<div>
+        <div>{member.nicknameByOwner}</div>
+        <div style={{color:"#a4a4a4"}}>{member.nicknameByFriend}</div>
+        </div>
         }
         <AddFriend onClick={()=>{
           if(type==="leader"){
