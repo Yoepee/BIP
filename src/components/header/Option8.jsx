@@ -24,8 +24,8 @@ const Option8 = ({ head, payload }) => {
       <div onClick={() => { navigate("/donation") }}>
         <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#6D09D1" }} /></p>
       </div>
-      <div style={{ marginLeft: "1%" }}>
-        <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
+      <div style={{ marginLeft: "1%" , marginTop:"6px"}}>
+        <p style={{ fontWeight: "bold", fontSize: "20px", marginTop:"14px"}}>{head}</p>
       </div>
       <div onClick={() => {
         if (id === undefined) {
@@ -47,7 +47,7 @@ const Option8 = ({ head, payload }) => {
           }
         }
       }} style={{ marginLeft: "auto", marginRight: "2%", cursor: "pointer" }}>
-        <p style={{ fontWeight: "bold", fontSize: "20px" }}>완료</p>
+        <p style={{ fontWeight: "bold", fontSize: "20px", marginTop:"20px" }}>완료</p>
       </div>
     </>
   )

@@ -2,6 +2,10 @@ import { useState } from "react";
 import KaKaoMap from "../map/KakaoMap";
 import DaumPostcode from 'react-daum-postcode';
 import axios from "axios";
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import { border } from "@mui/system";
+import styled from "styled-components"
 
 const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   const { naver } = window;
@@ -83,7 +87,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
 }
 
   return (
-    <div>
+    <div style={{ width:"80%", margin:"0 auto"}}>
       {openAddr ?
         <div style={{ position: "relative", background: "gray", justifyContent: "center" }}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -99,39 +103,39 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
         : null}
       <div>
         {!chkPost ?
-          <p onClick={() => { setChkPost(!chkPost) }}>{post}▼</p>
-          : <p onClick={() => { setChkPost(!chkPost) }}>{post}▲</p>
+          <p style={{ marginBottom:"0"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowDownOutlinedIcon style={{verticalAlign: "sub"}}/></p>
+          : <p  style={{ marginBottom:"0"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowUpOutlinedIcon style={{verticalAlign: "sub"}}/></p>
         }
         {chkPost ?
-          <>
-            <div onClick={() => { setChkPost(!chkPost); setPost("재능기부"); setDonate({ ...donate, board: "request" }) }}>재능기부</div>
-            <div onClick={() => { setChkPost(!chkPost); setPost("재능요청"); setDonate({ ...donate, board: "donation" }) }}>재능요청</div>
-          </>
+          <Category>
+            <span onClick={() => { setChkPost(!chkPost); setPost("재능기부"); setDonate({ ...donate, board: "request" }) }}>재능기부</span>
+            <span onClick={() => { setChkPost(!chkPost); setPost("재능요청"); setDonate({ ...donate, board: "donation" }) }}>재능요청</span>
+          </Category>
           : null}
       </div>
       <div>
       {!chkCategory ?
-          <p onClick={() => { setChkCategory(!chkCategory) }}>{category}▼</p>
-          : <p onClick={() => { setChkCategory(!chkCategory) }}>{category}▲</p>
+          <p style={{ marginBottom:"0"}} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowDownOutlinedIcon style={{verticalAlign: "sub"}}/></p>
+          : <p style={{ marginBottom:"0"}} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowUpOutlinedIcon style={{verticalAlign: "sub"}}/></p>
         }
         {chkCategory ?
-          <>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("봉사"); setDonate({ ...donate, category: "volunteer" }) }}>봉사</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("돌봄"); setDonate({ ...donate, category: "care" }) }}>돌봄</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("교육"); setDonate({ ...donate, category: "edu" }) }}>교육</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("나눔"); setDonate({ ...donate, category: "share" }) }}>나눔</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("문화/예술"); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("모임/구인"); setDonate({ ...donate, category: "people" }) }}>모임/구인</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setCategory("기타"); setDonate({ ...donate, category: "etc" }) }}>기타</div>
-          </>
+          <CategoryKind  style={{ display:"flex", flexDirection:"column",borderRadius:"8px", boxShadow:"3px 3px 3px 3px #EFEEF0", width:"90px", padding:"10px", marginBottom:"10px"}}>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("봉사"); setDonate({ ...donate, category: "volunteer" }) }}>봉사</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("돌봄"); setDonate({ ...donate, category: "care" }) }}>돌봄</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("교육"); setDonate({ ...donate, category: "edu" }) }}>교육</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("나눔"); setDonate({ ...donate, category: "share" }) }}>나눔</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("문화/예술"); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("모임/구인"); setDonate({ ...donate, category: "people" }) }}>모임/구인</span>
+            <span onClick={() => { setChkCategory(!chkCategory); setCategory("기타"); setDonate({ ...donate, category: "etc" }) }}>기타</span>
+          </CategoryKind >
           : null}
       </div>
-      <div>
-        내용
-        <input placeholder="내용" name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
+      <div style={{margin:"10px 0"}}>
+        <span style={{marginRight:"10px"}}>내용</span>
+        <input style={{ border:"none", outline:"none", width:"80%" }}placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </div>
       <div>사진
-      <input type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg"/>
+      <input style={{marginLeft:"10px"}} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg"/>
       </div>
       <div>장소</div>
       {openAddr ? null :
@@ -145,3 +149,22 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   )
 }
 export default AddDonation;
+
+const Category = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90px;
+  padding: 10px;
+  border-radius: 8px; 
+  box-shadow:3px 3px 3px 3px #EFEEF0;
+`
+const CategoryKind = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90px;
+  margin-bottom:10px;
+  padding: 10px;
+  border-radius: 8px; 
+  box-shadow:3px 3px 3px 3px #EFEEF0;
+`
+

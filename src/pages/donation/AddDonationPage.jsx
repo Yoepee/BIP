@@ -50,7 +50,7 @@ const AddDonationPage = () =>{
   return (
     <>
       <Header head={"기부 추가"} option={8} payload={donate}/>
-      나는 기부 추가 페이지
+      
       <AddDonation donate={donate} setDonate={setDonate} onChangeHandler={onChangeHandler} />
     </>
   )
