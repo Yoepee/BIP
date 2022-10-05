@@ -12,8 +12,7 @@ const AddDonationPage = () =>{
   const initialState = {
     board : "request",
     category:"volunteer",
-    title:"",
-    content : "내용없음",
+    content : "",
     imgUrl:[],
     address:"",
     coordinate:"",
@@ -37,7 +36,7 @@ const AddDonationPage = () =>{
         setDonate({...initialState, 
           board : response.payload.data.board,
           category : response.payload.data.category,
-          title : response.payload.data.title,
+          content : response.payload.data.content,
           address : response.payload.data.address,
           coordinate : response.payload.data.coordinate,
           point : response.payload.data.point

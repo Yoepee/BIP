@@ -45,7 +45,7 @@ const Donation = () => {
                   </div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <p>제목 : {post.title}</p>
+                  <p>내용 : {post.content}</p>
                   <p>P {post.point}</p>
                 </div>
                 {post.imgUrl !== null ?
