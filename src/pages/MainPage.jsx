@@ -10,7 +10,7 @@ import Monthdate from "../components/main/calendar/Monthdate";
 import { useNavigate } from "react-router-dom";
 import PromiseList from "../components/main/list/PromiseList";
 import dayjs from "dayjs";
-import NextMonth from "../components/main/calendar/NextMonth";
+import Monthly from "../components/main/calendar/Monthly";
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
@@ -32,9 +32,11 @@ const MainPage = () => {
     return (
       <>
         <Wrap>
+
             <StHeaderContainer>
             <Week day={day} setDay={setDay}/>
             </StHeaderContainer>
+            <div><Monthly setDay={setDay} page={page}/></div>
             {/* 약속 리스트 불러오기 */}
             {day.unit!=="month"?
             <PromiseList day={day}/>
