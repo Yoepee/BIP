@@ -11,7 +11,6 @@ const Comment = () => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comment);
   const initialState = {
-    postId:id,
     content:""
   }
   const [edit, setEdit] = useState(initialState);
@@ -24,6 +23,10 @@ const Comment = () => {
   const editComment = (CommentId) => {
     if (window.confirm("댓글을 수정하시겠습니까?")) {
       dispatch(__editComment({id:CommentId, data:edit}))
+      .then((res)=>{
+        setEdit(initialState);
+        setChkEdit(0);
+      })
     } else {
       return;
     }
@@ -31,7 +34,7 @@ const Comment = () => {
   }
   const removeComment = (CommentId) => {
     if (window.confirm("댓글을 삭제하시겠습니까?")) {
-      dispatch(__removeComment({ id: CommentId, data: { postId: id } }))
+      dispatch(__removeComment(CommentId))
     } else {
       return;
     }
@@ -46,6 +49,7 @@ const Comment = () => {
     <>
       <div>
         댓글 목록
+        <CommentFooter />
         {commentList?.data?.data?.map((comment) => {
           if (comment.id === chkEdit) {
             return (
@@ -78,7 +82,6 @@ const Comment = () => {
           }
         })}
       </div>
-      <CommentFooter />
     </>
   )
 }
