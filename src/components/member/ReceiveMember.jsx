@@ -41,7 +41,6 @@ const ReceiveMember = ({ type, setChk }) => {
     dispatch(clearSearch());
    }
   
-   console.log(user);
   return (
     <>
     <Header head={"친구요청으로 추가"}/>
@@ -63,7 +62,7 @@ const ReceiveMember = ({ type, setChk }) => {
         {/* 추가 버튼 클릭시 친구 추가 */}
         <AddFriend onClick={()=>{
           if(type==="name"){
-            addMemberName(info.nickname);
+            addMemberName(info.nicknameByFriend);
             setChk(0);
           }
         }}>추가</AddFriend>

@@ -16,11 +16,23 @@ const Member = ({type, setType}) =>{
   // 친구목록에서 동작하는 기능 체크용도 (add = 신용도 추가, id = 약속 목록 초대(게시글 번호))
   const {id, add} = useParams();
 
+  let width = window.innerWidth;
+
   useEffect(()=>{
     dispatch(__getMember());
   },[dispatch])
 
-  console.log(member)
+  useEffect(()=> {
+    const windowResize = () => {
+      width=window.innerWidth;
+    }
+  
+    window.addEventListener(`resize`, windowResize);
+   
+    return () => {
+       window.removeEventListener(`resize`, windowResize);
+     }
+  }, []);
 
   // 친구 삭제 함수
   const removeMember = async(id) =>{
@@ -111,6 +123,7 @@ const Member = ({type, setType}) =>{
             <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
             :<ProfileImg src={friend.profileImgUrl} />
             }
+            {friend.nicknameByOwner===null?null:null}
             {/* 닉네임 출력 */}
             <Username>{friend.nicknameByFriend}</Username>
             {/* 별칭 출력 */}
