@@ -19,6 +19,7 @@ import ChatPage from "../pages/ChatPage"
 import DonationPage from "../pages/donation/DonationPage"
 import AddDonationPage from "../pages/donation/AddDonationPage"
 import DetailDonationPage from "../pages/donation/DetailDonationPage"
+import MonthlyPage from "../pages/MonthlyPage"
 
 
 
@@ -27,6 +28,7 @@ const Router = () =>{
         <Routes>
             {/* 메인페이지 */}
             <Route path="/" exact element={<MainPage/>}/>
+            <Route path="/monthly" exact element={<MonthlyPage/>}/>
             {/* 시작페이지 */}
             <Route path="/intro" exact element={<IntroPage/>}/>
             {/* 회원가입 */}

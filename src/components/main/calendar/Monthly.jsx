@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useDispatch, useSelector } from "react-redux";
+import { __getPromise } from "../../../redux/modules/promise";
+import { __getMonth } from "../../../redux/modules/month";
 
-const Calendar = () => {
-    
+const Calendar = ({setDay, day}) => {
+    const dispatch = useDispatch();
     //day
     const dayjs = require('dayjs');
     const weekday = require('dayjs/plugin/weekday');
@@ -15,10 +18,18 @@ const Calendar = () => {
     dayjs.extend(isoWeek);
     dayjs.extend(weekOfYear);
 
+    const monthList = useSelector((state)=>state.month);
+
     const today = dayjs();
     const [viewDate, setViewDate] = useState(dayjs());
     const [selectDate, setSelectDate] = useState(dayjs());
 
+    useEffect(()=>{
+      dispatch(__getMonth({unit:"month",date:selectDate.format('YYYY-MM-DD-00-00-00')}))
+    },[selectDate])
+
+    let e = monthList?.data?.data?.map((a)=>`${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[0]}`)
+    console.log(e)
     const createCalendar = () => {
         const startWeek = viewDate.startOf('month').week();
         const endWeek = viewDate.endOf('month').week() === 1 ? 53 : viewDate.endOf('month').week();
@@ -37,16 +48,17 @@ const Calendar = () => {
                 let isSelected = selectDate.format('YYYYMMDD') === current.format('YYYYMMDD') ? 'selected' : '';
                 let isToday = today.format('YYYYMMDD') === current.format('YYYYMMDD') ? 'today' : '';
                 let isNone = current.format('MM') === viewDate.format('MM') ? '' : 'none';
+                let test = monthList?.data?.data?.map((a)=>`${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[0]}`)
+                let isPromise = test?.find((x)=>x === String(current.format("DD-MM-YYYY"))) ? 'promise' : "";
+
                 return (
-                  <>
                     <div className={`box`} key={`${week}_${i}`} >
-                      <div className={`text ${isSelected} ${isToday} ${isNone}`} onClick={() => { setSelectDate(current) }}>
+                      <div className={`text ${isSelected} ${isToday} ${isNone} ${isPromise}`} onClick={() => { setSelectDate(current) }}>
                         <span className={`day`}>{current.format('D')}</span>
-                        {isToday ? (<span className="isToday">오늘</span>)
+                        {isToday ? (<span className="isToday"></span>)
                           : isSelected ? (<span className="isSelected"></span>) : null}
                       </div>
                     </div >
-                  </>
                 )
               })
               }
@@ -161,6 +173,14 @@ const StyledBody = styled.div `
     height: 32px;
     border-radius: 50%;
     background : #D9DCFB;
+    font-weight: 700;
+    color: #fff;
+  }
+  .promise{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background : pink;
     font-weight: 700;
     color: #fff;
   }
