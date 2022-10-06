@@ -10,6 +10,7 @@ import chat from "./modules/chat";
 import donation from "./modules/donation";
 import detailDonation from "./modules/detailDonation";
 import comment from "./modules/comment";
+import month from "./modules/month";
 
 export default configureStore({
   reducer: {
@@ -35,5 +36,7 @@ export default configureStore({
     detailDonation: detailDonation.reducer,
     // 댓글 내용 불러오기
     comment: comment.reducer,
+    // 월간 달력 갯수
+    month : month.reducer,
   }
 });
