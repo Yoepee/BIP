@@ -32,7 +32,13 @@ const DetailDonation = () => {
         </Category>
       </div>
       <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px"}}>
-        
+      {donation?.data?.data?.imgUrlList?.map((x)=>{
+        return (
+          <div>
+            <img src={x}/>
+          </div>
+        )
+      })}
       <div style={{ border: "none" }}>
         <div style={{ fontSize:"15px",fontWeight:"bold",margin:"10px 0"}}>{donation?.data?.data?.nickname}</div>
         <div style={{display:"flex", fontSize:"15px"}}> 
