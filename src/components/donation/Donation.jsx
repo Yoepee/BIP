@@ -85,7 +85,7 @@ const Category = styled.div`
 const PointIcon = styled.span`
   background-color: #3e09d1;
   border-radius: 50%;
-  padding: 0 6px;
+  padding: 0 6px;// 숙제
   margin-right: 2px;
   color: white;
   font-weight: bold;
