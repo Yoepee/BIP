@@ -60,6 +60,7 @@ const Wrap = styled.div`
   /* background-color: whitesmoke; */
   padding: 10% 0;
   font-family: "NotoSansKR-Regular";
+  
   /* font-family: "YUniverse-B"; */
   /* font-family: "YiSunShin-M"; */
   /* font-family: "Hambak"; */
@@ -95,6 +96,7 @@ const StHeaderContainer = styled.div`
   height: 214px;
   position: relative;
   margin-bottom: 20px;
+  margin:0 auto;
 
   & .topContainer {
     display: flex;
