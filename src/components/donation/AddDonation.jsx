@@ -4,12 +4,13 @@ import DaumPostcode from 'react-daum-postcode';
 import axios from "axios";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
-import { border } from "@mui/system";
 import styled from "styled-components"
 
 const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   const { naver } = window;
   let a;
+  const initailState = []
+  const [imgList, setImgList] = useState(initailState);
   // 게시판 종류
   const [post, setPost] = useState("재능기부");
   const [chkPost, setChkPost] = useState(false);
@@ -60,6 +61,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
     //   alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.");
     //   return;
     // }
+    setImgList([...imgList,{id:donate.imgUrlList.length, name:image.name}]);
+
     // 폼데이터 형식 선언
     const formData = new FormData();
 
@@ -77,7 +80,9 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
         },
     }).then(
       // url호출 성공시 img값에 url값 저장
-      (res)=>{setDonate({ ...donate, imgUrl: res.data.data })}
+      (res)=>{
+        setDonate({ ...donate, imgUrlList: [...donate.imgUrlList, res.data.data] })
+      }
       )
       
     // 폼데이터 들어가는 형식을 보기위한 내용
@@ -136,6 +141,30 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       </div>
       <div>사진
       <input style={{marginLeft:"10px"}} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg"/>
+      {imgList.map((img)=>{
+        return (
+          <div style={{display:"flex"}} key={img.id}>
+            <img src={donate.imgUrlList[img.id]}/>
+            <div>{img.name}</div>
+            <button onClick={()=>{
+              let count = img.id;
+              let copy = [...imgList];
+              copy.splice(img.id,1);
+              let copyList= copy.map((x)=>{
+                if(x.id <count){
+                  return {id:x.id,name:x.name}
+                }else{
+                  return {id:x.id-1,name:x.name}
+                }
+              })
+              setImgList([...copyList]);
+              let urlList = [...donate.imgUrlList];
+              urlList.splice(img.id,1);
+              setDonate({ ...donate, imgUrlList: [...urlList] });
+            }}>x</button>
+          </div>
+        )
+      })}
       </div>
       <div>장소</div>
       {openAddr ? null :
@@ -144,7 +173,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
             onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
           : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
       }
-      <KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"} />
+      <KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"}/>
     </div>
   )
 }

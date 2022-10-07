@@ -32,11 +32,19 @@ const DetailDonation = () => {
           {donation?.data?.data?.category === "etc" && <div> 기타</div>}
         </Category>
       </div>
+
       <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px 20px"}}>
-        
+        {donation?.data?.data?.imgUrlList?.map((x)=>{
+        return (
+          <div>
+            <img src={x}/>
+          </div>
+        )
+      })}
       <div style={{ border: "none",fontWeight:"bold", display:"flex", justifyContent:"space-between" }}>
           <p>{donation?.data?.data?.content}</p>
           <div>
+
           {donation?.data?.data?.point === 0?
           <p style={{marginRight:"2%"}}><PointIcon>P</PointIcon>{donation?.data?.data?.point}</p>
           :null
