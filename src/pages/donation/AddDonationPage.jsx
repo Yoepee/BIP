@@ -37,6 +37,7 @@ const AddDonationPage = () =>{
           board : response.payload.data.board,
           category : response.payload.data.category,
           content : response.payload.data.content,
+          imgUrlList: response.payload.data.imgUrlList,
           address : response.payload.data.address,
           coordinate : response.payload.data.coordinate,
           point : response.payload.data.point,
