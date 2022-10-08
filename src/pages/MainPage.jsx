@@ -34,6 +34,7 @@ const MainPage = () => {
       <>
         <Wrap>
             <StHeaderContainer>
+
             <div onClick={()=>{navigate("/monthly")}}>
               <CalendarMonthIcon style={{ color: "#3E09D1", marginTop:"70px", cursor:"pointer"}} />
             </div>
