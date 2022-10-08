@@ -144,6 +144,7 @@ const STCalendar = styled.div`
 
 /* 주간캘린더 일전체 컨테이너 */
 const STDayContainer = styled.div`
+  
   justify-content: center;
   align-content: center;
   text-align: center;
@@ -152,6 +153,7 @@ const STDayContainer = styled.div`
   
 
   & .daylistContainer {
+    
     display: flex;
     justify-content: space-between;
     position: relative;

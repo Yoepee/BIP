@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { __getDetailDonation } from "../../redux/modules/detailDonation";
 import styled from 'styled-components'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { flexbox } from "@mui/system";
 const DetailDonation = () => {
   const dispatch = useDispatch();
   const donation = useSelector((state) => state.detailDonation);
@@ -31,25 +32,38 @@ const DetailDonation = () => {
           {donation?.data?.data?.category === "etc" && <div> 기타</div>}
         </Category>
       </div>
-      <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px"}}>
-        
-      <div style={{ border: "none" }}>
-        <div style={{ fontSize:"15px",fontWeight:"bold",margin:"10px 0"}}>{donation?.data?.data?.nickname}</div>
-        <div style={{display:"flex", fontSize:"15px"}}> 
-            <div>{donation?.data?.data?.address}º</div>
-            <div>{donation?.data?.data?.createdAt}</div>
+
+      <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px 20px"}}>
+        {donation?.data?.data?.imgUrlList?.map((x)=>{
+        return (
+          <div>
+            <img src={x}/>
+          </div>
+        )
+      })}
+      <div style={{ border: "none",fontWeight:"bold", display:"flex", justifyContent:"space-between" }}>
+          <p>{donation?.data?.data?.content}</p>
+          <div>
+
+          {donation?.data?.data?.point === 0?
+          <p style={{marginRight:"2%"}}><PointIcon>P</PointIcon>{donation?.data?.data?.point}</p>
+          :null
+          }
         </div>
       </div>
       <div style={{ border: "none"}}>
+        {/* 이미지 */}
         <div>
-          {donation?.data?.data?.point === 0?
-          <p>포인트 {donation?.data?.data?.point}</p>
-          :null
-          }
-          <p>{donation?.data?.data?.content}</p>
+        <div style={{display:"flex", fontSize:"15px"}}> 
+            <div>{donation?.data?.data?.address}</div>
+           {/* 지도 */}
         </div>
-        <div>
-          <div>관심 {donation?.data?.data?.likes} 조회수 {donation?.data?.data?.views} </div>
+          <div style={{ fontSize:"14px", color:"#757575",margin:"10px 0"}}>{donation?.data?.data?.nickname}</div>
+          <div style={{ display:"flex",  justifyContent:"space-between"}}>
+            <div style={{ fontSize:"14px", color:"#757575"}}>관심 {donation?.data?.data?.likes} 조회수 {donation?.data?.data?.views} </div>
+            <div style={{ fontSize:"14px", color:"#757575"}}>{donation?.data?.data?.createdAt}</div>
+          </div>
+          
         </div>
       </div>
       </div>
@@ -67,4 +81,14 @@ const Category = styled.div`
   color:#494949;
   font-weight: bold;
   font-size: 15px;
+`
+
+const PointIcon = styled.span`
+  background-color: #3e09d1;
+  border-radius: 50%;
+  padding: 0 6px;// 숙제
+  margin-right: 2px;
+  color: white;
+  font-weight: bold;
+  
 `

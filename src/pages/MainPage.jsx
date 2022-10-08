@@ -62,6 +62,7 @@ const Wrap = styled.div`
   /* background-color: whitesmoke; */
   padding: 10% 0;
   font-family: "NotoSansKR-Regular";
+
 `
 const Plus = styled.div`
 position : fixed;
@@ -90,8 +91,9 @@ const StHeaderContainer = styled.div`
   max-width: 450px;
   height: 214px;
   position: relative;
+
   margin: 0 auto;
-  
+
 
   & .topContainer {
     display: flex;

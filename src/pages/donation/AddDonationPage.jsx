@@ -13,7 +13,7 @@ const AddDonationPage = () =>{
     board : "request",
     category:"volunteer",
     content : "",
-    imgUrl:[],
+    imgUrlList:[],
     address:"",
     coordinate:"",
     point:0
@@ -37,16 +37,20 @@ const AddDonationPage = () =>{
           board : response.payload.data.board,
           category : response.payload.data.category,
           content : response.payload.data.content,
+          imgUrlList: response.payload.data.imgUrlList,
           address : response.payload.data.address,
           coordinate : response.payload.data.coordinate,
-          point : response.payload.data.point
+          point : response.payload.data.point,
+          imgUrlList : response.payload.data.imgUrlList
         })
     });
     // id값이 없으면 생성하기로 동작 초기값 : 공백
     }else{
       setDonate(initialState);
     }
-  },[dispatch])
+  },[dispatch]);
+
+  console.log(donate)
   return (
     <>
       <Header head={"기부 추가"} option={8} payload={donate}/>
