@@ -6,6 +6,7 @@ import { __getDetailPromise } from "../../../redux/modules/detailPromise";
 import axios from "axios";
 import CheckIn from "./CheckIn";
 import KaKaoMap from "../../map/KakaoMap";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 // 약속 상세 페이지
 const DetailPromise = () => {
@@ -81,28 +82,42 @@ const DetailPromise = () => {
           {/* 참여 인원, 클릭시 체크인 창 꺼냄 */}
           <People onClick={()=>{setChk(!chk)}}>
             {!chk?
-            <p >▼</p>
-            :<p>▲</p>}
-            <p>참여인원 : </p>
+            <span style={{cursor:"pointer", marginRight:"2%"}}>▼</span>
+            :<span style={{cursor:"pointer", marginRight:"2%"}}>▲</span>}
+            <span style={{marginRight:"2%"}}>참여인원 : </span>
             {promise?.data?.data?.memberList?.map((member)=>{
               if(member.nicknameByFriend===leader){
                 if(member.nicknameByOwner!==null){
-                  return (
-                    <p key={member.id}>💜{member.nicknameByOwner}</p>
+                  return (             
+                    <div key={member.id} style={{display:"flex"}}>
+                      <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+                      <div style={{color: "#3E09D1"}}>♥</div>
+                      <div style={{paddingBottom:"100px"}}>{member.nicknameByOwner}</div>
+                    </div>
                   )
                 }else{
                   return (
-                    <p key={member.id}>💜{member.nicknameByFriend}</p>
+                    <div key={member.id} style={{display:"flex"}}>
+                      <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+                      <div style={{color: "#3E09D1"}}>♥</div>
+                      <div>{member.nicknameByFriend}</div>
+                    </div>
                   )
                 }
               }else{
                 if(member.nicknameByOwner!==null){
                   return (
-                    <p key={member.id}>💚{member.nicknameByOwner}</p>
+                    <div key={member.id} style={{display:"flex"}}>
+                      <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
+                      <div>{member.nicknameByOwner}</div>
+                    </div>
                   )
                 }else{
                   return (
-                    <p key={member.id}>💚{member.nicknameByFriend}</p>
+                    <div key={member.id} style={{display:"flex"}}>
+                      <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
+                      <div>{member.nicknameByFriend}</div>
+                      </div>
                   )
                 }
               }
@@ -120,8 +135,8 @@ const DetailPromise = () => {
             <p>{promise?.data?.data?.place}</p>
           </Where>
           {promise?.data?.data?.coordinate===null?
-          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"400px"} height={"400px"}/></Map>
-          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"400px"} height={"400px"}/></Map>}
+          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"340px"} height={"340px"}/></Map>
+          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"340px"} height={"340px"}/></Map>}
         </RightItem>        
       </Wrap>      
     </>
@@ -148,7 +163,7 @@ const Title = styled.div`
   p {    
     /* margin-right: 10%;  */
    span{
-     background-color: #6D09D1;
+     background-color: #3E09D1;
      border-radius: 50%;
      padding: 0 4px;
      margin-right: 2px;
@@ -184,9 +199,8 @@ const People = styled.div`
   font-weight: bold;
   font-size: 15px;
   /* margin: 10% 15%; */
-  p {
-    margin-right: 2%;
-    cursor:pointer;
+  span {
+    /* margin-right: 2%; */
   }
 `
 
@@ -206,10 +220,9 @@ const Where = styled.div`
 
 const Map = styled.div`
   /* position: absolute; */
-  width: 300px;
-  height: 200px;
-  /* margin-bottom: 100px; */
-  background-color: #F5EAFB;
+  margin-bottom: 100px;
+  
+  /* background-color: #F5EAFB; */
   @media screen and (min-width: 769px) {
    margin: 110px auto;
    margin-bottom: 0;

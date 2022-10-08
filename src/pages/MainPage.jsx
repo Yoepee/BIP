@@ -34,7 +34,7 @@ const MainPage = () => {
       <>
         <Wrap>
             <StHeaderContainer>
-            <div onClick={()=>{navigate("/monthly")}}><CalendarMonthIcon style={{ color: "#A67EED" }} /></div>
+            {/* <div onClick={()=>{navigate("/monthly")}}><CalendarMonthIcon style={{ color: "#A67EED" }} /></div> */}
             <Week day={day} setDay={setDay}/>
             </StHeaderContainer>
             {/* 약속 리스트 불러오기 */}

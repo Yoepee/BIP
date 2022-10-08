@@ -5,6 +5,8 @@ import { __getDetailDonation } from "../../redux/modules/detailDonation";
 import styled from 'styled-components'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { flexbox } from "@mui/system";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const DetailDonation = () => {
   const dispatch = useDispatch();
   const donation = useSelector((state) => state.detailDonation);
@@ -63,7 +65,10 @@ const DetailDonation = () => {
             <div style={{ fontSize:"14px", color:"#757575"}}>관심 {donation?.data?.data?.likes} 조회수 {donation?.data?.data?.views} </div>
             <div style={{ fontSize:"14px", color:"#757575"}}>{donation?.data?.data?.createdAt}</div>
           </div>
-          
+          <div style={{display:"flex"}}>
+                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}}><FavoriteBorderIcon/>공감하기</div>
+                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}}>🚨신고하기</div>
+          </div>
         </div>
       </div>
       </div>
