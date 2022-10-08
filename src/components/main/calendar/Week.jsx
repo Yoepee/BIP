@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 const Week = (value) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [ clickDay, setClickDay ] = useState(null);
 
   useEffect(() => {
@@ -72,7 +71,6 @@ const Week = (value) => {
     <STWeekCalendar>
       <STCalendar>
         <div className="Month">{weekDate[0].year}년 {weekDate[0].month}</div>
-        <div onClick={()=>{navigate("/monthly")}}><CalendarMonthIcon style={{ color: "#A67EED" }} /></div>
       </STCalendar>
       <STDayContainer>
         <div className="daylistContainer">
