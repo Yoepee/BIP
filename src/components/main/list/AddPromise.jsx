@@ -361,7 +361,7 @@ const AddPromise = ({
         </When>
           {/* 카카오 지도 출력 부, 위도경도는 주소 검색 시 자동 선정 */}
           {/* 크키값 width, height 값으로 지정필요 */}
-        <Map><KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"} /></Map>
+        <Map><KaKaoMap lat={lat} lng={lng} width={"340px"} height={"340px"} /></Map>
       </Wrap>
     </>
   );
@@ -437,9 +437,9 @@ const Point = styled.div`
 
 const Map = styled.div`
   /* position: absolute; */
-  width: 50%;
+  width: 80%;
   height: 25vh;
-  margin: 0 25%;
+  margin: 0 auto;
   background-color: #f5eafb;
 `;
 const OptionMenu = styled.div`
