@@ -235,7 +235,7 @@ const PromiseCard = styled.div`
 `;
 
 const People = styled.p`
-  color: #6d09d1;
+  color: #3E09D1;
   border-radius: 50%;
   width: 20px;
   text-align: center;

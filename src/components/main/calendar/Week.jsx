@@ -121,8 +121,9 @@ export default Week;
 const STWeekCalendar = styled.div`
   position: absolute;
   width: 100%;
-  bottom: 15%;
+  bottom: 100px;
 `;
+
 const STCalendar = styled.div`
   width: 100%;
   display: flex;
