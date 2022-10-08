@@ -34,7 +34,9 @@ const MainPage = () => {
       <>
         <Wrap>
             <StHeaderContainer>
-            <div onClick={()=>{navigate("/monthly")}}><CalendarMonthIcon style={{ color: "#A67EED" }} /></div>
+            <div onClick={()=>{navigate("/monthly")}}>
+              <CalendarMonthIcon style={{ color: "#3E09D1", marginTop:"70px", cursor:"pointer"}} />
+            </div>
             <Week day={day} setDay={setDay}/>
             </StHeaderContainer>
             {/* 약속 리스트 불러오기 */}
@@ -44,7 +46,7 @@ const MainPage = () => {
         </Wrap>
         {/* 약속 추가하기 */}
         <Plus>
-            <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
+            <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#3E09D1"}} /></IconBtn>
           </Plus>
           {/* 푸터메뉴 1번째 항목 선택 (0,1,2,3) */}
         <Footer foot={0}/>
@@ -60,13 +62,7 @@ const Wrap = styled.div`
   /* background-color: whitesmoke; */
   padding: 10% 0;
   font-family: "NotoSansKR-Regular";
-  
-  /* font-family: "YUniverse-B"; */
-  /* font-family: "YiSunShin-M"; */
-  /* font-family: "Hambak"; */
-  /* font-family: "GowunDodum"; */
-  /* font-family: "Mimiworld-B"; */
-  /* font-family: "Mimiworld-R"; */
+
 `
 const Plus = styled.div`
 position : fixed;
@@ -79,7 +75,7 @@ const IconBtn = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-border: 1.5px solid #6D09D1;
+border: 1.5px solid #3E09D1;
 border-radius:50%;
 background-color: white;
 width: 40px;
@@ -95,8 +91,9 @@ const StHeaderContainer = styled.div`
   max-width: 450px;
   height: 214px;
   position: relative;
-  margin-bottom: 20px;
-  margin:0 auto;
+
+  margin: 0 auto;
+
 
   & .topContainer {
     display: flex;

@@ -75,6 +75,7 @@ const Week = (value) => {
           <button>
             <ArrowBackIosNewRoundedIcon
               onClick={changePast}
+              style={{color:"#3E09D1"}}
             />
           </button>
           <div>
@@ -106,6 +107,7 @@ const Week = (value) => {
           <button>
             <ArrowForwardIosRoundedIcon
               onClick={changeFuture}
+              style={{color:"#3E09D1"}}
             />
           </button>
         </div>
@@ -126,16 +128,16 @@ const STCalendar = styled.div`
   display: flex;
   justify-content: center;
   & .Month {
-    background-color: #fbfbfb;
-    border-radius: 6px;
+    /* background-color: #fbfbfb; */
+    /* border-radius: 6px; */
     padding: 6px 10px;
     /* width: 52px;
     height: 26px; */
     font-weight: 700;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 14px;
+    line-height: 22px;
     text-align: center;
-    color: #5039c8;
+    color: #3E09D1;
     margin-bottom: 12px;
   }
 `;
@@ -164,28 +166,28 @@ const STDayContainer = styled.div`
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.08);
+      background: transparent;
+      /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.08); */
       cursor: pointer;
       &:nth-child(1) {
         left: 20px;
         top: 15px;
       }
     }
-    & .leftIcon {
+    /* & .leftIcon {
       background-color: #ffffff;
       border-radius: 50%;
       position: absolute;
       left: 0.1px;
       top: 0.1px;
-    }
-    & .rightIcon {
+    } */
+    /* & .rightIcon {
       background-color: #ffffff;
       border-radius: 50%;
       position: absolute;
       left: 0.1px;
       top: 0.1px;
-    }
+    } */
   }
   /* 하루짜리 날짜 배열 Daylist */
   & .daylistSelector {
@@ -201,7 +203,7 @@ const STDayContainer = styled.div`
     border-radius: 8px;
     //클릭시 색 변하기
     & input:checked + label {
-      background-color: #5039c8;
+      background-color: #3E09D1;
       color: white;
     }
 
@@ -236,8 +238,8 @@ const STLabel = styled.label`
 
   //today표현
   &.isToday {
-  background-color: #b3a5ff;
-  color: #fff;
+  background-color: #D9DCFB;
+  color: #292929;
   }
   & .weekday {
     font-size: 10px;
@@ -249,7 +251,7 @@ const STLabel = styled.label`
   }
   //마우스 올렸을 때
   &:hover {
-    background: #5039c8;
+    background: #3E09D1;
     color: white;
   }
 `;
