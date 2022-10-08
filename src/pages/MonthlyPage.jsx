@@ -9,6 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
 import Week from "../components/main/calendar/Week";
+import Header from ".././components/header/Header";
 
 const MonthlyPage = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ const MonthlyPage = () => {
     return (
       <>
         <Wrap>
+            
+            <Header  head={""} option={0}/>
             <div><Monthly setDay={setDay} day={day}/></div>
             {/* 약속 리스트 불러오기 */}
             {day.unit!=="month"?

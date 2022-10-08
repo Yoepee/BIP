@@ -49,8 +49,8 @@ const DetailPromise = () => {
           {/* 제목 */}
           <Title>
             <p style={{fontSize:"24px"}}>{promise?.data?.data?.title}</p>
-            <div style={{margin:"20px 8px 0 0"}}>
-            <p style={{fontSize:"13px", marginLeft:"250px"}}><span>P</span>{promise?.data?.data?.point}</p>
+            <div style={{margin:"15px 14px 0 0"}}>
+            <p style={{fontSize:"13px"}}><span>P</span>{promise?.data?.data?.point}</p>
             </div>
           </Title>
           {/* 내용 */}
@@ -91,7 +91,7 @@ const DetailPromise = () => {
                   return (             
                     <div key={member.id} style={{display:"flex"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
-                      <div style={{color: "#3E09D1"}}>♥</div>
+
                       <div style={{paddingBottom:"100px"}}>{member.nicknameByOwner}</div>
                     </div>
                   )
@@ -99,7 +99,7 @@ const DetailPromise = () => {
                   return (
                     <div key={member.id} style={{display:"flex"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
-                      <div style={{color: "#3E09D1"}}>♥</div>
+
                       <div>{member.nicknameByFriend}</div>
                     </div>
                   )
@@ -148,7 +148,7 @@ export default DetailPromise;
 const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   text-align: center;
   position: relative;
 `
@@ -160,7 +160,8 @@ const Title = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  p {    
+  p {   
+     
     /* margin-right: 10%;  */
    span{
      background-color: #3E09D1;
@@ -209,7 +210,7 @@ const Where = styled.div`
   display: flex;
   /* margin: 10% 15%; */
   font-weight: bold;
-
+  
   @media screen and (min-width: 769px) {
    float: right;
    p{

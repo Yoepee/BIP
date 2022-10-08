@@ -112,14 +112,15 @@ const StyledHeader = styled.div `
   margin: 20px;
 
   .thisMonth{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    color: #292929;
-    line-height: 24px;
+    color: #3E09D1;
+    line-height: 20px;
+    margin-bottom: 30px;
   }
   div{
     margin: 0 10%;
-    color: #292929;
+    color: #3E09D1;
     cursor: pointer;
 
   }
@@ -189,10 +190,11 @@ const StyledBody = styled.div `
     font-weight: 700;
     color: #292929;
     background : #D9DCFB;
+    /* border: 1px solid #3E09D1; */
   }
   .isSelected{
     position: relative;
-    color: pink;
+    color: #D9DCFB;
     font-size: 10px;
     font-weight: 400;
   }

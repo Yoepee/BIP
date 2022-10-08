@@ -20,29 +20,29 @@ const Footer = ({ foot }) => {
       <div onClick={() => { navigate("/") }} style={{ textAlign: "center" }}>
         {/* 0번 메뉴시 아이콘 변경으로 활성화 표시 */}
         {foot === 0 ?
-          <p style={{ color: "#A67EED" }}><HomeIcon /></p>
-          : <p style={{ color: "#A67EED" }}><HomeOutlinedIcon /></p>}
+          <p style={{ color: "#A67EED", cursor:"pointer" }}><HomeIcon /></p>
+          : <p style={{ color: "#A67EED", cursor:"pointer" }}><HomeOutlinedIcon /></p>}
         {/* <p>약속</p> */}
       </div>
       {/* 1번 메뉴시 아이콘 변경으로 활성화 표시 */}
       <div onClick={() => { navigate("/donation") }} style={{ textAlign: "center" }}>
         {foot === 1 ?
-          <p style={{ color: "#A67EED" }}><VolunteerActivismIcon /></p>
-          : <p style={{ color: "#A67EED" }}><VolunteerActivismOutlinedIcon /></p>}
+          <p style={{ color: "#A67EED", cursor:"pointer" }}><VolunteerActivismIcon /></p>
+          : <p style={{ color: "#A67EED", cursor:"pointer" }}><VolunteerActivismOutlinedIcon /></p>}
         {/* <p>테스트</p> */}
       </div>
       <div onClick={() => { navigate("/member") }} style={{ textAlign: "center" }}>
         {/* 2번 메뉴시 아이콘 변경으로 활성화 표시 */}
         {foot === 2 ?
-          <p style={{ color: "#A67EED" }}><GroupIcon /></p>
-          : <p style={{ color: "#A67EED" }}><GroupOutlinedIcon /></p>}
+          <p style={{ color: "#A67EED", cursor:"pointer" }}><GroupIcon /></p>
+          : <p style={{ color: "#A67EED", cursor:"pointer" }}><GroupOutlinedIcon /></p>}
         {/* <p>친구</p> */}
       </div>
       <div onClick={() => { navigate("/profile") }} style={{ textAlign: "center" }}>
         {/* 3번 메뉴시 아이콘 변경으로 활성화 표시 */}
         {foot === 3 ?
-          <p style={{ color: "#A67EED" }}><PermContactCalendarIcon /></p>
-          : <p style={{ color: "#A67EED" }}><PermContactCalendarOutlinedIcon /></p>}
+          <p style={{ color: "#A67EED", cursor:"pointer" }}><PermContactCalendarIcon /></p>
+          : <p style={{ color: "#A67EED", cursor:"pointer" }}><PermContactCalendarOutlinedIcon /></p>}
         {/* <p>프로필</p> */}
       </div>
     </Menu>

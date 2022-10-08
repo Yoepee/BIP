@@ -29,7 +29,7 @@ const KaKaoMap = (props) => {
 
   return (
     // 상속값으로 크기 조절
-  <div ref={mapElement} style={{ width: props.width, height: props.height }} />
+  <div ref={mapElement} style={{ width: props.width, height: props.height, margin:" 0 auto" }} />
   )
 }
 

@@ -30,6 +30,7 @@ place-items: center;
 position:fixed;
 bottom: 0;
 margin: 0 auto;
+z-index: 100;
 `
 
 const Invite = styled.div`
@@ -50,7 +51,7 @@ font-weight:bold;
 `
 
 const Chat = styled.div`
-background-color:#F5EAFB;
+background-color: #D9DCFB;
 cursor:pointer;
 width:100%;
 text-align:center;
