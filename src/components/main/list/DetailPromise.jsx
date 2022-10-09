@@ -84,19 +84,19 @@ const DetailPromise = () => {
             {!chk?
             <span style={{cursor:"pointer", marginRight:"2%"}}>▼</span>
             :<span style={{cursor:"pointer", marginRight:"2%"}}>▲</span>}
-            <span style={{marginRight:"2%"}}>참여인원 : </span>
+            <span style={{cursor:"pointer", marginRight:"2%"}}>참가자 : </span>
             {promise?.data?.data?.memberList?.map((member)=>{
               if(member.nicknameByFriend===leader){
                 if(member.nicknameByOwner!==null){
                   return (             
-                    <div key={member.id} style={{display:"flex"}}>
+                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
                       <div style={{paddingBottom:"100px"}}>{member.nicknameByOwner}</div>
                     </div>
                   )
                 }else{
                   return (
-                    <div key={member.id} style={{display:"flex"}}>
+                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
                       <div>{member.nicknameByFriend}</div>
                     </div>
@@ -105,14 +105,14 @@ const DetailPromise = () => {
               }else{
                 if(member.nicknameByOwner!==null){
                   return (
-                    <div key={member.id} style={{display:"flex"}}>
+                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
                       <div>{member.nicknameByOwner}</div>
                     </div>
                   )
                 }else{
                   return (
-                    <div key={member.id} style={{display:"flex"}}>
+                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
                       <div>{member.nicknameByFriend}</div>
                       </div>
@@ -133,8 +133,8 @@ const DetailPromise = () => {
             <p>{promise?.data?.data?.place}</p>
           </Where>
           {promise?.data?.data?.coordinate===null?
-          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"340px"} height={"340px"}/></Map>
-          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"340px"} height={"340px"}/></Map>}
+          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"380px"} height={"320px"}/></Map>
+          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"380px"} height={"320px"}/></Map>}
         </RightItem>        
       </Wrap>      
     </>
@@ -147,6 +147,7 @@ const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
   width: 70%;
+  min-width: 340px; 
   text-align: center;
   position: relative;
 `
