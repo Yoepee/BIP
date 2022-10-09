@@ -227,9 +227,9 @@ const PromiseCard = styled.div`
   }
   @media screen and (min-width: 769px) {
     background-color: #edffeb;
-    width: 92%;
-    height: 120px;
-    font-size: 13px;
+    width: 230px;
+    /* height: 120px; */
+    font-size: 12px;
     margin: 0 auto;
   }
 `;
