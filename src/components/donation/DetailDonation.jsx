@@ -8,6 +8,7 @@ import { flexbox } from "@mui/system";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios";
+import KaKaoMap from "../map/KakaoMap";
 const DetailDonation = () => {
   const dispatch = useDispatch();
   const donation = useSelector((state) => state.detailDonation);
@@ -112,9 +113,12 @@ const DetailDonation = () => {
       <div style={{ border: "none"}}>
         {/* 이미지 */}
         <div>
-        <div style={{display:"flex", fontSize:"15px"}}> 
+        <div style={{ fontSize:"15px"}}> 
             <div>{donation?.data?.data?.address}</div>
            {/* 지도 */}
+           {donation?.data?.data?.coordinate===null?
+          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"340px"} height={"340px"}/></Map>
+          :<Map><KaKaoMap lat={donation?.data?.data?.coordinate.split(",")[0]} lng={donation?.data?.data?.coordinate.split(",")[1]} width={"340px"} height={"340px"}/></Map>}
         </div>
           <div style={{ fontSize:"14px", color:"#757575",margin:"10px 0"}}>{donation?.data?.data?.nickname}</div>
           <div style={{ display:"flex",  justifyContent:"space-between"}}>
@@ -158,4 +162,14 @@ const PointIcon = styled.span`
   color: white;
   font-weight: bold;
   
+`
+const Map = styled.div`
+  /* position: absolute; */
+  margin-bottom: 100px;
+  
+  /* background-color: #F5EAFB; */
+  @media screen and (min-width: 769px) {
+   margin: 110px auto;
+   margin-bottom: 0;
+  }
 `
