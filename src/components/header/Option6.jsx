@@ -17,14 +17,26 @@ const Option6 = ({ head }) => {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
-      }).then((response) => {
+      }).then(async(response) => {
+        console.log(response)
         if (response.data.success) {
           localStorage.removeItem('Authorization');
           localStorage.removeItem('RefreshToken');
           localStorage.removeItem('name');
           navigate("/intro")
         } else {
-          alert(response.data.data)
+          if(response.data.data === "사용자를 찾을 수 없습니다."){
+            const a = await axios.get(process.env.REACT_APP_SERVER_HOST + "/api/member/reissue", {
+              headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+              }
+            }).then((ress)=>{
+              console.log(ress)
+            })}
+            else{
+              alert(response.data.data)
+            }
         }
       })
     } else {

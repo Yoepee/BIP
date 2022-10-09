@@ -15,7 +15,7 @@ const Donation = () => {
   useEffect(() => {
     dispatch(__getDonation(type));
   }, [dispatch, type]);
-
+  
   return (
     <div style={{width:"88%", margin:"0 auto"}}>
       <div style={{ display: "flex", cursor: "pointer" }}>
@@ -59,7 +59,7 @@ const Donation = () => {
               <div style={{ display: "flex", marginTop:"10px",color:"#a1a0a0" }}>
                 <div><ChatBubbleIcon style={{fontSize:"18px",verticalAlign: "sub"}}/> {post.numOfComment}</div>
                 <div><FavoriteIcon style={{marginLeft:"5px",fontSize:"18px",verticalAlign: "sub"}}/>{post.likes}</div>
-                <div style={{ marginLeft: "auto",fontSize:"14px", color:"#757575"}}>{post.createdAt}</div>
+                <div style={{ marginLeft: "auto",fontSize:"14px", color:"#757575"}}>{post.timePast}</div>
               </div>
             </div>
           )

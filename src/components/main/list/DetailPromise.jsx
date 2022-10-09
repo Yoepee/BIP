@@ -91,6 +91,7 @@ const DetailPromise = () => {
                   return (             
                     <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+
                       <div style={{paddingBottom:"100px"}}>{member.nicknameByOwner}</div>
                     </div>
                   )
@@ -98,6 +99,7 @@ const DetailPromise = () => {
                   return (
                     <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
                       <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+
                       <div>{member.nicknameByFriend}</div>
                     </div>
                   )
