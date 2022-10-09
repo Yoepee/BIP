@@ -39,14 +39,23 @@ const Option3 = ({ head }) => {
         }
       }).then(async(response) => {
         if (response.data.success) {
-          const chat = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/chat/member/${id}`,{
+          await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/chat/member/${id}`,{
             headers: {
               Authorization: localStorage.getItem('Authorization'),
               RefreshToken: localStorage.getItem('RefreshToken'),
+          }}).then(async(res)=>{
+            if(res.data.data !== "채팅방에 없는 회원입니다"){
+              navigate("/")
+            }else{
+              const chat = await axios.delete(process.env.REACT_APP_SERVER_HOST+`/api/chat/member/${id}`,{
+                headers: {
+                  Authorization: localStorage.getItem('Authorization'),
+                  RefreshToken: localStorage.getItem('RefreshToken'),
+                }
+              })
+              navigate("/")
             }
           })
-          console.log(chat)
-          navigate("/")
         } else {
           alert(response.data.data);
           setChk(0);
