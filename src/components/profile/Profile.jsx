@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import base from "../../img/baseProfile.jpg";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getProfile } from "../../redux/modules/profile";
@@ -12,25 +15,10 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
-  let a;
-
-  // 활동내역 조회
-  const __activity = async () => {
-    a = await axios.get(
-      process.env.REACT_APP_SERVER_HOST + `/api/user/event/`,
-      {
-        headers: {
-          Authorization: localStorage.getItem("Authorization"),
-          RefreshToken: localStorage.getItem("RefreshToken"),
-        },
-      }
-    );
-  };
 
   // 활동내역 받는 함수 동작
   useEffect(() => {
     dispatch(__getProfile());
-    __activity();
   }, [dispatch]);
   console.log(profile);
 
@@ -75,13 +63,32 @@ const Profile = () => {
             </p>
           </div>
         </Prodiv>
+        <Prodiv>
+          <BtnSet>
+                <Btn  onClick={()=>{navigate("/profile/history/like")}}>
+                <label>
+                    <IconBtn><FavoriteIcon/></IconBtn>
+                    <p>관심목록</p>
+                    </label>
+                </Btn>
+                <Btn onClick={()=>{navigate("/profile/history/promise")}}>
+                    <label>
+                    <IconBtn><ReceiptIcon/></IconBtn>
+                    <p>약속내역</p>
+                    </label>
+                </Btn>
+                <Btn onClick={()=>{navigate("/profile/history/write")}}>
+                <label>
+                    <IconBtn><VolunteerActivismIcon/></IconBtn>
+                    <p>작성목록</p>
+                    </label>
+                </Btn>
+            </BtnSet>
+        </Prodiv>
         <Prodiv style={{ flexDirection: "column" }}>
           <p>포인트 : {profile?.data?.data?.point}</p>
           <p>신용 점수 : {profile?.data?.data?.creditScore}</p>
           <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
-        </Prodiv>
-        <Prodiv>
-          <p>활동 내역</p>
         </Prodiv>
       </div>
     </div>
@@ -122,3 +129,29 @@ const Img = styled.img`
   height: 100%;
  
 `;
+
+const BtnSet = styled.div`
+display: grid;
+align-items: center;
+width:100%;
+grid-template-columns: repeat(3, 1fr);
+place-content:center;
+margin-top: 10px;
+`
+const Btn = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+`
+
+const IconBtn = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
+background-color: #A67EED;
+width: 70px;
+height: 70px;
+color:#3E09D1;
+cursor:pointer;
+`

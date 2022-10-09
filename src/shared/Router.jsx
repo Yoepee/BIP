@@ -24,6 +24,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
+import MyHistoryPage from "../pages/profile/MyHistoryPage"
 
 
 
@@ -90,6 +91,8 @@ const Router = () => {
             <Route path="/detailprofile" exact element={<DetailProfilePage />} />
             {/* 프로필 수정 */}
             <Route path="/editprofile/:type" exact element={<EditProfilePage />} />
+            {/* 내역보기 */}
+            <Route path="/profile/history/:type" exact element={<MyHistoryPage />} />
             {/* 신용도 구매 */}
             <Route path="/addcredit" exact element={<AddCreditPage />} />
             {/* 약속잡기 */}
