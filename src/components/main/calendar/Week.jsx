@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const Week = (value) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [ clickDay, setClickDay ] = useState(null);
 
   useEffect(() => {
@@ -69,6 +71,9 @@ const Week = (value) => {
     <STWeekCalendar>
       <STCalendar>
         <div className="Month">{weekDate[0].year}년 {weekDate[0].month}</div>
+        <div onClick={()=>{navigate("/monthly")}}>
+        <CalendarMonthIcon style={{ color: "#3E09D1", cursor:"pointer"}} />
+        </div>
       </STCalendar>
       <STDayContainer>
         <div className="daylistContainer">
@@ -125,18 +130,18 @@ const STWeekCalendar = styled.div`
 `;
 
 const STCalendar = styled.div`
-  width: 100%;
+  width: 120px;
+  /* background-color: pink; */
   display: flex;
   justify-content: center;
+  margin: 0 auto;
   & .Month {
     /* background-color: #fbfbfb; */
     /* border-radius: 6px; */
     padding: 6px 10px;
-    /* width: 52px;
-    height: 26px; */
     font-weight: 700;
     font-size: 14px;
-    line-height: 22px;
+    line-height: 12px;
     text-align: center;
     color: #3E09D1;
     margin-bottom: 12px;
