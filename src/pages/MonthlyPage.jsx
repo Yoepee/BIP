@@ -36,7 +36,7 @@ const MonthlyPage = () => {
         </Wrap>
         {/* 약속 추가하기 */}
         <Plus>
-            <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#6D09D1"}} /></IconBtn>
+            <IconBtn onClick={() => { navigate("/addpromise") }}><CreateIcon style={{color:"#3E09D1"}} /></IconBtn>
           </Plus>
           {/* 푸터메뉴 1번째 항목 선택 (0,1,2,3) */}
         <Footer/>
@@ -70,9 +70,9 @@ const IconBtn = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-border: 1.5px solid #6D09D1;
+border: 1.5px solid #3E09D1;
 border-radius:50%;
-background-color: white;
+background-color: #FAFAFA;
 width: 40px;
 height: 40px;
 color:white;
