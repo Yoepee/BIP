@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import KaKaoMap from "../map/KakaoMap";
 import DaumPostcode from 'react-daum-postcode';
 import axios from "axios";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import styled from "styled-components"
+import { useParams } from "react-router-dom";
 
 const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
-  const { naver } = window;
+  const { kakao } = window;
   let a;
+  const {id} = useParams();
   const initailState = []
   const [imgList, setImgList] = useState(initailState);
   // 게시판 종류
@@ -24,31 +26,32 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   const [lng, setLng] = useState(126.9769);
   // 주소검색 출력 여부 확인값
   const [openAddr, setOpenAddr] = useState(false)
+
+  useEffect(()=>{
+    if(id!==undefined&&donate.address!==""){
+      kakaoGeocode(donate.address)
+    }
+  },[donate.address])
+
   // 주소 값을 통해 좌표를 찾는 함수
-  const searchAddressToCoordinate = (address) => {
-    // 네이버 geocode 사용 (index.html에 자바스크립트 선언)
-    naver.maps.Service.geocode(
-      {
-        query: address,
-      },
-      (status, response) => {
-        if (status !== naver.maps.Service.Status.OK)
+  const kakaoGeocode = (address) => {
+    // 카카오 geocode 사용 (index.html에 자바스크립트 선언)
+    new kakao.maps.services.Geocoder().addressSearch(
+      address,
+      (result, status) => {
+        if (status !== kakao.maps.services.Status.OK)
           return alert("Something wrong!");
 
-        // 결과값 = response.v2.addresses에 나오는 걸 나눠서 작성된 내용
-        let result = response.v2;
-        let items = result.addresses;
-
-        // 경도, 위도 값
-        let x = parseFloat(items[0].x);
-        let y = parseFloat(items[0].y);
+        // // 경도, 위도 값
+        let x = parseFloat(result[0].x);
+        let y = parseFloat(result[0].y);
 
         setLat(y);
         setLng(x);
-        // 주소값 지정
-        setRoadAddress(items[0].roadAddress);
-        // 좌표값을 약속 생성 변수 값으로 입력
-        setDonate({ ...donate, address: items[0].roadAddress, coordinate: (String(y) + "," + String(x)) }) 
+        // // 주소값 지정
+        setRoadAddress(result[0].road_address.address_name);
+        // // 좌표값을 약속 생성 변수 값으로 입력
+        setDonate({ ...donate, address: result[0].road_address.address_name, coordinate: (String(y) + "," + String(x)) }) 
       }
     )
   }
@@ -102,7 +105,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
           <div>
             <DaumPostcode
               autoClose={false}
-              onComplete={(data) => { searchAddressToCoordinate(data.address); setOpenAddr(false) }} />
+              onComplete={(data) => { kakaoGeocode(data.address); setOpenAddr(false) }} />
           </div>
         </div>
         : null}
@@ -134,6 +137,10 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
             <span onClick={() => { setChkCategory(!chkCategory); setCategory("기타"); setDonate({ ...donate, category: "etc" }) }}>기타</span>
           </CategoryKind >
           : null}
+      </div>
+      <div style={{margin:"10px 0"}}>
+        <span style={{marginRight:"10px"}}>포인트</span>
+        <input style={{ border:"none", outline:"none", width:"80%" }}placeholder="추가 제공할 포인트를 적어주세요" name="point" value={donate.point} onChange={(e) => { onChangeHandler(e) }} />
       </div>
       <div style={{margin:"10px 0"}}>
         <span style={{marginRight:"10px"}}>내용</span>

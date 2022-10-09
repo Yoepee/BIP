@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import KaKaoMap from "../../map/KakaoMap";
 // 주소검색 라이브러리 (다음 우편번호 검색)
 import DaumPostcode from 'react-daum-postcode';
+import { useParams } from "react-router-dom";
 // 달력 날짜표시 한국어 세팅
 dayjs.locale("ko");
 
@@ -37,7 +38,7 @@ const AddPromise = ({
   const [date, setDate] = useState(now);
   // 약속 선택 (자신과의 약속, 타인과의 약속)
   const [modal, setModal] = useState(false);
-  const { naver } = window;
+  const { kakao } = window;
   // 주소 검색 후 나온 결과 주소값 지정
   const [roadAddress, setRoadAddress] = useState(null);
   // 위도 경도 변경되는 값을 받을 수 있도록 상태 관리.
@@ -45,32 +46,28 @@ const AddPromise = ({
   const [lng, setLng] = useState(126.9769);
   // 주소검색 출력 여부 확인값
   const [openAddr, setOpenAddr] = useState(false)
+  // id값 확인
+  const {id} = useParams();
 
   // 주소 값을 통해 좌표를 찾는 함수
-  const searchAddressToCoordinate = (address) => {
-    // 네이버 geocode 사용 (index.html에 자바스크립트 선언)
-    naver.maps.Service.geocode(
-      {
-        query: address,
-      },
-      (status, response) => {
-        if (status !== naver.maps.Service.Status.OK)
+  const kakaoGeocode = (address) => {
+    // 카카오 geocode 사용 (index.html에 자바스크립트 선언)
+    new kakao.maps.services.Geocoder().addressSearch(
+      address,
+      (result, status) => {
+        if (status !== kakao.maps.services.Status.OK)
           return alert("Something wrong!");
 
-        // 결과값 = response.v2.addresses에 나오는 걸 나눠서 작성된 내용
-        let result = response.v2;
-        let items = result.addresses;
-
-        // 경도, 위도 값
-        let x = parseFloat(items[0].x);
-        let y = parseFloat(items[0].y);
+        // // 경도, 위도 값
+        let x = parseFloat(result[0].x);
+        let y = parseFloat(result[0].y);
 
         setLat(y);
         setLng(x);
-        // 주소값 지정
-        setRoadAddress(items[0].roadAddress);
-        // 좌표값을 약속 생성 변수 값으로 입력
-        setPromise({ ...promise, place: items[0].roadAddress, coordinate: (String(y) + "," + String(x)) })
+        // // 주소값 지정
+        setRoadAddress(result[0].road_address.address_name);
+        // // 좌표값을 약속 생성 변수 값으로 입력
+        setPromise({ ...promise, place: result[0].road_address.address_name, coordinate: (String(y) + "," + String(x)) })
       }
     )
   }
@@ -80,6 +77,12 @@ const AddPromise = ({
     setCheck(false);
   }, [date]);
 
+  useEffect(()=>{
+    if(id!==undefined&&promise.place!==""){
+      kakaoGeocode(promise.place)
+    }
+  },[promise.place])
+
   // 시간 값 변동 시 약속생성 시간 값 설정 변경
   useEffect(() => {
     // 오후 조건
@@ -87,14 +90,14 @@ const AddPromise = ({
       // 오후 12시 (정오)
       if (time.hour === "12") {
         // 분 입력 값이 1자리 일때 0부착
-        if (time.min.length===1) {
+        if (time.min.length === 1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
               `YYYY-MM-DD-${time.hour}-0${time.min}-00`
             ),
           });
-        // 그 외 분 정상입력
+          // 그 외 분 정상입력
         } else {
           setPromise({
             ...promise,
@@ -106,7 +109,7 @@ const AddPromise = ({
         // 12시 외에는 작성시간 +12시간 ex) 오후 1시 => 13시
       } else {
         // 분 입력 값이 1자리 일때 0부착
-        if (time.min.length===1) {
+        if (time.min.length === 1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -128,7 +131,7 @@ const AddPromise = ({
       // 오전 12시(자정) 00시로 변경
       if (time.hour === "12") {
         // 분 입력 값이 1자리 일때 0부착
-        if (time.min.length===1) {
+        if (time.min.length === 1) {
           setPromise({
             ...promise,
             eventDateTime: dayjs(date).format(
@@ -146,9 +149,9 @@ const AddPromise = ({
         }
         // 시간 값이 1자리 일때 0부착
       } else {
-        if (time.hour.length===1) {
+        if (time.hour.length === 1) {
           // 분 입력 값이 1자리 일때 0부착
-          if (time.min.length===1) {
+          if (time.min.length === 1) {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
@@ -167,7 +170,7 @@ const AddPromise = ({
           // 시간 값이 2자리 이상일 때 정상 동작
         } else {
           // 분 입력 값이 1자리 일때 0부착
-          if (time.min.length===1) {
+          if (time.min.length === 1) {
             setPromise({
               ...promise,
               eventDateTime: dayjs(date).format(
@@ -193,19 +196,23 @@ const AddPromise = ({
       <Wrap>
         {/* 주소 검색창 출력 여부에 따라 표시 */}
         {openAddr ?
-          <div style={{ position: "relative", background: "gray", justifyContent:"center" }}>
+          <div style={{ position: "relative", background: "gray", justifyContent: "center" }}>
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <div style={{backgroundColor:"black", color: "white"}}
+              <div style={{ backgroundColor: "black", color: "white" }}
                 onClick={() => { setOpenAddr(false) }}>닫기</div>
             </div>
             <div>
               <DaumPostcode
                 autoClose={false}
-                onComplete={(data) => { searchAddressToCoordinate(data.address); setOpenAddr(false) }} />
+                onComplete={(data) => {
+                  // searchAddressToCoordinate(data.address); 
+                  kakaoGeocode(data.address);
+                  setOpenAddr(false)
+                }} />
             </div>
           </div>
           : null}
-          {/* 제목 */}
+        {/* 제목 */}
         <UnderLine>
           <Input
             type="text"
@@ -244,7 +251,7 @@ const AddPromise = ({
                 : <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
                   <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
                 </div>}
-                {/* 선택에 따른 약속 생성 값 수정 */}
+          {/* 선택에 따른 약속 생성 값 수정 */}
           {modal === true ?
             <div style={{
               width: "150px",
@@ -354,13 +361,13 @@ const AddPromise = ({
           <div>장소</div>
           {openAddr ? null :
             roadAddress === null ?
-              <div style={{color:"#D9D9D9"}} 
-              onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
+              <div style={{ color: "#D9D9D9" }}
+                onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
               : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
           }
         </When>
-          {/* 카카오 지도 출력 부, 위도경도는 주소 검색 시 자동 선정 */}
-          {/* 크키값 width, height 값으로 지정필요 */}
+        {/* 카카오 지도 출력 부, 위도경도는 주소 검색 시 자동 선정 */}
+        {/* 크키값 width, height 값으로 지정필요 */}
         <Map><KaKaoMap lat={lat} lng={lng} width={"340px"} height={"340px"} /></Map>
       </Wrap>
     </>
