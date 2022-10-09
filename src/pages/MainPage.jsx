@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import PromiseList from "../components/main/list/PromiseList";
 import dayjs from "dayjs";
 import Monthly from "../components/main/calendar/Monthly";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
@@ -34,10 +33,6 @@ const MainPage = () => {
       <>
         <Wrap>
             <StHeaderContainer>
-
-            <div onClick={()=>{navigate("/monthly")}}>
-              <CalendarMonthIcon style={{ color: "#3E09D1", marginTop:"70px", cursor:"pointer"}} />
-            </div>
             <Week day={day} setDay={setDay}/>
             </StHeaderContainer>
             {/* 약속 리스트 불러오기 */}

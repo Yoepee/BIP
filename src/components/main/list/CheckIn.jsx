@@ -19,9 +19,9 @@ const CheckIn = () =>{
   return (
     <>
     {/* 클릭시 체크인 함수 동작 */}
-    <div style={{color:"red", cursor:"pointer"}} onClick={()=>{dispatch(__CheckIn(id));}}>{">>"}체크인{"<<"}</div>
+    <CheckInBtn onClick={()=>{dispatch(__CheckIn(id));}}>출석하기</CheckInBtn>
     {/* 체크인 멤버리스트 출력 */}
-    <div style={{display:"flex", backgroundColor:"white", borderRadius:"15px"}}>
+    <div style={{display:"flex", backgroundColor:"#FAFAFA", borderRadius:"8px", fontSize:"0", minWidth:"380px"}}>
          {checkList?.data?.data?.map((member)=>{
           // 결과값이 ontime이면 정상 표시
           if(member.attendance==="ONTIME"){
@@ -66,29 +66,59 @@ const CheckIn = () =>{
 
 export default CheckIn;
 
+const CheckInBtn = styled.div`
+  width: 100px;
+  background-color: #D9DCFB;
+  border-radius: 20px;
+  color: #3E09D1;
+  cursor: pointer;
+  margin: 20px auto;
+  padding: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 3px 0 rgb(0,0,0,0.2);
+  &:hover {
+    background-color: #D9DCFB;
+    color: white;
+  }
+  &:active {
+    background-color: #D9DCFB;
+    color: white;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.3);
+    position: relative;
+    top:2px;
+  }
+`
+
 const OntimeCard = styled.div`
-border-radius: 20px;
+background-color: #3E09D1;
+color: white;
+border-radius: 25px;
+line-height: 18px;
 margin : 10px;
-padding : 10px;
-background-color: #6D09D1;
-color:white;
-font-weight:bold;
+padding : 6px 10px;
+font-weight: bold;
+font-size: 14px;
 `
 
 const LateCard = styled.div`
-border-radius: 20px;
+background-color: tomato;
+color: white;
+border-radius: 25px;
+line-height: 18px;
 margin : 10px;
-padding : 10px;
-background-color: red;
-font-weight:bold;
+padding : 6px 10px;
+font-weight: bold;
+font-size: 14px;
 `
 
 const NoshowCard = styled.div`
-border-radius: 20px;
-margin : 10px;
-padding : 10px;
 background-color: white;
-border: 2px solid #D9D9D9;
 color:#D9D9D9;
-font-weight:bold;
+border: 2px solid #D9D9D9;
+border-radius: 25px;
+line-height: 20px;
+margin : 10px;
+padding : 2px 8px;
+font-weight: bold;
+font-size: 14px;
 `
