@@ -153,12 +153,12 @@ const CheckPhone = () => {
           {/* 입력값이 없거나 휴대폰번호가 바르게 적히면 x */}
           {/* 휴대폰 번호가 이상하면 경고문구 출력 */}
           {member.value === "" ? null :
-            regexPhone.test(member.value) ? null : (<><div style={{ color: "red", fonSizen: "14px" , margin:"0 10%"}}>올바른 휴대폰 번호이 아닙니다.</div></>)}
+            regexPhone.test(member.value) ? null : (<><div style={{ color: "red", fonSize: "14px"}}>올바른 휴대폰 번호이 아닙니다</div></>)}
           {/* 인증번호 발급 버튼 클릭시 동작, 입력창 생성 */}
           {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
           {/* 인증코드가 이상하면 경고문구 출력 */}
           {test === "" ? null :
-            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin:"0 10%"}}>6자리 인증번호를 입력해주세요.</div></>)}
+            regtest.test(test) ? null : (<><div style={{ color: "red", fonSize: "14px"}}>6자리 인증번호를 입력해주세요</div></>)}
         </form>
 
 
@@ -272,6 +272,11 @@ const Wrapper = styled.div`
         border-color:#3E09D1;
         outline: none;
       }
+    }
+    div{
+      width: 70%;
+      margin: 0 auto;
+      max-width: 366px;
     }
   }
 `
