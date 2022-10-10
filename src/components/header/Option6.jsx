@@ -89,7 +89,7 @@ const Option6 = ({ head }) => {
       </div>
       <div onClick={() => { setChk(!chk); }}
         style={{ marginLeft: "auto", marginRight: "2%" }}>
-        <p><SettingsOutlinedIcon style={{ color: "#A67EED" }} /></p>
+        <p><SettingsOutlinedIcon style={{ color: "#D9DCFB" }} /></p>
       </div>
       {chk ?
         <div style={{
@@ -120,6 +120,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`
