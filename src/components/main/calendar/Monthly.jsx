@@ -175,20 +175,19 @@ const StyledBody = styled.div `
     border-radius: 50%;
     background : #D9DCFB;
     font-weight: 700;
-    color: #fff;
+    color: white;
   }
   .promise{
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background : pink;
+    background : #EDFFEB;
     font-weight: 700;
-    color: #fff;
+    /* color: #fff; */
   }
   .today{
     border-radius: 50%;
     font-weight: 700;
-    color: #292929;
     background : #D9DCFB;
     /* border: 1px solid #3E09D1; */
   }
