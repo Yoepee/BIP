@@ -103,7 +103,6 @@ const Comment = () => {
       cancelButtonColor: 'tomato',
       confirmButtonText: '추가',
       cancelButtonText: '취소',
-      fontSize:"100px"
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(__addMemberName({ value: nickname }))
