@@ -103,8 +103,8 @@ const Week = (value) => {
                     htmlFor={weekday.date}
                     className={getToday() === weekday.back && "isToday"}
                   >
-                    <div className="weekday">{weekday.day}</div>
-                    <div className="weekdate">{weekday.date}</div>
+                    <span className="weekday">{weekday.day}</span>
+                    <span className="weekdate">{weekday.date}</span>
                   </STLabel>
                 </div>
               );
@@ -181,20 +181,6 @@ const STDayContainer = styled.div`
         top: 15px;
       }
     }
-    /* & .leftIcon {
-      background-color: #ffffff;
-      border-radius: 50%;
-      position: absolute;
-      left: 0.1px;
-      top: 0.1px;
-    } */
-    /* & .rightIcon {
-      background-color: #ffffff;
-      border-radius: 50%;
-      position: absolute;
-      left: 0.1px;
-      top: 0.1px;
-    } */
   }
   /* 하루짜리 날짜 배열 Daylist */
   & .daylistSelector {
