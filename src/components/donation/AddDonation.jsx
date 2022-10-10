@@ -6,10 +6,10 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import styled from "styled-components"
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   const { kakao } = window;
-  let a;
   const { id } = useParams();
   const initailState = []
   const [imgList, setImgList] = useState(initailState);
@@ -59,7 +59,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       address,
       (result, status) => {
         if (status !== kakao.maps.services.Status.OK)
-          return alert("Something wrong!");
+          return Swal.fire("에러가 발생했습니다!",'　', 'error');
 
         // // 경도, 위도 값
         let x = parseFloat(result[0].x);
@@ -94,7 +94,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
     // 이미지만 보내면되기때문에 더이상 append하지않고 이미지파일 전송
 
     // form데이터를 보내주면 이미지가 저장되는 url경로를 불러주는 api
-    a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
       headers: {
         Authorization: localStorage.getItem("Authorization"),
         RefreshToken: localStorage.getItem("RefreshToken"),

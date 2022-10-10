@@ -1,7 +1,6 @@
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 import AddMemberPage from '../../pages/AddMemberPage';

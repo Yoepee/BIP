@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { readSocial } from "../../redux/modules/social";
+import Swal from "sweetalert2";
 
 // 이메일로 로그인 요청시 이동
 const CheckEmail = () => {
@@ -62,6 +63,13 @@ const CheckEmail = () => {
   const __examEmail = async (payload) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
       .then((response) => {
+        console.log(response)
+        if(!response.data.success){
+          Swal.fire(response.data.data,"　","error");
+          setVisble(false)
+        }else{
+          Swal.fire(response.data.data,"　","success");
+        }
       });
   }
 
@@ -134,12 +142,12 @@ const CheckEmail = () => {
                   if (regtest.test(test)) {
                     __emailLogin(member);
                   } else {
-                    alert("인증번호를 확인해주세요.")
+                    Swal.fire("인증번호를 확인해주세요.","　","error");
                   }
                 }
               // 이메일 이상여부 검사
               } else {
-                alert("이메일을 확인해주세요.")
+                Swal.fire("인증번호를 확인해주세요.","　","error");
               }
             }}>
             {chkBtn}
@@ -161,12 +169,12 @@ const CheckEmail = () => {
                 if (regtest.test(test)) {
                   __emailLogin(member);
                 } else {
-                  alert("인증번호를 확인해주세요.")
+                  Swal.fire("인증번호를 확인해주세요.","　","error");
                 }
               }
             // 이메일 이상여부 검사
             } else {
-              alert("이메일을 확인해주세요.")
+              Swal.fire("인증번호를 확인해주세요.","　","error");
             }
           }}>
           {chkBtn}
