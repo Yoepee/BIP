@@ -196,9 +196,9 @@ const AddPromise = ({
       <Wrap>
         {/* 주소 검색창 출력 여부에 따라 표시 */}
         {openAddr ?
-          <div style={{ position: "relative", background: "gray", justifyContent: "center" }}>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <div style={{ backgroundColor: "black", color: "white" }}
+          <div style={{ position: "relative", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "flex-end", margin:"5px" }}>
+              <div style={{ backgroundColor: "#D9DCFB", cursor:"pointer", fontWeight:"bold", borderRadius:"6px", padding:"3px" }}
                 onClick={() => { setOpenAddr(false) }}>닫기</div>
             </div>
             <div>
@@ -233,23 +233,23 @@ const AddPromise = ({
           />
         </UnderLine>
         {/* 약속 대상 선택 */}
-        <Point>
+        <Who>
           {/* 선택값에 따른 div표시 변경 */}
           <label style={{ fontWeight: "bold" }}>약속 대상</label>
           {promise.point === "0" && !modal ?
             <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
-              <div>자신과의 약속　</div><div style={{ color: "#A67EED" }}>▼</div>
+              <div>자신과의 약속　</div><div style={{ color: "#3E09D1", cursor:"pointer" }}>▼</div>
             </div>
             : promise.point === "0" && modal ?
               <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
-                <div>자신과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
+                <div>자신과의 약속　</div><div style={{ color: "#3E09D1", cursor:"pointer" }}>▲</div>
               </div>
               : promise.point == "100" && !modal ?
                 <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
-                  <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▼</div>
+                  <div>타인과의 약속　</div><div style={{ color: "#3E09D1", cursor:"pointer" }}>▼</div>
                 </div>
                 : <div onClick={() => { setModal(!modal); }} style={{ display: "flex" }}>
-                  <div>타인과의 약속　</div><div style={{ color: "#A67EED" }}>▲</div>
+                  <div>타인과의 약속　</div><div style={{ color: "#3E09D1", cursor:"pointer" }}>▲</div>
                 </div>}
           {/* 선택에 따른 약속 생성 값 수정 */}
           {modal === true ?
@@ -260,7 +260,7 @@ const AddPromise = ({
               top: "30px", right: "110px",
               textAlign: "center",
               borderRadius: "5px",
-              border: "1px solid black",
+              border: "1px solid #292929",
               zIndex: "10"
             }}>
               <OptionMenu
@@ -270,7 +270,7 @@ const AddPromise = ({
             </div>
             : null
           }
-        </Point>
+        </Who>
         {/* 시간 선택 */}
         <When>
           {/* 클릭 시 달력 출력 (달력 아이콘) */}
@@ -279,7 +279,7 @@ const AddPromise = ({
               setCheck(!check);
             }}>
             <p>
-              <CalendarMonthIcon style={{ color: "#A67EED" }} />
+              <CalendarMonthIcon style={{ color: "#3E09D1", cursor:"pointer" }} />
             </p>
           </div>
           {/* 선택된 날짜 출력 */}
@@ -290,7 +290,7 @@ const AddPromise = ({
               {am ? (
                 <>
                   <Button
-                    style={{ color: "black", backgroundColor: "#F5EAFB" }}
+                    style={{ color: "black", backgroundColor: "#D9DCFB" }}
                     onClick={() => {
                       setAm(true);
                     }}>
@@ -314,7 +314,7 @@ const AddPromise = ({
                     오전
                   </Button>
                   <Button
-                    style={{ color: "black", backgroundColor: "#F5EAFB" }}
+                    style={{ color: "black", backgroundColor: "#D9DCFB" }}
                     onClick={() => {
                       setAm(false);
                     }}>
@@ -358,7 +358,7 @@ const AddPromise = ({
         ) : null}
         {/* 장소 입력인데 동일 styled적용 확인후 수정필요 여부 결정 */}
         <When>
-          <div>장소</div>
+          <div style={{fontWeight:"bold"}}>장소</div>
           {openAddr ? null :
             roadAddress === null ?
               <div style={{ color: "#D9D9D9" }}
@@ -368,7 +368,7 @@ const AddPromise = ({
         </When>
         {/* 카카오 지도 출력 부, 위도경도는 주소 검색 시 자동 선정 */}
         {/* 크키값 width, height 값으로 지정필요 */}
-        <Map><KaKaoMap lat={lat} lng={lng} width={"340px"} height={"340px"} /></Map>
+        <Map><KaKaoMap lat={lat} lng={lng} width={"380px"} height={"300px"} /></Map>
       </Wrap>
     </>
   );
@@ -379,8 +379,8 @@ export default AddPromise;
 const Wrap = styled.div`
   /* background-color: pink; */
   margin: 0 auto;
-  width: 80vw;
-  min-width: 300px;
+  width: 70%;
+  min-width: 500px;
   max-width: 800px;
   text-align: center;
   position: relative;
@@ -390,7 +390,7 @@ const UnderLine = styled.div`
   
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #f5eafb;
+  border-bottom: 0.8px solid #D9DCFB;
   margin: 5% 5% 5% 12%;
   width: 70%;
 `
@@ -422,8 +422,8 @@ const InputTime = styled.input`
   }
 `;
 
-const Point = styled.div`
-  border-bottom: 1px solid #f5eafb;
+const Who = styled.div`
+  border-bottom: 0.8px solid #D9DCFB;
   margin: 5% 5% 5% 12%;
   width: 70%;
   /* background-color: green; */
@@ -438,21 +438,21 @@ const Point = styled.div`
     margin-bottom: 20px;
     width: 30%;
     padding: 2%;
-    
+    cursor: pointer;
   }
 `;
 
 const Map = styled.div`
   /* position: absolute; */
-  width: 80%;
-  height: 25vh;
-  margin: 0 auto;
-  background-color: #f5eafb;
+  /* width: 80%; */
+  /* height: 25vh; */
+  margin: 20px auto;
 `;
 const OptionMenu = styled.div`
 padding: 3px;
+font-size: 14px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`
