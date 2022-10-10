@@ -4,7 +4,7 @@
   max-width: 100%;
   min-width: 270px;
   background-color: transparent;
-  color: #222;
+  color: #292929;
   border: none;
   /* border-radius: 8px; */
   /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); */
@@ -14,7 +14,7 @@
  }
  .react-calendar__navigation button {
   /* color: #6f48eb; */
-  color: black;
+  color: #292929;
   font-weight: bold;
   min-width: 44px;
   background: none;

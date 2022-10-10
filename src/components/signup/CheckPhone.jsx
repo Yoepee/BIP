@@ -220,10 +220,22 @@ const CheckPhone = () => {
 export default CheckPhone;
 
 
+const InfoArea = styled.div`
+  display: flex;
+  padding: 10px;
+	align-items: center;
+	justify-content: center;
+  p {
+    font-weight: 600;
+    font-size: 17px;
+  }
+`
+
 
 const Wrapper = styled.div`
   display: flex;
   width: 80%;
+  min-width: 360px;
   flex-direction: column;
   margin: 20px auto;
 
@@ -235,11 +247,11 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     input{
-      width: 80%;
+      width: 70%;
       margin: 0 auto;
-      max-width: 400px;
+      max-width: 366px;
       border:2px solid #D9DCFB;
-      padding: 20px;
+      padding: 16px;
       border-radius: 6px;
       &:focus{
         border-color:#3E09D1;
@@ -249,28 +261,16 @@ const Wrapper = styled.div`
   }
 `
 
-const InfoArea = styled.div`
-  display: flex;
-  padding: 10px;
-	align-items: center;
-	justify-content: center;
-  p {
-    font-weight: 600;
-    font-size: 18px;
-  }
-`
-
 const BtnArea = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
   .default_btn{
     background-color: #D9DCFB;
     color:  white;
   }
   Button {
     background-color: #D9DCFB;
-    /* width: 100%; */
     width: 100%;
     margin: 0 auto;
     max-width: 400px;
@@ -280,7 +280,7 @@ const BtnArea = styled.div`
 		/* align-items: center; */
     &:hover{
       background-color: #3E09D1;
-      color:white;
+      color: white;
     }
   }
 `
