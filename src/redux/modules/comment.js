@@ -7,7 +7,7 @@ export const __getComment = createAsyncThunk(
   "/api/comment?postId=게시물id&page=댓글 페이지",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/comment?postId=${payload.id}&page=${payload.page}`, {
+      const data = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/comments?postId=${payload.id}&page=${payload.page}`, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -26,7 +26,7 @@ export const __addComment = createAsyncThunk(
   "/api/comment/{postid}",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/comment/${payload.id}`, payload.data, {
+      const data = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/comments/${payload.id}`, payload.data, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -45,7 +45,7 @@ export const __editComment = createAsyncThunk(
   "/api/comment/update/{commentId}",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/comment/update/${payload.id}`, payload.data, {
+      const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/comments/update/${payload.id}`, payload.data, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -65,7 +65,7 @@ export const __removeComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload)
-      const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/comment/delete/${payload}`, null, {
+      const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/comments/delete/${payload}`, null, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
