@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { __getDetailDonation } from "../../redux/modules/detailDonation";
 import styled from 'styled-components'
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import { flexbox } from "@mui/system";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios";
 import KaKaoMap from "../map/KakaoMap";
+import Swal from "sweetalert2";
+
 const DetailDonation = () => {
   const dispatch = useDispatch();
   const donation = useSelector((state) => state.detailDonation);
@@ -20,6 +20,10 @@ const DetailDonation = () => {
     dispatch(__getDetailDonation(id));
     __getLike();
   }, [dispatch]);
+
+  useEffect(()=>{
+    dispatch(__getDetailDonation(id));
+  },[like])
 
   const __getLike = async() =>{
     await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/like/check/${id}`, {
@@ -38,7 +42,6 @@ const DetailDonation = () => {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
     }}).then((res)=>{
-      console.log(res)
       if(res.data.success){
         setLike(!like)
       }
@@ -50,14 +53,21 @@ const DetailDonation = () => {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
     }}).then((res)=>{
-      console.log(res)
       if(res.data.success){
         setLike(!like)
       }
     })
   }
   const __notifyPost = async() =>{
-    if (window.confirm("게시글을 신고하시겠습니까?")) {
+    Swal.fire({
+      title: `게시글을 신고하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '신고',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
     await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/posts/report/${id}`, null, {
       headers: {
           Authorization: localStorage.getItem('Authorization'),
@@ -65,14 +75,13 @@ const DetailDonation = () => {
     }}).then((res)=>{
       console.log(res)
       if(res.data.success){
-        alert(res.data.data);
+        Swal.fire(res.data.data, "　", "success");
       }else{
-        alert(res.data.data);
+        Swal.fire(res.data.data, "　", "error");
       }
     })
-    }else{
-      return;
     }
+  })
   }
   return (
     <div style={{width:"80%", margin:"0 auto"}}>

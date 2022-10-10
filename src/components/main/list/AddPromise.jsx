@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
+import Swal from "sweetalert2";
 
 import dayjs from "dayjs";
 import KaKaoMap from "../../map/KakaoMap";
@@ -56,7 +57,8 @@ const AddPromise = ({
       address,
       (result, status) => {
         if (status !== kakao.maps.services.Status.OK)
-          return alert("Something wrong!");
+          return Swal.fire("에러가 발생했습니다!",'　', 'error');
+
 
         // // 경도, 위도 값
         let x = parseFloat(result[0].x);

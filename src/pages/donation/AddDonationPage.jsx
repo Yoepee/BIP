@@ -45,7 +45,6 @@ const AddDonationPage = () =>{
           address : response.payload.data.address,
           coordinate : response.payload.data.coordinate,
           point : response.payload.data.point,
-          imgUrlList : response.payload.data.imgUrlList
         })
     });
     // id값이 없으면 생성하기로 동작 초기값 : 공백

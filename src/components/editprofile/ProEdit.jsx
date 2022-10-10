@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 // 프로필 수정 사진 외 (닉네임, 휴대폰번호, 이메일) 수정
 // set = 입력값 담는 변수
@@ -45,7 +46,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       // 이메일
     } else {
       if (regexEmail.test(set.email)) {
-        __chkEmail({ value: set.email})
+        __chkEmail({ value: set.email })
       } else {
         setMent("")
       }
@@ -59,22 +60,22 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const timer = useRef(null);
 
   // 랜더링시 카운트다운 초기화
-  useEffect(()=>{
+  useEffect(() => {
     return () => clearInterval(timer.current);
-  },[])
+  }, [])
 
   // 시간이 0 이하일 때 카운트다운 종료
-  useEffect(()=>{
-    if(time.current<0){
+  useEffect(() => {
+    if (time.current < 0) {
       clearInterval(timer.current);
     }
-  },[sec])
+  }, [sec])
 
   // 시간 타이머 함수
   const countDown = () => {
-    setMin(parseInt(time.current/60));
-    setSec(time.current%60);
-    time.current-=1;
+    setMin(parseInt(time.current / 60));
+    setSec(time.current % 60);
+    time.current -= 1;
   }
 
   // 휴대폰 번호 중복검사 함수
@@ -82,7 +83,6 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
     if (regexPhone.test(set.phonenumber)) {
       let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
         .then((response) => {
-          console.log(response)
           if (response.data.data) {
             setMent("사용 가능한 번호 입니다.")
             setChk(true)
@@ -95,7 +95,6 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   // 닉네임 중복검사 함수
   const __chkNickname = async (payload) => {
     if (regexNickname.test(set.value)) {
-      console.log(payload)
       let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chknickname", payload)
         .then((response) => {
           setMent(response.data.data)
@@ -124,40 +123,52 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   }
   // 휴대폰 인증코드 (콘솔 검사용)
   const __testPhone = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", {value:payload})
-    .then((response)=>{
-      console.log(response)
-    });
+    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", { value: payload })
+      .then((response) => {
+        console.log(response)
+      });
   }
   // 실제 휴대폰 문자 인증코드 발송
   const __examPhone = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", {value:payload})
-    .then((response)=>{
-    });
+    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", { value: payload })
+      .then((response) => {
+        console.log(response)
+      });
   }
 
   // 이메일 인증코드 발송
   const __examEmail = async (payload) => {
     console.log(payload)
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/user/auth/email", {value:payload})
+    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/user/auth/email", { value: payload }, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    })
       .then((response) => {
         console.log(response)
+        if(response.data.success){
+          Swal.fire(response.data.data,"　","success");
+        }else{
+          Swal.fire(response.data.data,"　","error");
+          setVisible(false);
+        }
       });
   }
   return (
-    <div style={{ display:"flex", flexDirection:"column", margin:"0 auto", width:"76%"}}>
+    <div style={{ display: "flex", flexDirection: "column", margin: "0 auto", width: "76%" }}>
       {/* 닉네임 수정 시에 동작하는 내용 */}
       {type === "name" ?
-        <div style={{ margin:"0 auto", width:"100%",borderBottom: "1px solid #F5EAFB"}}>
+        <div style={{ margin: "0 auto", width: "100%", borderBottom: "1px solid #F5EAFB" }}>
           <p>닉네임</p>
-          <input style={{outline: "none",border:"none"}} placeholder="닉네임"
+          <input style={{ outline: "none", border: "none" }} placeholder="닉네임"
             name="value"
             type="text"
             value={set.value}
             onChange={(e) => { onChangeHandler(e) }} />
-            {/* 닉네임 정규식 유효성 검사 */}
+          {/* 닉네임 정규식 유효성 검사 */}
           {set.value === "" ? null : regexNickname.test(set.value) ?
-          // 유효성 검사 통과 시 중복검사 결과 출력
+            // 유효성 검사 통과 시 중복검사 결과 출력
             ment === "사용 가능한 닉네임 입니다." ?
               (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
               : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
@@ -173,73 +184,73 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               value={set.phonenumber}
               onChange={(e) => { onChangeHandler(e) }} />
             {set.phonenumber === "" ? null :
-            // 휴대폰 번호 유효성 검사
+              // 휴대폰 번호 유효성 검사
               regexPhone.test(set.phonenumber) ? ment === "사용 가능한 번호 입니다." ?
-              // 중복번호 수정 제한
+                // 중복번호 수정 제한
                 null
                 : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
                 : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
-                <BtnArea>
-                  {/* 인증번호 발급 버튼 클릭시 입력창 출력 */}
-            {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
-          {set.authCode === "" ? null :
-          // 인증코드 형식에 어긋나면 경고문구 출력
-            regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
-            {/* 인증번호 발급 시 재발급 버튼 및 카운트 다운 */}
-            {visible && <Button style={{marginTop:"15px",width:"100px"}}variant="contained" className="default_btn" onClick={()=>{__testPhone(set.phonenumber);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
-          {/* 휴대폰 번호 입력에 따른 버튼 색상 변경 */}
-          {!visible&&
-          regexPhone.test(set.phonenumber)?
-          <Button  
-            variant="contained"
-            style={{backgroundColor: "#6D09D1"}}
-            onClick={() => {
-              if (regexPhone.test(set.phonenumber)) {
-                if (!visible) {
-                  setChkBtn("인증번호 확인하기");
-                  __testPhone(set.phonenumber);
-                  timer.current = setInterval(()=>{
-                    countDown();
-                  },1000);
-                  setVisible(!visible);
-                } else {
-                  if(regtest.test(set.authCode)){
-                  __chkPhone(set.phonenumber);
-                  }else{
-                    alert("인증번호를 확인해주세요.")
-                  }
-                }
-              } else {
-                alert("휴대폰 번호를 확인해주세요.")
-              }
-            }}>
-            {chkBtn}
-          </Button>
-          :visible?null:<Button
-          variant="contained"
-          onClick={() => {
-            if (regexPhone.test(set.phonenumber)) {
-              if (!visible) {
-                setChkBtn("인증번호 확인하기");
-                __testPhone(set.phonenumber);
-                timer.current = setInterval(()=>{
-                  countDown();
-                },1000);
-                setVisible(!visible);
-              } else {
-                if(regtest.test(set.authCode)){
-                __chkPhone({value:set.phonenumber});
-                }else{
-                  alert("인증번호를 확인해주세요.")
-                }
-              }
-            } else {
-              alert("휴대폰 번호를 확인해주세요.")
-            }
-          }}>
-          {chkBtn}
-        </Button>}
-          </BtnArea>
+            <BtnArea>
+              {/* 인증번호 발급 버튼 클릭시 입력창 출력 */}
+              {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6} />}
+              {set.authCode === "" ? null :
+                // 인증코드 형식에 어긋나면 경고문구 출력
+                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
+              {/* 인증번호 발급 시 재발급 버튼 및 카운트 다운 */}
+              {visible && <Button style={{ marginTop: "15px" }} variant="contained" className="default_btn" onClick={() => { __testPhone(set.phonenumber); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+              {/* 휴대폰 번호 입력에 따른 버튼 색상 변경 */}
+              {!visible &&
+                regexPhone.test(set.phonenumber) ?
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#6D09D1" }}
+                  onClick={() => {
+                    if (regexPhone.test(set.phonenumber)) {
+                      if (!visible) {
+                        setChkBtn("인증번호 확인하기");
+                        __testPhone(set.phonenumber);
+                        timer.current = setInterval(() => {
+                          countDown();
+                        }, 1000);
+                        setVisible(!visible);
+                      } else {
+                        if (regtest.test(set.authCode)) {
+                          __chkPhone(set.phonenumber);
+                        } else {
+                          Swal.fire("인증번호를 확인해주세요", "　", "error")
+                        }
+                      }
+                    } else {
+                      Swal.fire("휴대폰 번호를 확인해주세요", "　", "error")
+                    }
+                  }}>
+                  {chkBtn}
+                </Button>
+                : visible ? null : <Button
+                  variant="contained"
+                  onClick={() => {
+                    if (regexPhone.test(set.phonenumber)) {
+                      if (!visible) {
+                        setChkBtn("인증번호 확인하기");
+                        __testPhone(set.phonenumber);
+                        timer.current = setInterval(() => {
+                          countDown();
+                        }, 1000);
+                        setVisible(!visible);
+                      } else {
+                        if (regtest.test(set.authCode)) {
+                          __chkPhone({ value: set.phonenumber });
+                        } else {
+                          Swal.fire("인증번호를 확인해주세요", "　", "error")
+                        }
+                      }
+                    } else {
+                      Swal.fire("휴대폰 번호를 확인해주세요", "　", "error")
+                    }
+                  }}>
+                  {chkBtn}
+                </Button>}
+            </BtnArea>
           </>
           // 이메일 수정 시에 동작하는 내용
           : <>
@@ -249,73 +260,73 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               type="text"
               value={set.email}
               onChange={(e) => { onChangeHandler(e) }} />
-              {/* 이메일 유효성 검사 경고문구 출력 */}
+            {/* 이메일 유효성 검사 경고문구 출력 */}
             {set.email === "" ? null : regexEmail.test(set.email) ?
               ment === "사용 가능한 이메일 입니다." ?
                 null
                 : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
               : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다.</div>)}
-              <BtnArea>
-                {/* 인증코드 입력창 출력 */}
-            {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6}/>}
-          {/* 형식에 어긋난 인증코드 입력시 경고문구 출력 */}
-          {set.authCode === "" ? null :
-            regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
-            {/* 인증코드 재발급 버튼 */}
-            {visible && <Button style ={{marginTop:"20px"}} variant="contained" className="default_btn" onClick={()=>{__examEmail(set.email);time.current=180;}}>인증번호 다시 받기 ({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
-          {/* 입력값에 따른 버튼 색상 변경 */}
-          {!visible&&
-          regexEmail.test(set.email)?
-          <Button
-            variant="contained"
-            style={{backgroundColor: "#6D09D1"}}
-            onClick={() => {
-              if (regexEmail.test(set.email)) {
-                if (!visible) {
-                  setChkBtn("인증번호 확인하기");
-                  __examEmail(set.email);
-                  timer.current = setInterval(()=>{
-                    countDown();
-                  },1000);
-                  setVisible(!visible);
-                } else {
-                  if(regtest.test(set.authCode)){
-                  __chkPhone(set.phonenumber);
-                  }else{
-                    alert("인증번호를 확인해주세요.")
-                  }
-                }
-              } else {
-                alert("이메일 주소를 확인해주세요.")
-              }
-            }}>
-            {chkBtn}
-          </Button>
-          :visible?null:<Button
-          variant="contained"
-          onClick={() => {
-            if (regexEmail.test(set.email)) {
-              if (!visible) {
-                setChkBtn("인증번호 확인하기");
-                __examEmail(set.email);
-                timer.current = setInterval(()=>{
-                  countDown();
-                },1000);
-                setVisible(!visible);
-              } else {
-                if(regtest.test(set.authCode)){
-                  __chkEmail({value:set.email})
-                }else{
-                  alert("인증번호를 확인해주세요.")
-                }
-              }
-            } else {
-              alert("이메일 주소를 확인해주세요.")
-            }
-          }}>
-          {chkBtn}
-        </Button>}
-          </BtnArea>
+            <BtnArea>
+              {/* 인증코드 입력창 출력 */}
+              {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6} />}
+              {/* 형식에 어긋난 인증코드 입력시 경고문구 출력 */}
+              {set.authCode === "" ? null :
+                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
+              {/* 인증코드 재발급 버튼 */}
+              {visible && <Button style={{ marginTop: "20px" }} variant="contained" className="default_btn" onClick={() => { __examEmail(set.email); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+              {/* 입력값에 따른 버튼 색상 변경 */}
+              {!visible &&
+                regexEmail.test(set.email) ?
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#6D09D1" }}
+                  onClick={() => {
+                    if (regexEmail.test(set.email)) {
+                      if (!visible) {
+                        setChkBtn("인증번호 확인하기");
+                        __examEmail(set.email);
+                        timer.current = setInterval(() => {
+                          countDown();
+                        }, 1000);
+                        setVisible(!visible);
+                      } else {
+                        if (regtest.test(set.authCode)) {
+                          __chkPhone(set.phonenumber);
+                        } else {
+                          Swal.fire("인증번호를 확인해주세요", "　", "error")
+                        }
+                      }
+                    } else {
+                      Swal.fire("이메일 주소를 확인해주세요.", "　", "error")
+                    }
+                  }}>
+                  {chkBtn}
+                </Button>
+                : visible ? null : <Button
+                  variant="contained"
+                  onClick={() => {
+                    if (regexEmail.test(set.email)) {
+                      if (!visible) {
+                        setChkBtn("인증번호 확인하기");
+                        __examEmail(set.email);
+                        timer.current = setInterval(() => {
+                          countDown();
+                        }, 1000);
+                        setVisible(!visible);
+                      } else {
+                        if (regtest.test(set.authCode)) {
+                          __chkEmail({ value: set.email })
+                        } else {
+                          Swal.fire("인증번호를 확인해주세요", "　", "error")
+                        }
+                      }
+                    } else {
+                      Swal.fire("이메일 주소를 확인해주세요.", "　", "error")
+                    }
+                  }}>
+                  {chkBtn}
+                </Button>}
+            </BtnArea>
           </>}
     </div>
   )

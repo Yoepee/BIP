@@ -5,7 +5,6 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 // 프로필 사진 수정 컴포넌트
 // setImg, img 이미지 url을 담는 값
 const ProEditPicture = ({setImg, img}) => {
-    let a;
     const onChange = async (e) => {
         // input file에서 선택된 file을 img로 지정
         const image = e.target.files[0];
@@ -23,7 +22,7 @@ const ProEditPicture = ({setImg, img}) => {
         // 이미지만 보내면되기때문에 더이상 append하지않고 이미지파일 전송
 
         // form데이터를 보내주면 이미지가 저장되는 url경로를 불러주는 api
-        a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
+        await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
             headers: {
                 Authorization: localStorage.getItem("Authorization"),
                 RefreshToken: localStorage.getItem("RefreshToken"),
@@ -34,10 +33,10 @@ const ProEditPicture = ({setImg, img}) => {
           (res)=>{setImg({imgUrl:res.data.data})}
           )
           
-        // 폼데이터 들어가는 형식을 보기위한 내용
-        for (var pair of formData.entries()) {
-          console.log(pair[0] + ", " + pair[1]);
-        }
+        // // 폼데이터 들어가는 형식을 보기위한 내용
+        // for (var pair of formData.entries()) {
+        //   console.log(pair[0] + ", " + pair[1]);
+        // }
     }
     return (
         <div>
