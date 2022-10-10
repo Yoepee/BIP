@@ -52,7 +52,7 @@ const Option9 = ({ head }) => {
   return (
     <>
       <div onClick={() => { navigate("/donation") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ color: "#6D09D1" }} /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{ color: "#3E09D1" }} /></p>
       </div>
       <div style={{ marginLeft: "1%", fontWeight: "bold", fontSize: "20px" }}>
         <p style={{ marginTop: "16px" }}>{head}</p>
@@ -60,7 +60,7 @@ const Option9 = ({ head }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", display: "flex" }}>
         {donate?.data?.data?.nickname === localStorage.getItem("name") ?
           <div onClick={() => { setChk(!chk) }} style={{ marginRight: "2%" }}>
-            <p style={{ color: "#A67EED" }}><MoreVertIcon /></p>
+            <p style={{ color: "#D9DCFB" }}><MoreVertIcon /></p>
           </div>
           : null}
         {chk == 1 ?
@@ -93,6 +93,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`

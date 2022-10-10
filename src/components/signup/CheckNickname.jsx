@@ -62,7 +62,7 @@ const CheckNickname = () => {
         <Button className="next_btn" onClick={()=>{__editNickname(member)}}>완료</Button>
       </HeaderArea>
 
-      <Profile>
+      <Nickname>
       <label style={{fontWeight:'600', fontSize:'18px'}}>닉네임</label>
         <input label="닉네임" placeholder="닉네임을 입력하세요"  name="value"
             value={member.value}
@@ -73,7 +73,7 @@ const CheckNickname = () => {
             (<div style={{color: "#00766c", fontSize:"14px",marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
             :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
             :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>사용가능한 닉네임이 아닙니다.</div>)}
-      </Profile>
+      </Nickname>
     </Wrapper>
   );
 };
@@ -83,6 +83,7 @@ export default CheckNickname;
 const Wrapper = styled.div`
   display: flex;
   width: 80%;
+  max-width: 400px;
   flex-direction: column;
   margin: 30px auto;
 `;
@@ -107,7 +108,7 @@ const HeaderTitle = styled.span`
   font-size: 20px;
 `;
 
-const Profile = styled.form`
+const Nickname = styled.form`
   margin: 69px auto 0 auto;
   display: flex;
   flex-direction: column;
@@ -121,13 +122,13 @@ const Profile = styled.form`
     outline: none;
     border: none;
     font-size: 15px;
-    border-bottom: 1px solid #D5C2F8;
+    border-bottom: 1px solid #D9DCFB;
     margin-top: 49px;
     &::placeholder{
       font-size: 15px;
     }
     &:focus{
-      border-bottom: 2px solid #6D09D1;
+      border-bottom: 2px solid #3E09D1;
     }
   }
 `;

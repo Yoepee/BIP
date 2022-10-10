@@ -70,7 +70,7 @@ const ItrBtn = styled.button`
   width: 200px;
   height: 45px;
   margin-bottom: 8px;
-  background-color: #6D09D1;
+  background-color: #3E09D1;
   color: white;
   font-size: 12px;
   font-weight: bold;

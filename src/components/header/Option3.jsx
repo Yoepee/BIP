@@ -138,7 +138,7 @@ const Option3 = ({ head }) => {
   return (
     <>
       <div onClick={() => { navigate("/") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ color: "#6D09D1" }} /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{ color: "#3E09D1" }} /></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
         <p>{head}</p>
@@ -146,7 +146,7 @@ const Option3 = ({ head }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", display: "flex" }}>
         {leader ?
           <div onClick={() => { if (chk === 0) { setChk(2); } else { setChk(0) } }} style={{ marginRight: "20px" }}>
-            <p style={{ color: "#A67EED" }}><ManageAccountsRoundedIcon /></p>
+            <p style={{ color: "#D9DCFB" }}><ManageAccountsRoundedIcon /></p>
           </div>
           : null}
         {chk === 2 ?
@@ -177,7 +177,7 @@ const Option3 = ({ head }) => {
           </div>
           : null}
         <div onClick={() => { if (chk === 0) { setChk(1); } else { setChk(0) } }} style={{ marginRight: "2%" }}>
-          <p style={{ color: "#A67EED" }}><MoreVertIcon /></p>
+          <p style={{ color: "#D9DCFB" }}><MoreVertIcon /></p>
         </div>
         {chk == 1 ?
           <div style={{
@@ -208,6 +208,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`

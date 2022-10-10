@@ -31,11 +31,11 @@ const Option7 = ({ setType }) => {
       {!chk ?
         <>
           <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▼</p>
-          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#6D09D1" }}>▼</p> */}
+          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#3E09D1" }}>▼</p> */}
         </>
         : <>
           <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▲</p>
-          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#6D09D1" }}>▲</p> */}
+          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#3E09D1" }}>▲</p> */}
           <div style={{
             width: "120px",
             position: "absolute",
@@ -71,7 +71,7 @@ const Option7 = ({ setType }) => {
             }
           }
         }}>
-        <p><SearchIcon style={{ color: "#A67EED" }} /></p>
+        <p><SearchIcon style={{ color: "#D9DCFB" }} /></p>
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
         onClick={() => { setType("none"); }}>
@@ -87,7 +87,7 @@ export default Option7;
 const SearchInput = styled.input`
 outline: none;
 border: none;
-border-bottom: 1px solid #D5C2F8;
+border-bottom: 1px solid #D9DCFB;
 padding: 5px 10px;
 margin-top: 20px;
 &::placeholder{
@@ -99,6 +99,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`
