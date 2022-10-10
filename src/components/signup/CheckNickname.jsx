@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
@@ -9,49 +9,67 @@ const CheckNickname = () => {
   const navigate = useNavigate();
 
   const initialState = {
-    value:'',
+    value: '',
   }
   const [member, setMember] = useState(initialState)
-  const [chkname,setChkname] = useState("")
-  /** 닉네임 유효성 검사*/ 
-  const regexNickname =  /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,8}$/;
+  const [chkname, setChkname] = useState("")
+  /** 닉네임 유효성 검사*/
+  const regexNickname = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,8}$/;
 
   const onChangeHandler = (e) => {
-    const {name, value} = e.target;
-    setMember({...member, [name]: value})
+    const { name, value } = e.target;
+    setMember({ ...member, [name]: value })
   }
 
   // 닉네임 중복검사
-  const __chkNickname = async(payload)=>{
-    await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/member/chknickname", payload)
-    .then((response)=>{
-      setChkname(response.data.data)
-    });
+  const __chkNickname = async (payload) => {
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chknickname", payload)
+      .then((response) => {
+        setChkname(response.data.data)
+      });
   }
-  
+
   // 타이핑을 작성할때마다 중복검사 동작
-  useEffect(()=>{
-    if(regexNickname.test(member.value)){
+  useEffect(() => {
+    if (regexNickname.test(member.value)) {
       __chkNickname(member);
-    }else{
+    } else {
       setChkname("")
     }
-  },[member])
+  }, [member])
 
   // 닉네임 수정함수
-  const __editNickname = async(payload)=>{
+  const __editNickname = async (payload) => {
     // 중복이 없을 시에만 동작 (그외는 경고문구 출력)
-    if(chkname==="사용 가능한 닉네임 입니다."){
-      await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/nickname", payload,{
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-      }}).then((response)=>{
-        // 성공시 로컬 스토리지 저장 후 메인페이지 이동
-        localStorage.setItem("name", response.data.data.nickname);
-        navigate("/")
+    if (chkname === "사용 가능한 닉네임 입니다.") {
+      __isToken().then(async () => {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/nickname", payload, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then((response) => {
+          // 성공시 로컬 스토리지 저장 후 메인페이지 이동
+          localStorage.setItem("name", response.data.data.nickname);
+          navigate("/")
+        })
       })
     }
+  }
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
   }
 
   return (
@@ -59,20 +77,20 @@ const CheckNickname = () => {
       {/* 자체 헤더 */}
       <HeaderArea>
         <HeaderTitle>닉네임 설정</HeaderTitle>
-        <Button className="next_btn" onClick={()=>{__editNickname(member)}}>완료</Button>
+        <Button className="next_btn" onClick={() => { __editNickname(member) }}>완료</Button>
       </HeaderArea>
 
       <Nickname>
-      <label style={{fontWeight:'600', fontSize:'18px'}}>닉네임</label>
-        <input label="닉네임" placeholder="닉네임을 입력하세요"  name="value"
-            value={member.value}
-            onChange={onChangeHandler}/>
-            {/* 닉네임 값이 바르지않으면 경고문구 출력 */}
-            {member.value=== "" ? null: regexNickname.test(member.value)?
-            chkname === "사용 가능한 닉네임 입니다."?
-            (<div style={{color: "#00766c", fontSize:"14px",marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>{chkname}</div>)
-            :(<div style={{color:"red", fonSizen:"14px" ,marginTop:"9px" ,marginBottom:"9px"}}>사용가능한 닉네임이 아닙니다.</div>)}
+        <label style={{ fontWeight: '600', fontSize: '18px' }}>닉네임</label>
+        <input label="닉네임" placeholder="닉네임을 입력하세요" name="value"
+          value={member.value}
+          onChange={onChangeHandler} />
+        {/* 닉네임 값이 바르지않으면 경고문구 출력 */}
+        {member.value === "" ? null : regexNickname.test(member.value) ?
+          chkname === "사용 가능한 닉네임 입니다." ?
+            (<div style={{ color: "#00766c", fontSize: "14px", marginTop: "9px", marginBottom: "9px" }}>{chkname}</div>)
+            : (<div style={{ color: "red", fonSizen: "14px", marginTop: "9px", marginBottom: "9px" }}>{chkname}</div>)
+          : (<div style={{ color: "red", fonSizen: "14px", marginTop: "9px", marginBottom: "9px" }}>사용가능한 닉네임이 아닙니다.</div>)}
       </Nickname>
     </Wrapper>
   );

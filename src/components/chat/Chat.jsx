@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { __getChat } from '../../redux/modules/chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+import axios from 'axios';
 
 // 채팅 기능 컴포넌트
 const Chat = () => {
@@ -36,18 +37,37 @@ const Chat = () => {
 
   const scrollRef = useRef(null); //스크롤 하단 고정
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
 
 
   // 랜더링시 이전 채팅내용 불러오는 함수 및 stomp채팅 연결
   useEffect(() => {
-    connect();
-    dispatch(__getChat({ id, page: page.current }));
+    __isToken().then(() => {
+      connect();
+      dispatch(__getChat({ id, page: page.current }));
+    })
     return () =>
-      disconnect();
+      __isToken().then(() => {
+        disconnect();
+      })
   }, []);
 
   // 인피니티 스크롤 기능 (다음페이지 데이터 받아옴)
-  const fetch = useCallback(() => { dispatch(__getChat({ id, page: page.current })); page.current += 1; }, []);
+  const fetch = useCallback(() => { __isToken().then(() => { dispatch(__getChat({ id, page: page.current })); page.current += 1; }) }, []);
   useEffect(() => {
     if (inView && hasNextPage) {
       fetch();

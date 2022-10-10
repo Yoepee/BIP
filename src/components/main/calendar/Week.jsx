@@ -4,12 +4,10 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 
 const Week = (value) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [ clickDay, setClickDay ] = useState(null);
 

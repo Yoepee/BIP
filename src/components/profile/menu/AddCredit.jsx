@@ -6,6 +6,21 @@ import Swal from "sweetalert2";
 // 신용도 추가하기 페이지
 const AddCredit = () => {
   const navigate = useNavigate();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   // 나의 신용점수 구매 함수
   const __getMyCredit = async (num) => {
     Swal.fire({
@@ -38,14 +53,20 @@ const AddCredit = () => {
         나의 신용점수 구매
         <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
           <p>신용점수 1점 구매</p>
+          <p><PointIcon>P</PointIcon>2000</p>
           <AddBox onClick={() => {
+            __isToken().then(()=>{
             __getMyCredit(1);
+          })
           }}>선택</AddBox>
         </div>
         <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
           <p>신용점수 5점 구매</p>
+          <p><PointIcon>P</PointIcon>10000</p>
           <AddBox onClick={() => {
-            __getMyCredit(5);
+            __isToken().then(()=>{
+              __getMyCredit(5);
+            })
           }}>선택</AddBox>
         </div>
       </div>
@@ -54,12 +75,14 @@ const AddCredit = () => {
         친구의 신용점수 구매
         <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
           <p>신용점수 1점 구매</p>
+          <p><PointIcon>P</PointIcon>2000</p>
           <AddBox onClick={() => {
             navigate("/member/add1");
           }}>선택</AddBox>
         </div>
         <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
           <p>신용점수 5점 구매</p>
+          <p><PointIcon>P</PointIcon>10000</p>
           <AddBox onClick={() => {
             navigate("/member/add5");
           }}>선택</AddBox>
@@ -79,4 +102,14 @@ color:white;
 border-radius:6px;
 padding:5px;
 cursor:pointer;
+`
+
+const PointIcon = styled.span`
+  background-color: #3e09d1;
+  border-radius: 50%;
+  padding: 0 6px;// 숙제
+  margin-right: 2px;
+  color: white;
+  font-weight: bold;
+  
 `

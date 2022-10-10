@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
     "/api/events/list/{month}",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
             const data =  await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/events/list?unit=${payload.unit}&querydate=${payload.date}`,{
                 headers: {
                     Authorization: localStorage.getItem('Authorization'),

@@ -15,14 +15,33 @@ const DetailDonation = () => {
   const { id } = useParams();
   const [like,setLike] = useState();
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   // console.log(donation)
   useEffect(() => {
+    __isToken().then(()=>{
     dispatch(__getDetailDonation(id));
     __getLike();
+    })
   }, [dispatch]);
 
   useEffect(()=>{
+    __isToken().then(()=>{
     dispatch(__getDetailDonation(id));
+  })
   },[like])
 
   const __getLike = async() =>{
@@ -136,13 +155,13 @@ const DetailDonation = () => {
           </div>
           <div style={{display:"flex"}}>
             {like?
-                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}}onClick={()=>{__unLike()}}>
+                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}}onClick={()=>{__isToken().then(()=>{__unLike()})}}>
                   <div style={{color:"red"}}><FavoriteIcon/></div>
                   공감하기
                   </div>
-                :<div style={{display:"flex", margin:"15px", color:"#9e9e9e"}} onClick={()=>{__doLike()}}><FavoriteBorderIcon/>공감하기</div>
+                :<div style={{display:"flex", margin:"15px", color:"#9e9e9e"}} onClick={()=>{__isToken().then(()=>{__doLike()})}}><FavoriteBorderIcon/>공감하기</div>
             }
-                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}} onClick={()=>{__notifyPost()}}>🚨신고하기</div>
+                <div style={{display:"flex", margin:"15px", color:"#9e9e9e"}} onClick={()=>{__isToken().then(()=>{__notifyPost()})}}>🚨신고하기</div>
           </div>
         </div>
       </div>

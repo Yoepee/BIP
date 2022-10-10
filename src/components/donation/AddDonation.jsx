@@ -25,7 +25,22 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
   const [lat, setLat] = useState(37.5656);
   const [lng, setLng] = useState(126.9769);
   // 주소검색 출력 여부 확인값
-  const [openAddr, setOpenAddr] = useState(false)
+  const [openAddr, setOpenAddr] = useState(false);
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
 
   useEffect(() => {
     if (id !== undefined && donate.address !== "") {
@@ -59,7 +74,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       address,
       (result, status) => {
         if (status !== kakao.maps.services.Status.OK)
-          return Swal.fire("에러가 발생했습니다!",'　', 'error');
+          return Swal.fire("에러가 발생했습니다!", '　', 'error');
 
         // // 경도, 위도 값
         let x = parseFloat(result[0].x);
@@ -93,24 +108,26 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
     formData.append("file", image); // 반복문을 활용하여 파일들을 formData 객체에 추가한다
     // 이미지만 보내면되기때문에 더이상 append하지않고 이미지파일 전송
 
-    // form데이터를 보내주면 이미지가 저장되는 url경로를 불러주는 api
-    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
-      headers: {
-        Authorization: localStorage.getItem("Authorization"),
-        RefreshToken: localStorage.getItem("RefreshToken"),
-        "Content-Type": "multipart/form-data",
-      },
-    }).then(
-      // url호출 성공시 img값에 url값 저장
-      (res) => {
-        setDonate({ ...donate, imgUrlList: [...donate.imgUrlList, res.data.data] })
-      }
-    )
+    __isToken().then(async () => {
+      // form데이터를 보내주면 이미지가 저장되는 url경로를 불러주는 api
+      await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/image", formData, {
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+          "Content-Type": "multipart/form-data",
+        },
+      }).then(
+        // url호출 성공시 img값에 url값 저장
+        (res) => {
+          setDonate({ ...donate, imgUrlList: [...donate.imgUrlList, res.data.data] })
+        }
+      )
 
-    // 폼데이터 들어가는 형식을 보기위한 내용
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+      // 폼데이터 들어가는 형식을 보기위한 내용
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ", " + pair[1]);
+      // }
+    })
   }
 
   return (

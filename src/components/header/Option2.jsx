@@ -3,12 +3,28 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { __addPromise, __editPromise } from '../../redux/modules/detailPromise';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 // 약속생성 뒤로가기(홈) 제목 완료
 const Option2 = ({ head, payload }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
 
   const isEmptyObj = (obj) => {
     if (obj.constructor === Object) {
@@ -34,14 +50,16 @@ const Option2 = ({ head, payload }) => {
             Swal.fire("작성하지 않은 내용이 있습니다.", "　", "error")
             return;
           }
-          dispatch(__addPromise(payload))
-            .then((response) => {
-              if (response?.payload?.data === "약속 시간을 미래로 설정해주세요.") {
-                Swal.fire(response?.payload?.data, "　", "error");
-              } else {
-                navigate(`/detailpromise/${response.payload.data.id}`);
-              }
-            })
+          __isToken().then(() => {
+            dispatch(__addPromise(payload))
+              .then((response) => {
+                if (response?.payload?.data === "약속 시간을 미래로 설정해주세요.") {
+                  Swal.fire(response?.payload?.data, "　", "error");
+                } else {
+                  navigate(`/detailpromise/${response.payload.data.id}`);
+                }
+              })
+          })
         } else {
           if (isEmptyObj(payload)) {
             Swal.fire("작성하지 않은 내용이 있습니다.", "　", "error")
@@ -56,15 +74,18 @@ const Option2 = ({ head, payload }) => {
             cancelButtonText: '취소',
           }).then((result) => {
             if (result.isConfirmed) {
-            dispatch(__editPromise({ id: id, data: payload }))
-              .then((response) => {
-                if (response?.payload?.data === "약속 시간을 미래로 설정해주세요.") {
-                  Swal.fire(response?.payload?.data, "　", "error");
-                } else {
-                  navigate(`/detailpromise/${id}`);
-                }
+              __isToken().then(() => {
+                dispatch(__editPromise({ id: id, data: payload }))
+                  .then((response) => {
+                    if (response?.payload?.data === "약속 시간을 미래로 설정해주세요.") {
+                      Swal.fire(response?.payload?.data, "　", "error");
+                    } else {
+                      navigate(`/detailpromise/${id}`);
+                    }
+                  })
               })
-          }})
+            }
+          })
         }
       }} style={{ marginLeft: "auto", marginRight: "2%", cursor: "pointer" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>완료</p>

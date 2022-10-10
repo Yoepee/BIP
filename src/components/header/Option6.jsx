@@ -11,6 +11,21 @@ const Option6 = ({ head }) => {
 
   const [chk, setChk] = useState(false);
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   const logout = async () => {
     Swal.fire({
       title: `로그아웃 하시겠습니까?`,
@@ -33,17 +48,6 @@ const Option6 = ({ head }) => {
             localStorage.removeItem('RefreshToken');
             localStorage.removeItem('name');
             navigate("/intro")
-          } else {
-            if (response.data.data === "사용자를 찾을 수 없습니다.") {
-              const a = await axios.get(process.env.REACT_APP_SERVER_HOST + "/api/member/reissue", {
-                headers: {
-                  Authorization: localStorage.getItem('Authorization'),
-                  RefreshToken: localStorage.getItem('RefreshToken'),
-                }
-              }).then((ress) => {
-                console.log(ress)
-              })
-            }
           }
         })
       } else {
@@ -52,34 +56,25 @@ const Option6 = ({ head }) => {
     })
   }
   const quit = async () => {
-    Swal.fire({
-      title: `회원 탈퇴를 하시겠습니까?`,
-      showCancelButton: true,
-      confirmButtonColor: '#3E09D1',
-      cancelButtonColor: 'tomato',
-      confirmButtonText: '탈퇴',
-      cancelButtonText: '취소',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const data = await axios.delete(process.env.REACT_APP_SERVER_HOST + "/api/user", {
-          headers: {
-            Authorization: localStorage.getItem('Authorization'),
-            RefreshToken: localStorage.getItem('RefreshToken'),
-          }
-        }).then((response) => {
-          if (response.data.success) {
-            localStorage.removeItem('Authorization');
-            localStorage.removeItem('RefreshToken');
-            localStorage.removeItem('name');
-            navigate("/intro")
-          } else {
-            Swal.fire(response.data.data,"　","error")
-          }
-        })
-      } else {
-        setChk(!chk);
-      }
-    })
+    if (window.confirm("회원 탈퇴를 하시겠습니까?")) {
+      const data = await axios.delete(process.env.REACT_APP_SERVER_HOST + "/api/user", {
+        headers: {
+          Authorization: localStorage.getItem('Authorization'),
+          RefreshToken: localStorage.getItem('RefreshToken'),
+        }
+      }).then((response) => {
+        if (response.data.success) {
+          localStorage.removeItem('Authorization');
+          localStorage.removeItem('RefreshToken');
+          localStorage.removeItem('name');
+          navigate("/intro")
+        } else {
+          alert(response.data.data)
+        }
+      })
+    } else {
+      setChk(!chk);
+    }
   }
   return (
     <>
@@ -89,7 +84,7 @@ const Option6 = ({ head }) => {
       </div>
       <div onClick={() => { setChk(!chk); }}
         style={{ marginLeft: "auto", marginRight: "2%" }}>
-        <p><SettingsOutlinedIcon style={{ color: "#D9DCFB" }} /></p>
+        <p><SettingsOutlinedIcon style={{ color: "#A67EED" }} /></p>
       </div>
       {chk ?
         <div style={{
@@ -102,9 +97,9 @@ const Option6 = ({ head }) => {
           border: "1px solid black"
         }}>
           <OptionMenu
-            onClick={() => { logout(); }}>로그아웃</OptionMenu>
+            onClick={() => { __isToken().then(() => { logout(); }) }}>로그아웃</OptionMenu>
           <OptionMenu
-            onClick={() => { quit(); }}>회원 탈퇴</OptionMenu>
+            onClick={() => { __isToken().then(() => { quit(); }) }}>회원 탈퇴</OptionMenu>
           <OptionMenu
             onClick={() => { setChk(!chk); }}>취소</OptionMenu>
         </div>
@@ -120,6 +115,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#3E09D1;
+  background-color:#6D09D1;
   color:white;
 }`
