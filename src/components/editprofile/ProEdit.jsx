@@ -27,6 +27,21 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const [visible, setVisible] = useState(false);
   const [chkBtn, setChkBtn] = useState("인증하기 받기")
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   // 타입선별하여 작성된 내용 중복체크 진행
   useEffect(() => {
     // 닉네임
@@ -157,10 +172,10 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       }
     })
       .then((response) => {
-        if(response.data.success){
-          Swal.fire(response.data.data,"　","success");
-        }else{
-          Swal.fire(response.data.data,"　","error");
+        if (response.data.success) {
+          Swal.fire(response.data.data, "　", "success");
+        } else {
+          Swal.fire(response.data.data, "　", "error");
           setVisible(false);
         }
       });
@@ -283,7 +298,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               {set.authCode === "" ? null :
                 regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
               {/* 인증코드 재발급 버튼 */}
-              {visible && <Button style={{ marginTop: "20px" }} variant="contained" className="default_btn" onClick={() => { __examEmail(set.email); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+              {visible && <Button style={{ marginTop: "20px" }} variant="contained" className="default_btn" onClick={() => { __isToken().then(() => { __examEmail(set.email); }); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
               {/* 입력값에 따른 버튼 색상 변경 */}
               {!visible &&
                 regexEmail.test(set.email) ?
@@ -294,7 +309,9 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                     if (regexEmail.test(set.email)) {
                       if (!visible) {
                         setChkBtn("인증번호 확인하기");
-                        __examEmail(set.email);
+                        __isToken().then(() => {
+                          __examEmail(set.email);
+                        });
                         timer.current = setInterval(() => {
                           countDown();
                         }, 1000);
@@ -318,7 +335,9 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                     if (regexEmail.test(set.email)) {
                       if (!visible) {
                         setChkBtn("인증번호 확인하기");
-                        __examEmail(set.email);
+                        __isToken().then(() => {
+                          __examEmail(set.email);
+                        })
                         timer.current = setInterval(() => {
                           countDown();
                         }, 1000);

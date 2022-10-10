@@ -14,6 +14,21 @@ const Option3 = ({ head }) => {
   const [leader, setLeader] = useState(false);
   const { id } = useParams();
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   const bangjang = async () => {
     await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
       headers: {
@@ -40,39 +55,40 @@ const Option3 = ({ head }) => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
-      await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/events/exit/${id}`, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then(async (response) => {
-        if (response.data.success) {
-          await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/${id}`, {
-            headers: {
-              Authorization: localStorage.getItem('Authorization'),
-              RefreshToken: localStorage.getItem('RefreshToken'),
-            }
-          }).then(async (res) => {
-            if (res.data.data !== "채팅방에 없는 회원입니다") {
-              navigate("/")
-            } else {
-              await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/${id}`, {
-                headers: {
-                  Authorization: localStorage.getItem('Authorization'),
-                  RefreshToken: localStorage.getItem('RefreshToken'),
-                }
-              })
-              navigate("/")
-            }
-          })
-        } else {
-          Swal.fire(response.data.data,"　","error");
-          setChk(0);
-        }
-      })
-    } else {
-      setChk(0);
-    }})
+        await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/events/exit/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then(async (response) => {
+          if (response.data.success) {
+            await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/${id}`, {
+              headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+              }
+            }).then(async (res) => {
+              if (res.data.data !== "채팅방에 없는 회원입니다") {
+                navigate("/")
+              } else {
+                await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/${id}`, {
+                  headers: {
+                    Authorization: localStorage.getItem('Authorization'),
+                    RefreshToken: localStorage.getItem('RefreshToken'),
+                  }
+                })
+                navigate("/")
+              }
+            })
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+            setChk(0);
+          }
+        })
+      } else {
+        setChk(0);
+      }
+    })
   }
 
   const removePromist = async () => {
@@ -85,22 +101,23 @@ const Option3 = ({ head }) => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
-      await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/events/${id}`, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then((response) => {
-        if (response.data.success) {
-          navigate("/")
-        } else {
-          Swal.fire(response.data.data,"　","error");
-          setChk(0);
-        }
-      })
-    } else {
-      setChk(0);
-    }})
+        await axios.delete(process.env.REACT_APP_SERVER_HOST + `/api/events/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then((response) => {
+          if (response.data.success) {
+            navigate("/")
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+            setChk(0);
+          }
+        })
+      } else {
+        setChk(0);
+      }
+    })
   }
   const __endPromise = async () => {
     Swal.fire({
@@ -112,27 +129,30 @@ const Option3 = ({ head }) => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
-      await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/events/confirm/${id}`, null, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then((response) => {
-        if (response.data.success) {
-          Swal.fire(response.data.data,"　","success");
-          setChk(0);
-        } else {
-          Swal.fire(response.data.data,"　","error");
-          setChk(0);
-        }
-      })
-    } else {
-      setChk(0);
-    }})
+        await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/events/confirm/${id}`, null, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then((response) => {
+          if (response.data.success) {
+            Swal.fire(response.data.data, "　", "success");
+            setChk(0);
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+            setChk(0);
+          }
+        })
+      } else {
+        setChk(0);
+      }
+    })
   }
 
   useEffect(() => {
-    bangjang();
+    __isToken().then(() => {
+      bangjang();
+    });
   }, [])
 
   return (
@@ -161,7 +181,7 @@ const Option3 = ({ head }) => {
             zIndex: "10"
           }}>
             <OptionMenu
-              onClick={() => { __endPromise() }}>약속 종료</OptionMenu>
+              onClick={() => { __isToken().then(() => { __endPromise() }) }}>약속 종료</OptionMenu>
             <OptionMenu
               onClick={() => { navigate(`/promiseleader/id=${id}/type=leader`) }}>방장 위임</OptionMenu>
             <OptionMenu
@@ -171,7 +191,7 @@ const Option3 = ({ head }) => {
                 navigate(`/addpromise/edit${id}`)
               }}>약속 수정</OptionMenu>
             <OptionMenu
-              onClick={() => { removePromist() }}>약속 삭제</OptionMenu>
+              onClick={() => { __isToken().then(() => { removePromist() }) }}>약속 삭제</OptionMenu>
             <OptionMenu style={{ borderBottom: "none" }}
               onClick={() => { setChk(0); }}>취소</OptionMenu>
           </div>
@@ -191,7 +211,7 @@ const Option3 = ({ head }) => {
             zIndex: "10"
           }}>
             <OptionMenu
-              onClick={() => { exitPromist() }}>약속 나가기</OptionMenu>
+              onClick={() => { __isToken().then(() => { exitPromist() }) }}>약속 나가기</OptionMenu>
             <OptionMenu sstyle={{ borderBottom: "0px solid black" }}
               onClick={() => { setChk(!chk); }}>취소</OptionMenu>
           </div>

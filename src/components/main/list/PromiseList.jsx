@@ -12,18 +12,36 @@ import 비 from "../../../img/weather/비.svg";
 import 천둥번개 from "../../../img/weather/천둥번개.svg";
 import 돌풍 from "../../../img/weather/돌풍.svg";
 import 눈 from "../../../img/weather/눈.svg";
+import axios from "axios";
 
 // 약속목록 컴포넌트
 // day = 약속 날짜 선택값
 const PromiseList = ({ day }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   // 약속 목록
   const promiseList = useSelector((state) => state.promise);
-  
+
   // 약속값 받아오기
   useEffect(() => {
-    dispatch(__getPromise(day));
+    __isToken().then(() => {
+      dispatch(__getPromise(day));
+    })
   }, [day]);
 
   return (
@@ -49,22 +67,22 @@ const PromiseList = ({ day }) => {
                 }}>
                 <div style={{ display: "flex" }}>
                   {/* <p> 현재날씨</p> */}
-                  {promise.weatherResponseDto.sky==="맑음"&&<img src={맑음} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="흐림"&&<img src={흐림} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="비"&&<img src={비} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="눈"&&<img src={눈} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="이슬비"&&<img src={이슬비} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="천둥번개"&&<img src={천둥번개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="약한 안개"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="옅은 안개"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="안개"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="짙은 안개"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="약한 황사"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="짙은 황사"&&<img src={안개} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="재 주의"&&<img src={안개} width={"70px"} height={"70px"} />}
-                   {promise.weatherResponseDto.sky==="돌풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
-                  {promise.weatherResponseDto.sky==="폭풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
-                  <div style={{display:"flex", marginTop:"10px"}}>
+                  {promise.weatherResponseDto.sky === "맑음" && <img src={맑음} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "흐림" && <img src={흐림} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "비" && <img src={비} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "눈" && <img src={눈} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "이슬비" && <img src={이슬비} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "천둥번개" && <img src={천둥번개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "약한 안개" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "옅은 안개" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "안개" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "짙은 안개" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "약한 황사" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "짙은 황사" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "재 주의" && <img src={안개} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "돌풍" && <img src={돌풍} width={"70px"} height={"70px"} />}
+                  {promise.weatherResponseDto.sky === "폭풍" && <img src={돌풍} width={"70px"} height={"70px"} />}
+                  <div style={{ display: "flex", marginTop: "10px" }}>
                     {/* <p>날씨 : {promise.weatherResponseDto.sky}</p> */}
                     <p> {promise.weatherResponseDto.temperature}　</p>
                     {/* <p>

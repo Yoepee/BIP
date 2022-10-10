@@ -9,6 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
 import Header from ".././components/header/Header";
+import axios from "axios";
 
 const MonthlyPage = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,25 @@ const MonthlyPage = () => {
 
   const navigate = useNavigate();
   useEffect(()=>{
+    __isToken().then(()=>{
     dispatch(__getPromise(day));
+    })
   },[day])
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+        headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+        }
+    }
+    ).then((res) => {
+        if(res.data.success){
+            localStorage.setItem("Authorization", res.headers.authorization);
+            localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+        }
+    })
+  }
     return (
       <>
         <Wrap>

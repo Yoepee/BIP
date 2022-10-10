@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { __searchFriendName, __searchFriendPhone, __getMember } from '../../redux/modules/member';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 // 친구검색(친구목록창 검색기능)
 const Option7 = ({ setType }) => {
@@ -14,6 +15,21 @@ const Option7 = ({ setType }) => {
     value: ""
   }
   const [value, setValue] = useState(initialState);
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -57,19 +73,21 @@ const Option7 = ({ setType }) => {
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
         onClick={() => {
-          if (sort === "닉네임") {
-            if (value.value === "") {
-              dispatch(__getMember());
+          __isToken().then(() => {
+            if (sort === "닉네임") {
+              if (value.value === "") {
+                dispatch(__getMember());
+              } else {
+                searchMemberName(value.value);
+              }
             } else {
-              searchMemberName(value.value);
+              if (value.value === "") {
+                searchMemberPhone(value.value);
+              } else {
+                searchMemberName(value.value);
+              }
             }
-          } else {
-            if (value.value === "") {
-              searchMemberPhone(value.value);
-            } else {
-              searchMemberName(value.value);
-            }
-          }
+          })
         }}>
         <p><SearchIcon style={{ color: "#D9DCFB" }} /></p>
       </div>

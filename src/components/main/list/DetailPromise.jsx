@@ -10,20 +10,37 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 // 약속 상세 페이지
 const DetailPromise = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   // 상세보기 정보 받아오기
-  const promise = useSelector((state)=>state.detailPromise);
+  const promise = useSelector((state) => state.detailPromise);
   // 방장 닉네임 확인
   const [leader, setLeader] = useState("");
   // 체크인 창을 숨길지 드러낼지 결정하는 변수
-  const [chk,setChk] = useState(false);
+  const [chk, setChk] = useState(false);
 
   // 상세보기 정보와 방장 정보를 확인함
-  useEffect(()=>{
-    dispatch(__getDetailPromise(id));
-    bangjang();
-  },[dispatch])
+  useEffect(() => {
+    __isToken().then(() => {
+      dispatch(__getDetailPromise(id));
+      bangjang();
+    })
+  }, [dispatch])
 
   // 방장 누구인지 확인하는 함수
   const bangjang = async () => {
@@ -35,22 +52,22 @@ const DetailPromise = () => {
     }).then((response) => {
       // 방장을 식별하면 leader에 방장 닉네임을 보관
       if (response.data.success) {
-          setLeader(response.data.data.nickname)
+        setLeader(response.data.data.nickname)
       } else {
         return;
       }
     })
   }
-  
-  return(
+
+  return (
     <>
       <Wrap>
         <LeftItem>
           {/* 제목 */}
           <Title>
-            <p style={{fontSize:"24px"}}>{promise?.data?.data?.title}</p>
-            <div style={{margin:"15px 14px 0 0"}}>
-            <p style={{fontSize:"13px"}}><span>P</span>{promise?.data?.data?.point}</p>
+            <p style={{ fontSize: "24px" }}>{promise?.data?.data?.title}</p>
+            <div style={{ margin: "15px 14px 0 0" }}>
+              <p style={{ fontSize: "13px" }}><span>P</span>{promise?.data?.data?.point}</p>
             </div>
           </Title>
           {/* 내용 */}
@@ -62,71 +79,71 @@ const DetailPromise = () => {
             <p>{promise?.data?.data?.eventDateTime.split("-")[0]}년</p>
             <p>{promise?.data?.data?.eventDateTime.split("-")[1]}월</p>
             <p>{promise?.data?.data?.eventDateTime.split("-")[2]}일</p>
-            {Number(promise?.data?.data?.eventDateTime.split("-")[3])<12?
-            <>
-            <p>오전</p>
-            <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])}시</p>
-            </>
-            :Number(promise?.data?.data?.eventDateTime.split("-")[3])===12?
-            <>
-            <p>오후</p>
-            <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
-            </>
-            :<>
-            <p>오후</p>
-            <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])-12}시</p>
-            </>
+            {Number(promise?.data?.data?.eventDateTime.split("-")[3]) < 12 ?
+              <>
+                <p>오전</p>
+                <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3])}시</p>
+              </>
+              : Number(promise?.data?.data?.eventDateTime.split("-")[3]) === 12 ?
+                <>
+                  <p>오후</p>
+                  <p>{promise?.data?.data?.eventDateTime.split("-")[3]}시</p>
+                </>
+                : <>
+                  <p>오후</p>
+                  <p>{Number(promise?.data?.data?.eventDateTime.split("-")[3]) - 12}시</p>
+                </>
             }
-            <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>    
+            <p>{promise?.data?.data?.eventDateTime.split("-")[4]}분</p>
           </When>
           {/* 참여 인원, 클릭시 체크인 창 꺼냄 */}
-          <People onClick={()=>{setChk(!chk)}}>
-            {!chk?
-            <span style={{cursor:"pointer", marginRight:"2%"}}>▼</span>
-            :<span style={{cursor:"pointer", marginRight:"2%"}}>▲</span>}
-            <span style={{cursor:"pointer", marginRight:"2%"}}>참가자 : </span>
-            {promise?.data?.data?.memberList?.map((member)=>{
-              if(member.nicknameByFriend===leader){
-                if(member.nicknameByOwner!==null){
-                  return (             
-                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
-                      <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+          <People onClick={() => { setChk(!chk) }}>
+            {!chk ?
+              <span style={{ cursor: "pointer", marginRight: "2%" }}>▼</span>
+              : <span style={{ cursor: "pointer", marginRight: "2%" }}>▲</span>}
+            <span style={{ cursor: "pointer", marginRight: "2%" }}>참가자 : </span>
+            {promise?.data?.data?.memberList?.map((member) => {
+              if (member.nicknameByFriend === leader) {
+                if (member.nicknameByOwner !== null) {
+                  return (
+                    <div key={member.id} style={{ display: "flex", marginRight: "3px" }}>
+                      <div style={{ color: "#3E09D1" }}><FavoriteIcon fontSize="small" /></div>
 
-                      <div style={{paddingBottom:"100px"}}>{member.nicknameByOwner}</div>
+                      <div style={{ paddingBottom: "100px" }}>{member.nicknameByOwner}</div>
                     </div>
                   )
-                }else{
+                } else {
                   return (
-                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
-                      <div style={{color: "#3E09D1"}}><FavoriteIcon fontSize="small" /></div>
+                    <div key={member.id} style={{ display: "flex", marginRight: "3px" }}>
+                      <div style={{ color: "#3E09D1" }}><FavoriteIcon fontSize="small" /></div>
 
                       <div>{member.nicknameByFriend}</div>
                     </div>
                   )
                 }
-              }else{
-                if(member.nicknameByOwner!==null){
+              } else {
+                if (member.nicknameByOwner !== null) {
                   return (
-                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
-                      <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
+                    <div key={member.id} style={{ display: "flex", marginRight: "3px" }}>
+                      <div style={{ color: "#D9DCFB" }}><FavoriteIcon fontSize="small" /></div>
                       <div>{member.nicknameByOwner}</div>
                     </div>
                   )
-                }else{
+                } else {
                   return (
-                    <div key={member.id} style={{display:"flex", marginRight:"3px"}}>
-                      <div style={{color: "#D9DCFB"}}><FavoriteIcon fontSize="small"/></div>
+                    <div key={member.id} style={{ display: "flex", marginRight: "3px" }}>
+                      <div style={{ color: "#D9DCFB" }}><FavoriteIcon fontSize="small" /></div>
                       <div>{member.nicknameByFriend}</div>
-                      </div>
+                    </div>
                   )
                 }
               }
             })}
           </People>
           {/* chk값을 확인하여 체크인 컴포넌트를 부를지 결정 */}
-          {chk?
-          <CheckIn/>
-          :null}
+          {chk ?
+            <CheckIn />
+            : null}
         </LeftItem>
         {/* 장소 - 좌표값을 받아와서 지도에 표시 */}
         {/* 초기값으로 서울시청이 지정되어 있으나 장소가 없으면 약속이 없으므로 불필요 문구 (차후 삭제 예정) */}
@@ -134,11 +151,11 @@ const DetailPromise = () => {
           <Where>
             <p>{promise?.data?.data?.place}</p>
           </Where>
-          {promise?.data?.data?.coordinate===null?
-          <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"380px"} height={"320px"}/></Map>
-          :<Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"380px"} height={"320px"}/></Map>}
-        </RightItem>        
-      </Wrap>      
+          {promise?.data?.data?.coordinate === null ?
+            <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"380px"} height={"320px"} /></Map>
+            : <Map><KaKaoMap lat={promise?.data?.data?.coordinate.split(",")[0]} lng={promise?.data?.data?.coordinate.split(",")[1]} width={"380px"} height={"320px"} /></Map>}
+        </RightItem>
+      </Wrap>
     </>
   )
 }

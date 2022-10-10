@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getProfile } from "../../redux/modules/profile";
+import axios from "axios";
 
 const DetailProfile = () => {
   const navigate = useNavigate();
@@ -11,9 +12,26 @@ const DetailProfile = () => {
   // 프로필 정보 받아오기
   const profile = useSelector((state)=>state.profile);
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   // 프로필 정보 받아서 출력하기 필요
     useEffect(()=>{
+      __isToken().then(()=>{
         dispatch(__getProfile());
+      });
     },[dispatch])
   return (
     <div style={{margin:"40px"}}>

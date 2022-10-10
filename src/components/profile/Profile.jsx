@@ -16,9 +16,26 @@ const Profile = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   // 활동내역 받는 함수 동작
   useEffect(() => {
-    dispatch(__getProfile());
+    __isToken().then(() => {
+      dispatch(__getProfile());
+    })
   }, [dispatch]);
 
   return (
@@ -29,7 +46,7 @@ const Profile = () => {
           onClick={() => {
             navigate("/detailprofile");
           }}>
-            {/* 이미지 파일 없으면 기본 이미지 출력 */}
+          {/* 이미지 파일 없으면 기본 이미지 출력 */}
           {!profile?.data?.data?.profileImgUrl ? (
             <ImgArea>
               <Img src={base} />
@@ -64,25 +81,25 @@ const Profile = () => {
         </Prodiv>
         <Prodiv>
           <BtnSet>
-                <Btn  onClick={()=>{navigate("/profile/history/like")}}>
-                <label>
-                    <IconBtn><FavoriteIcon/></IconBtn>
-                    <p>관심목록</p>
-                    </label>
-                </Btn>
-                <Btn onClick={()=>{navigate("/profile/history/promise")}}>
-                    <label>
-                    <IconBtn><ReceiptIcon/></IconBtn>
-                    <p>약속내역</p>
-                    </label>
-                </Btn>
-                <Btn onClick={()=>{navigate("/profile/history/write")}}>
-                <label>
-                    <IconBtn><VolunteerActivismIcon/></IconBtn>
-                    <p>작성목록</p>
-                    </label>
-                </Btn>
-            </BtnSet>
+            <Btn onClick={() => { navigate("/profile/history/like") }}>
+              <label>
+                <IconBtn><FavoriteIcon /></IconBtn>
+                <p>관심목록</p>
+              </label>
+            </Btn>
+            <Btn onClick={() => { navigate("/profile/history/promise") }}>
+              <label>
+                <IconBtn><ReceiptIcon /></IconBtn>
+                <p>약속내역</p>
+              </label>
+            </Btn>
+            <Btn onClick={() => { navigate("/profile/history/write") }}>
+              <label>
+                <IconBtn><VolunteerActivismIcon /></IconBtn>
+                <p>작성목록</p>
+              </label>
+            </Btn>
+          </BtnSet>
         </Prodiv>
         <Prodiv style={{ flexDirection: "column" }}>
           <p>포인트 : {profile?.data?.data?.point}</p>
@@ -106,7 +123,7 @@ const Prodiv = styled.div`
   border-bottom: 1px solid #f5eafb;
 `;
 
-const ImgArea = styled.div `
+const ImgArea = styled.div`
     width:80px; 
     height:80px; 
     border-radius:100%; 

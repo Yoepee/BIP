@@ -26,8 +26,25 @@ const Comment = () => {
   const [chkNick, setChkNick] = useState(0);
   const [notify, setNotify] = useState(0);
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   useEffect(() => {
+    __isToken().then(()=>{
     dispatch(__getComment({ id: id, page: 0 }));
+    })
   }, [dispatch, id])
 
   const editComment = (CommentId) => {
@@ -155,7 +172,7 @@ const Comment = () => {
               <CommentCard key={comment.id}>
                 <div style={{ display: "flex", fontWeight: "bold", marginLeft: "10px" }}> <div>{comment.nickname}</div> {comment.nickname === localStorage.getItem("name") ?
                   <div style={{ display: "flex", marginLeft: "auto" }}>
-                    <div onClick={() => { editComment(comment.id) }}><CheckIcon /></div>
+                    <div onClick={() => { __isToken().then(()=>{editComment(comment.id)}) }}><CheckIcon /></div>
                     <div onClick={() => { setChkEdit(0) }}><CloseIcon /></div>
                   </div>
                   : null} </div>
@@ -174,17 +191,17 @@ const Comment = () => {
                   }}>{comment.nickname}</div>
                   {detailDonation?.data?.data?.nickname === localStorage.getItem("name") ?
                     chkNick === comment.id && (<Modaldiv>
-                      <OptionMenu onClick={() => { __addMember(comment.nickname) }}>친구추가</OptionMenu>
-                      <OptionMenu onClick={() => { __givePoint(comment.nickname) }}>포인트 전달</OptionMenu>
+                      <OptionMenu onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</OptionMenu>
+                      <OptionMenu onClick={() => { __isToken().then(()=>{__givePoint(comment.nickname)}) }}>포인트 전달</OptionMenu>
                     </Modaldiv>)
                     : chkNick === comment.id && (<Modaldiv>
-                      <div onClick={() => { __addMember(comment.nickname) }}>친구추가</div>
+                      <div onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</div>
                     </Modaldiv>)}
 
                   {comment.nickname === localStorage.getItem("name") ?
                     <div style={{ display: "flex", marginLeft: "auto" }}>
                       <div onClick={() => { setChkEdit(comment.id); setEdit({ ...edit, content: comment.content }) }}><EditIcon /></div>
-                      <div onClick={() => { removeComment(comment.id) }}><DeleteIcon /></div>
+                      <div onClick={() => { __isToken().then(()=>{removeComment(comment.id)}) }}><DeleteIcon /></div>
                       <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
                     </div>
                     : <div style={{ display: "flex", marginLeft: "auto" }}>
@@ -192,7 +209,7 @@ const Comment = () => {
                     </div>}
                   {notify === comment.id ?
                     <Modaldiv>
-                      <OptionMenu onClick={()=>{__notifyComment(comment.id)}}>신고하기</OptionMenu>
+                      <OptionMenu onClick={()=>{__isToken().then(()=>{__notifyComment(comment.id)})}}>신고하기</OptionMenu>
                     </Modaldiv>
                     : null}
                 </div>

@@ -10,11 +10,28 @@ import Swal from "sweetalert2";
 const PromiseLeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   // 약속 상세정보 받아오기 (멤버리스트 활용)
   const promise = useSelector((state) => state.checkIn);
   const { id, type } = useParams();
   useEffect(() => {
-    dispatch(__getCheckIn(id));
+    __isToken().then(() => {
+      dispatch(__getCheckIn(id));
+    })
   }, [dispatch])
 
   // 방장위임
@@ -101,11 +118,13 @@ const PromiseLeader = () => {
                 </div>
               }
               <AddFriend onClick={() => {
-                if (type === "leader") {
-                  __giveLeader(member.id);
-                } else {
-                  __kickMember(member.id, member.nicknameByFriend);
-                }
+                __isToken().then(() => {
+                  if (type === "leader") {
+                    __giveLeader(member.id);
+                  } else {
+                    __kickMember(member.id, member.nicknameByFriend);
+                  }
+                })
               }}>선택</AddFriend>
             </div>
           )

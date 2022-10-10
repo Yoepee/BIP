@@ -12,13 +12,30 @@ import Swal from "sweetalert2";
 const Member = ({ type, setType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   // 친구목록 받아오기
   const member = useSelector((state) => state.member);
   // 친구목록에서 동작하는 기능 체크용도 (add = 신용도 추가, id = 약속 목록 초대(게시글 번호))
   const { id, add } = useParams();
 
   useEffect(() => {
-    dispatch(__getMember());
+    __isToken().then(() => {
+      dispatch(__getMember());
+    })
   }, [dispatch])
 
   // 친구 삭제 함수
@@ -134,19 +151,27 @@ const Member = ({ type, setType }) => {
                 if (type === "none") {
                   // 기능 없을 때 id값이 존재하면 약속 초대
                   if (id !== undefined) {
+                    __isToken().then(() => {
                     inviteMember(friend.nicknameByFriend);
+                    })
                     // add 값이 존재하면 신용점수 추가
                   } else if (add !== undefined) {
+                    __isToken().then(() => {
                     __addFriendCredit(friend.nicknameByFriend, add)
+                    })
                   }
                   return;
                   // type이 give이면 선택 멤버 별칭 추가
                 } else if (type === "give") {
+                  __isToken().then(() => {
                   giveName(friend.nicknameByFriend);
+                  })
                 }
                 // type이 remove이면 선택 멤버 삭제
                 else if (type === "remove") {
+                  __isToken().then(() => {
                   removeMember(friend.id);
+                  })
                 }
               }}>
               {/* 사진이 없으면 기본이미지, 있다면 프로필 사진 출력 */}

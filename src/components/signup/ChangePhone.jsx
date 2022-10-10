@@ -60,6 +60,21 @@ const ChangePhone = () => {
     setMember({ ...member, [name]: value })
   }
 
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
+
   // 인증번호 발송을 콘솔로 대신하는 역할
   const __testPhone = async (payload) => {
     await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", payload)
@@ -77,10 +92,10 @@ const ChangePhone = () => {
   const __examPhone = async (payload) => {
     await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", payload)
       .then((response) => {
-        if(response.data.success){
-          Swal.fire(response.data.data,"　","success");
-        }else{
-          Swal.fire(response.data.data,"　","error");
+        if (response.data.success) {
+          Swal.fire(response.data.data, "　", "success");
+        } else {
+          Swal.fire(response.data.data, "　", "error");
           setVisble(false);
         }
       });
@@ -90,46 +105,50 @@ const ChangePhone = () => {
   const __editPhone = async (payload) => {
     // 이메일 로그인
     if (type === "mail") {
-      await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber", { authCode: test, phoneNumber: payload.value }, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then((response) => {
-        if (response.data.success) {
-          // 닉네임 없으면 닉네임 설정 페이지 이동
-          if (social?.data?.nickname === null) {
-            navigate("/signup/nickname")
-          } else {
-            // 이상 없으면 메인페이지
-            navigate("/")
+      __isToken().then(async () => {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber", { authCode: test, phoneNumber: payload.value }, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
           }
-        } else {
-          Swal.fire(response.data.data,"　","error");
-        }
-        // 카카오 최초 로그인
+        }).then((response) => {
+          if (response.data.success) {
+            // 닉네임 없으면 닉네임 설정 페이지 이동
+            if (social?.data?.nickname === null) {
+              navigate("/signup/nickname")
+            } else {
+              // 이상 없으면 메인페이지
+              navigate("/")
+            }
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+          }
+          // 카카오 최초 로그인
+        })
       })
     } else {
-      await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/kakao", { authCode: test, phoneNumber: payload.value }, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then((response) => {
-        if (response.data.success) {
-          // 카카오 최초 로그인시 토큰 재발급으로 새로 저장필요
-          localStorage.setItem("Authorization", response.headers.authorization);
-          localStorage.setItem("RefreshToken", response.headers.refreshtoken);
-          // 닉네임 없으면 닉네임 설정 페이지 이동
-          if (social?.data?.nickname === null) {
-            navigate("/signup/nickname")
-            // 이상 없으면 메인페이지
-          } else {
-            navigate("/")
+      __isToken().then(async () => {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/kakao", { authCode: test, phoneNumber: payload.value }, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
           }
-        } else {
-          Swal.fire(response.data.data,"　","error");
-        }
+        }).then((response) => {
+          if (response.data.success) {
+            // 카카오 최초 로그인시 토큰 재발급으로 새로 저장필요
+            localStorage.setItem("Authorization", response.headers.authorization);
+            localStorage.setItem("RefreshToken", response.headers.refreshtoken);
+            // 닉네임 없으면 닉네임 설정 페이지 이동
+            if (social?.data?.nickname === null) {
+              navigate("/signup/nickname")
+              // 이상 없으면 메인페이지
+            } else {
+              navigate("/")
+            }
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+          }
+        })
       })
     }
   }
@@ -163,61 +182,61 @@ const ChangePhone = () => {
 
 
       <BtnArea>
-         {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
-         {visble && <Button variant="contained" className="default_btn" onClick={() => { __testPhone(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
-          {/* 번호가 이상이 없을 시 버튼 색깔 변경 */}
-          {!visble &&
-            regexPhone.test(member.value) ?
-            <Button
-              variant="contained"
-              style={{ backgroundColor: "#3E09D1" }}
-              onClick={() => {
-                if (regexPhone.test(member.value)) {
-                  if (!visble) {
-                    setChkBtn("인증번호 확인하기");
-                    __testPhone(member);
-                    timer.current = setInterval(() => {
-                      countDown();
-                    }, 1000);
-                    setVisble(!visble);
-                  } else {
-                    if (regtest.test(test)) {
-                      // __chkPhone(member);
-                    } else {
-                      Swal.fire("인증번호를 확인해주세요","　","error")
-                    }
-                  }
+        {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
+        {visble && <Button variant="contained" className="default_btn" onClick={() => { __testPhone(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+        {/* 번호가 이상이 없을 시 버튼 색깔 변경 */}
+        {!visble &&
+          regexPhone.test(member.value) ?
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#3E09D1" }}
+            onClick={() => {
+              if (regexPhone.test(member.value)) {
+                if (!visble) {
+                  setChkBtn("인증번호 확인하기");
+                  __testPhone(member);
+                  timer.current = setInterval(() => {
+                    countDown();
+                  }, 1000);
+                  setVisble(!visble);
                 } else {
-                  Swal.fire("휴대폰 번호를 확인해주세요","　","error")
-                }
-              }}>
-              {chkBtn}
-            </Button>
-            : visble ? null : <Button
-              variant="contained"
-              onClick={() => {
-                if (regexPhone.test(member.value)) {
-                  if (!visble) {
-                    setChkBtn("인증번호 확인하기");
-                    __testPhone(member);
-                    timer.current = setInterval(() => {
-                      countDown();
-                    }, 1000);
-                    setVisble(!visble);
+                  if (regtest.test(test)) {
+                    // __chkPhone(member);
                   } else {
-                    if (regtest.test(test)) {
-                      // __chkPhone(member);
-                    } else {
-                      Swal.fire("인증번호를 확인해주세요","　","error")
-                    }
+                    Swal.fire("인증번호를 확인해주세요", "　", "error")
                   }
-                } else {
-                  Swal.fire("휴대폰 번호를 확인해주세요","　","error")
                 }
-              }}>
-              {chkBtn}
-            </Button>}
-        </BtnArea>
+              } else {
+                Swal.fire("휴대폰 번호를 확인해주세요", "　", "error")
+              }
+            }}>
+            {chkBtn}
+          </Button>
+          : visble ? null : <Button
+            variant="contained"
+            onClick={() => {
+              if (regexPhone.test(member.value)) {
+                if (!visble) {
+                  setChkBtn("인증번호 확인하기");
+                  __testPhone(member);
+                  timer.current = setInterval(() => {
+                    countDown();
+                  }, 1000);
+                  setVisble(!visble);
+                } else {
+                  if (regtest.test(test)) {
+                    // __chkPhone(member);
+                  } else {
+                    Swal.fire("인증번호를 확인해주세요", "　", "error")
+                  }
+                }
+              } else {
+                Swal.fire("휴대폰 번호를 확인해주세요", "　", "error")
+              }
+            }}>
+            {chkBtn}
+          </Button>}
+      </BtnArea>
     </Wrapper>
   )
 }

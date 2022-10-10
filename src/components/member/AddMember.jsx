@@ -4,11 +4,27 @@ import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // 친구 추가 컴포넌트
 const AddMember = ({member, type, setChk}) => {
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.searchMember);
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
   
   // 닉네임으로 친구 추가
   const addMemberName = (member) => {
@@ -52,6 +68,7 @@ const AddMember = ({member, type, setChk}) => {
         :<p>({user?.data?.data?.nicknameByOwner})</p>}
         {/* type값에 따라 휴대폰 번호인지 닉네임인지 선별하여 함수 동작 */}
         <AddFriend onClick={()=>{
+          __isToken().then(()=>{
           if(type==="name"){
             addMemberName(member);
             setChk(0);
@@ -59,6 +76,7 @@ const AddMember = ({member, type, setChk}) => {
             addMemberPhone(member);
             setChk(0);
           }
+        })
         }}>추가</AddFriend>
     </Card>
     :null}

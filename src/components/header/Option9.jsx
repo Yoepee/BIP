@@ -14,10 +14,27 @@ const Option9 = ({ head }) => {
   const dispatch = useDispatch();
   const [chk, setChk] = useState(false);
   const { id } = useParams();
-  const donate = useSelector((state) => state.detailDonation)
+  const donate = useSelector((state) => state.detailDonation);
+
+  const __isToken = async () => {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    }
+    ).then((res) => {
+      if (res.data.success) {
+        localStorage.setItem("Authorization", res.headers.authorization);
+        localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+      }
+    })
+  }
 
   useEffect(() => {
-    dispatch(__getDetailDonation);
+    __isToken().then(() => {
+      dispatch(__getDetailDonation);
+    });
   }, [dispatch])
 
 
@@ -77,7 +94,7 @@ const Option9 = ({ head }) => {
             <OptionMenu
               onClick={() => { navigate(`/adddonation/edit${id}`) }}>게시글 수정</OptionMenu>
             <OptionMenu
-              onClick={() => { removeDonation() }}>게시글 삭제</OptionMenu>
+              onClick={() => { __isToken().then(() => { removeDonation() }) }}>게시글 삭제</OptionMenu>
             <OptionMenu sstyle={{ borderBottom: "0px solid black" }}
               onClick={() => { setChk(!chk); }}>취소</OptionMenu>
           </div>
