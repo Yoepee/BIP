@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 // 체크인 정보 불러오기(상세보기 멤버 상태) (상태 NOSHOW, ONTIME, LATE)
   export const __getToken = createAsyncThunk(
@@ -11,7 +12,7 @@ import axios from 'axios';
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
             if(data.data.success===false)
-              alert(data.data.error.message);
+              Swal.fire(data.data.error.message,"　","error");
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

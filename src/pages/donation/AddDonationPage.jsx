@@ -51,9 +51,8 @@ const AddDonationPage = () =>{
     }else{
       setDonate(initialState);
     }
-  },[dispatch]);
+  },[dispatch, id]);
 
-  console.log(donate)
   return (
     <>
       <Header head={"기부 추가"} option={8} payload={donate}/>

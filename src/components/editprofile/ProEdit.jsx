@@ -81,7 +81,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   // 휴대폰 번호 중복검사 함수
   const __chkPhone = async (payload) => {
     if (regexPhone.test(set.phonenumber)) {
-      let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
+      await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)
         .then((response) => {
           if (response.data.data) {
             setMent("사용 가능한 번호 입니다.")
@@ -95,7 +95,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   // 닉네임 중복검사 함수
   const __chkNickname = async (payload) => {
     if (regexNickname.test(set.value)) {
-      let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chknickname", payload)
+      await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chknickname", payload)
         .then((response) => {
           setMent(response.data.data)
           if (response.data.data === "사용 가능한 닉네임 입니다.") {
@@ -110,7 +110,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   // 이메일 중복검사 함수
   const __chkEmail = async (payload) => {
     if (regexEmail.test(set.email)) {
-      let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkemail", payload)
+      await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkemail", payload)
         .then((response) => {
           setMent(response.data.data)
           if (response.data.data === "사용 가능한 이메일 입니다.") {
@@ -126,27 +126,37 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", { value: payload })
       .then((response) => {
         console.log(response)
+        if (response.data.success) {
+          Swal.fire(response.data.data, "　", "success");
+        } else {
+          Swal.fire(response.data.data, "　", "error");
+          setVisible(false);
+        }
       });
   }
   // 실제 휴대폰 문자 인증코드 발송
   const __examPhone = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", { value: payload })
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", { value: payload })
       .then((response) => {
         console.log(response)
+        if (response.data.success) {
+          Swal.fire(response.data.data, "　", "success");
+        } else {
+          Swal.fire(response.data.data, "　", "error");
+          setVisible(false);
+        }
       });
   }
 
   // 이메일 인증코드 발송
   const __examEmail = async (payload) => {
-    console.log(payload)
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/user/auth/email", { value: payload }, {
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/user/auth/email", { value: payload }, {
       headers: {
         Authorization: localStorage.getItem('Authorization'),
         RefreshToken: localStorage.getItem('RefreshToken'),
       }
     })
       .then((response) => {
-        console.log(response)
         if(response.data.success){
           Swal.fire(response.data.data,"　","success");
         }else{

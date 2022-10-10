@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 // 휴대폰번호 미입력 계정 번호 입력 페이지 (카카오 최초 로그인 or 이메일 로그인)
 const ChangePhone = () => {
@@ -21,7 +22,7 @@ const ChangePhone = () => {
   const [visble, setVisble] = useState(false);
   const [chkBtn, setChkBtn] = useState("인증하기 받기")
   // 경고문구
-  const [ment, setMent] = useState("");
+  const [ment] = useState("");
   // 인증번호 변수
   const [test, setTest] = useState("")
   // 휴대폰 유효성 검사
@@ -61,15 +62,27 @@ const ChangePhone = () => {
 
   // 인증번호 발송을 콘솔로 대신하는 역할
   const __testPhone = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", payload)
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", payload)
       .then((response) => {
         console.log(response)
+        if (response.data.success) {
+          Swal.fire("인증번호 전송완료", "　", "success");
+        } else {
+          Swal.fire(response.data.data, "　", "error");
+          setVisble(false);
+        }
       });
   }
   // 실제 휴대폰으로 인증번호가 전송되는 함수
   const __examPhone = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", payload)
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", payload)
       .then((response) => {
+        if(response.data.success){
+          Swal.fire(response.data.data,"　","success");
+        }else{
+          Swal.fire(response.data.data,"　","error");
+          setVisble(false);
+        }
       });
   }
 
@@ -77,7 +90,7 @@ const ChangePhone = () => {
   const __editPhone = async (payload) => {
     // 이메일 로그인
     if (type === "mail") {
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber", { authCode: test, phoneNumber: payload.value }, {
+      await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber", { authCode: test, phoneNumber: payload.value }, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -92,12 +105,12 @@ const ChangePhone = () => {
             navigate("/")
           }
         } else {
-          alert(response.data.data)
+          Swal.fire(response.data.data,"　","error");
         }
         // 카카오 최초 로그인
       })
     } else {
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/kakao", { authCode: test, phoneNumber: payload.value }, {
+      await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/kakao", { authCode: test, phoneNumber: payload.value }, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -115,7 +128,7 @@ const ChangePhone = () => {
             navigate("/")
           }
         } else {
-          alert(response.data.data)
+          Swal.fire(response.data.data,"　","error");
         }
       })
     }
@@ -165,11 +178,11 @@ const ChangePhone = () => {
                     if (regtest.test(test)) {
                       // __chkPhone(member);
                     } else {
-                      alert("인증번호를 확인해주세요.")
+                      Swal.fire("인증번호를 확인해주세요.","　","error")
                     }
                   }
                 } else {
-                  alert("휴대폰 번호를 확인해주세요.")
+                  Swal.fire("휴대폰 번호를 확인해주세요.","　","error")
                 }
               }}>
               {chkBtn}
@@ -189,11 +202,11 @@ const ChangePhone = () => {
                     if (regtest.test(test)) {
                       // __chkPhone(member);
                     } else {
-                      alert("인증번호를 확인해주세요.")
+                      Swal.fire("인증번호를 확인해주세요.","　","error")
                     }
                   }
                 } else {
-                  alert("휴대폰 번호를 확인해주세요.")
+                  Swal.fire("휴대폰 번호를 확인해주세요.","　","error")
                 }
               }}>
               {chkBtn}

@@ -15,7 +15,7 @@ const Naver = () => {
 
   const __naverLogin = async() => {
     // 경로에서 받아온 값을 서버로 전달
-    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/naverlogin?code=${code}&state=${state}`)
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/naverlogin?code=${code}&state=${state}`)
     .then((response)=>{
       if(response.data.success){
         localStorage.setItem("Authorization", response.headers.authorization);

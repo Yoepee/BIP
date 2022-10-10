@@ -44,9 +44,6 @@ const Option6 = ({ head }) => {
                 console.log(ress)
               })
             }
-            else {
-              alert(response.data.data)
-            }
           }
         })
       } else {
@@ -55,25 +52,34 @@ const Option6 = ({ head }) => {
     })
   }
   const quit = async () => {
-    if (window.confirm("회원 탈퇴를 하시겠습니까?")) {
-      const data = await axios.delete(process.env.REACT_APP_SERVER_HOST + "/api/user", {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken'),
-        }
-      }).then((response) => {
-        if (response.data.success) {
-          localStorage.removeItem('Authorization');
-          localStorage.removeItem('RefreshToken');
-          localStorage.removeItem('name');
-          navigate("/intro")
-        } else {
-          alert(response.data.data)
-        }
-      })
-    } else {
-      setChk(!chk);
-    }
+    Swal.fire({
+      title: `회원 탈퇴를 하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '탈퇴',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const data = await axios.delete(process.env.REACT_APP_SERVER_HOST + "/api/user", {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then((response) => {
+          if (response.data.success) {
+            localStorage.removeItem('Authorization');
+            localStorage.removeItem('RefreshToken');
+            localStorage.removeItem('name');
+            navigate("/intro")
+          } else {
+            Swal.fire(response.data.data,"　","error")
+          }
+        })
+      } else {
+        setChk(!chk);
+      }
+    })
   }
   return (
     <>

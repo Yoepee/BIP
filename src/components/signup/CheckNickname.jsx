@@ -23,7 +23,7 @@ const CheckNickname = () => {
 
   // 닉네임 중복검사
   const __chkNickname = async(payload)=>{
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/member/chknickname", payload)
+    await axios.post(process.env.REACT_APP_SERVER_HOST+"/api/member/chknickname", payload)
     .then((response)=>{
       setChkname(response.data.data)
     });
@@ -42,7 +42,7 @@ const CheckNickname = () => {
   const __editNickname = async(payload)=>{
     // 중복이 없을 시에만 동작 (그외는 경고문구 출력)
     if(chkname==="사용 가능한 닉네임 입니다."){
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/nickname", payload,{
+      await axios.put(process.env.REACT_APP_SERVER_HOST+"/api/user/nickname", payload,{
         headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
@@ -82,11 +82,9 @@ export default CheckNickname;
 
 const Wrapper = styled.div`
   display: flex;
-
   width: 80%;
   flex-direction: column;
   margin: 30px auto;
- 
 `;
 
 const HeaderArea = styled.div`
@@ -95,17 +93,12 @@ const HeaderArea = styled.div`
   height: 50px;
   justify-content: space-between;
 
-
   Button {
     width: 1%;
     font-weight: 600;
     font-size: 20px;
     margin-bottom: 20px;
-    
-   
   }
-
- 
 `;
 
 const HeaderTitle = styled.span`

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 // 친구목록 불러오기
 export const __getMember = createAsyncThunk(
@@ -12,9 +13,8 @@ export const __getMember = createAsyncThunk(
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
       })
-      console.log(data)
       if (data.data.success === false)
-        alert(data.data.error.message);
+        Swal.fire(data.data.error.message, "　", "error");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -71,7 +71,7 @@ export const __searchFriendName = createAsyncThunk(
         }
       })
       if (data.data.success === false)
-        alert(data.data.data);
+        Swal.fire(data.data.data, "　", "error");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -91,7 +91,7 @@ export const __searchFriendPhone = createAsyncThunk(
         }
       })
       if (data.data.success === false)
-        alert(data.data.data);
+        Swal.fire(data.data.data, "　", "error");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -226,8 +226,8 @@ export const member = createSlice({
     },
     [__secondName.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      const index = state.data.data.findIndex(user=>user.nicknameByFriend === action.payload.data.nicknameByFriend);
-      state.data.data.splice(index,1,{...state.data.data[index], nicknameByOwner:action.payload.data.nicknameByOwner})
+      const index = state.data.data.findIndex(user => user.nicknameByFriend === action.payload.data.nicknameByFriend);
+      state.data.data.splice(index, 1, { ...state.data.data[index], nicknameByOwner: action.payload.data.nicknameByOwner })
     },
     [__secondName.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

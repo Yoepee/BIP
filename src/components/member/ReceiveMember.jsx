@@ -5,6 +5,7 @@ import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 import axios from "axios";
 import Header from "../header/Header";
+import Swal from "sweetalert2";
 
 // 친구요청 받은 친구목록 컴포넌트
 const ReceiveMember = ({ type, setChk }) => {
@@ -19,12 +20,11 @@ const ReceiveMember = ({ type, setChk }) => {
 
   // 본인을 추가한 친구리스트 값 받아오기
   const __getReceive = async()=>{
-    let a = await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/friends/recommandlist`,{
+    await axios.get(process.env.REACT_APP_SERVER_HOST+`/api/friends/recommandlist`,{
       headers: {
           Authorization:localStorage.getItem('Authorization'),
           RefreshToken:localStorage.getItem('RefreshToken')
       }}).then((response)=>{
-        console.log(response)
         setUser(response.data);
       })
   }
@@ -34,7 +34,7 @@ const ReceiveMember = ({ type, setChk }) => {
     dispatch(__addMemberName({value:member}))
     .then((response)=>{
       if(response.payload.success===false){
-        alert(response.payload.data);
+        Swal.fire(response.payload.data,"　","error");
         return;
       }
     })
@@ -102,14 +102,4 @@ border:none;
 border-radius: 8px;
 background-color: #F5EAFB;
 margin:10px
-
-`
-
-const Input = styled.input`
-  margin-left: 20px;
-  border: none;
-  outline: none;
-  width: 350px;
-  border-bottom: 1px solid  #F5EAFB;
-  margin-bottom: 31px;
 `

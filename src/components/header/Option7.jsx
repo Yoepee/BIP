@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { __searchFriendName, __searchFriendPhone, __getMember } from '../../redux/modules/member';
 import { useDispatch } from 'react-redux';
 
-// 친구검색
-const Option7 = ({ head, setType, type }) => {
+// 친구검색(친구목록창 검색기능)
+const Option7 = ({ setType }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("닉네임");
   const [chk, setChk] = useState(false);
