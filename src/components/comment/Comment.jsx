@@ -118,6 +118,32 @@ const Comment = () => {
     })
   }
 
+  const __notifyComment= async(commentId) =>{
+    Swal.fire({
+      title: `댓글작성자를 신고하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '신고',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+    await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/comment/report/${commentId}`, null, {
+      headers: {
+          Authorization: localStorage.getItem('Authorization'),
+          RefreshToken: localStorage.getItem('RefreshToken'),
+    }}).then((res)=>{
+      console.log(res)
+      if(res.data.success){
+        Swal.fire(res.data.data, "　", "success");
+      }else{
+        Swal.fire(res.data.data, "　", "error");
+      }
+    })
+    }
+  })
+  }
+
   return (
     <>
       <div style={{ width: "80%", margin: "10px auto" }}>
@@ -136,7 +162,6 @@ const Comment = () => {
 
                 <EditInput name="content" value={edit.content} onChange={onChangeHandler} />
                 {/* <div style={{ marginLeft: "auto" }}>{comment.createdAt}</div> */}
-
               </CommentCard>
             )
           } else {
@@ -160,14 +185,14 @@ const Comment = () => {
                     <div style={{ display: "flex", marginLeft: "auto" }}>
                       <div onClick={() => { setChkEdit(comment.id); setEdit({ ...edit, content: comment.content }) }}><EditIcon /></div>
                       <div onClick={() => { removeComment(comment.id) }}><DeleteIcon /></div>
-                      <div onClick={() => { }}><MoreVertIcon /></div>
+                      <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
                     </div>
                     : <div style={{ display: "flex", marginLeft: "auto" }}>
                       <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
                     </div>}
                   {notify === comment.id ?
-                    <Modaldiv onClick={() => { Swal.fire(`아직 미구현입니다.`,"　", "warning") }}>
-                      <OptionMenu>신고하기</OptionMenu>
+                    <Modaldiv>
+                      <OptionMenu onClick={()=>{__notifyComment(comment.id)}}>신고하기</OptionMenu>
                     </Modaldiv>
                     : null}
                 </div>
