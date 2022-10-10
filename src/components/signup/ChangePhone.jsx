@@ -141,10 +141,7 @@ const ChangePhone = () => {
         <Button className="next_btn" onClick={() => { __editPhone(member) }}>완료</Button>
       </HeaderArea>
 
-      <Profile>
-        <form action="">
-          
-        </form>
+      <form action="">
         <input variant="outlined" label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요" name="value"
           value={member.value}
           onChange={onChangeHandler} />
@@ -152,16 +149,20 @@ const ChangePhone = () => {
         {member.value === "" ? null :
           regexPhone.test(member.value) ? ment === "사용 가능한 번호 입니다" ?
             (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
-            : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
-            : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호가 아닙니다</div></>)}
+            : (<div style={{ color: "red", fonSize: "14px" }}>{ment}</div>)
+            : (<><div style={{ color: "red", fonSize: "14px" }}>올바른 휴대폰 번호가 아닙니다</div></>)}
         {/* 인증번호 받기 시 입력창 출력 */}
         {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
         {/* 인증번호 이상 시 경고문구 출력 */}
         {test === "" ? null :
-          regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
-        <BtnArea>
-          {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
-          {visble && <Button variant="contained" className="default_btn" onClick={() => { __testPhone(member); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+          regtest.test(test) ? null : (<><div style={{ color: "red", fonSize: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
+      </form>
+
+
+
+      <BtnArea>
+         {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
+         {visble && <Button variant="contained" className="default_btn" onClick={() => { __testPhone(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
           {/* 번호가 이상이 없을 시 버튼 색깔 변경 */}
           {!visble &&
             regexPhone.test(member.value) ?
@@ -215,7 +216,6 @@ const ChangePhone = () => {
               {chkBtn}
             </Button>}
         </BtnArea>
-      </Profile>
     </Wrapper>
   )
 }
@@ -251,6 +251,11 @@ const Wrapper = styled.div`
         outline: none;
       }
     }
+    div{
+      width: 70%;
+      margin: 5px auto;
+      max-width: 366px;
+    }
   }
 `;
 
@@ -276,13 +281,6 @@ const HeaderTitle = styled.span`
   font-size: 20px;
 `;
 
-const Profile = styled.form`
-  margin: 150px auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 500px;
-`;
 
 const BtnArea = styled.div`
   width: 80%;
@@ -299,10 +297,8 @@ const BtnArea = styled.div`
     width: 100%;
     margin: 5px auto;
     max-width: 400px;
-    /* margin-bottom: 10px; */
 		height: 50px;
 		font-weight: 700;
-		/* align-items: center; */
     &:hover{
       background-color: #3E09D1;
       color: white;
