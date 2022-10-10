@@ -8,25 +8,20 @@ import Monthly from "../components/main/calendar/Monthly";
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
-import Week from "../components/main/calendar/Week";
 import Header from ".././components/header/Header";
 
 const MonthlyPage = () => {
   const dispatch = useDispatch();
   // 약속 리스트 불러오기 데이터 값
   const [day, setDay] = useState({unit:"day",date:dayjs().format('YYYY-MM-DD-00-00-00')})
-  // 케로셀 페이지 변경 확인 용도
-  const [page, setPage] = useState(0);
 
   const navigate = useNavigate();
   useEffect(()=>{
     dispatch(__getPromise(day));
   },[day])
-  console.log(day)
     return (
       <>
         <Wrap>
-            
             <Header  head={""} option={0}/>
             <div><Monthly setDay={setDay} day={day}/></div>
             {/* 약속 리스트 불러오기 */}

@@ -28,7 +28,7 @@ const Comment = () => {
 
   useEffect(() => {
     dispatch(__getComment({ id: id, page: 0 }));
-  }, [dispatch])
+  }, [dispatch, id])
 
   const editComment = (CommentId) => {
     Swal.fire({
@@ -41,7 +41,7 @@ const Comment = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         dispatch(__editComment({ id: CommentId, data: edit }))
-          .then((res) => {
+          .then(() => {
             setEdit(initialState);
             setChkEdit(0);
           })
@@ -78,7 +78,7 @@ const Comment = () => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        let a = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/point/give/${id}`, { nickname: nickname }, {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/point/give/${id}`, { nickname: nickname }, {
           headers: {
             Authorization: localStorage.getItem('Authorization'),
             RefreshToken: localStorage.getItem('RefreshToken')

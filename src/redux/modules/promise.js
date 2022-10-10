@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 // 약속 리스트 받아오기 (unit = day,week,month, date = 날짜)
   export const __getPromise = createAsyncThunk(
@@ -12,7 +13,7 @@ import axios from 'axios';
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
             if(data.data.success===false)
-              alert(data.data.error.message);
+              Swal.fire(data.data.error.message,"　","error");
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

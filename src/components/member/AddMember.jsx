@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __addMemberName, __addMemberPhone} from "../../redux/modules/member";
 import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 // 친구 추가 컴포넌트
 const AddMember = ({member, type, setChk}) => {
@@ -14,7 +15,7 @@ const AddMember = ({member, type, setChk}) => {
     dispatch(__addMemberName(member))
     .then((response)=>{
       if(response.payload.success===false){
-        alert(response.payload.data);
+        Swal.fire(response.payload.data,"　","error");
         return;
       }
     })
@@ -27,7 +28,7 @@ const AddMember = ({member, type, setChk}) => {
     dispatch(__addMemberPhone(member))
     .then((response)=>{
       if(response.payload.success===false){
-        alert(response.payload.data);
+        Swal.fire(response.payload.data,"　","error");
         return;
       }
     })

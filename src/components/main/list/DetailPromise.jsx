@@ -27,7 +27,7 @@ const DetailPromise = () => {
 
   // 방장 누구인지 확인하는 함수
   const bangjang = async () => {
-    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/master/check/${id}`, {
       headers: {
         Authorization: localStorage.getItem('Authorization'),
         RefreshToken: localStorage.getItem('RefreshToken')

@@ -1,25 +1,35 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // 신용도 추가하기 페이지
 const AddCredit = () => {
   const navigate = useNavigate();
   // 나의 신용점수 구매 함수
   const __getMyCredit = async (num) => {
-    if (window.confirm(`신용점수를 ${num}점 구매하시겠습니까?`)) {
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/user/point`, { point: 2000 * num, nickname: localStorage.getItem("name") }, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken')
-        }
-      }).then((response) => {
-        console.log(response)
-      })
-      return;
-    } else {
-      return;
-    }
+    Swal.fire({
+      title: `신용점수를 ${num}점 구매하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '구매',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/user/point`, { point: 2000 * num, nickname: localStorage.getItem("name") }, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken')
+          }
+        }).then((response) => {
+          console.log(response)
+        })
+        return;
+      } else {
+        return;
+      }
+    })
   }
 
   return (

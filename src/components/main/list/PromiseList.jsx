@@ -23,7 +23,7 @@ const PromiseList = ({ day }) => {
   
   // 약속값 받아오기
   useEffect(() => {
-    dispatch(__getPromise(day)).then((response) => {});
+    dispatch(__getPromise(day));
   }, [day]);
 
   return (

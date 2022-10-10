@@ -16,7 +16,6 @@ const IntroPage = () => {
 
   // 네이버 로그인시 네이버 url경로로 이동
   const naver = () =>{
-    console.log(process.env.REACT_APP_NAVER_URL)
     window.location.href=process.env.REACT_APP_NAVER_URL
   }
   

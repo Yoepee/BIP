@@ -61,7 +61,7 @@ const CheckEmail = () => {
 
   // 이메일 인증코드 발급 함수
   const __examEmail = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
       .then((response) => {
         console.log(response)
         if(!response.data.success){
@@ -75,7 +75,7 @@ const CheckEmail = () => {
 
   // 이메일 로그인
   const __emailLogin = async (payload) => {
-    let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/login/email", { authCode: test, email: payload.value })
+    await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/login/email", { authCode: test, email: payload.value })
       .then((response) => {
         if (response.data.success === true) {
           localStorage.setItem("Authorization", response.headers.authorization);

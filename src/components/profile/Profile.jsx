@@ -20,7 +20,6 @@ const Profile = () => {
   useEffect(() => {
     dispatch(__getProfile());
   }, [dispatch]);
-  console.log(profile);
 
   return (
     <div>

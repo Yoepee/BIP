@@ -1,5 +1,4 @@
 import Carousel from 'react-material-ui-carousel'
-import styled from "styled-components"
 import intro1 from '../../img/001.png'
 import intro2 from '../../img/002.png'
 import intro3 from '../../img/003.png'

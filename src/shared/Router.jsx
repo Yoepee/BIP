@@ -22,8 +22,8 @@ import DetailDonationPage from "../pages/donation/DetailDonationPage"
 import MonthlyPage from "../pages/MonthlyPage"
 import { useEffect } from "react"
 import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
-import { __getLogin } from "../redux/modules/login"
+// import { useDispatch, useSelector } from "react-redux"
+// import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 
 
@@ -51,7 +51,7 @@ const Router = () => {
     //     }
     // }, [])
     const __isToken = async () => {
-        let isToken = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+        await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
             headers: {
                 Authorization: localStorage.getItem('Authorization'),
                 RefreshToken: localStorage.getItem('RefreshToken'),

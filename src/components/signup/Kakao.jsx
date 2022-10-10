@@ -13,7 +13,7 @@ const Kakao = () => {
 
   const __kakaoLogin = async() => {
     // 경로에서 받아온 값을 서버로 전달
-    let a = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/kakaologin?code=${code}`)
+    await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/kakaologin?code=${code}`)
     .then((response)=>{
       if(response.data.success){
         localStorage.setItem("Authorization", response.headers.authorization);

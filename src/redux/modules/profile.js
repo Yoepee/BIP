@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 // 프로필 정보 받아오기
   export const __getProfile = createAsyncThunk(
@@ -12,7 +13,7 @@ import axios from 'axios';
                     RefreshToken: localStorage.getItem('RefreshToken'),
               }})
             if(data.data.success===false)
-              alert(data.data.error.message);
+              Swal.fire(data.data.error.message,"　","error");
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
