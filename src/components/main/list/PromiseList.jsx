@@ -211,7 +211,10 @@ const Cards = styled.div`
 const PromiseCard = styled.div`
   /* min-width: 350px; */
   height: 100%;
-  background-color: #edffeb;
+  /* background-color: #edffeb; */
+  background-color: #FAFAFA;
+  /* border: 1px solid #F0F0F0; */
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
   padding: 0 10px;
   border-radius: 4px;

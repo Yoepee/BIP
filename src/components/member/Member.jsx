@@ -118,20 +118,25 @@ const Member = ({type, setType}) =>{
                 removeMember(friend.id);
               }
             }}>
-              {/* 사진이 업으면 기본이미지, 있다면 프로필 사진 출력 */}
+              {/* 사진이 없으면 기본이미지, 있다면 프로필 사진 출력 */}
             {friend.profileImgUrl===null?
             <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
             :<ProfileImg src={friend.profileImgUrl} />
             }
+            <div style={{fontSize:"0"}}>
             {friend.nicknameByOwner===null?
             // 닉네임 출력
             <Username>{friend.nicknameByFriend}</Username>
             :<div>
             <Username>{friend.nicknameByOwner}</Username> 
-            <div style={{color:"#a4a4a4"}}>{friend.nicknameByFriend}</div>
+            <Nickname>{friend.nicknameByFriend}</Nickname>
             </div>}
+            </div>            
             {/* 신용도 출력 */}
-            <Credit><span>C</span>{friend.creditScore}</Credit>
+            <Credit>
+              <span style={{backgroundColor:"#D9DCFB", borderRadius:"50%"}}>C</span>
+              <span>{friend.creditScore}</span>
+            </Credit>
             </Card>
           )
         })}
@@ -147,12 +152,6 @@ const Wrap = styled.div`
   width: 80%;
   margin: 50px auto;
   font-family: "NotoSansKR-Regular";
-  /* font-family: "YUniverse-B"; */
-  /* font-family: "YiSunShin-B"; */
-  /* font-family: "Hambak"; */
-  /* font-family: "GowunDodum"; */
-  /* font-family: "Mimiworld-B"; */
-  /* font-family: "Mimiworld-R"; */
 
   @media screen and (min-width: 769px) {
     display: grid;
@@ -167,18 +166,20 @@ display:flex;
 height: 80px;
 border:none;
 border-radius: 8px;
-background-color: #F5EAFB;
+/* background-color: #F5EAFB; */
+background-color: #FAFAFA;
 margin:10px;
 padding-right: 10px;
 position: relative;
+box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 
   @media screen and (min-width: 769px) {
     width: 150px;
     font-size: 12px;
-    box-shadow: 0px 5px 5px 0px rgba(144, 144, 144, 0.5);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
     :hover{
       transform: translateY(-5px);
-      box-shadow: 0px 10px 10px 2px rgba(144, 144, 144, 0.25);
+      box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
     }
   }
 `
@@ -188,6 +189,7 @@ const ProfileImg = styled.img`
   height: 50px;
   border-radius: 50%;
   margin: 15px;
+  
   @media screen and (min-width: 769px) {
     width: 30px;
     height: 30px;
@@ -199,44 +201,49 @@ const ProfileImg = styled.img`
 
 const Username = styled.div`
 font-weight:600;
+margin-Top: 14px;
+font-size: 14px;
   @media screen and (min-width: 769px) {
     font-size: 12px;
     font-weight: bold;
     position: absolute;
     left: 48px;
-    top: 12px;
+    top: 10px;
   }
 `
 
 const Nickname = styled.p`
+ color: #a4a4a4;
+ font-size: 14px;
+ margin-top: 6px;
   @media screen and (min-width: 769px) {
       font-size: 11px;
       position: absolute;
       left: 48px;
-      top: 28px;
+      top: 36px;
   }
 `
 
 const Credit = styled.p`  
-  /* background-color: blue; */
   height: 20px;
   margin-left: auto;
   margin-right: 2%;
   display: flex;
   span {
-    background-color: #EDFFEB;
-    border-radius: 50%;
     width: 20px;
     text-align: center;
+    line-height: 18px;
     margin-right: 1px;
   }
   @media screen and (min-width: 769px) {
     font-size: 10px;
     position: absolute;
-    right: 5px;
-    height: 12px;
+    right: 8px;
+    text-align: center;
     span {
-      width: 12px;
+      width: 14px;
+      height: 14px;
+      line-height: 12px;
     }
   }
 `
