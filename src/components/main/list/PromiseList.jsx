@@ -64,7 +64,7 @@ const PromiseList = ({ day }) => {
                   {promise.weatherResponseDto.sky==="재 주의"&&<img src={안개} width={"70px"} height={"70px"} />}
                    {promise.weatherResponseDto.sky==="돌풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
                   {promise.weatherResponseDto.sky==="폭풍"&&<img src={돌풍} width={"70px"} height={"70px"} />}
-                  <div style={{display:"flex"}}>
+                  <div style={{display:"flex", marginTop:"10px"}}>
                     {/* <p>날씨 : {promise.weatherResponseDto.sky}</p> */}
                     <p> {promise.weatherResponseDto.temperature}　</p>
                     {/* <p>
