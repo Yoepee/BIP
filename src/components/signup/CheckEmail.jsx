@@ -252,10 +252,8 @@ const BtnArea = styled.div`
     width: 100%;
     margin: 5px auto;
     max-width: 400px;
-    /* margin-bottom: 10px; */
 		height: 50px;
 		font-weight: 700;
-		/* align-items: center; */
     &:hover{
       background-color: #3E09D1;
       color: white;

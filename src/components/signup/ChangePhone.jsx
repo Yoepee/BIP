@@ -20,7 +20,7 @@ const ChangePhone = () => {
   const [member, setMember] = useState(initialState);
   // 인증번호 발급 변수
   const [visble, setVisble] = useState(false);
-  const [chkBtn, setChkBtn] = useState("인증하기 받기")
+  const [chkBtn, setChkBtn] = useState("인증번호 받기")
   // 경고문구
   const [ment] = useState("");
   // 인증번호 변수
@@ -150,15 +150,15 @@ const ChangePhone = () => {
           onChange={onChangeHandler} />
         {/* 휴대폰 값 이상 시 경고문구 출력 */}
         {member.value === "" ? null :
-          regexPhone.test(member.value) ? ment === "사용 가능한 번호 입니다." ?
+          regexPhone.test(member.value) ? ment === "사용 가능한 번호 입니다" ?
             (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
             : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
-            : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
+            : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호가 아닙니다</div></>)}
         {/* 인증번호 받기 시 입력창 출력 */}
         {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
         {/* 인증번호 이상 시 경고문구 출력 */}
         {test === "" ? null :
-          regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
+          regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
         <BtnArea>
           {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
           {visble && <Button variant="contained" className="default_btn" onClick={() => { __testPhone(member); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
@@ -167,7 +167,7 @@ const ChangePhone = () => {
             regexPhone.test(member.value) ?
             <Button
               variant="contained"
-              style={{ backgroundColor: "#6D09D1" }}
+              style={{ backgroundColor: "#3E09D1" }}
               onClick={() => {
                 if (regexPhone.test(member.value)) {
                   if (!visble) {
@@ -181,11 +181,11 @@ const ChangePhone = () => {
                     if (regtest.test(test)) {
                       // __chkPhone(member);
                     } else {
-                      Swal.fire("인증번호를 확인해주세요.","　","error")
+                      Swal.fire("인증번호를 확인해주세요","　","error")
                     }
                   }
                 } else {
-                  Swal.fire("휴대폰 번호를 확인해주세요.","　","error")
+                  Swal.fire("휴대폰 번호를 확인해주세요","　","error")
                 }
               }}>
               {chkBtn}
@@ -205,11 +205,11 @@ const ChangePhone = () => {
                     if (regtest.test(test)) {
                       // __chkPhone(member);
                     } else {
-                      Swal.fire("인증번호를 확인해주세요.","　","error")
+                      Swal.fire("인증번호를 확인해주세요","　","error")
                     }
                   }
                 } else {
-                  Swal.fire("휴대폰 번호를 확인해주세요.","　","error")
+                  Swal.fire("휴대폰 번호를 확인해주세요","　","error")
                 }
               }}>
               {chkBtn}
@@ -225,49 +225,49 @@ export default ChangePhone;
 const Wrapper = styled.div`
   display: flex;
   width: 80%;
+  min-width: 360px;
   flex-direction: column;
   margin: 20px auto;
 
 	div{
-		margin-bottom: 10px;
-	
+		margin-bottom: 10px;	
 	}
 
- form{
-  display: flex;
-  flex-direction: column;
-  input{
-    border:2px solid #D5C2F8;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 13px;
-    &:focus{
-      border-color:#6D09D1;
-      outline: none;
+  form{
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 100%;
+    
+    input{
+      width: 70%;
+      margin: 10px auto;
+      max-width: 366px;
+      border:2px solid #D9DCFB;
+      padding: 16px;
+      border-radius: 6px;
+      &:focus{
+        border-color:#3E09D1;
+        outline: none;
+      }
     }
- }
- }
+  }
 `;
 
 
 const HeaderArea = styled.div`
   display: flex;
   width: 100%;
+  max-width: 400px;
   height: 50px;
-  
+  margin: 0 auto;
   justify-content: space-between;
-  border-bottom: 1px solid #b1acac;
-
+  border-bottom: 1px solid #D9DCFB;
   Button {
-    width: 1%;
     font-weight: 600;
     font-size: 20px;
     margin-bottom: 20px;
-    
-   
-  }
-
- 
+  } 
 `;
 
 const HeaderTitle = styled.span`
@@ -285,24 +285,27 @@ const Profile = styled.form`
 `;
 
 const BtnArea = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 5px auto;
+  text-align: center;
   .default_btn{
-    background-color: #D5C2F8;
+    background-color: #D9DCFB;
     color:  white;
   }
   Button {
+    background-color: #D9DCFB;
     width: 100%;
-    color: white;
-    background-color: #D5C2F8;
-    margin-bottom: 10px;
+    margin: 5px auto;
+    max-width: 400px;
+    /* margin-bottom: 10px; */
 		height: 50px;
-		font-weight: 600;
-		align-items: center;
+		font-weight: 700;
+		/* align-items: center; */
     &:hover{
-      background-color: #6D09D1;
-      color:white;
+      background-color: #3E09D1;
+      color: white;
     }
   }
 `;
