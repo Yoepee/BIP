@@ -275,7 +275,7 @@ const Wrapper = styled.div`
     }
     div{
       width: 70%;
-      margin: 0 auto;
+      margin: 5px auto;
       max-width: 366px;
     }
   }

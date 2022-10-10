@@ -109,12 +109,12 @@ const CheckEmail = () => {
             variant="outlined"
             placeholder="이메일을 입력해주세요"/>
             {/* 이메일 입력 오류시 경고문구 */}
-          {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px", margin:"0 10%" }}>올바른 이메일 형식이 아닙니다.</div>)}
+          {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px"}}>올바른 이메일 형식이 아닙니다</div>)}
           {/* 인증번호 받기 클릭 후 입력창 출력 */}
           {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
           {/* 인증번호 오류 시 경고 문구 */}
           {test === "" ? null :
-            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin:"0 10%" }}>6자리 인증번호를 입력해주세요.</div></>)}
+            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin:"0 10%" }}>6자리 인증번호를 입력해주세요</div></>)}
 
         </form>
 
@@ -228,6 +228,11 @@ const Wrapper = styled.div`
         outline: none;
       }
     }
+  div{
+    width: 70%;
+    margin: 5px auto;
+    max-width: 366px;
+  } 
  }
 
 `;
