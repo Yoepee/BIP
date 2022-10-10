@@ -15,7 +15,8 @@ const Option1 = ({ head, payload, chk, image }) =>{
     if(chk){
       dispatch(__editNickname(payload))
       .then((response)=>{
-        if(response.payload.data.success){
+        (console.log(response))
+        if(response.payload.success){
           Swal.fire("성공적으로 변경되었습니다.","　","success");
         }else{
           Swal.fire(response.payload.data,"　","error");
