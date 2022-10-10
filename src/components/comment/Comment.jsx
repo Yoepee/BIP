@@ -128,7 +128,7 @@ const Comment = () => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
-    await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/comment/report/${commentId}`, null, {
+    await axios.post(process.env.REACT_APP_SERVER_HOST+`/api/comments/report/${commentId}`, null, {
       headers: {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),

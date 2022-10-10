@@ -59,8 +59,10 @@ const Router = () => {
         }
         ).then((res) => {
             console.log(res)
-            localStorage.setItem("Authorization", res.headers.authorization);
-            localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+            if(res.data.success){
+                localStorage.setItem("Authorization", res.headers.authorization);
+                localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+            }
         })
     }
     // console.log(isLogin)
