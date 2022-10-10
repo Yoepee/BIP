@@ -260,7 +260,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     input{
       width: 70%;
-      margin: 0 auto;
+      margin: 10px auto;
       max-width: 366px;
       border:2px solid #D9DCFB;
       padding: 16px;
@@ -275,7 +275,7 @@ const Wrapper = styled.div`
 
 const BtnArea = styled.div`
   width: 80%;
-  margin: 20px auto;
+  margin: 5px auto;
   text-align: center;
   .default_btn{
     background-color: #D9DCFB;
@@ -284,7 +284,7 @@ const BtnArea = styled.div`
   Button {
     background-color: #D9DCFB;
     width: 100%;
-    margin: 0 auto;
+    margin: 5px auto;
     max-width: 400px;
     /* margin-bottom: 10px; */
 		height: 50px;
