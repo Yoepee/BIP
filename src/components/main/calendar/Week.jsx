@@ -127,12 +127,12 @@ export default Week;
 const STWeekCalendar = styled.div`
   position: absolute;
   width: 100%;
+  min-width: 400px;
   bottom: 100px;
 `;
 
 const STCalendar = styled.div`
   width: 120px;
-  /* background-color: pink; */
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -151,7 +151,6 @@ const STCalendar = styled.div`
 
 /* 주간캘린더 일전체 컨테이너 */
 const STDayContainer = styled.div`
-  
   justify-content: center;
   align-content: center;
   text-align: center;

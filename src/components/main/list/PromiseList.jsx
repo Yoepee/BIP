@@ -197,6 +197,7 @@ export default PromiseList;
 const Wrap = styled.div`
   /* background-color: skyblue; */
   width: 80%;
+  min-width: 360px;
   margin: 20px auto;
 `;
 const Cards = styled.div`
@@ -211,7 +212,6 @@ const Cards = styled.div`
 const PromiseCard = styled.div`
   /* min-width: 350px; */
   height: 100%;
-  /* background-color: #edffeb; */
   background-color: #FAFAFA;
   /* border: 1px solid #F0F0F0; */
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
@@ -229,7 +229,6 @@ const PromiseCard = styled.div`
     right: 10px;
   }
   @media screen and (min-width: 769px) {
-    background-color: #edffeb;
     width: 230px;
     /* height: 120px; */
     font-size: 12px;
