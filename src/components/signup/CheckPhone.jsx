@@ -233,7 +233,6 @@ const InfoArea = styled.div`
 
 
 const Wrapper = styled.div`
-/* background-color: pink; */
   display: flex;
   width: 80%;
   min-width: 360px;

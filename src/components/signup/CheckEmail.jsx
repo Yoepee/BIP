@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 const CheckEmail = () => {
   // 인증번호 받기 버튼을 클릭 여부 조사하는 변수들
   const [visble, setVisble] = useState(false);
-  const [chkBtn, setChkBtn] = useState("인증하기 받기")
+  const [chkBtn, setChkBtn] = useState("인증메일 받기")
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -96,7 +96,7 @@ const CheckEmail = () => {
       <Header option={0} />
         <InfoArea>
           <p>
-            이메일로 계정찾기
+            이메일로 계정 찾기
           </p>
         </InfoArea>
         <form action="">
@@ -202,6 +202,7 @@ const InfoArea = styled.div`
 const Wrapper = styled.div`
   display: flex;
   width: 80%;
+  min-width: 360px;
   flex-direction: column;
   margin: 20px auto;
 
@@ -214,15 +215,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   input{
-    border:2px solid #D5C2F8;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 13px;
-    &:focus{
-      border-color:#6D09D1;
-      outline: none;
+      width: 70%;
+      margin: 0 auto;
+      max-width: 366px;
+      border:2px solid #D9DCFB;
+      padding: 16px;
+      border-radius: 6px;
+      &:focus{
+        border-color:#3E09D1;
+        outline: none;
+      }
     }
-   }
  }
 
 `;
@@ -230,24 +233,25 @@ const Wrapper = styled.div`
 
 
 const BtnArea = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 5px;
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
   .default_btn{
-    background-color:#D5C2F8;
+    background-color: #D9DCFB;
     color:  white;
   }
   Button {
+    background-color: #D9DCFB;
     width: 100%;
-    color: white;
-    background-color: #D5C2F8;
-    margin-bottom: 10px;
+    margin: 0 auto;
+    max-width: 400px;
+    /* margin-bottom: 10px; */
 		height: 50px;
-		font-weight: 600;
-		align-items: center;
+		font-weight: 700;
+		/* align-items: center; */
     &:hover{
-      background-color:#6D09D1;;
-      color:white;
+      background-color: #3E09D1;
+      color: white;
     }
   }
-`;
+`
