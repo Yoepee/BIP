@@ -11,12 +11,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from 'styled-components'
 import axios from "axios";
 import { __addMemberName } from "../../redux/modules/member";
+import Swal from "sweetalert2";
 
 const Comment = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comment);
-  const detailDonation = useSelector((state)=>state.detailDonation);
+  const detailDonation = useSelector((state) => state.detailDonation);
   const initialState = {
     content: ""
   }
@@ -30,23 +31,36 @@ const Comment = () => {
   }, [dispatch])
 
   const editComment = (CommentId) => {
-    if (window.confirm("댓글을 수정하시겠습니까?")) {
-      dispatch(__editComment({ id: CommentId, data: edit }))
-        .then((res) => {
-          setEdit(initialState);
-          setChkEdit(0);
-        })
-    } else {
-      return;
-    }
-
+    Swal.fire({
+      title: `댓글을 수정하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '수정',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(__editComment({ id: CommentId, data: edit }))
+          .then((res) => {
+            setEdit(initialState);
+            setChkEdit(0);
+          })
+      }
+    })
   }
   const removeComment = (CommentId) => {
-    if (window.confirm("댓글을 삭제하시겠습니까?")) {
-      dispatch(__removeComment(CommentId))
-    } else {
-      return;
-    }
+    Swal.fire({
+      title: `댓글을 삭제하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        dispatch(__removeComment(CommentId))
+      }
+    })
   }
 
   const onChangeHandler = (e) => {
@@ -55,34 +69,53 @@ const Comment = () => {
   }
 
   const __givePoint = async (nickname) => {
-    if (window.confirm(`${nickname}님에게 포인트를 주시겠습니까?`)) {
-      let a = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/point/give/${id}`, { nickname: nickname }, {
-        headers: {
-          Authorization: localStorage.getItem('Authorization'),
-          RefreshToken: localStorage.getItem('RefreshToken')
-        }
-      }).then((res) => {
-        console.log(res)
-      })
-    } else {
-      return;
-    }
+    Swal.fire({
+      title: `${nickname}님에게 포인트를 전달하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '전달',
+      cancelButtonText: '취소',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let a = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/point/give/${id}`, { nickname: nickname }, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken')
+          }
+        }).then((res) => {
+          console.log(res)
+          if(res.data.success===false){
+            Swal.fire(res.data.data, "　", 'error')
+          }else{
+            Swal.fire(res.data.data.message, "　", 'success')
+          }
+        })
+      }
+    })
   }
 
   const __addMember = (nickname) => {
-    if (window.confirm(`${nickname}님을 친구로 추가하시겠습니까?`)) {
-      dispatch(__addMemberName({ value: nickname }))
-        .then((response) => {
-          if (response.payload.success === false) {
-            alert(response.payload.data);
-            return;
-          }else{
-            alert(`${nickname}님을 친구로 등록했습니다.`)
-          }
-        })
-    } else {
-      return;
-    }
+    Swal.fire({
+      title: `${nickname}님을 친구로 추가하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonColor: '#3E09D1',
+      cancelButtonColor: 'tomato',
+      confirmButtonText: '추가',
+      cancelButtonText: '취소',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(__addMemberName({ value: nickname }))
+          .then((response) => {
+            if (response.payload.success === false) {
+              Swal.fire(response.payload.data, '　', 'error');
+              return;
+            } else {
+              Swal.fire(`${nickname}님을 친구로 등록했습니다.`, '　', "success")
+            }
+          })
+      }
+    })
   }
 
   return (
@@ -109,34 +142,34 @@ const Comment = () => {
           } else {
             return (
               <CommentCard key={comment.id}>
-                <div style={{ display: "flex", fontWeight: "bold", marginLeft: "10px" }}> 
-                <div onClick={() => { 
-                  if(chkNick!==0){setChkNick(0)}
-                  else{setChkNick(comment.id)} 
-                }}>{comment.nickname}</div>
-                {detailDonation?.data?.data?.nickname === localStorage.getItem("name")?
-                  chkNick===comment.id&&(<Modaldiv>
-                    <OptionMenu onClick={() => { __addMember(comment.nickname) }}>친구추가</OptionMenu>
-                    <OptionMenu onClick={() => { __givePoint(comment.nickname) }}>포인트주기</OptionMenu>
-                  </Modaldiv>)
-                  :chkNick===comment.id&&(<Modaldiv>
-                    <div onClick={() => { __addMember(comment.nickname) }}>친구추가</div>
-                  </Modaldiv>)}
+                <div style={{ display: "flex", fontWeight: "bold", marginLeft: "10px" }}>
+                  <div onClick={() => {
+                    if (chkNick !== 0) { setChkNick(0) }
+                    else { setChkNick(comment.id); setNotify(0); }
+                  }}>{comment.nickname}</div>
+                  {detailDonation?.data?.data?.nickname === localStorage.getItem("name") ?
+                    chkNick === comment.id && (<Modaldiv>
+                      <OptionMenu onClick={() => { __addMember(comment.nickname) }}>친구추가</OptionMenu>
+                      <OptionMenu onClick={() => { __givePoint(comment.nickname) }}>포인트 전달</OptionMenu>
+                    </Modaldiv>)
+                    : chkNick === comment.id && (<Modaldiv>
+                      <div onClick={() => { __addMember(comment.nickname) }}>친구추가</div>
+                    </Modaldiv>)}
 
                   {comment.nickname === localStorage.getItem("name") ?
                     <div style={{ display: "flex", marginLeft: "auto" }}>
                       <div onClick={() => { setChkEdit(comment.id); setEdit({ ...edit, content: comment.content }) }}><EditIcon /></div>
                       <div onClick={() => { removeComment(comment.id) }}><DeleteIcon /></div>
-                      <div onClick={() => {  }}><MoreVertIcon /></div>
+                      <div onClick={() => { }}><MoreVertIcon /></div>
                     </div>
                     : <div style={{ display: "flex", marginLeft: "auto" }}>
-                    <div onClick={() => { if(notify!==0){setNotify(0)}else{setNotify(comment.id)}  }}><MoreVertIcon /></div>
-                  </div>}
-                  {notify===comment.id?
-                  <Modaldiv onClick={()=>{}}>
-                    <OptionMenu>신고하기</OptionMenu>
-                  </Modaldiv>
-                  :null}
+                      <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
+                    </div>}
+                  {notify === comment.id ?
+                    <Modaldiv onClick={() => { Swal.fire(`아직 미구현입니다.`,"　", "warning") }}>
+                      <OptionMenu>신고하기</OptionMenu>
+                    </Modaldiv>
+                    : null}
                 </div>
                 <div style={{ marginLeft: "10px" }}>{comment.content}</div>
                 <div style={{ marginLeft: "10px", marginRight: "10px", color: "#757575", fontSize: "14px" }}>{comment.createdAt}</div>

@@ -22,7 +22,11 @@ const AddDonationPage = () =>{
 
   const onChangeHandler = (e) => {
     const {name, value} = e.target;
-    setDonate({...donate, [name]: value})
+    if(name==="point"){
+      setDonate({...donate, [name]: value.replace(/[^0-9]/g, "")})
+    }else{
+      setDonate({...donate, [name]: value})
+    }
   }
 
   // 수정하기 일 때 상세보기 정보 받아와서 초기값으로 지정
