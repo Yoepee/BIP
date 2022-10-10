@@ -36,11 +36,11 @@ const Option4 = ({ head, setType, type }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", cursor: "pointer", display: "flex" }}>
         <div style={{ marginRight: "30px", cursor: "pointer" }}
           onClick={() => {setType("search");}}>
-          <p><SearchIcon style={{color:"#A67EED"}} /></p>
+          <p><SearchIcon style={{color:"#D9DCFB"}} /></p>
         </div>
           <div style={{ marginRight: "30px", cursor: "pointer" }}
             onClick={() => { if(chk!==0){setChk(0)}else{setChk(1)} }}>
-            <p><PersonAddRoundedIcon style={{color:"#A67EED"}}/></p>
+            <p><PersonAddRoundedIcon style={{color:"#D9DCFB"}}/></p>
           </div>
           {chk  === 1 ?
             <div style={{
@@ -66,7 +66,7 @@ const Option4 = ({ head, setType, type }) => {
         }
         <div style={{ cursor: "pointer" }}
           onClick={() => {if(chk!==0){setChk(0)}else{setChk(2)}}}>
-          <p><MoreVertIcon style={{color:"#A67EED"}}/></p>
+          <p><MoreVertIcon style={{color:"#D9DCFB"}}/></p>
         </div>
         {chk  === 2 ?
             <div style={{
@@ -104,7 +104,7 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`
 

@@ -31,7 +31,7 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
           style={{
             outline: "none",
             border: "none",
-            borderBottom: "1px solid #F5EAFB",
+            borderBottom: "1px solid #D9DCFB",
             marginTop: "20px",
             width: "250px",
           }}
@@ -64,6 +64,6 @@ const Input = styled.input`
   border: none;
   outline: none;
   width: 200px;
-  border-bottom: 1px solid  #F5EAFB;
+  border-bottom: 1px solid  #D9DCFB;
   margin-bottom: 31px;
 `
