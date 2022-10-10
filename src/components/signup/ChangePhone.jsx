@@ -142,9 +142,6 @@ const ChangePhone = () => {
       </HeaderArea>
 
       <Profile>
-        <form action="">
-          
-        </form>
         <input variant="outlined" label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요" name="value"
           value={member.value}
           onChange={onChangeHandler} />
