@@ -75,15 +75,15 @@ const CheckInBtn = styled.div`
   margin: 20px auto;
   padding: 5px 0;
   font-weight: bold;
-  box-shadow: 1px 3px 0 rgb(0,0,0,0.2);
+  box-shadow: 1px 3px 0 rgb(0,0,0,0.1);
   &:hover {
-    background-color: #D9DCFB;
+    background-color: #3E09D1;;
     color: white;
   }
   &:active {
-    background-color: #D9DCFB;
+    background-color: #3E09D1;;
     color: white;
-    box-shadow: 1px 1px 0 rgb(0,0,0,0.3);
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.1);
     position: relative;
     top:2px;
   }
