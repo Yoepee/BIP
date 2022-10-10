@@ -9,7 +9,7 @@ import axios from "axios";
 const CheckPhone = () => {
   // 인증번호 받기 버튼을 클릭 여부 조사하는 변수들
   const [visble, setVisble] = useState(false);
-  const [chkBtn, setChkBtn] = useState("인증하기 받기")
+  const [chkBtn, setChkBtn] = useState("인증번호 받기")
   const navigate = useNavigate();
 
   // 휴대폰 번호를 인식하는 초기값
@@ -122,8 +122,8 @@ const CheckPhone = () => {
       <Header option={0} />
         <InfoArea>
           <p>
-            휴대폰 인증으로 가입해요 번호는 안전하게 보안되어 어디에도 공개되지
-            않아요
+            휴대폰 인증으로 가입해요<br/>
+            번호는 안전하게 보안되어 어디에도 공개되지 않아요
           </p>
         </InfoArea>
         {/* 휴대폰번호 입력칸 */}
@@ -181,7 +181,7 @@ const CheckPhone = () => {
             {chkBtn}
           </Button>
           :<Button
-          style={{backgroundColor: "#6D09D1"}}
+          style={{backgroundColor: "#3E09D1"}}
           variant="contained"
           onClick={() => {
             if (regexPhone.test(member.value)) {
@@ -208,9 +208,9 @@ const CheckPhone = () => {
         }
         </BtnArea>
         {/* 휴대폰 번호 분실시 이메일로 로그인 할 수 있도록 이동 */}
-        <EmailDiv onClick={()=>{navigate("/signup/email")}}>
-          <p>휴대폰 번호가 변경되었나요? </p>
-          <EmailP> 이메일로 계정찾기</EmailP>
+        <EmailDiv>
+          <p>휴대폰 번호가 변경되었나요?</p>
+          <EmailP onClick={()=>{navigate("/signup/email")}}>이메일로 계정찾기</EmailP>
         </EmailDiv>
       </Wrapper>
     </div>
@@ -221,6 +221,33 @@ export default CheckPhone;
 
 
 
+const Wrapper = styled.div`
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  margin: 20px auto;
+
+	div{
+		margin-bottom: 10px;	
+	}
+
+  form{
+    display: flex;
+    flex-direction: column;
+    input{
+      width: 80%;
+      margin: 0 auto;
+      max-width: 400px;
+      border:2px solid #D9DCFB;
+      padding: 20px;
+      border-radius: 6px;
+      &:focus{
+        border-color:#3E09D1;
+        outline: none;
+      }
+    }
+  }
+`
 
 const InfoArea = styled.div`
   display: flex;
@@ -229,69 +256,46 @@ const InfoArea = styled.div`
 	justify-content: center;
   p {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
   }
-`;
-const Wrapper = styled.div`
-  display: flex;
-  width: 80%;
-  flex-direction: column;
-  margin: 20px auto;
-
-	div{
-		margin-bottom: 10px;
-	
-	}
-
- form{
-  display: flex;
-  flex-direction: column;
-  input{
-    border:2px solid #D5C2F8;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 13px;
-    &:focus{
-      border-color:#6D09D1;
-      outline: none;
-    }
- }
-
-`;
-
-
+`
 
 const BtnArea = styled.div`
   width: 100%;
   margin-top: 20px;
   margin-bottom: 5px;
   .default_btn{
-    background-color: #D5C2F8;
+    background-color: #D9DCFB;
     color:  white;
   }
   Button {
+    background-color: #D9DCFB;
+    /* width: 100%; */
     width: 100%;
-    color: white;
-    background-color: #D5C2F8;
-    margin-bottom: 10px;
+    margin: 0 auto;
+    max-width: 400px;
+    /* margin-bottom: 10px; */
 		height: 50px;
-		font-weight: 600;
-		align-items: center;
+		font-weight: 700;
+		/* align-items: center; */
     &:hover{
-      background-color: #6D09D1;
+      background-color: #3E09D1;
       color:white;
     }
   }
-`;
-
-const EmailP = styled.p`
-text-decoration : underline;
 `
+
 const EmailDiv = styled.div`
 display:flex;
 justify-content:center;
+`
+
+const EmailP = styled.p`
+text-decoration : underline;
+margin-left: 10px;
+font-weight: bold;
 &:hover{
-  font-weight:bold;
+  color: #3E09D1;
   cursor:pointer;
 }
 `
