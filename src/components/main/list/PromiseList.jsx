@@ -92,24 +92,25 @@ const PromiseList = ({ day }) => {
                     <p>💧{promise.weatherResponseDto.probability}</p>
                   </div>
                 </div>
-                <div style={{ display: "flex" }}>
-                  <p style={{ fontSize: "15px", fontWeight: "bold" }}>
-                    {promise.title}
-                  </p>
-                  {/* 포인트 받아야할듯 */}
-                  <People>
-                    <PersonIcon />
-                  </People>
-                  <p style={{ fontWeight: "500" }}>{promise.memberCount}</p>
-                </div>
-                <div>
-                  <p
-                    className="place"
-                    style={{ marginTop: "0", marginBottom: "0" }}>
-                    {promise.place}
-                  </p>
-                </div>
-                <div>
+                <Contents>
+                  <div style={{ display: "flex" }}>
+                    <p style={{ fontSize: "15px", fontWeight: "bold" }}>
+                      {promise.title}
+                    </p>
+                    {/* 포인트 받아야할듯 */}
+                    <People>
+                      <PersonIcon />
+                    </People>
+                    <p style={{ fontWeight: "500" }}>{promise.memberCount}</p>
+                  </div>
+                  <div>
+                    <p
+                      className="place"
+                      style={{ marginTop: "0", marginBottom: "0" }}>
+                      {promise.place}
+                    </p>
+                  </div>
+                  <div>
                   <div style={{ display: "flex" }}>
                     {/* 시간값 split으로 잘라서 사용 */}
                     {Number(promise.eventDateTime.split("-")[3]) < 12 ? (
@@ -133,9 +134,10 @@ const PromiseList = ({ day }) => {
                     <p style={{ marginRight: "10px" }}>
                       {promise.eventDateTime.split("-")[4]}분
                     </p>
-                    <p className="lastTime">{promise.lastTime}</p>
+                    <p className="lastTime" style={{marginRight:"10px"}}>{promise.lastTime}</p>
                   </div>
                 </div>
+                </Contents>                
               </PromiseCard>
             );
           })}
@@ -157,6 +159,7 @@ const PromiseList = ({ day }) => {
                 onClick={() => {
                   navigate(`/detailpromise/${promise.id}`);
                 }}>
+                <Contents>
                 <div style={{ display: "flex" }}>
                   <p style={{ fontSize: "15px", fontWeight: "bold" }}>
                     {promise.title}
@@ -198,9 +201,10 @@ const PromiseList = ({ day }) => {
                     <p style={{ marginRight: "10px" }}>
                       {promise.eventDateTime.split("-")[4]}분
                     </p>
-                    <p className="lastTime">종료</p>
+                    <p className="lastTime" style={{marginRight:"10px"}}>종료</p>
                   </div>
                 </div>
+                </Contents>
               </PromiseCard>
             );
           })}
@@ -216,7 +220,7 @@ const Wrap = styled.div`
   /* background-color: skyblue; */
   width: 80%;
   min-width: 360px;
-  margin: 20px auto;
+  margin: 0 auto;
 `;
 const Cards = styled.div`
   @media screen and (min-width: 769px) {
@@ -253,6 +257,10 @@ const PromiseCard = styled.div`
     margin: 0 auto;
   }
 `;
+const Contents = styled.div`
+  /* background-color: pink; */
+  margin: 0 10px;
+`
 
 const People = styled.p`
   color: #3E09D1;

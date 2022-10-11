@@ -39,7 +39,7 @@ const Option2 = ({ head, payload }) => {
   return (
     <>
       <div onClick={() => { navigate("/") }}>
-        <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#3E09D1" }} /></p>
+        <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
@@ -68,7 +68,7 @@ const Option2 = ({ head, payload }) => {
           Swal.fire({
             title: `약속을 수정하시겠습니까?`,
             showCancelButton: true,
-            confirmButtonColor: '#3E09D1',
+            confirmButtonColor: '#6B68F3',
             cancelButtonColor: 'tomato',
             confirmButtonText: '수정',
             cancelButtonText: '취소',

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
 import Week from "../components/main/calendar/Week";
 import axios from "axios";
+import WebHeader from "../components/header/WebHeader";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const MainPage = () => {
     return (
       <>
         <Wrap>
+            <WebHeader />
             <StHeaderContainer>
             <Week day={day} setDay={setDay}/>
             </StHeaderContainer>
@@ -62,9 +64,8 @@ const MainPage = () => {
 export default MainPage;
 
 const Wrap = styled.div`
-  /* background-color: whitesmoke; */
-  padding: 10% 0;
-  font-family: "NotoSansKR-Regular";
+  /* background-color: skyblue; */
+  /* padding: 20px 0; */
 
 `
 const Plus = styled.div`
@@ -94,8 +95,7 @@ const StHeaderContainer = styled.div`
   max-width: 450px;
   height: 214px;
   position: relative;
-
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
 
 
   & .topContainer {
