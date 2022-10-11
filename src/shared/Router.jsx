@@ -20,11 +20,12 @@ import DonationPage from "../pages/donation/DonationPage"
 import AddDonationPage from "../pages/donation/AddDonationPage"
 import DetailDonationPage from "../pages/donation/DetailDonationPage"
 import MonthlyPage from "../pages/MonthlyPage"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
+import Swal from "sweetalert2"
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -33,6 +34,25 @@ const Router = () => {
     useEffect(() => {
         __isToken();
     }, [])
+
+    const [listening, setListening] = useState(false);
+    const [data, setData] = useState([]);
+    const [value, setValue] = useState(null);
+
+    const [meventSource, msetEventSource] = useState(undefined);
+
+    let eventSource = undefined;
+
+    const remove = async () => {
+        const data = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/sse/delete`, {
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+            }
+        }).then((res) => {
+            console.log(res)
+        })
+    }
 
     useEffect(() => {
         let array = window.location.href.split("/");
@@ -50,11 +70,59 @@ const Router = () => {
             __isToken().then(() => {
                 dispatch(__getLogin())
                     .then((res) => {
-                        if(!res.payload.data){
+                        if (!res.payload.data) {
                             navigate("/intro");
                         }
                     });
             });
+            // 크롬 알림기능
+        console.log("매번 실행되는지");
+        console.log("listening", listening);
+        remove()
+        if (!listening) {
+            eventSource = new EventSource(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe?memberId=2`); //구독
+
+            msetEventSource(eventSource);
+
+            console.log("eventSource", eventSource);
+
+            eventSource.onopen = event => {
+                console.log("connection opened");
+            };
+
+            eventSource.onmessage = event => {
+                console.log("result", event.data);
+                setData(old => [...old, event.data]);
+                setValue(event.data);
+                if (Notification.permission !== "granted") {
+                    Notification.requestPermission().then((permission) => {
+                        if (permission === "granted") {
+                            /* 권한을 요청받고 nofi를 생성해주는 부분 */
+                            new Notification(event.data, { body: "약속을 확인해주세요." });
+                        }
+                    });
+                } else {
+                    /* 권한이 있을때 바로 noti 생성해주는 부분 */
+                    new Notification(event.data, { body: "약속을 확인해주세요." });
+                }
+                Swal.fire(event.data);
+            };
+
+            eventSource.onerror = event => {
+                console.log(event.target.readyState);
+                if (event.target.readyState === EventSource.CLOSED) {
+                    console.log("eventsource closed (" + event.target.readyState + ")");
+                }
+                eventSource.close();
+            };
+
+            setListening(true);
+        }
+
+        return () => {
+            eventSource.close();
+            console.log("eventsource closed");
+        };
         }
     }, [])
 
