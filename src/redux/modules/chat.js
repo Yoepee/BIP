@@ -13,8 +13,6 @@ export const __getChat = createAsyncThunk(
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
       })
-      if (data.data.success === false)
-        Swal.fire(data.data.data, "　", "error");
       return thunkAPI.fulfillWithValue({ data: data.data, page: payload.page });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -41,16 +39,19 @@ export const chat = createSlice({
     },
     [__getChat.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-
+      if(!action.payload.data.success){}
+      else{
       // 처음으로 데이터 값 불러올때는 배열에 추가식이 아닌 state값 수정
       if (action.payload.page === 0) {
         // 처음 불러오기때 데이터 변경
-        state.data = action.payload.data.data.reverse();
+        if(action.payload.data.data.length!==0)
+          state.data = action.payload.data.data.reverse();
       } else {
         // 이후 인피니티 스크롤 시 데이터 앞에 저장
 
         state.data.unshift(...action.payload.data.data.reverse());
       } // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+    }
     },
     [__getChat.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
