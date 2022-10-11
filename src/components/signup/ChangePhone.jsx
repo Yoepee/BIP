@@ -140,7 +140,7 @@ const ChangePhone = () => {
             localStorage.setItem("Authorization", response.headers.authorization);
             localStorage.setItem("RefreshToken", response.headers.refreshtoken);
             // 닉네임 없으면 닉네임 설정 페이지 이동
-            if (response?.data?.nickname === null) {
+            if (response?.data?.data?.nickname === null) {
               navigate("/signup/nickname")
               // 이상 없으면 메인페이지
             } else {
