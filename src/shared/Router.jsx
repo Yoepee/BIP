@@ -22,34 +22,42 @@ import DetailDonationPage from "../pages/donation/DetailDonationPage"
 import MonthlyPage from "../pages/MonthlyPage"
 import { useEffect } from "react"
 import axios from "axios"
-// import { useDispatch, useSelector } from "react-redux"
-// import { __getLogin } from "../redux/modules/login"
+import { useDispatch } from "react-redux"
+import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 
-
-
 const Router = () => {
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // let isLogin = useSelector((state) => state.login)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     useEffect(() => {
-        // dispatch(__getLogin());
         __isToken();
     }, [])
-    // useEffect(() => {
-    //     let a = window.location.href.split("/")
-    //     if (a[a.length - 1] !== "login" && a[a.length - 1] !== "signup" && a[a.length - 1] !== "intro") {
-    //         if (localStorage.getItem("Authorization") === null) {
-    //             navigate("/intro")
-    //         }
-    //         if (localStorage.getItem("RefreshToken") === null) {
-    //             navigate("/intro")
-    //         }
-    //         if (localStorage.getItem("name") === null) {
-    //             navigate("/intro")
-    //         }
-    //     }
-    // }, [])
+
+    useEffect(() => {
+        let array = window.location.href.split("/");
+        let index = array.findIndex((item) => item === "localhost:3000");
+        if (array[index + 1] !== "login" && array[index + 1] !== "signup" && array[index + 1] !== "intro") {
+            if (localStorage.getItem("Authorization") === null) {
+                navigate("/intro")
+            }
+            if (localStorage.getItem("RefreshToken") === null) {
+                navigate("/intro")
+            }
+            if (localStorage.getItem("name") === null) {
+                navigate("/intro")
+            }
+            __isToken().then(() => {
+                dispatch(__getLogin())
+                    .then((res) => {
+                        if(!res.payload.data){
+                            navigate("/intro");
+                        }
+                    });
+            });
+        }
+    }, [])
+
     const __isToken = async () => {
         await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
             headers: {
@@ -58,18 +66,18 @@ const Router = () => {
             }
         }
         ).then((res) => {
-            console.log(res)
-            if(res.data.success){
+            if (res.data.success) {
                 localStorage.setItem("Authorization", res.headers.authorization);
                 localStorage.setItem("RefreshToken", res.headers.refreshtoken);
             }
         })
     }
-    // console.log(isLogin)
+
     return (
         <Routes>
             {/* 메인페이지 */}
             <Route path="/" exact element={<MainPage />} />
+            {/* 전체달력 확인페이지 */}
             <Route path="/monthly" exact element={<MonthlyPage />} />
             {/* 시작페이지 */}
             <Route path="/intro" exact element={<IntroPage />} />
