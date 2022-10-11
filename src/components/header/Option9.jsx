@@ -69,7 +69,7 @@ const Option9 = ({ head }) => {
   return (
     <>
       <div onClick={() => { navigate("/donation") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ color: "#3E09D1" }} /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       <div style={{ marginLeft: "1%", fontWeight: "bold", fontSize: "20px" }}>
         <p style={{ marginTop: "16px" }}>{head}</p>
@@ -110,6 +110,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#3E09D1;
+  background-color:#6B68F3;
   color:white;
 }`

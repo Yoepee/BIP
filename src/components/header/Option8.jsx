@@ -39,7 +39,7 @@ const Option8 = ({ head, payload }) => {
   return (
     <>
       <div onClick={() => { navigate("/donation") }}>
-        <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#3E09D1" }} /></p>
+        <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       <div style={{ marginLeft: "1%", marginTop: "6px" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px", marginTop: "14px" }}>{head}</p>

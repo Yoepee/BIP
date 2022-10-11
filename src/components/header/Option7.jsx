@@ -117,6 +117,6 @@ const OptionMenu = styled.div`
 padding: 3px;
 cursor: pointer;
 &:hover{
-  background-color:#3E09D1;
+  background-color:#6B68F3;
   color:white;
 }`
