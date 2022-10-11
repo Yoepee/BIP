@@ -220,7 +220,7 @@ const Wrap = styled.div`
   /* background-color: skyblue; */
   width: 80%;
   min-width: 360px;
-  margin: 20px auto;
+  margin: 0 auto;
 `;
 const Cards = styled.div`
   @media screen and (min-width: 769px) {

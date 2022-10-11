@@ -95,8 +95,7 @@ const StHeaderContainer = styled.div`
   max-width: 450px;
   height: 214px;
   position: relative;
-
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
 
 
   & .topContainer {
