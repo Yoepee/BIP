@@ -75,7 +75,7 @@ const Profile = () => {
               display: "flex",
             }}>
             <p>
-              <ArrowForwardIosRoundedIcon style={{ color: "#6D09D1" }} />
+              <ArrowForwardIosRoundedIcon style={{ color: "#3E09D1" }} />
             </p>
           </div>
         </Prodiv>
@@ -120,7 +120,7 @@ const Prodiv = styled.div`
   display: flex;
   margin: 0 auto;
   width: 80%;
-  border-bottom: 1px solid #f5eafb;
+  border-bottom: 1px solid #D9DCFB;
 `;
 
 const ImgArea = styled.div`
