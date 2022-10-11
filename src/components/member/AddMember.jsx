@@ -95,7 +95,7 @@ height: 22px;
 margin-right:20px;
 align-items: center;
 justify-content: center;
-background-color:#6D09D1;
+background-color:#3E09D1;
 font-weight: bold;
 color:white;
 padding: 10px;
@@ -108,7 +108,7 @@ display:flex;
 height: 80px;
 border:none;
 border-radius: 8px;
-background-color: #F5EAFB;
+background-color: #D9DCFB;
 margin:10px
 
 `
@@ -119,7 +119,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   width: 70%;
-  border-bottom: 1px solid  #F5EAFB;
+  border-bottom: 1px solid  #D9DCFB;
   margin-bottom: 31px;
 `
 

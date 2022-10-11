@@ -10,13 +10,15 @@ import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
 import Header from ".././components/header/Header";
 import axios from "axios";
+import WebHeader from "../components/header/WebHeader";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const MonthlyPage = () => {
   const dispatch = useDispatch();
   // 약속 리스트 불러오기 데이터 값
   const [day, setDay] = useState({unit:"day",date:dayjs().format('YYYY-MM-DD-00-00-00')})
-
   const navigate = useNavigate();
+
   useEffect(()=>{
     __isToken().then(()=>{
     dispatch(__getPromise(day));
@@ -40,8 +42,10 @@ const MonthlyPage = () => {
     return (
       <>
         <Wrap>
-            <Header  head={""} option={0}/>
-            <div><Monthly setDay={setDay} day={day}/></div>
+            <WebHeader />
+            {/* <Header  head={""} option={0}/> */}
+            <BackIcon onClick={()=>{navigate('/')}}><ArrowBackIcon /></BackIcon>
+            <div style={{marginTop:"30px"}}><Monthly setDay={setDay} day={day}/></div>
             {/* 약속 리스트 불러오기 */}
             {day.unit!=="month"?
             <PromiseList day={day}/>
@@ -63,15 +67,19 @@ export default MonthlyPage;
 
 const Wrap = styled.div`
   /* background-color: whitesmoke; */
-  padding: 10% 0;
-  font-family: "NotoSansKR-Regular";
-  /* font-family: "YUniverse-B"; */
-  /* font-family: "YiSunShin-M"; */
-  /* font-family: "Hambak"; */
-  /* font-family: "GowunDodum"; */
-  /* font-family: "Mimiworld-B"; */
-  /* font-family: "Mimiworld-R"; */
+  /* padding: 10% 0; */
 `
+
+const BackIcon = styled.div`
+  /* background-color: pink; */
+  width: 30px;
+  margin: 20px 0 0 20px;
+  cursor: pointer;
+  @media screen and (min-width: 769px) {
+    display:none;
+  }  
+`
+
 const Plus = styled.div`
 position : fixed;
 bottom : 0;

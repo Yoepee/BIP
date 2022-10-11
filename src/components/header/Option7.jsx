@@ -59,7 +59,7 @@ const Option7 = ({ setType }) => {
             top: "50px", left: "5px",
             textAlign: "center",
             borderRadius: "5px",
-            border: "1px solid black"
+            border: "1px solid #292929"
           }}>
             <OptionMenu
               onClick={() => { setSort("닉네임"); setChk(!chk); }}>닉네임</OptionMenu>
@@ -89,7 +89,7 @@ const Option7 = ({ setType }) => {
             }
           })
         }}>
-        <p><SearchIcon style={{ color: "#D9DCFB" }} /></p>
+        <p><SearchIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       <div style={{ marginRight: "30px", cursor: "pointer" }}
         onClick={() => { setType("none"); }}>
@@ -105,7 +105,7 @@ export default Option7;
 const SearchInput = styled.input`
 outline: none;
 border: none;
-border-bottom: 1px solid #D9DCFB;
+border-bottom: 1px solid #6B68F3;
 padding: 5px 10px;
 margin-top: 20px;
 &::placeholder{
