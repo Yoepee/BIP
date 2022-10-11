@@ -124,7 +124,7 @@ const DetailDonation = () => {
         {donation?.data?.data?.imgUrlList?.map((x,i)=>{
         return (
           <div key={i}>
-            <img src={x}/>
+            <img src={x} style={{width:"45%"}}/>
           </div>
         )
       })}
