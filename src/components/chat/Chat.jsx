@@ -7,6 +7,7 @@ import { __getChat } from '../../redux/modules/chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // 채팅 기능 컴포넌트
 const Chat = () => {
@@ -54,13 +55,22 @@ const Chat = () => {
     })
   }
 
-
-
   // 랜더링시 이전 채팅내용 불러오는 함수 및 stomp채팅 연결
   useEffect(() => {
-    __isToken().then(() => {
-      connect();
-      dispatch(__getChat({ id, page: page.current }));
+    __isToken().then(async() => {
+      await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/events/member/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem('Authorization'),
+          RefreshToken: localStorage.getItem('RefreshToken'),
+        }
+      }).then((res)=>{
+        if(res.data.data){
+          connect();
+          dispatch(__getChat({ id, page: page.current }));
+        }else{
+          Swal.fire("채팅방 멤버가 아닙니다.","　","error")
+        }
+      })
     })
     return () =>
       __isToken().then(() => {
