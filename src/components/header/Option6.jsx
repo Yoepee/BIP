@@ -26,6 +26,18 @@ const Option6 = ({ head }) => {
     })
   }
 
+  const remove = async () => {
+    const data = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/sse/delete`, {
+        headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+        }
+    }).then((res) => {
+        console.log(res)
+    })
+}
+
+
   const logout = async () => {
     Swal.fire({
       title: `로그아웃 하시겠습니까?`,
@@ -48,6 +60,7 @@ const Option6 = ({ head }) => {
             localStorage.removeItem('RefreshToken');
             localStorage.removeItem('name');
             navigate("/intro")
+            remove();
           }
         })
       } else {
