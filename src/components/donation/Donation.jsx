@@ -70,7 +70,7 @@ const Donation = () => {
                   <p><PointIcon>P</PointIcon>{post.point}</p>
                 </div>
                 {post.firstImgUrl !== null ?
-                  <img src={post.firstImgUrl} />
+                  <img src={post.firstImgUrl} style={{ width:"50%" }} />
                   : null}
                 <div style={{ fontSize: "14px", color: "#757575" }}>{post.nickname}</div>
               </div>

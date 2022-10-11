@@ -4,6 +4,7 @@ import DaumPostcode from 'react-daum-postcode';
 import axios from "axios";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import styled from "styled-components"
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -132,7 +133,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   console.log(imgList)
   console.log(donate.imgUrlList)
   return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
+    <div style={{ width: "80%", margin: "0 auto"}}>
       {openAddr ?
         <div style={{ position: "relative", background: "gray", justifyContent: "center" }}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -185,10 +186,12 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       </div>
       <div>사진
         <input style={{ marginLeft: "10px" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
-        {imgList.map((img) => {
+      </div>
+      {imgList.map((img) => {
           return (
-            <div style={{ display: "flex" }} key={img.id}>
-              <img src={donate.imgUrlList[img.id]} />
+            <div style={{ display: "inline-block", marginTop:"10px", width:"90px", marginRight:"10px", postiion : "relative"}} key={img.id}>
+              <div style={{ display:"flex", alignItems:"start"}}>
+              <img src={donate.imgUrlList[img.id]}  style={{ width:"90px", height:"90px", objectFit: "cover"}}/>
               <button onClick={() => {
                 let count = img.id;
                 let copy = [...imgList];
@@ -204,11 +207,12 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
                 let urlList = [...donate.imgUrlList];
                 urlList.splice(img.id, 1);
                 setDonate({ ...donate, imgUrlList: [...urlList] });
-              }}>x</button>
+              }} style={{width:"18px", height:"18px", borderRadius:"50%",border:"none", backgroundColor:"#ffffff6f", position: "absolute", margin:"2px 70px", padding:"0"}}><CloseIcon style={{fontSize:"12px"}}/></button>
             </div>
+            </div>
+            
           )
         })}
-      </div>
       <div>장소</div>
       {openAddr ? null :
         roadAddress === null ?
