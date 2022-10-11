@@ -134,12 +134,13 @@ const ChangePhone = () => {
             RefreshToken: localStorage.getItem('RefreshToken'),
           }
         }).then((response) => {
+          console.log(response)
           if (response.data.success) {
             // 카카오 최초 로그인시 토큰 재발급으로 새로 저장필요
             localStorage.setItem("Authorization", response.headers.authorization);
             localStorage.setItem("RefreshToken", response.headers.refreshtoken);
             // 닉네임 없으면 닉네임 설정 페이지 이동
-            if (social?.data?.nickname === null) {
+            if (response?.data?.nickname === null) {
               navigate("/signup/nickname")
               // 이상 없으면 메인페이지
             } else {
