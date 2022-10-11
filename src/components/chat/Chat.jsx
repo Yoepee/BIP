@@ -34,6 +34,8 @@ const Chat = () => {
   let index = 0;
   // 실시간 채팅 닉네임 비교하여 출력여부 결정하는 용도
   let index2 = 0;
+  let dayIndex = 0;
+  let timeIndex = 0;
 
   const scrollRef = useRef(null); //스크롤 하단 고정
 
@@ -134,7 +136,7 @@ const Chat = () => {
       console.log(content);
       setMessages((_messages) => [
         ..._messages,
-        { message: content.message, sender: content.sender },
+        { message: content.message, sender: content.sender, sendTime:content.sendTime },
       ]);
     });
   };
@@ -205,6 +207,7 @@ const Chat = () => {
     }
   }
   console.log(messages);
+  console.log(chatList)
   return (
     <>
       {/* 인피니티 스크롤 인식 ref */}
@@ -224,9 +227,7 @@ const Chat = () => {
                     <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                       <MyChat>{chat.message}</MyChat>
                     </ChatMessage>
-
                   </div>
-
                 )
               } else {
                 index = i;
@@ -345,29 +346,31 @@ export default Chat;
 const ChatMessage = styled.div`
 background-color: white;
 `
-const MyNick = styled.p`
+const MyNick = styled.div`
 background-color: white;
 margin-right:10px;
 text-align:right;
 `
-const MyChat = styled.p`
+const MyChat = styled.div`
 background-color:#6D09D1;
 color:white;
 text-align:right;
 width : fit-content;
 padding:10px;
 border-radius:10px;
+margin:3px;
 `
 
-const NickName = styled.p`
+const NickName = styled.div`
 background-color: white;
 margin-right:10px;
 `
 
-const Chatting = styled.p`
+const Chatting = styled.div`
 background-color: #EDFFEB;
 width:fit-content;
 padding:10px;
 border-radius:10px;
 margin-left:10px;
+margin:3px;
 `

@@ -45,11 +45,11 @@ export const chat = createSlice({
       // 처음으로 데이터 값 불러올때는 배열에 추가식이 아닌 state값 수정
       if (action.payload.page === 0) {
         // 처음 불러오기때 데이터 변경
-        state.data = action.payload.data.data
+        state.data = action.payload.data.data.reverse();
       } else {
         // 이후 인피니티 스크롤 시 데이터 앞에 저장
 
-        state.data.unshift(...action.payload.data.data);
+        state.data.unshift(...action.payload.data.data.reverse());
       } // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
     },
     [__getChat.rejected]: (state, action) => {
