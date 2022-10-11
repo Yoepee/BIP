@@ -165,9 +165,9 @@ display:flex;
 justify-content:center;
 align-items:center;
 border-radius:50%;
-background-color: #A67EED;
+background-color: #6B68F3;
 width: 70px;
 height: 70px;
-color:#3E09D1;
+color:white;
 cursor:pointer;
 `
