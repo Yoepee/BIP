@@ -19,7 +19,9 @@ const AddDonationPage = () => {
     coordinate: "",
     point: 0
   }
+  const initailState2 = []
   const [donate, setDonate] = useState(initialState);
+  const [imgList, setImgList] = useState(initailState2);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -64,6 +66,7 @@ const AddDonationPage = () => {
               coordinate: response.payload.data.coordinate,
               point: response.payload.data.point,
             })
+            setImgList([...Array(response.payload.data.imgUrlList.length)].map((a,i)=>{return {id:i}}))
           });
       });
       // id값이 없으면 생성하기로 동작 초기값 : 공백
@@ -76,7 +79,7 @@ const AddDonationPage = () => {
     <>
       <Header head={"기부 추가"} option={8} payload={donate} />
 
-      <AddDonation donate={donate} setDonate={setDonate} onChangeHandler={onChangeHandler} />
+      <AddDonation donate={donate} setDonate={setDonate} onChangeHandler={onChangeHandler} imgList={imgList} setImgList={setImgList} />
     </>
   )
 }

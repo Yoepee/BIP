@@ -59,7 +59,11 @@ const AddPromisePage = () => {
               eventDateTime: dayjs(new Date(response.payload.data.eventDateTime.split("-")[0], Number(response.payload.data.eventDateTime.split("-")[1]) - 1, response.payload.data.eventDateTime.split("-")[2])).format(`YYYY-MM-DD-${response.payload.data.eventDateTime.split("-")[3]}-${response.payload.data.eventDateTime.split("-")[4]}-00`),
               point: response.payload.data.point
             });
-            setTime({ ...initialState2, hour: Number(response.payload.data.eventDateTime.split("-")[3]), min: response.payload.data.eventDateTime.split("-")[4] });
+            if(Number(response.payload.data.eventDateTime.split("-")[3])>12){
+              setTime({ ...initialState2, hour: Number(response.payload.data.eventDateTime.split("-")[3])-12, min: response.payload.data.eventDateTime.split("-")[4] });
+            }else{
+              setTime({ ...initialState2, hour: Number(response.payload.data.eventDateTime.split("-")[3]), min: response.payload.data.eventDateTime.split("-")[4] });
+            }
             // 시간값을 확인하여 오전 오후 식별
             if (Number(response.payload.data.eventDateTime.split("-")[3]) > 12) {
               setAm(false);

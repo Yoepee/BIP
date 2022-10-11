@@ -8,11 +8,11 @@ import styled from "styled-components"
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
+const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }) => {
   const { kakao } = window;
   const { id } = useParams();
-  const initailState = []
-  const [imgList, setImgList] = useState(initailState);
+  // const initailState = []
+  // const [imgList, setImgList] = useState(initailState);
   // 게시판 종류
   const [post, setPost] = useState("재능요청");
   const [chkPost, setChkPost] = useState(false);
@@ -98,7 +98,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
     //   alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.");
     //   return;
     // }
-    setImgList([...imgList, { id: donate.imgUrlList.length, name: image.name }]);
+    setImgList([...imgList, { id: donate.imgUrlList.length }]);
 
     // 폼데이터 형식 선언
     const formData = new FormData();
@@ -129,7 +129,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
       // }
     })
   }
-
+  console.log(imgList)
+  console.log(donate.imgUrlList)
   return (
     <div style={{ width: "80%", margin: "0 auto" }}>
       {openAddr ?
@@ -188,16 +189,15 @@ const AddDonation = ({ donate, setDonate, onChangeHandler }) => {
           return (
             <div style={{ display: "flex" }} key={img.id}>
               <img src={donate.imgUrlList[img.id]} />
-              <div>{img.name}</div>
               <button onClick={() => {
                 let count = img.id;
                 let copy = [...imgList];
                 copy.splice(img.id, 1);
                 let copyList = copy.map((x) => {
                   if (x.id < count) {
-                    return { id: x.id, name: x.name }
+                    return { id: x.id }
                   } else {
-                    return { id: x.id - 1, name: x.name }
+                    return { id: x.id - 1 }
                   }
                 })
                 setImgList([...copyList]);

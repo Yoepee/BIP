@@ -10,6 +10,3 @@ const Option = ({head}) =>{
 }
 
 export default Option;
-
-
-
