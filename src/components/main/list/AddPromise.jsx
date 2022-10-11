@@ -15,6 +15,7 @@ import KaKaoMap from "../../map/KakaoMap";
 import DaumPostcode from 'react-daum-postcode';
 import { useParams } from "react-router-dom";
 // 달력 날짜표시 한국어 세팅
+import 'dayjs/locale/ko'
 dayjs.locale("ko");
 
 // promise = 약속 생성시 필요 값 (출력)
