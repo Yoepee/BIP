@@ -78,12 +78,11 @@ const Option6 = ({ head }) => {
   }
   return (
     <>
-      <div style={{ marginLeft: "1%" }}>
+      <StHead style={{ marginLeft: "1%" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
-
-      </div>
+      </StHead>
       <div onClick={() => { setChk(!chk); }}
-        style={{ marginLeft: "auto", marginRight: "2%" }}>
+        style={{ margin:"10px 2% 0 auto" }}>
         <p><SettingsOutlinedIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       {chk ?
@@ -94,7 +93,7 @@ const Option6 = ({ head }) => {
           top: "50px", right: "20px",
           textAlign: "center",
           borderRadius: "5px",
-          border: "1px solid black"
+          border: "1px solid #292929"
         }}>
           <OptionMenu
             onClick={() => { __isToken().then(() => { logout(); }) }}>로그아웃</OptionMenu>
@@ -116,5 +115,11 @@ padding: 3px;
 cursor: pointer;
 &:hover{
   background-color:#6B68F3;
-  color:white;
+  color: white;
 }`
+
+const StHead = styled.div`
+  @media screen and (min-width: 769px) {
+    display:none;
+  }  
+`
