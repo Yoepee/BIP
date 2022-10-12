@@ -268,6 +268,8 @@ const Wrapper = styled.div`
 
 const BtnArea = styled.div`
   width: 80%;
+  display: flex;
+  flex-direction: column;
   margin: 20px auto;
   text-align: center;
   .default_btn{

@@ -123,9 +123,12 @@ const DetailDonation = () => {
       <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px 20px"}}>
         {donation?.data?.data?.imgUrlList?.map((x,i)=>{
         return (
-          <div key={i} style={{margin: "0 25px" }}>
-            <img src={x} style={{width:"30%"}}/>
-          </div>
+          <Wrapper>
+            <Container key={i}>
+            <img src={x}style={{objectFit: "cover"}}/>
+          </Container>
+          </Wrapper>
+          
         )
       })}
       <div style={{ border: "none",fontWeight:"bold", display:"flex", justifyContent:"space-between" }}>
@@ -193,11 +196,63 @@ const PointIcon = styled.span`
 `
 const Map = styled.div`
   /* position: absolute; */
+  margin-top: 20px;
   margin-bottom: 100px;
   
   /* background-color: #F5EAFB; */
   @media screen and (min-width: 769px) {
    margin: 110px auto;
    margin-bottom: 0;
+  }
+`
+
+const Wrapper = styled.div`
+  display: inline-flex;
+  padding: 8px;
+`
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  @media screen and (min-width: 625px){
+    width: 200px;
+  }
+  @media screen and (min-width: 700px){
+    width: 236px;
+  }
+  @media screen and (min-width: 775px){
+    width: 270px;
+  }
+  @media screen and (min-width: 850px){
+    width: 300px;
+  }
+  @media screen and (min-width: 925px){
+    width: 330px;
+  }
+  img {
+    display: flex;
+    width: 100%;
+    @media screen and (min-width: 625px){
+    
+      height: 170px;
+    }
+    @media screen and (min-width: 700px){
+    
+      height: 206px;
+    }
+    @media screen and (min-width: 775px){
+    
+      height: 242px;
+    }
+    @media screen and (min-width: 850px){
+    
+      height: 278px;
+    }
+    @media screen and (min-width: 925px){
+    
+      height: 314px;
+    }
+    border-radius: 5px;
+    object-fit: cover;
   }
 `
