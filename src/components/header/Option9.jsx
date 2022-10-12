@@ -69,10 +69,10 @@ const Option9 = ({ head }) => {
   return (
     <>
       <div onClick={() => { navigate("/donation") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3" }} /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{ cursor:"pointer" }} /></p>
       </div>
       <div style={{ marginLeft: "1%", fontWeight: "bold", fontSize: "20px" }}>
-        <p style={{ marginTop: "16px" }}>{head}</p>
+        <p style={{ marginTop: "13px" }}>{head}</p>
       </div>
       <div style={{ marginLeft: "auto", marginRight: "2%", display: "flex" }}>
         {donate?.data?.data?.nickname === localStorage.getItem("name") ?

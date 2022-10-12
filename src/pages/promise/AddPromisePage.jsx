@@ -6,6 +6,7 @@ import AddPromise from "../../components/main/list/AddPromise";
 import { __getDetailPromise } from "../../redux/modules/detailPromise";
 import dayjs from "dayjs";
 import axios from "axios";
+import WebHeader from "../../components/header/WebHeader";
 
 // 약속 추가
 const AddPromisePage = () => {
@@ -108,6 +109,7 @@ const AddPromisePage = () => {
 
   return (
     <>
+      <WebHeader />
       {/* 헤더 옵션 2 */}
       <Header head={"약속하기"} option={2} payload={promise} />
       {/* 약속 생성 수정할 수 있는 값 전달 */}

@@ -4,6 +4,8 @@ import ProEditPicture from "../../components/editprofile/ProEditPicture"
 import ProEditText from "../../components/editprofile/ProEditText"
 import Header from "../../components/header/Header";
 import axios from "axios";
+import WebHeader from "../../components/header/WebHeader";
+
 
 // 프로필 수정 페이지
 const EditProfilePage = () => {
@@ -33,6 +35,7 @@ const EditProfilePage = () => {
 
     return (
         <div>
+            <WebHeader />
             {/* 헤더 옵션 1 */}
             <Header head={"프로필 수정"} option={1} payload={set} chk={chk} image={img} />
             <div>

@@ -1,5 +1,6 @@
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
 
 //  뒤로가기 제목 
 const Option0 = ({head}) =>{
@@ -15,14 +16,20 @@ const Option0 = ({head}) =>{
         navigate(-1);
       }
     }}>
-    <p><ArrowBackIosNewRoundedIcon style={{color:'#6B68F3', marginTop:"7px"}} /></p>
+    <BackIcon><ArrowBackIosNewRoundedIcon style={{ marginTop:"7px"}} /></BackIcon>
 
     </div>
     <div style={{marginLeft:"1%", fontWeight:"bold", fontSize:"20px"}}>
-        <p>{head}</p>
-      </div>
+      <p>{head}</p>
+    </div>
     </>
   )
 }
 
 export default Option0;
+
+const BackIcon = styled.p`
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+`

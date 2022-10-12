@@ -47,7 +47,7 @@ const Donation = () => {
       <div>
         {donationList?.data?.data?.map((post) => {
           return (
-            <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "10px" }} key={post.id}
+            <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "20px" }} key={post.id}
               onClick={() => { navigate(`/detaildonation/${post.id}`) }}>
               <div>
                 <div style={{ display: "flex" }}>

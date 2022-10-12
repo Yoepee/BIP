@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { __addPromise, __editPromise } from '../../redux/modules/detailPromise';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import styled from "styled-components";
 
 // 약속생성 뒤로가기(홈) 제목 완료
 const Option2 = ({ head, payload }) => {
@@ -38,9 +39,9 @@ const Option2 = ({ head, payload }) => {
 
   return (
     <>
-      <div onClick={() => { navigate("/") }}>
-        <p style={{ marginTop: "20px" }}><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3" }} /></p>
-      </div>
+      <BackIcon onClick={() => { navigate("/") }}>
+        <p style={{ marginTop: "23px" }}><ArrowBackIosNewRoundedIcon style={{ cursor:"pointer" }} /></p>
+      </BackIcon>
       <div style={{ marginLeft: "1%" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
       </div>
@@ -95,3 +96,10 @@ const Option2 = ({ head, payload }) => {
 }
 
 export default Option2;
+
+const BackIcon = styled.div`
+  /* background-color: pink; */
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+`

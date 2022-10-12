@@ -45,7 +45,7 @@ justify-content:center;
 align-items:center;
 border: 1.5px solid #3E09D1;
 border-radius:50%;
-background-color: FAFAFA;
+background-color: #FAFAFA;
 width: 40px;
 height: 40px;
 color:white;
