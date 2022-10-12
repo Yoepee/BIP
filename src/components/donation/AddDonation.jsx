@@ -135,9 +135,9 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   return (
     <div style={{ width: "80%", margin: "0 auto"}}>
       {openAddr ?
-        <div style={{ position: "relative", background: "gray", justifyContent: "center" }}>
+        <div style={{ position: "relative", justifyContent: "center" }}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <div style={{ backgroundColor: "black", color: "white" }}
+            <div style={{ backgroundColor: "#D9DCFB", cursor:"pointer", fontWeight:"bold", borderRadius:"6px", padding:"3px" }}
               onClick={() => { setOpenAddr(false) }}>닫기</div>
           </div>
           <div>
