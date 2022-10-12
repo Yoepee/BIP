@@ -157,9 +157,9 @@ const Option3 = ({ head }) => {
 
   return (
     <>
-      <div onClick={() => { navigate("/") }}>
+      <BackIcon onClick={() => { navigate("/") }}>
         <p><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3", cursor:"pointer" }} /></p>
-      </div>
+      </BackIcon>
       <div style={{ marginLeft: "1%" }}>
         <p>{head}</p>
       </div>
@@ -231,3 +231,10 @@ cursor: pointer;
   background-color:#6B68F3;
   color:white;
 }`
+
+const BackIcon = styled.div`
+  /* background-color: pink; */
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+`
