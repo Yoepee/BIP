@@ -123,8 +123,8 @@ const DetailDonation = () => {
       <div style={{boxShadow:"rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius:"8px", padding:"10px 20px"}}>
         {donation?.data?.data?.imgUrlList?.map((x,i)=>{
         return (
-          <div key={i}>
-            <img src={x} style={{width:"45%"}}/>
+          <div key={i} style={{margin: "0 25px" }}>
+            <img src={x} style={{width:"30%"}}/>
           </div>
         )
       })}
