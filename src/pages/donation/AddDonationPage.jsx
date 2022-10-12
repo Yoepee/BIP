@@ -5,6 +5,9 @@ import AddDonation from "../../components/donation/AddDonation";
 import Header from "../../components/header/Header";
 import { __getDetailDonation } from "../../redux/modules/detailDonation";
 import axios from "axios";
+import WebHeader from "../../components/header/WebHeader";
+import styled from "styled-components"
+
 
 // 재능기부 수정 삭제 페이지
 const AddDonationPage = () => {
@@ -77,6 +80,7 @@ const AddDonationPage = () => {
 
   return (
     <>
+      <WebHeader />
       <Header head={"기부 추가"} option={8} payload={donate} />
 
       <AddDonation donate={donate} setDonate={setDonate} onChangeHandler={onChangeHandler} imgList={imgList} setImgList={setImgList} />
