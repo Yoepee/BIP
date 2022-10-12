@@ -189,10 +189,10 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       </div>
       {imgList.map((img) => {
           return (
-            <div style={{ display: "inline-block", marginTop:"10px", width:"90px", marginRight:"10px", postiion : "relative"}} key={img.id}>
+            <ImgArea key={img.id}>
               <div style={{ display:"flex", alignItems:"start"}}>
               <img src={donate.imgUrlList[img.id]}  style={{ width:"90px", height:"90px", objectFit: "cover"}}/>
-              <button onClick={() => {
+              <Btn onClick={() => {
                 let count = img.id;
                 let copy = [...imgList];
                 copy.splice(img.id, 1);
@@ -207,9 +207,9 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
                 let urlList = [...donate.imgUrlList];
                 urlList.splice(img.id, 1);
                 setDonate({ ...donate, imgUrlList: [...urlList] });
-              }} style={{width:"18px", height:"18px", borderRadius:"50%",border:"none", backgroundColor:"#ffffff6f", position: "absolute", margin:"2px 70px", padding:"0"}}><CloseIcon style={{fontSize:"12px"}}/></button>
+              }}><CloseIcon style={{fontSize:"12px"}}/></Btn>
             </div>
-            </div>
+          </ImgArea>
             
           )
         })}
@@ -244,3 +244,21 @@ const CategoryKind = styled.div`
   box-shadow:3px 3px 3px 3px #EFEEF0;
 `
 
+const ImgArea = styled.div`
+display: inline-block;
+position : relative;
+width:90px; 
+margin-top:10px; 
+margin-right: 10px;
+`
+
+const Btn = styled.button`
+width: 18px; 
+height: 18px; 
+border-radius: 50%;
+border: none;  
+background-color:#ffffff6f;
+position: absolute; 
+margin: 2px 70px;
+padding: 0;
+`

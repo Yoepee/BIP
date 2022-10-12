@@ -65,13 +65,16 @@ const Donation = () => {
                     {post.category === "etc" && <Category style={{ marginLeft: "10px" }}>기타</Category>}
                   </div>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div style={{ display: "flex", justifyContent: "space-between"}}>
                   <p style={{ fontSize: "18px", fontWeight: "bold" }}>{post.content}</p>
                   <p><PointIcon>P</PointIcon>{post.point}</p>
                 </div>
+                <div>
+
                 {post.firstImgUrl !== null ?
                   <img src={post.firstImgUrl} style={{ width:"50%" }} />
                   : null}
+                </div>
                 <div style={{ fontSize: "14px", color: "#757575" }}>{post.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
