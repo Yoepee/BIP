@@ -79,7 +79,7 @@ const Router = () => {
                         // 크롬 알림기능
         console.log("매번 실행되는지");
         console.log("listening", listening);
-        remove()
+        // remove()
         if (!listening) {
             eventSource = new EventSource(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe?memberId=2`); //구독
 
@@ -95,6 +95,10 @@ const Router = () => {
                 console.log("result", event.data);
                 setData(old => [...old, event.data]);
                 setValue(event.data);
+                // 최초 입장 메세지 출력 x
+                if(event.data === "입장"){
+                }
+                else{
                 if (Notification.permission !== "granted") {
                     Notification.requestPermission().then((permission) => {
                         if (permission === "granted") {
@@ -107,6 +111,7 @@ const Router = () => {
                     new Notification(event.data, { body: "약속을 확인해주세요." });
                 }
                 Swal.fire(event.data);
+                }
             };
 
             eventSource.onerror = event => {
