@@ -95,7 +95,7 @@ const Option6 = ({ head }) => {
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
       </StHead>
       <div onClick={() => { setChk(!chk); }}
-        style={{ margin:"10px 2% 0 auto" }}>
+        style={{ margin:"10px 5% 0 auto", cursor:"pointer" }}>
         <p><SettingsOutlinedIcon style={{ color: "#6B68F3" }} /></p>
       </div>
       {chk ?
