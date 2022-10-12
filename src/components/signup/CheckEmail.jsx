@@ -35,22 +35,22 @@ const CheckEmail = () => {
   const timer = useRef(null);
 
   // 랜더링 시 타이머 초기화
-  useEffect(()=>{
+  useEffect(() => {
     return () => clearInterval(timer.current);
-  },[])
+  }, [])
 
   // 시간이 0보다 작아지면 타이머 종료
-  useEffect(()=>{
-    if(time.current<0){
+  useEffect(() => {
+    if (time.current < 0) {
       clearInterval(timer.current);
     }
-  },[sec])
+  }, [sec])
 
   // 시간이 흐를때마다 시간출력부가 동작됨
   const countDown = () => {
-    setMin(parseInt(time.current/60));
-    setSec(time.current%60);
-    time.current-=1;
+    setMin(parseInt(time.current / 60));
+    setSec(time.current % 60);
+    time.current -= 1;
   }
 
   // 이메일 입력칸 동작
@@ -64,11 +64,11 @@ const CheckEmail = () => {
     await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
       .then((response) => {
         console.log(response)
-        if(!response.data.success){
-          Swal.fire(response.data.data,"　","error");
+        if (!response.data.success) {
+          Swal.fire(response.data.data, "　", "error");
           setVisble(false)
-        }else{
-          Swal.fire(response.data.data,"　","success");
+        } else {
+          Swal.fire(response.data.data, "　", "success");
         }
       });
   }
@@ -90,31 +90,58 @@ const CheckEmail = () => {
       });
   }
 
+  // 엔터로 인증번호 받기 & 인증번호 확인
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      // 이메일 이상여부 검사
+      if (regexEmail.test(member.value)) {
+        if (!visble) {
+          setChkBtn("인증번호 확인하기");
+          setVisble(!visble);
+          __examEmail(member);
+          timer.current = setInterval(() => {
+            countDown();
+          }, 1000);
+        } else {
+          if (regtest.test(test)) {
+            __emailLogin(member);
+          } else {
+            Swal.fire("인증번호를 확인해주세요.", "　", "error");
+          }
+        }
+        // 이메일 이상여부 검사
+      } else {
+        Swal.fire("인증번호를 확인해주세요.", "　", "error");
+      }
+    }
+  }
+
   return (
     <div>
       <Wrapper>
-      <Header option={0} />
+        <Header option={0} />
         <InfoArea>
           <p>
             이메일로 계정 찾기
           </p>
         </InfoArea>
         <form action="">
-        <input
+          <input
             id="outlined-basic"
             name="value"
             value={member.value}
             onChange={onChangeHandler}
             label="이메일"
             variant="outlined"
-            placeholder="이메일을 입력해주세요"/>
-            {/* 이메일 입력 오류시 경고문구 */}
-          {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px"}}>올바른 이메일 형식이 아닙니다</div>)}
+            onKeyPress={handleKeyPress}
+            placeholder="이메일을 입력해주세요" />
+          {/* 이메일 입력 오류시 경고문구 */}
+          {member.value === "" ? null : regexEmail.test(member.value) ? null : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다</div>)}
           {/* 인증번호 받기 클릭 후 입력창 출력 */}
-          {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
+          {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onKeyPress={handleKeyPress} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
           {/* 인증번호 오류 시 경고 문구 */}
           {test === "" ? null :
-            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin:"0 10%" }}>6자리 인증번호를 입력해주세요</div></>)}
+            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin: "0 10%" }}>6자리 인증번호를 입력해주세요</div></>)}
 
         </form>
 
@@ -123,63 +150,63 @@ const CheckEmail = () => {
 
         <BtnArea>
           {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
-          {visble && <Button variant="contained" className="default_btn" onClick={()=>{__examEmail(member);}}>인증번호 다시 받기({min}:{sec<10?<>0{sec}</>:<>{sec}</>})</Button>}
+          {visble && <Button variant="contained" className="default_btn" onClick={() => { __examEmail(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
           {/* 이메일 이상이 없을 시 버튼 색깔 변경 */}
-          {!regexEmail.test(member.value)?
-          <Button
-            variant="contained"
-            onClick={() => {
-              // 이메일 이상여부 검사
-              if (regexEmail.test(member.value)) {
-                if (!visble) {
-                  setChkBtn("인증번호 확인하기");
-                  setVisble(!visble);
-                  __examEmail(member);
-                  timer.current = setInterval(()=>{
-                    countDown();
-                  },1000);
-                } else {
-                  if (regtest.test(test)) {
-                    __emailLogin(member);
+          {!regexEmail.test(member.value) ?
+            <Button
+              variant="contained"
+              onClick={() => {
+                // 이메일 이상여부 검사
+                if (regexEmail.test(member.value)) {
+                  if (!visble) {
+                    setChkBtn("인증번호 확인하기");
+                    setVisble(!visble);
+                    __examEmail(member);
+                    timer.current = setInterval(() => {
+                      countDown();
+                    }, 1000);
                   } else {
-                    Swal.fire("인증번호를 확인해주세요.","　","error");
+                    if (regtest.test(test)) {
+                      __emailLogin(member);
+                    } else {
+                      Swal.fire("인증번호를 확인해주세요.", "　", "error");
+                    }
                   }
-                }
-              // 이메일 이상여부 검사
-              } else {
-                Swal.fire("인증번호를 확인해주세요.","　","error");
-              }
-            }}>
-            {chkBtn}
-          </Button>
-          :<Button
-          variant="contained"
-          style={{backgroundColor: "#6D09D1"}}
-          onClick={() => {
-            // 이메일 이상여부 검사
-            if (regexEmail.test(member.value)) {
-              if (!visble) {
-                setChkBtn("인증번호 확인하기");
-                setVisble(!visble);
-                __examEmail(member);
-                timer.current = setInterval(()=>{
-                  countDown();
-                },1000);
-              } else {
-                if (regtest.test(test)) {
-                  __emailLogin(member);
+                  // 이메일 이상여부 검사
                 } else {
-                  Swal.fire("인증번호를 확인해주세요.","　","error");
+                  Swal.fire("인증번호를 확인해주세요.", "　", "error");
                 }
-              }
-            // 이메일 이상여부 검사
-            } else {
-              Swal.fire("인증번호를 확인해주세요.","　","error");
-            }
-          }}>
-          {chkBtn}
-        </Button>
-        }
+              }}>
+              {chkBtn}
+            </Button>
+            : <Button
+              variant="contained"
+              style={{ backgroundColor: "#6D09D1" }}
+              onClick={() => {
+                // 이메일 이상여부 검사
+                if (regexEmail.test(member.value)) {
+                  if (!visble) {
+                    setChkBtn("인증번호 확인하기");
+                    setVisble(!visble);
+                    __examEmail(member);
+                    timer.current = setInterval(() => {
+                      countDown();
+                    }, 1000);
+                  } else {
+                    if (regtest.test(test)) {
+                      __emailLogin(member);
+                    } else {
+                      Swal.fire("인증번호를 확인해주세요.", "　", "error");
+                    }
+                  }
+                  // 이메일 이상여부 검사
+                } else {
+                  Swal.fire("인증번호를 확인해주세요.", "　", "error");
+                }
+              }}>
+              {chkBtn}
+            </Button>
+          }
         </BtnArea>
       </Wrapper>
     </div>
