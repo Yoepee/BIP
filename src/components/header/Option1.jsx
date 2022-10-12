@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { __editNickname, __editPhone, __editEmail, __editPicture } from '../../redux/modules/profile';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import styled from "styled-components";
+
 
 // 프로필 변경 뒤로가기(프로필상세) 제목 완료
 const Option1 = ({ head, payload, chk, image }) => {
@@ -90,7 +92,7 @@ const Option1 = ({ head, payload, chk, image }) => {
   return (
     <>
       <div onClick={() => { navigate(-1) }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ color: '#6B68F3', marginTop: "7px" }} /></p>
+        <p><ArrowBackIosNewRoundedIcon style={{ marginTop: "7px", cursor:"pointer" }} /></p>
       </div>
       <div style={{ marginLeft: "1%" }}>
         <p style={{ fontWeight: "bold", fontSize: "20px" }}>{head}</p>
