@@ -30,6 +30,9 @@ export const chat = createSlice({
     isLoading: false
   },
   reducers: {
+    clearChat(state, action) {
+      state.data = [];
+    }
   },
   // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
   extraReducers: {
@@ -58,8 +61,8 @@ export const chat = createSlice({
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
   },
-
-
 })
+
+export let {clearChat} = chat.actions;
 
 export default chat;
