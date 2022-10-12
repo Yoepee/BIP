@@ -154,6 +154,37 @@ const ChangePhone = () => {
     }
   }
 
+  // 엔터로 인증번호 받기 & 인증번호 확인
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      if (regexPhone.test(member.value)) {
+        if (!visble) {
+          setChkBtn("인증번호 확인하기");
+          __testPhone(member);
+          timer.current = setInterval(() => {
+            countDown();
+          }, 1000);
+          setVisble(!visble);
+        } else {
+          if (regtest.test(test)) {
+            // __chkPhone(member);
+          } else {
+            Swal.fire("인증번호를 확인해주세요", "　", "error")
+          }
+        }
+      } else {
+        Swal.fire("휴대폰 번호를 확인해주세요", "　", "error")
+      }
+    }
+  }
+
+  // 엔터로 휴대폰 번호 수정
+  const handleKeyPress2 = e => {
+    if (e.key === 'Enter') {
+    __editPhone(member);
+    }
+  }
+
   return (
     <Wrapper>
       <HeaderArea>
@@ -166,6 +197,7 @@ const ChangePhone = () => {
 
         <input variant="outlined" label="휴대폰 번호" placeholder="휴대폰 번호를 입력하세요" name="value"
           value={member.value}
+          onKeyPress={handleKeyPress}
           onChange={onChangeHandler} />
         {/* 휴대폰 값 이상 시 경고문구 출력 */}
         {member.value === "" ? null :
@@ -174,7 +206,7 @@ const ChangePhone = () => {
             : (<div style={{ color: "red", fonSize: "14px" }}>{ment}</div>)
             : (<><div style={{ color: "red", fonSize: "14px" }}>올바른 휴대폰 번호가 아닙니다</div></>)}
         {/* 인증번호 받기 시 입력창 출력 */}
-        {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
+        {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onKeyPress={handleKeyPress2} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
         {/* 인증번호 이상 시 경고문구 출력 */}
         {test === "" ? null :
           regtest.test(test) ? null : (<><div style={{ color: "red", fonSize: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}

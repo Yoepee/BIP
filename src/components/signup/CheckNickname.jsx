@@ -72,6 +72,13 @@ const CheckNickname = () => {
     })
   }
 
+  // 엔터로 닉네임 수정
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      __editNickname(member)
+    }
+  }
+
   return (
     <Wrapper>
       {/* 자체 헤더 */}
@@ -84,6 +91,7 @@ const CheckNickname = () => {
         <label style={{ fontWeight: '600', fontSize: '18px' }}>닉네임</label>
         <input label="닉네임" placeholder="닉네임을 입력하세요" name="value"
           value={member.value}
+          onKeyPress={handleKeyPress}
           onChange={onChangeHandler} />
         {/* 닉네임 값이 바르지않으면 경고문구 출력 */}
         {member.value === "" ? null : regexNickname.test(member.value) ?
@@ -126,7 +134,7 @@ const HeaderTitle = styled.span`
   font-size: 20px;
 `;
 
-const Nickname = styled.form`
+const Nickname = styled.div`
   margin: 69px auto 0 auto;
   display: flex;
   flex-direction: column;
