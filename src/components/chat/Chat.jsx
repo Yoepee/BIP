@@ -217,388 +217,447 @@ const Chat = () => {
   console.log(chatList)
   return (
     <>
-    <Wrap>
-      {/* 인피니티 스크롤 인식 ref */}
-      <div ref={ref} style={{ position: "absolute", top: "600px" }} />
+      <Wrap>
+        {/* 인피니티 스크롤 인식 ref */}
+        <div ref={ref} style={{ position: "absolute", top: "600px" }} />
 
-      <div style={{ border: "0.8px solid #494949", borderRadius:"8px", padding:"10px" }}>
-        {/* 채팅내용 불러오기 */}
-        {chatList?.data?.map((chat, i) => {
-          // null 값으로 출력나오는 내용 x
-          if (chat.message === null) {
-            return;
-          } else {
-            // 본인이 작성한 게시글일 경우
-            if (chat.sender === localStorage.getItem("name")) {
-              // 게시글 작성자가 중복일 경우 출력x
-              if (i > 0 && chatList?.data[i]?.sender === chatList?.data[index]?.sender) {
-                // 날짜가 동일할 경우 출력 x
-                if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{chat.message}</MyChat>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
-                        </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 다를 경우 출력 o
-                else {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{chat.message}</MyChat>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
-                        </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 게시글 작성자가 중복이 아닌경우
-              } else {
-                // 날짜가 중복인 경우 출력x
-                if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
-                        <MyNick>{chat.sender}</MyNick>
-                      </ChatMessage>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{chat.message}</MyChat>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
-                        </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌 경우 출력
-                else {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
-                      <ChatMessage>
-                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
-                        <MyNick>{chat.sender}</MyNick>
-                      </ChatMessage>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{chat.message}</MyChat>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
-                        </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-              }
-              // 본인이 작성자가 아닌경우
+        <div style={{ border: "0.8px solid #494949", borderRadius: "8px", padding: "10px" }}>
+          {/* 채팅내용 불러오기 */}
+          {chatList?.data?.map((chat, i) => {
+            // null 값으로 출력나오는 내용 x
+            if (chat.message === null) {
+              return;
             } else {
-              // 작성자가 중복인 경우 출력 x
-              if (i > 0 && chatList?.data[i]?.sender === chatList?.data[index]?.sender) {
-                // 날짜가 중복인 경우 출력 x
-                if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        <Chatting>{chat.message}</Chatting>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
+              // 본인이 작성한 게시글일 경우
+              if (chat.sender === localStorage.getItem("name")) {
+                // 게시글 작성자가 중복일 경우 출력x
+                if (i > 0 && chatList?.data[i]?.sender === chatList?.data[index]?.sender) {
+                  // 날짜가 동일할 경우 출력 x
+                  if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{chat.message}</MyChat>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌경우 출력o
-                else {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
-                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
-                      <ChatMessage>
-                        <Chatting>{chat.message}</Chatting>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 다를 경우 출력 o
+                  else {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        <StDate>{chat.sendTime.split("-")[0]}</StDate>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{chat.message}</MyChat>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 게시글 작성자가 중복이 아닌경우
+                } else {
+                  // 날짜가 중복인 경우 출력x
+                  if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        <ChatMessage>
+                          {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                          <MyNick>{chat.sender}</MyNick>
+                        </ChatMessage>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{chat.message}</MyChat>
+                        </ChatMessage>
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌 경우 출력
+                  else {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        <StDate>{chat.sendTime.split("-")[0]}</StDate>
+                        <ChatMessage>
+                          {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                          <MyNick>{chat.sender}</MyNick>
+                        </ChatMessage>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{chat.message}</MyChat>
+                        </ChatMessage>
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
                 }
-                // 작성자가 타인인데 중복이 아닌경우
+                // 본인이 작성자가 아닌경우
               } else {
-                // 날짜가 중복인 경우 출력 x
-                if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        <NickName>{chat.sender}</NickName>
-                      </ChatMessage>
-                      <ChatMessage>
-                        <Chatting>{chat.message}</Chatting>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
+                // 작성자가 중복인 경우 출력 x
+                if (i > 0 && chatList?.data[i]?.sender === chatList?.data[index]?.sender) {
+                  // 날짜가 중복인 경우 출력 x
+                  if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
+                    index = i;
+                    return (
+                      <div key={i}>
                         <ChatMessage>
-                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{chat.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌경우 출력 o
-                else {
-                  index = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
-                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
-                      <ChatMessage>
-                        <NickName>{chat.sender}</NickName>
-                      </ChatMessage>
-                      <ChatMessage>
-                        <Chatting>{chat.message}</Chatting>
-                      </ChatMessage>
-                      {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
-                        null :
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌경우 출력o
+                  else {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                        <StDate>{chat.sendTime.split("-")[0]}</StDate>
                         <ChatMessage>
-                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{chat.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 작성자가 타인인데 중복이 아닌경우
+                } else {
+                  // 날짜가 중복인 경우 출력 x
+                  if (chatList?.data[i]?.sendTime.split("-")[0] === chatList?.data[index]?.sendTime.split("-")[0]) {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        <ChatMessage>
+                          <NickName>{chat.sender}</NickName>
+                        </ChatMessage>
+                        <ChatMessage>
+                          <Chatting>{chat.message}</Chatting>
+                        </ChatMessage>
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌경우 출력 o
+                  else {
+                    index = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                        <StDate>{chat.sendTime.split("-")[0]}</StDate>
+                        <ChatMessage>
+                          <NickName>{chat.sender}</NickName>
+                        </ChatMessage>
+                        <ChatMessage>
+                          <Chatting>{chat.message}</Chatting>
+                        </ChatMessage>
+                        {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
+                          chatList?.data[i]?.sender === chatList?.data[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{chat.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
                 }
               }
             }
-          }
-        })}
-        {/* 실시간 채팅 불러오기 */}
-        {messages.map((msg, i) => {
-          // 알림 출력시 표시
-          if (msg.sender === "알림") {
-            return (
-              <div key={i}>
-                <StDate>{msg.sendTime.split("-")[0]}</StDate>
-                <p>{msg.message}</p>
-              </div>
-            )
-            // 불 필요 내용 출력x
-          } else if (msg.message === null) {
-            return;
-          }
-          else {
-            // 본인 채팅 출력
-            if (msg.sender === localStorage.getItem("name")) {
-              // 작성자가 본인인 경우 중복 작성시 작성자 출력 생략
-              if (i > 0 && messages[i]?.sender === messages[index2]?.sender) {
-                // 날짜가 중복인 경우 출력x
-                if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{msg.message}</MyChat>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+          })}
+          {/* 실시간 채팅 불러오기 */}
+          {messages.map((msg, i) => {
+            // 알림 출력시 표시
+            if (msg.sender === "알림") {
+              return (
+                <div key={i}>
+                  <StDate>{msg.sendTime.split("-")[0]}</StDate>
+                  <p>{msg.message}</p>
+                </div>
+              )
+              // 불 필요 내용 출력x
+            } else if (msg.message === null) {
+              return;
+            }
+            else {
+              // 본인 채팅 출력
+              if (msg.sender === localStorage.getItem("name")) {
+                // 작성자가 본인인 경우 중복 작성시 작성자 출력 생략
+                if (i > 0 && messages[i]?.sender === messages[index2]?.sender) {
+                  // 날짜가 중복인 경우 출력x
+                  if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{msg.message}</MyChat>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌경우 출력o
-                else {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
-                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{msg.message}</MyChat>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
-                        <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌경우 출력o
+                  else {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 && messages[i]?.sendTime.split("-")[0] !== chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                        {i !== 0 ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{msg.message}</MyChat>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 작성자가 본인인 경우 중복이 아닌 경우 출력o
+                } else {
+                  // 날짜가 중복인 경우 출력x
+                  if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        <ChatMessage>
+                          <MyNick>{msg.sender}</MyNick>
+                        </ChatMessage>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{msg.message}</MyChat>
+                        </ChatMessage>
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌 경우 출력o
+                  else {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 && messages[i]?.sendTime.split("-")[0] !== chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                        {i !== 0 ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                        <ChatMessage>
+                          <MyNick>{msg.sender}</MyNick>
+                        </ChatMessage>
+                        <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
+                          <MyChat>{msg.message}</MyChat>
+                        </ChatMessage>
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ? null :
+                            <ChatMessage>
+                              <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
                 }
-                // 작성자가 본인인 경우 중복이 아닌 경우 출력o
+                // 작성자가 본인이 아닌 경우
               } else {
-                // 날짜가 중복인 경우 출력x
-                if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        <MyNick>{msg.sender}</MyNick>
-                      </ChatMessage>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{msg.message}</MyChat>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
+                // 작성자가 본인인 아닌 경우 중복일 경우 출력x
+                if (i > 0 && messages[i]?.sender === messages[index2]?.sender) {
+                  // 날짜가 중복인 경우 출력x
+                  if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
+                    index2 = i;
+                    return (
+                      <div key={i}>
                         <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{msg.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌 경우 출력o
-                else {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
-                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
-                      <ChatMessage>
-                        <MyNick>{msg.sender}</MyNick>
-                      </ChatMessage>
-                      <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <MyChat>{msg.message}</MyChat>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜 중복이 아닌경우 출력o
+                  else {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 && messages[i]?.sendTime.split("-")[0] !== chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
+                        {i !== 0 ? <StTime>{msg.sendTime.split("-")[0]}</StTime> : null}
                         <ChatMessage>
-                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{msg.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-              }
-              // 작성자가 본인이 아닌 경우
-            } else {
-              // 작성자가 본인인 아닌 경우 중복일 경우 출력x
-              if (i > 0 && messages[i]?.sender === messages[index2]?.sender) {
-                // 날짜가 중복인 경우 출력x
-                if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        <Chatting>{msg.message}</Chatting>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 작성자가 본인인 아닌 경우 중복일 경우 출력o
+                } else {
+                  // 날짜가 중복인 경우 출력x
+                  if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
+                    index2 = i;
+                    return (
+                      <div key={i}>
                         <ChatMessage>
-                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          <NickName>{msg.sender}</NickName>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜 중복이 아닌경우 출력o
-                else {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0]? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
-                      <ChatMessage>
-                        <Chatting>{msg.message}</Chatting>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
                         <ChatMessage>
-                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{msg.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 작성자가 본인인 아닌 경우 중복일 경우 출력o
-              } else {
-                // 날짜가 중복인 경우 출력x
-                if (messages[i]?.sendTime.split("-")[0] === messages[index2]?.sendTime.split("-")[0]) {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      <ChatMessage>
-                        <NickName>{msg.sender}</NickName>
-                      </ChatMessage>
-                      <ChatMessage>
-                        <Chatting>{msg.message}</Chatting>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          messages[i]?.sender === messages[i + 1]?.sender ?
+                            null :
+                            <ChatMessage>
+                              <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                            </ChatMessage>
+                          : <ChatMessage>
+                            <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
+                  // 날짜가 중복이 아닌 경우 출력o
+                  else {
+                    index2 = i;
+                    return (
+                      <div key={i}>
+                        {i === 0 && messages[i]?.sendTime.split("-")[0] !== chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
+                        {i !== 0 ? <StTime>{msg.sendTime.split("-")[0]}</StTime> : null}
                         <ChatMessage>
-                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          <NickName>{msg.sender}</NickName>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
-                }
-                // 날짜가 중복이 아닌 경우 출력o
-                else {
-                  index2 = i;
-                  return (
-                    <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
-                      <ChatMessage>
-                        <NickName>{msg.sender}</NickName>
-                      </ChatMessage>
-                      <ChatMessage>
-                        <Chatting>{msg.message}</Chatting>
-                      </ChatMessage>
-                      {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
-                        null :
                         <ChatMessage>
-                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          <Chatting>{msg.message}</Chatting>
                         </ChatMessage>
-                      }
-                    </div>
-                  )
+                        {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
+                          null :
+                          <ChatMessage>
+                            <StTime>{msg.sendTime.split("-")[1]}</StTime>
+                          </ChatMessage>
+                        }
+                      </div>
+                    )
+                  }
                 }
               }
             }
-          }
-        })}
-      </div>
-      {/* 스크롤 하단 고정 */}
-      <InputArea style={{display:"flex"}}>
-        <StInput ref={inputRef}
-          onKeyPress={handleKeyPress}
-          value={ment} onChange={(e) => { setMent(e.target.value) }} />
-        <div><ChatBtn onClick={() => { submit() }}><SendIcon /></ChatBtn></div>
-      </InputArea>
-      <div ref={scrollRef} />
-    </Wrap>      
+          })}
+        </div>
+        {/* 스크롤 하단 고정 */}
+        <InputArea style={{ display: "flex" }}>
+          <StInput ref={inputRef}
+            onKeyPress={handleKeyPress}
+            value={ment} onChange={(e) => { setMent(e.target.value) }} />
+          <div><ChatBtn onClick={() => { submit() }}><SendIcon /></ChatBtn></div>
+        </InputArea>
+        <div ref={scrollRef} />
+      </Wrap>
     </>
   )
 }
