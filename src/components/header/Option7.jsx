@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { __searchFriendName, __searchFriendPhone, __getMember } from '../../redux/modules/member';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 // 친구검색(친구목록창 검색기능)
 const Option7 = ({ setType }) => {
@@ -44,14 +46,21 @@ const Option7 = ({ setType }) => {
   }
   return (
     <>
-      {!chk ?
+    <Wrap>
+    {!chk ?
         <>
-          <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▼</p>
-          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#3E09D1" }}>▼</p> */}
+          <p onClick={() => { setChk(!chk) }} 
+          style={{ cursor: "pointer", paddingTop:"5px" }}>
+            <span>{sort}</span>
+            <span style={{color:"#6B68F3", verticalAlign:"middle"}}><ExpandMoreIcon /></span></p>
+          
         </>
         : <>
-          <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer" }}>{sort} ▲</p>
-          {/* <p onClick={() => { setChk(!chk) }} style={{ cursor: "pointer", color:"#3E09D1" }}>▲</p> */}
+          <p onClick={() => { setChk(!chk) }}
+          style={{ cursor: "pointer", paddingTop:"5px" }}>
+            <span>{sort}</span>
+            <span style={{color:"#6B68F3", verticalAlign:"middle"}}><ExpandLessIcon /></span></p>
+          
           <div style={{
             width: "120px",
             position: "absolute",
@@ -71,7 +80,7 @@ const Option7 = ({ setType }) => {
       <div>
         <SearchInput placeholder='친구검색' name='value' value={value.value} onChange={onChangeHandler} />
       </div>
-      <div style={{ marginRight: "30px", cursor: "pointer" }}
+      <div style={{ marginRight: "10px", cursor: "pointer" }}
         onClick={() => {
           __isToken().then(() => {
             if (sort === "닉네임") {
@@ -89,12 +98,13 @@ const Option7 = ({ setType }) => {
             }
           })
         }}>
-        <p><SearchIcon style={{ color: "#6B68F3" }} /></p>
+        <p><SearchIcon style={{ color: "#6B68F3", margin:"5px 0 0 5px" }} /></p>
       </div>
-      <div style={{ marginRight: "30px", cursor: "pointer" }}
+      <div style={{ marginRight: "40px", cursor: "pointer", marginTop:"5px" }}
         onClick={() => { setType("none"); }}>
-        <p><CloseRoundedIcon /></p>
+        <p><CloseRoundedIcon style={{color:"#6B68F3"}}/></p>
       </div>
+    </Wrap>
     </>
   )
 }
@@ -102,14 +112,22 @@ const Option7 = ({ setType }) => {
 export default Option7;
 
 
+const Wrap = styled.div`
+  /* background-color: pink; */
+  display: flex;
+  margin-left: auto;
+`
+
 const SearchInput = styled.input`
+background-color: #ebebeb;
 outline: none;
 border: none;
-border-bottom: 1px solid #6B68F3;
-padding: 5px 10px;
+border-radius: 8px;
+/* border-bottom: 1px solid #FAFAFA; */
+padding: 4px 10px;
 margin-top: 20px;
 &::placeholder{
-  font-size: 15px;
+  font-size: 13px;
 }
 `
 
