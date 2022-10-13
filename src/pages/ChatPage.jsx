@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Chat from "../components/chat/Chat";
 import WebHeader from "../components/header/WebHeader";
 import { clearChat } from "../redux/modules/chat";
@@ -10,12 +10,13 @@ import styled from "styled-components";
 const ChatPage = () =>{ 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {id} = useParams();
   return (
     <>
     <div style={{backgroundColor:"#FAFAFA"}}>
       <WebHeader />
       {/* 헤더 후에 수정필요 */}
-      <BackIcon onClick={() => { dispatch(clearChat());navigate(-1) }}><ArrowBackIosNewRoundedIcon /></BackIcon>
+      <BackIcon onClick={() => { dispatch(clearChat()); navigate(`/detailpromise/${id}`) }}><ArrowBackIosNewRoundedIcon /></BackIcon>
       {/* 채팅내용 불러오기(채팅 작성 footer식으로 빼도 됨) */}
       <Chat/>
     </div>
