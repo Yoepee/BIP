@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import SendIcon from '@mui/icons-material/Send';
+
 
 // 채팅 기능 컴포넌트
 const Chat = () => {
@@ -215,10 +217,11 @@ const Chat = () => {
   console.log(chatList)
   return (
     <>
+    <Wrap>
       {/* 인피니티 스크롤 인식 ref */}
       <div ref={ref} style={{ position: "absolute", top: "600px" }} />
 
-      <div style={{ border: "1px solid black", margin: "2%" }}>
+      <div style={{ border: "0.8px solid #494949", borderRadius:"8px", padding:"10px" }}>
         {/* 채팅내용 불러오기 */}
         {chatList?.data?.map((chat, i) => {
           // null 값으로 출력나오는 내용 x
@@ -588,17 +591,26 @@ const Chat = () => {
         })}
       </div>
       {/* 스크롤 하단 고정 */}
-      <div>
-        <input ref={inputRef}
+      <InputArea style={{display:"flex"}}>
+        <StInput ref={inputRef}
           onKeyPress={handleKeyPress}
           value={ment} onChange={(e) => { setMent(e.target.value) }} />
-        <button onClick={() => { submit() }}>전송</button>
-      </div>
+        <div><ChatBtn onClick={() => { submit() }}><SendIcon /></ChatBtn></div>
+      </InputArea>
       <div ref={scrollRef} />
+    </Wrap>      
     </>
   )
 }
 export default Chat;
+
+const Wrap = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+`
 
 const ChatMessage = styled.div`
 background-color: white;
@@ -609,13 +621,16 @@ margin-right:10px;
 text-align:right;
 `
 const MyChat = styled.div`
-background-color:#6D09D1;
-color:white;
-text-align:right;
+/* background-color: #6b68f3; */
+background-color:#6a68f3dd;
+color: white;
+/* text-align: right; */
 width : fit-content;
-padding:10px;
-border-radius:10px;
-margin:3px;
+max-width: 58%;
+padding: 5px 10px;
+border-radius: 13px;
+margin: 3px;
+font-size: 15px;
 `
 
 const NickName = styled.div`
@@ -624,10 +639,39 @@ margin-right:10px;
 `
 
 const Chatting = styled.div`
-background-color: #EDFFEB;
+/* background-color: #EDFFEB; */
+background-color: #D9DCFB;
 width:fit-content;
-padding:10px;
-border-radius:10px;
+padding: 5px 10px;
+border-radius: 13px;
 margin-left:10px;
 margin:3px;
+font-size: 15px;
+`
+
+const StDate = styled.div`
+  background-color: orange;
+`
+const StTime = styled.div`
+  background-color: skyblue;
+`
+
+const InputArea = styled.div`
+  background-color: #FAFAFA;
+  padding-top: 10px;
+  padding-bottom: 100px;
+`
+
+const StInput = styled.input`
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #292929; 
+  outline: none;
+  padding: 6px;
+`
+const ChatBtn = styled.div`
+  padding-top: 3px;
+  padding-left: 5px;
+  color: #3E09D1;
+  cursor: pointer;
 `
