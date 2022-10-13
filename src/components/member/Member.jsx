@@ -207,30 +207,27 @@ const Wrap = styled.div`
   /* background-color: green; */
   width: 80%;
   margin: 50px auto;
-  font-family: "NotoSansKR-Regular";
 
   @media screen and (min-width: 769px) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    
+    grid-gap: 10px;    
   }
 `
 
 const Card = styled.div`
-display:flex;
-height: 80px;
-border:none;
-border-radius: 8px;
-/* background-color: #F5EAFB; */
-background-color: #FAFAFA;
-margin:10px;
-padding-right: 10px;
-position: relative;
-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  display:flex;
+  height: 80px;
+  border: none;
+  border-radius: 8px;
+  background-color: #FAFAFA;
+  margin:10px;
+  padding-right: 10px;
+  position: relative;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 
   @media screen and (min-width: 769px) {
-    width: 150px;
+    width: 160px;
     font-size: 12px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
     :hover{
@@ -257,7 +254,7 @@ const ProfileImg = styled.img`
 
 const Username = styled.div`
 font-weight:600;
-margin-Top: 14px;
+margin-Top: 15px;
 font-size: 14px;
   @media screen and (min-width: 769px) {
     font-size: 12px;
@@ -283,7 +280,7 @@ const Nickname = styled.p`
 const Credit = styled.p`  
   height: 20px;
   margin-left: auto;
-  margin-right: 2%;
+  margin-right: 5%;
   display: flex;
   span {
     width: 20px;
