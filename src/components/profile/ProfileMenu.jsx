@@ -7,7 +7,7 @@ const ProfileMenu = () =>{
     <div>
       {/* 신용구매 페이지로 이동 */}
         <div onClick={()=>{navigate("/addcredit")}}>
-            <p style={{marginLeft:"10%"}}>신용점수 구매</p>
+            <p style={{marginLeft:"10%", cursor:"pointer"}}>신용점수 구매</p>
         </div>
     </div>
   )
