@@ -133,7 +133,7 @@ const Router = () => {
         //     eventSource.close();
         //     console.log("eventsource closed");
         // };
-        // __isSSE();
+        __isSSE();
         }
     }, [])
 
@@ -159,12 +159,16 @@ const Router = () => {
                 RefreshToken: localStorage.getItem('RefreshToken'),
             }
         }).then((res)=>{
-        console.log(res)
+        // if(res.data.data){}
+
         if (!listening) {
-            eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member`,{
+            eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe`,{
                 headers: {
+                    Authorization: localStorage.getItem('Authorization'),
                     RefreshToken: localStorage.getItem('RefreshToken'),
-              }}); //구독
+              },
+              heartbeatTimeout: 1000*60*20,
+            }); //구독
 
             msetEventSource(eventSource);
 
@@ -178,10 +182,10 @@ const Router = () => {
                 console.log("result", event.data);
                 setData(old => [...old, event.data]);
                 setValue(event.data);
-                // 최초 입장 메세지 출력 x
-                if(event.data === "입장"){
-                }
-                else{
+                // // 최초 입장 메세지 출력 x
+                // if(event.data === "입장"){
+                // }
+                // else{
                 if (Notification.permission !== "granted") {
                     Notification.requestPermission().then((permission) => {
                         if (permission === "granted") {
@@ -194,12 +198,12 @@ const Router = () => {
                     new Notification(event.data, { body: "약속을 확인해주세요." });
                 }
                 Swal.fire(event.data);
-                }
+                // }
             };
 
             eventSource.onerror = event => {
                 console.log(event.target.readyState);
-                if (event.target.readyState === EventSource.CLOSED) {
+                if (event.target.readyState === EventSourcePolyfill.CLOSED) {
                     console.log("eventsource closed (" + event.target.readyState + ")");
                 }
                 eventSource.close();
