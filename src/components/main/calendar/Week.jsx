@@ -130,7 +130,7 @@ const STWeekCalendar = styled.div`
 `;
 
 const STCalendar = styled.div`
-  width: 120px;
+  width: 140px;
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -139,7 +139,7 @@ const STCalendar = styled.div`
     /* border-radius: 6px; */
     padding: 6px 10px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 12px;
     text-align: center;
     color: #3E09D1;
@@ -164,7 +164,7 @@ const STDayContainer = styled.div`
 
     & button {
       position: relative;
-      right: 20px;
+      right: 30px;
       top: 15px;
       border: none;
       width: 22px;

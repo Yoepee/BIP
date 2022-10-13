@@ -227,7 +227,7 @@ const Cards = styled.div`
     /* background-color: pink; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    grid-gap: 13px;
   }
 `;
 
@@ -251,7 +251,7 @@ const PromiseCard = styled.div`
     right: 10px;
   }
   @media screen and (min-width: 769px) {
-    width: 230px;
+    width: 280px;
     /* height: 120px; */
     font-size: 12px;
     margin: 0 auto;
