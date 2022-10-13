@@ -20,9 +20,9 @@ const Option4 = ({ head, setType, type }) => {
       </AddMemberArea>
       :null}
       {chk===4?
-      <div style={{width:"400px", height:"300px", position:"absolute", background:"white", border:"1px solid #292929", left:"30%", top:"20%", zIndex:"20"}}>
+      <ReceiveMemberArea>
         <ReceiveMember type={chktype} setChk={setChk} setChktype={setChktype} />
-      </div>
+      </ReceiveMemberArea>
       :null
       }
       {chk===0?null:
@@ -123,5 +123,17 @@ const AddMemberArea = styled.div`
   left:0;
   right:0;
   z-index:20;
+  border-radius: 8px;
+`
+
+const ReceiveMemberArea = styled.div`
+  width: 400px; 
+  height: 300px; 
+  position: absolute;
+  background: white; 
+  margin: 50px auto;
+  left: 0; 
+  right:0;
+  z-index: 20;
   border-radius: 8px;
 `

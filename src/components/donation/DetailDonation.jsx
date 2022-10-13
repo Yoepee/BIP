@@ -110,7 +110,7 @@ const DetailDonation = () => {
     })
   }
   return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
+    <Wrap style={{ width: "80%", margin: "0 auto" }}>
       <div style={{ display: "flex", marginBottom: "10px" }}>
         <Category style={{ marginRight: "10px" }}>
           {donation?.data?.data?.board === "request" && <div> 재능요청</div>}
@@ -127,7 +127,7 @@ const DetailDonation = () => {
         </Category>
       </div>
 
-      <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px" }}>
+      <Card>
         {donation?.data?.data?.imgUrlList?.map((x, i) => {
           return (
             <Wrapper>
@@ -175,11 +175,20 @@ const DetailDonation = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Card>
+    </Wrap>
   )
 }
 export default DetailDonation;
+
+const Wrap = styled.div`
+  
+  @media screen and (min-width: 769px) {
+    max-width: 1400px;
+  }
+  margin: 0 auto;
+
+`
 
 const Category = styled.div`
   border: none;
@@ -236,6 +245,12 @@ const Container = styled.div`
   @media screen and (min-width: 925px){
     width: 330px;
   }
+  @media screen and (min-width: 1007px){
+    width: 390px;
+  }
+  @media screen and (min-width: 1400px){
+    width: 435px;
+  }
   img {
     display: flex;
     width: 100%;
@@ -262,4 +277,15 @@ const Container = styled.div`
     border-radius: 5px;
     object-fit: cover;
   }
+`
+const Card = styled.div`
+  box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  @media screen and (min-width:1400px) {
+   max-width :1400px ;
+  }
+  margin: 10px auto;
+
 `
