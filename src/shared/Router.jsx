@@ -26,6 +26,7 @@ import { useDispatch } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 import Swal from "sweetalert2"
+import  {  NativeEventSource ,  EventSourcePolyfill  }  from  'event-source-polyfill' ;
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -79,9 +80,91 @@ const Router = () => {
                         // 크롬 알림기능
         console.log("매번 실행되는지");
         console.log("listening", listening);
-        // remove()
+        // // remove()
+        // if (!listening) {
+        //     eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member`,{
+        //         headers: {
+        //             RefreshToken: localStorage.getItem('RefreshToken'),
+        //       }}); //구독
+
+        //     msetEventSource(eventSource);
+
+        //     console.log("eventSource", eventSource);
+
+        //     eventSource.onopen = event => {
+        //         console.log("connection opened");
+        //     };
+
+        //     eventSource.onmessage = event => {
+        //         console.log("result", event.data);
+        //         setData(old => [...old, event.data]);
+        //         setValue(event.data);
+        //         // 최초 입장 메세지 출력 x
+        //         if(event.data === "입장"){
+        //         }
+        //         else{
+        //         if (Notification.permission !== "granted") {
+        //             Notification.requestPermission().then((permission) => {
+        //                 if (permission === "granted") {
+        //                     /* 권한을 요청받고 nofi를 생성해주는 부분 */
+        //                     new Notification(event.data, { body: "약속을 확인해주세요." });
+        //                 }
+        //             });
+        //         } else {
+        //             /* 권한이 있을때 바로 noti 생성해주는 부분 */
+        //             new Notification(event.data, { body: "약속을 확인해주세요." });
+        //         }
+        //         Swal.fire(event.data);
+        //         }
+        //     };
+
+        //     eventSource.onerror = event => {
+        //         console.log(event.target.readyState);
+        //         if (event.target.readyState === EventSource.CLOSED) {
+        //             console.log("eventsource closed (" + event.target.readyState + ")");
+        //         }
+        //         eventSource.close();
+        //     };
+
+        //     setListening(true);
+        // }
+
+        // return () => {
+        //     eventSource.close();
+        //     console.log("eventsource closed");
+        // };
+        // __isSSE();
+        }
+    }, [])
+
+    const __isToken = async () => {
+        await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+            }
+        }
+        ).then((res) => {
+            if (res.data.success) {
+                localStorage.setItem("Authorization", res.headers.authorization);
+                localStorage.setItem("RefreshToken", res.headers.refreshtoken);
+            }
+        })
+    }
+
+    const __isSSE= async () => {
+        await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/sse/getSubInfo`, {
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                RefreshToken: localStorage.getItem('RefreshToken'),
+            }
+        }).then((res)=>{
+        console.log(res)
         if (!listening) {
-            eventSource = new EventSource(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe?memberId=2`); //구독
+            eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member`,{
+                headers: {
+                    RefreshToken: localStorage.getItem('RefreshToken'),
+              }}); //구독
 
             msetEventSource(eventSource);
 
@@ -129,22 +212,8 @@ const Router = () => {
             eventSource.close();
             console.log("eventsource closed");
         };
-        }
-    }, [])
-
-    const __isToken = async () => {
-        await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
-            headers: {
-                Authorization: localStorage.getItem('Authorization'),
-                RefreshToken: localStorage.getItem('RefreshToken'),
-            }
-        }
-        ).then((res) => {
-            if (res.data.success) {
-                localStorage.setItem("Authorization", res.headers.authorization);
-                localStorage.setItem("RefreshToken", res.headers.refreshtoken);
-            }
         })
+
     }
 
     return (
