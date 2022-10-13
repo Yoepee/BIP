@@ -71,6 +71,12 @@ export const detailDonation = createSlice({
     isLoading: false
   },
   reducers: {
+    likeDonate(state, action) {
+      state.data.data = {...state.data.data, likes:state.data.data.likes+1}
+    },
+    unlikeDonate(state, action) {
+      state.data.data = {...state.data.data, likes:state.data.data.likes-1}
+    }
   },
   // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
   extraReducers: {
@@ -115,5 +121,7 @@ export const detailDonation = createSlice({
 
 
 })
+
+export let {likeDonate, unlikeDonate} = detailDonation.actions;
 
 export default detailDonation;
