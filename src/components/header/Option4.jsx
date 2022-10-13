@@ -5,9 +5,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import AddMemberPage from '../../pages/AddMemberPage';
 import ReceiveMember from '../member/ReceiveMember';
+import { useDispatch } from 'react-redux';
+import { clearSearch } from '../../redux/modules/searchMember';
 
 {/* 친구목록 제목 검색 친구추가 메뉴(친구수정(별칭), 친구삭제)) */}
 const Option4 = ({ head, setType, type }) => {
+  const dispatch = useDispatch();
   const [chk, setChk] = useState(0);
   const [chktype, setChktype] = useState("name");
   return (
@@ -23,7 +26,10 @@ const Option4 = ({ head, setType, type }) => {
       :null
       }
       {chk===0?null:
-      <ModalBack onClick={()=>{setChk(0)}}
+      <ModalBack onClick={()=>{
+        setChk(0)
+        // 검색 목록 초기화
+      dispatch(clearSearch());}}
       style={{position:"fixed", backgroundColor:"black", opacity:"0.8", zIndex:"10"}}/>}
       <div style={{ marginLeft: "1%" }}>
         {type==="none"?
