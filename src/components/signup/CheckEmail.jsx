@@ -53,6 +53,16 @@ const CheckEmail = () => {
     time.current -= 1;
   }
 
+  const reset = () => {
+    clearInterval(timer.current);
+    time.current = 180;
+    setMin(parseInt(time.current / 60));
+    setSec(time.current % 60);
+    timer.current = setInterval(() => {
+      countDown();
+    }, 1000);
+  }
+
   // 이메일 입력칸 동작
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -150,7 +160,7 @@ const CheckEmail = () => {
 
         <BtnArea>
           {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
-          {visble && <Button variant="contained" className="default_btn" onClick={() => { __examEmail(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+          {visble && <Button variant="contained" className="default_btn" onClick={() => { reset();__examEmail(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
           {/* 이메일 이상이 없을 시 버튼 색깔 변경 */}
           {!regexEmail.test(member.value) ?
             <Button
