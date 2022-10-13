@@ -184,7 +184,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
     <div style={{ display: "flex", flexDirection: "column", margin: "0 auto", width: "76%" }}>
       {/* 닉네임 수정 시에 동작하는 내용 */}
       {type === "name" ?
-        <div style={{ margin: "0 auto", width: "100%", borderBottom: "1px solid #F5EAFB" }}>
+        <div style={{ margin: "0 auto", width: "100%", borderBottom: "1px solid #D9DCFB" }}>
           <p>닉네임</p>
           <input style={{ outline: "none", border: "none" }} placeholder="닉네임"
             name="value"
@@ -194,10 +194,10 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
           {/* 닉네임 정규식 유효성 검사 */}
           {set.value === "" ? null : regexNickname.test(set.value) ?
             // 유효성 검사 통과 시 중복검사 결과 출력
-            ment === "사용 가능한 닉네임 입니다." ?
+            ment === "사용 가능한 닉네임 입니다" ?
               (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
-              : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
-            : (<div style={{ color: "red", fonSizen: "14px" }}>사용가능한 닉네임이 아닙니다.</div>)}
+              : (<div style={{ color: "red", fonSize: "14px" }}>{ment}</div>)
+            : (<div style={{ color: "red", fonSize: "14px" }}>사용가능한 닉네임이 아닙니다</div>)}
         </div>
         // 휴대폰번호 수정 시에 동작하는 내용
         : type === "call" ?
@@ -210,17 +210,17 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               onChange={(e) => { onChangeHandler(e) }} />
             {set.phonenumber === "" ? null :
               // 휴대폰 번호 유효성 검사
-              regexPhone.test(set.phonenumber) ? ment === "사용 가능한 번호 입니다." ?
+              regexPhone.test(set.phonenumber) ? ment === "사용 가능한 번호 입니다" ?
                 // 중복번호 수정 제한
                 null
-                : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
-                : (<><div style={{ color: "red", fonSizen: "14px" }}>올바른 휴대폰 번호이 아닙니다.</div></>)}
+                : (<div style={{ color: "red", fonSize: "14px" }}>{ment}</div>)
+                : (<><div style={{ color: "red", fonSize: "14px" }}>올바른 휴대폰 번호가 아닙니다</div></>)}
             <BtnArea>
               {/* 인증번호 발급 버튼 클릭시 입력창 출력 */}
               {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6} />}
               {set.authCode === "" ? null :
                 // 인증코드 형식에 어긋나면 경고문구 출력
-                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
+                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSize: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
               {/* 인증번호 발급 시 재발급 버튼 및 카운트 다운 */}
               {visible && <Button style={{ marginTop: "15px" }} variant="contained" className="default_btn" onClick={() => { __testPhone(set.phonenumber); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
               {/* 휴대폰 번호 입력에 따른 버튼 색상 변경 */}
@@ -228,7 +228,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                 regexPhone.test(set.phonenumber) ?
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "#6D09D1" }}
+                  style={{ backgroundColor: "#3E09D1" }}
                   onClick={() => {
                     if (regexPhone.test(set.phonenumber)) {
                       if (!visible) {
@@ -287,16 +287,16 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
               onChange={(e) => { onChangeHandler(e) }} />
             {/* 이메일 유효성 검사 경고문구 출력 */}
             {set.email === "" ? null : regexEmail.test(set.email) ?
-              ment === "사용 가능한 이메일 입니다." ?
+              ment === "사용 가능한 이메일 입니다" ?
                 null
                 : (<div style={{ color: "red", fonSizen: "14px" }}>{ment}</div>)
-              : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다.</div>)}
+              : (<div style={{ color: "red", fonSizen: "14px" }}>올바른 이메일 형식이 아닙니다</div>)}
             <BtnArea>
               {/* 인증코드 입력창 출력 */}
               {visible && <Input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" name="authCode" value={set.authCode} onChange={(e) => { onChangeHandler(e) }} minLength={6} maxLength={6} />}
               {/* 형식에 어긋난 인증코드 입력시 경고문구 출력 */}
               {set.authCode === "" ? null :
-                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요.</div></>)}
+                regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
               {/* 인증코드 재발급 버튼 */}
               {visible && <Button style={{ marginTop: "20px" }} variant="contained" className="default_btn" onClick={() => { __isToken().then(() => { __examEmail(set.email); }); time.current = 180; }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
               {/* 입력값에 따른 버튼 색상 변경 */}
@@ -304,7 +304,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                 regexEmail.test(set.email) ?
                 <Button
                   variant="contained"
-                  style={{ backgroundColor: "#6D09D1" }}
+                  style={{ backgroundColor: "#3E09D1" }}
                   onClick={() => {
                     if (regexEmail.test(set.email)) {
                       if (!visible) {
@@ -324,7 +324,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                         }
                       }
                     } else {
-                      Swal.fire("이메일 주소를 확인해주세요.", "　", "error")
+                      Swal.fire("이메일 주소를 확인해주세요", "　", "error")
                     }
                   }}>
                   {chkBtn}
@@ -350,7 +350,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                         }
                       }
                     } else {
-                      Swal.fire("이메일 주소를 확인해주세요.", "　", "error")
+                      Swal.fire("이메일 주소를 확인해주세요", "　", "error")
                     }
                   }}>
                   {chkBtn}
@@ -368,19 +368,19 @@ const BtnArea = styled.div`
   margin-top: 20px;
   margin-bottom: 5px;
   .default_btn{
-    background-color: #D5C2F8;
+    background-color: #D9DCFB;
     color:  white;
   }
   Button {
     width: 100%;
     color: white;
-    background-color: #D5C2F8;
+    background-color: #D9DCFB;
     margin-bottom: 10px;
 		height: 50px;
 		font-weight: 600;
 		align-items: center;
     &:hover{
-      background-color: #6D09D1;
+      background-color: #3E09D1;
       color:white;
     }
   }
@@ -390,6 +390,6 @@ const Input = styled.input`
   outline: none;
   border-radius: 8px;
   padding: 15px 0; 
-  border:2px solid #F5EAFB; 
+  border:2px solid #D9DCFB; 
   width:99.5%;
 `
