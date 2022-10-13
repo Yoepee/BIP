@@ -196,7 +196,7 @@ export const member = createSlice({
       if (action.payload.success === false) { }
       // 친구목록 검색 (받은데이터를 배열형식으로 저장 (기존에 map함수로 나와서))
       else {
-        state.data.data = [action.payload.data]
+        state.data.data = action.payload.data
       }
     },
     [__searchFriendName.rejected]: (state, action) => {
@@ -213,7 +213,7 @@ export const member = createSlice({
       if (action.payload.success === false) { }
       // 친구목록 검색 (받은데이터를 배열형식으로 저장 (기존에 map함수로 나와서))
       else {
-        state.data.data = [action.payload.data]
+        state.data.data = action.payload.data
       }
     },
     [__searchFriendPhone.rejected]: (state, action) => {
