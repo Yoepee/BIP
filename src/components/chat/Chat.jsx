@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import SendIcon from '@mui/icons-material/Send';
+
 
 // 채팅 기능 컴포넌트
 const Chat = () => {
@@ -215,10 +217,11 @@ const Chat = () => {
   console.log(chatList)
   return (
     <>
+    <Wrap>
       {/* 인피니티 스크롤 인식 ref */}
       <div ref={ref} style={{ position: "absolute", top: "600px" }} />
 
-      <div style={{ border: "1px solid black", margin: "2%" }}>
+      <div style={{ border: "0.8px solid #494949", borderRadius:"8px", padding:"10px" }}>
         {/* 채팅내용 불러오기 */}
         {chatList?.data?.map((chat, i) => {
           // null 값으로 출력나오는 내용 x
@@ -240,7 +243,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -251,14 +254,14 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                         <MyChat>{chat.message}</MyChat>
                       </ChatMessage>
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -272,7 +275,7 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       <ChatMessage>
-                        {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
                         <MyNick>{chat.sender}</MyNick>
                       </ChatMessage>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -281,7 +284,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -292,9 +295,9 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
-                        {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
                         <MyNick>{chat.sender}</MyNick>
                       </ChatMessage>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -303,7 +306,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -325,7 +328,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -336,15 +339,15 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
                         <Chatting>{chat.message}</Chatting>
                       </ChatMessage>
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -366,7 +369,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -377,8 +380,8 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
                         <NickName>{chat.sender}</NickName>
                       </ChatMessage>
@@ -388,7 +391,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -404,12 +407,12 @@ const Chat = () => {
           if (msg.sender === "알림") {
             return (
               <div key={i}>
-                <div>{msg.sendTime.split("-")[0]}</div>
+                <StDate>{msg.sendTime.split("-")[0]}</StDate>
                 <p>{msg.message}</p>
               </div>
             )
             // 불 필요 내용 출력x
-          } else if (msg.message === "") {
+          } else if (msg.message === null) {
             return;
           }
           else {
@@ -428,7 +431,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -439,15 +442,15 @@ const Chat = () => {
                   index2 = i;
                   return (
                     <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                         <MyChat>{msg.message}</MyChat>
                       </ChatMessage>
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -469,7 +472,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -480,8 +483,8 @@ const Chat = () => {
                   index2 = i;
                   return (
                     <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
                       <ChatMessage>
                         <MyNick>{msg.sender}</MyNick>
                       </ChatMessage>
@@ -491,7 +494,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -513,7 +516,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -525,14 +528,14 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0]? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
                       <ChatMessage>
                         <Chatting>{msg.message}</Chatting>
                       </ChatMessage>
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -554,7 +557,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -566,7 +569,7 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
                       <ChatMessage>
                         <NickName>{msg.sender}</NickName>
                       </ChatMessage>
@@ -576,7 +579,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -588,17 +591,26 @@ const Chat = () => {
         })}
       </div>
       {/* 스크롤 하단 고정 */}
-      <div>
-        <input ref={inputRef}
+      <InputArea style={{display:"flex"}}>
+        <StInput ref={inputRef}
           onKeyPress={handleKeyPress}
           value={ment} onChange={(e) => { setMent(e.target.value) }} />
-        <button onClick={() => { submit() }}>전송</button>
-      </div>
+        <div><ChatBtn onClick={() => { submit() }}><SendIcon /></ChatBtn></div>
+      </InputArea>
       <div ref={scrollRef} />
+    </Wrap>      
     </>
   )
 }
 export default Chat;
+
+const Wrap = styled.div`
+  background-color: white;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+`
 
 const ChatMessage = styled.div`
 background-color: white;
@@ -609,13 +621,16 @@ margin-right:10px;
 text-align:right;
 `
 const MyChat = styled.div`
-background-color:#6D09D1;
-color:white;
-text-align:right;
+/* background-color: #6b68f3; */
+background-color:#6a68f3dd;
+color: white;
+/* text-align: right; */
 width : fit-content;
-padding:10px;
-border-radius:10px;
-margin:3px;
+max-width: 58%;
+padding: 5px 10px;
+border-radius: 13px;
+margin: 3px;
+font-size: 15px;
 `
 
 const NickName = styled.div`
@@ -624,10 +639,45 @@ margin-right:10px;
 `
 
 const Chatting = styled.div`
-background-color: #EDFFEB;
+/* background-color: #EDFFEB; */
+background-color: #D9DCFB;
 width:fit-content;
-padding:10px;
-border-radius:10px;
+max-width: 58%;
+padding: 5px 10px;
+border-radius: 13px;
 margin-left:10px;
 margin:3px;
+font-size: 15px;
+`
+
+const StDate = styled.div`
+  /* background-color: orange; */
+  text-align: center;
+  color: #494949;
+`
+const StTime = styled.div`
+  /* background-color: skyblue; */
+  font-size: 13px;
+  padding: 0 5px;
+  color: #707070;
+`
+
+const InputArea = styled.div`
+  background-color: #FAFAFA;
+  padding-top: 10px;
+  padding-bottom: 100px;
+`
+
+const StInput = styled.input`
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #292929; 
+  outline: none;
+  padding: 6px;
+`
+const ChatBtn = styled.div`
+  padding-top: 3px;
+  padding-left: 5px;
+  color: #3E09D1;
+  cursor: pointer;
 `
