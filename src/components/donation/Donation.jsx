@@ -35,7 +35,7 @@ const Donation = () => {
   }, [dispatch, type]);
 
   return (
-    <div style={{ width: "88%", margin: "0 auto" }}>
+    <Wrap style={{ width: "80%", margin: "0 auto" }}>
       <div style={{ display: "flex", cursor: "pointer" }}>
         <Category
           onClick={() => { setType("all") }}>전체</Category>
@@ -47,7 +47,7 @@ const Donation = () => {
       <div>
         {donationList?.data?.data?.map((post) => {
           return (
-            <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "20px" }} key={post.id}
+            <Card key={post.id}
               onClick={() => { navigate(`/detaildonation/${post.id}`) }}>
               <div>
                 <div style={{ display: "flex" }}>
@@ -69,10 +69,10 @@ const Donation = () => {
                   <p style={{ fontSize: "18px", fontWeight: "bold" }}>{post.content}</p>
                   <p><PointIcon>P</PointIcon>{post.point}</p>
                 </div>
-                <div>
+                <div style={{display:"flex", flexDirection:"column", alignItems:"center",marginBottom:"10px" }}>
 
                 {post.firstImgUrl !== null ?
-                  <img src={post.firstImgUrl} style={{ width:"50%" }} />
+                  <img src={post.firstImgUrl} style={{ width:"100%" }} />
                   : null}
                 </div>
                 <div style={{ fontSize: "14px", color: "#757575" }}>{post.nickname}</div>
@@ -82,16 +82,24 @@ const Donation = () => {
                 <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub" }} />{post.likes}</div>
                 <div style={{ marginLeft: "auto", fontSize: "14px", color: "#757575" }}>{post.timePast}</div>
               </div>
-            </div>
+            </Card>
           )
         })}
       </div>
-    </div>
+    </Wrap>
   )
 }
 export default Donation;
 
 
+const Wrap = styled.div`
+  
+  @media screen and (min-width: 769px) {
+    max-width: 769px;
+  }
+  margin: 0 auto;
+
+`
 const Category = styled.div`
   padding: 5px;
   margin-bottom: 10px;
@@ -111,4 +119,15 @@ const PointIcon = styled.span`
   color: white;
   font-weight: bold;
   
+`
+const Card = styled.div`
+  box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  @media screen and (min-width:769px) {
+   max-width :769px ;
+  }
+  margin: 10px auto;
+
 `

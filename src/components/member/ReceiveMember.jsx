@@ -90,7 +90,10 @@ const ReceiveMember = ({ type, setChk }) => {
           )
         })
         // 요청 목록이 없으면 문구 출력
-        : <p>친구요청 목록이 없습니다.</p>
+        : <div style={{display:"flex", margin:"0 auto", width:"90%"}}>
+            <p>친구요청 목록이 없습니다.</p>
+          </div> 
+          
       }
     </>
   )
