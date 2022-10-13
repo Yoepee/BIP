@@ -44,6 +44,27 @@ const Option7 = ({ setType }) => {
   const searchMemberPhone = (member) => {
     dispatch(__searchFriendPhone(member));
   }
+
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      __isToken().then(() => {
+        if (sort === "닉네임") {
+          if (value.value === "") {
+            dispatch(__getMember());
+          } else {
+            searchMemberName(value.value);
+          }
+        } else {
+          if (value.value === "") {
+            dispatch(__getMember());
+          } else {
+            searchMemberPhone(value.value);
+          }
+        }
+      })
+    }
+  }
+
   return (
     <>
     <Wrap>
@@ -78,7 +99,7 @@ const Option7 = ({ setType }) => {
         </>
       }
       <div>
-        <SearchInput placeholder='친구검색' name='value' value={value.value} onChange={onChangeHandler} />
+        <SearchInput placeholder='친구검색' name='value' value={value.value} onChange={onChangeHandler}  onKeyPress={handleKeyPress}/>
       </div>
       <div style={{ marginRight: "10px", cursor: "pointer" }}
         onClick={() => {
@@ -91,9 +112,9 @@ const Option7 = ({ setType }) => {
               }
             } else {
               if (value.value === "") {
-                searchMemberPhone(value.value);
+                dispatch(__getMember());
               } else {
-                searchMemberName(value.value);
+                searchMemberPhone(value.value);
               }
             }
           })
