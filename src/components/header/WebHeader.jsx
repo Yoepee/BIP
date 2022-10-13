@@ -26,7 +26,8 @@ const StWebHeader = styled.div`
     /* background-color: pink; */
     width: 420px;
     display: flex;
-    margin: 20px 20px;
+    /* margin: 20px 20px; */
+    padding: 20px 20px;
     font-size: 16px;
     font-weight: bold;
     div {
