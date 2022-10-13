@@ -243,7 +243,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -254,14 +254,14 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                         <MyChat>{chat.message}</MyChat>
                       </ChatMessage>
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -275,7 +275,7 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       <ChatMessage>
-                        {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
                         <MyNick>{chat.sender}</MyNick>
                       </ChatMessage>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -284,7 +284,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -295,9 +295,9 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
-                        {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
+                        {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
                         <MyNick>{chat.sender}</MyNick>
                       </ChatMessage>
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -306,7 +306,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -328,7 +328,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -339,15 +339,15 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
                         <Chatting>{chat.message}</Chatting>
                       </ChatMessage>
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -369,7 +369,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -380,8 +380,8 @@ const Chat = () => {
                   index = i;
                   return (
                     <div key={i}>
-                      {i === 0 ? <div>{chat.sendTime.split("-")[0]}</div> : null}
-                      <div>{chat.sendTime.split("-")[0]}</div>
+                      {i === 0 ? <StDate>{chat.sendTime.split("-")[0]}</StDate> : null}
+                      <StDate>{chat.sendTime.split("-")[0]}</StDate>
                       <ChatMessage>
                         <NickName>{chat.sender}</NickName>
                       </ChatMessage>
@@ -391,7 +391,7 @@ const Chat = () => {
                       {chatList?.data[i]?.sendTime === chatList?.data[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{chat.sendTime.split("-")[1]}</div>
+                          <StTime>{chat.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -407,12 +407,12 @@ const Chat = () => {
           if (msg.sender === "알림") {
             return (
               <div key={i}>
-                <div>{msg.sendTime.split("-")[0]}</div>
+                <StDate>{msg.sendTime.split("-")[0]}</StDate>
                 <p>{msg.message}</p>
               </div>
             )
             // 불 필요 내용 출력x
-          } else if (msg.message === "") {
+          } else if (msg.message === null) {
             return;
           }
           else {
@@ -431,7 +431,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -442,15 +442,15 @@ const Chat = () => {
                   index2 = i;
                   return (
                     <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
                       <ChatMessage style={{ display: "flex", justifyContent: "flex-end" }}>
                         <MyChat>{msg.message}</MyChat>
                       </ChatMessage>
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -472,7 +472,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -483,8 +483,8 @@ const Chat = () => {
                   index2 = i;
                   return (
                     <div key={i}>
-                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <StDate>{msg.sendTime.split("-")[0]}</StDate> : null}
+                      {i!==0?<StDate>{msg.sendTime.split("-")[0]}</StDate>:null}
                       <ChatMessage>
                         <MyNick>{msg.sender}</MyNick>
                       </ChatMessage>
@@ -494,7 +494,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</div>
+                          <StTime style={{ display: "flex", justifyContent: "flex-end" }}>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -516,7 +516,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -528,14 +528,14 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0]? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
                       <ChatMessage>
                         <Chatting>{msg.message}</Chatting>
                       </ChatMessage>
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -557,7 +557,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -569,7 +569,7 @@ const Chat = () => {
                   return (
                     <div key={i}>
                       {i === 0 && messages[i]?.sendTime.split("-")[0]!==chatList?.data[index]?.sendTime.split("-")[0] ? <div>{msg.sendTime.split("-")[0]}</div> : null}
-                      {i!==0?<div>{msg.sendTime.split("-")[0]}</div>:null}
+                      {i!==0?<StTime>{msg.sendTime.split("-")[0]}</StTime>:null}
                       <ChatMessage>
                         <NickName>{msg.sender}</NickName>
                       </ChatMessage>
@@ -579,7 +579,7 @@ const Chat = () => {
                       {messages[i]?.sendTime === messages[i + 1]?.sendTime ?
                         null :
                         <ChatMessage>
-                          <div>{msg.sendTime.split("-")[1]}</div>
+                          <StTime>{msg.sendTime.split("-")[1]}</StTime>
                         </ChatMessage>
                       }
                     </div>
@@ -650,10 +650,15 @@ font-size: 15px;
 `
 
 const StDate = styled.div`
-  background-color: orange;
+  /* background-color: orange; */
+  text-align: center;
+  color: #494949;
 `
 const StTime = styled.div`
-  background-color: skyblue;
+  /* background-color: skyblue; */
+  font-size: 13px;
+  padding: 0 5px;
+  color: #707070;
 `
 
 const InputArea = styled.div`
