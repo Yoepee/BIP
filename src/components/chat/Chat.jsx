@@ -642,6 +642,7 @@ const Chatting = styled.div`
 /* background-color: #EDFFEB; */
 background-color: #D9DCFB;
 width:fit-content;
+max-width: 58%;
 padding: 5px 10px;
 border-radius: 13px;
 margin-left:10px;
