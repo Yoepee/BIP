@@ -672,18 +672,15 @@ const Wrap = styled.div`
 `
 
 const ChatMessage = styled.div`
-background-color: white;
+
 `
 const MyNick = styled.div`
-background-color: white;
-margin-right:10px;
+margin-right:8px;
 text-align:right;
 `
 const MyChat = styled.div`
-/* background-color: #6b68f3; */
 background-color:#6a68f3dd;
 color: white;
-/* text-align: right; */
 width : fit-content;
 max-width: 58%;
 padding: 5px 10px;
@@ -693,12 +690,10 @@ font-size: 15px;
 `
 
 const NickName = styled.div`
-background-color: white;
-margin-right:10px;
+margin-left: 8px;
 `
 
 const Chatting = styled.div`
-/* background-color: #EDFFEB; */
 background-color: #D9DCFB;
 width:fit-content;
 max-width: 58%;
