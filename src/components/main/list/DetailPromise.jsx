@@ -217,6 +217,7 @@ const People = styled.div`
   width: 100%;
   font-weight: bold;
   font-size: 15px;
+  flex-wrap: wrap;
   /* margin: 10% 15%; */
   span {
     /* margin-right: 2%; */

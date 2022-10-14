@@ -39,7 +39,7 @@ const CheckIn = () => {
       {/* 클릭시 체크인 함수 동작 */}
       <CheckInBtn onClick={() => { __isToken().then(() => {dispatch(__CheckIn(id));}) }}>출석하기</CheckInBtn>
       {/* 체크인 멤버리스트 출력 */}
-      <div style={{ display: "flex", backgroundColor: "#FAFAFA", borderRadius: "8px", fontSize: "0", minWidth: "380px" }}>
+      <MemberList>
         {checkList?.data?.data?.map((member) => {
           // 결과값이 ontime이면 정상 표시
           if (member.attendance === "ONTIME") {
@@ -77,7 +77,7 @@ const CheckIn = () => {
             }
           }
         })}
-      </div>
+      </MemberList>
     </>
   )
 }
@@ -106,13 +106,21 @@ const CheckInBtn = styled.div`
     top:2px;
   }
 `
+const MemberList = styled.div`
+  /* background-color: pink; */
+  display: flex;
+  border-radius: 8px;
+  min-width: 380px;
+  width: 100%;
+  flex-wrap: wrap;
+`
 
 const OntimeCard = styled.div`
 background-color: #3E09D1;
 color: white;
 border-radius: 25px;
 line-height: 18px;
-margin : 10px;
+margin : 5px;
 padding : 6px 10px;
 font-weight: bold;
 font-size: 14px;
@@ -123,7 +131,7 @@ background-color: tomato;
 color: white;
 border-radius: 25px;
 line-height: 18px;
-margin : 10px;
+margin : 5px;
 padding : 6px 10px;
 font-weight: bold;
 font-size: 14px;
@@ -135,7 +143,7 @@ color:#D9D9D9;
 border: 2px solid #D9D9D9;
 border-radius: 25px;
 line-height: 20px;
-margin : 10px;
+margin : 5px;
 padding : 2px 8px;
 font-weight: bold;
 font-size: 14px;
