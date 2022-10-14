@@ -82,7 +82,7 @@ const Option4 = ({ head, setType, type }) => {
               top: "50px", right: "20px",
               textAlign: "center",
               borderRadius: "5px",
-              border: "1px solid black",
+              border: "1px solid #292929",
               zIndex:"10"
             }}>
               <OptionMenu 
