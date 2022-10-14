@@ -72,7 +72,7 @@ const Donation = () => {
                 <div style={{display:"flex", flexDirection:"column", alignItems:"center",marginBottom:"10px" }}>
 
                 {post.firstImgUrl !== null ?
-                  <img src={post.firstImgUrl} style={{ width:"100%" }} />
+                  <img src={post.firstImgUrl} style={{ width:"100%", borderRadius:"8px" }} />
                   : null}
                 </div>
                 <div style={{ fontSize: "14px", color: "#757575" }}>{post.nickname}</div>
