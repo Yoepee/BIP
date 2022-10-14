@@ -35,7 +35,7 @@ const CommentFooter = () =>{
   }
 
   return (
-    <div style={{display:"flex", marginTop:"10px"}}>
+    <CommentWrap>
       <div style={{width:"93%", backgroundColor:"#e9e9e9", borderRadius:"20px", height:"40px"}}>
           <CommentInput  onKeyPress={handleKeyPress} placeholder="댓글 작성" name="content" value={comment.content} onChange={onChangeHandler}/>
       </div>
@@ -44,12 +44,18 @@ const CommentFooter = () =>{
       onClick={()=>{
         AddComment()
       }}>작성</CommentBtn>
-    </div>
+    </CommentWrap>
   )
 }
 
 export default CommentFooter;
-
+const CommentWrap = styled.div`
+  display: flex;
+  margin: 5px auto;
+  @media screen and (min-width: 769px) {
+    max-width: 1400px;
+  }
+`
 const CommentInput = styled.input`
   width:80%; 
   height: 35px;

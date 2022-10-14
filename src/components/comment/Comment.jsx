@@ -163,7 +163,7 @@ const Comment = () => {
 
   return (
     <>
-      <div style={{ width: "80%", margin: "10px auto" }}>
+      <CommentWrap>
         댓글 목록
         <CommentFooter />
         {commentList?.data?.data?.map((comment) => {
@@ -220,12 +220,20 @@ const Comment = () => {
             )
           }
         })}
-      </div>
+      </CommentWrap>
     </>
   )
 }
 
 export default Comment;
+
+const CommentWrap = styled.div`
+    @media screen and (min-width: 769px) {
+    max-width: 1400px;
+  }
+
+  margin: 10px auto;
+`
 
 const EditInput = styled.input`
   width: 90%; 
@@ -241,7 +249,7 @@ const EditInput = styled.input`
 const CommentCard = styled.div`
   display: flex; 
   flex-direction: column;
-  width: 100%; 
+  width: 100%;
   margin: 10px auto;
   padding:10px 5px; 
   border: none; 
