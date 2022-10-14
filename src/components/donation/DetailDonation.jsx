@@ -129,14 +129,35 @@ const DetailDonation = () => {
 
       <Card>
         {donation?.data?.data?.imgUrlList?.map((x, i) => {
-          return (
-            <Wrapper>
-              <Container key={i}>
-                <img src={x} style={{ objectFit: "cover" }} />
-              </Container>
-            </Wrapper>
+           if(donation.data.data.imgUrlList.length===3){
+                return (<Wrapper key={i}>
+                          <Container >
+                            <img src={x} style={{ objectFit: "cover" }} />
+                          </Container>
+                        </Wrapper>)
+              }else if (donation.data.data.imgUrlList.length===4){
+                  return(<Wrapper key = {i}>
+                          <Container2>
+                            <img src ={x} style={{ objectFit:"cover"}}/>
+                          </Container2>
+                         </Wrapper>)
+              }else if(donation.data.data.imgUrlList.length===2){
+                  return(<Wrapper key = {i}>
+                    <Container3>
+                      <img src ={x} style={{ objectFit:"cover"}}/>
+                    </Container3>
+                  </Wrapper>)
+              }else{
+                  return(<Wrapper key = {i}>
+                    <Container4>
+                      <img src ={x} style={{ objectFit:"cover"}}/>
+                    </Container4>
+                  </Wrapper>)
+              }
+           
+           
 
-          )
+          
         })}
         <div style={{ border: "none", fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
           <p>{donation?.data?.data?.content}</p>
@@ -231,6 +252,69 @@ const Container = styled.div`
   align-items: center;
   box-sizing: border-box;
   @media screen and (min-width: 625px){
+    width: 130px;
+  }
+  @media screen and (min-width: 700px){
+    width: 152px;
+  }
+  @media screen and (min-width: 775px){
+    width: 172px;
+  }
+  @media screen and (min-width: 850px){
+    width: 192px;
+  }
+  @media screen and (min-width: 925px){
+    width: 212px;
+  }
+  @media screen and (min-width: 1007px){
+    width: 234px;
+  }
+  @media screen and (min-width: 1400px){
+    width: 338px;
+  }
+  @media screen and (min-width: 1900px){
+    width: 436px;
+  }
+  img {
+    display: flex;
+    width: 100%;
+    @media screen and (min-width: 625px){
+    
+      height: 200px;
+    }
+    @media screen and (min-width: 700px){
+    
+      height: 250px;
+    }
+    @media screen and (min-width: 775px){
+    
+      height: 300px;
+    }
+    @media screen and (min-width: 850px){
+    
+      height: 320px;
+    }
+    @media screen and (min-width: 925px){
+    
+      height: 350px;
+    }
+    @media screen and (min-width: 1400px){
+    
+      height: 400px;
+    }
+    @media screen and (min-width: 925px){
+    
+      height: 350px;
+    }
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  `
+const Container2 = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  @media screen and (min-width: 625px){
     width: 200px;
   }
   @media screen and (min-width: 700px){
@@ -240,16 +324,19 @@ const Container = styled.div`
     width: 270px;
   }
   @media screen and (min-width: 850px){
-    width: 300px;
+    width: 305px;
   }
   @media screen and (min-width: 925px){
     width: 330px;
   }
   @media screen and (min-width: 1007px){
-    width: 390px;
+    width: 400px;
   }
   @media screen and (min-width: 1400px){
-    width: 435px;
+    width: 516px;
+  }
+  @media screen and (min-width: 1900px){
+    width: 660px;
   }
   img {
     display: flex;
@@ -272,8 +359,123 @@ const Container = styled.div`
     }
     @media screen and (min-width: 925px){
     
-      height: 314px;
+      height: 320px;
     }
+    @media screen and (min-width: 1004px){
+    
+      height: 350px;
+    }
+    @media screen and (min-width: 1400px){
+    
+      height: 350px;
+    }
+    @media screen and (min-width: 1900px){
+    
+      height: 400px;
+    }
+    border-radius: 5px;
+    object-fit: cover;
+  }
+`
+const Container3 = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  @media screen and (min-width: 625px){
+    width: 200px;
+  }
+  @media screen and (min-width: 700px){
+    width: 236px;
+  }
+  @media screen and (min-width: 775px){
+    width: 270px;
+  }
+  @media screen and (min-width: 850px){
+    width: 305px;
+  }
+  @media screen and (min-width: 925px){
+    width: 330px;
+  }
+  @media screen and (min-width: 1007px){
+    width: 400px;
+  }
+  @media screen and (min-width: 1400px){
+    width: 516px;
+  }
+  @media screen and (min-width: 1900px){
+    width: 660px;
+  }
+  img {
+    display: flex;
+    width: 100%;
+    @media screen and (min-width: 625px){
+    
+      height: 170px;
+    }
+    @media screen and (min-width: 700px){
+    
+      height: 206px;
+    }
+    @media screen and (min-width: 775px){
+    
+      height: 242px;
+    }
+    @media screen and (min-width: 850px){
+    
+      height: 278px;
+    }
+    @media screen and (min-width: 925px){
+    
+      height: 320px;
+    }
+    @media screen and (min-width: 1004px){
+    
+      height: 350px;
+    }
+    @media screen and (min-width: 1400px){
+    
+      height: 350px;
+    }
+    @media screen and (min-width: 1900px){
+    
+      height: 400px;
+    }
+    border-radius: 5px;
+    object-fit: cover;
+  }
+`
+const Container4 = styled.div`
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  @media screen and (min-width: 625px){
+    width: 430px;
+  }
+  @media screen and (min-width: 700px){
+    width: 490px;
+  }
+  @media screen and (min-width: 775px){
+    width: 545px;
+  }
+  @media screen and (min-width: 850px){
+    width: 610px;
+  }
+  @media screen and (min-width: 925px){
+    width: 670px;
+  }
+  @media screen and (min-width: 1007px){
+    width: 735px;
+  }
+  @media screen and (min-width: 1400px){
+    width: 1050px;
+  }
+  @media screen and (min-width: 1900px){
+    width: 1350px;
+  }
+  img {
+    display: flex;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     object-fit: cover;
   }
