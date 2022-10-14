@@ -99,6 +99,7 @@ export default AddCredit;
 const Wrap = styled.div`
   /* background-color: pink; */
   width: 80%;
+  max-width: 1000px;
   margin: 30px auto;
 `
 
