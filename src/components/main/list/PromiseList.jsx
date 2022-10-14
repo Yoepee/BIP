@@ -220,14 +220,15 @@ const Wrap = styled.div`
   /* background-color: skyblue; */
   width: 80%;
   min-width: 360px;
+  max-width: 1200px;
   margin: 0 auto;
 `;
 const Cards = styled.div`
   @media screen and (min-width: 769px) {
     /* background-color: pink; */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 13px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 14px;
   }
 `;
 
@@ -242,10 +243,7 @@ const PromiseCard = styled.div`
   border-radius: 4px;
   font-size: 13px;
   position: relative;
-  div {
-    /* background-color: yellow; */
-    /* height: 30px; */
-  }
+
   .lastTime {
     position: absolute;
     right: 10px;

@@ -81,7 +81,8 @@ const MyHistory = () => {
 
   console.log(list);
   return (
-    <div>
+    <>
+    <Cards>
       {list?.data?.data.map((item) => {
         if (type === "promise") {
           return (
@@ -210,11 +211,26 @@ const MyHistory = () => {
           )
         }
       })}
-    </div>
+    </Cards>
+    </>    
   )
 }
 
 export default MyHistory;
+
+const Cards = styled.div`
+  width: 80%;
+  min-width: 360px;
+  max-width: 1000px;
+  margin: 30px auto;
+
+  @media screen and (min-width: 769px) {
+    /* background-color: pink; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 14px;
+  }
+`;
 
 const Category = styled.div`
   padding: 5px;
@@ -236,10 +252,11 @@ const PointIcon = styled.span`
   font-weight: bold;
   
 `
+
+
 const PromiseCard = styled.div`
   /* min-width: 350px; */
   height: 100%;
-  /* background-color: #edffeb; */
   background-color: #FAFAFA;
   /* border: 1px solid #F0F0F0; */
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
@@ -248,17 +265,13 @@ const PromiseCard = styled.div`
   border-radius: 4px;
   font-size: 13px;
   position: relative;
-  div {
-    /* background-color: yellow; */
-    /* height: 30px; */
-  }
+  
   .lastTime {
     position: absolute;
     right: 10px;
   }
   @media screen and (min-width: 769px) {
-    background-color: #edffeb;
-    width: 230px;
+    width: 220px;
     /* height: 120px; */
     font-size: 12px;
     margin: 0 auto;
