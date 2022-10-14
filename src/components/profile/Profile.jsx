@@ -39,7 +39,7 @@ const Profile = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <Wrap>
       <div>
         {/* 프로필 수정연결된 상세페이지 이동 */}
         <Prodiv
@@ -62,9 +62,9 @@ const Profile = () => {
             {profile?.data?.data?.email ? (
               <p>{profile?.data?.data?.email}</p>
             ) : (
-              <p>
+              <p style={{paddingBottom:"20px"}}>
                 이메일 정보를 입력해야 <br />
-                휴대폰 분실 시 접속할 수 있습니다.
+                휴대폰 분실 시 접속할 수 있습니다
               </p>
             )}
           </div>
@@ -75,7 +75,7 @@ const Profile = () => {
               display: "flex",
             }}>
             <p>
-              <ArrowForwardIosRoundedIcon style={{ color: "#3E09D1" }} />
+              <ArrowForwardIosRoundedIcon style={{ color: "#3E09D1", cursor:"pointer" }} />
             </p>
           </div>
         </Prodiv>
@@ -84,51 +84,62 @@ const Profile = () => {
             <Btn onClick={() => { navigate("/profile/history/like") }}>
               <label>
                 <IconBtn><FavoriteIcon /></IconBtn>
-                <p>관심목록</p>
+                <p style={{textAlign:"center", fontSize:"14px"}}>관심목록</p>
               </label>
             </Btn>
             <Btn onClick={() => { navigate("/profile/history/promise") }}>
               <label>
                 <IconBtn><ReceiptIcon /></IconBtn>
-                <p>약속내역</p>
+                <p style={{textAlign:"center", fontSize:"14px"}}>약속내역</p>
               </label>
             </Btn>
             <Btn onClick={() => { navigate("/profile/history/write") }}>
               <label>
                 <IconBtn><VolunteerActivismIcon /></IconBtn>
-                <p>작성목록</p>
+                <p style={{textAlign:"center", fontSize:"14px"}}>작성목록</p>
               </label>
             </Btn>
           </BtnSet>
         </Prodiv>
-        <Prodiv style={{ flexDirection: "column" }}>
-          <p>포인트 : {profile?.data?.data?.point}</p>
-          <p>신용 점수 : {profile?.data?.data?.creditScore}</p>
+        <Prodiv style={{ flexDirection: "column", paddingLeft:"10px", paddingRight:"10px" }}>
+          <p style={{paddingBottom:"10px"}}>포인트 : {profile?.data?.data?.point}</p>
+          <div style={{display:"flex", justifyContent:"space-between"}}>
+            <p>신용점수 : {profile?.data?.data?.creditScore}</p>
+            {/* 신용구매 페이지로 이동 */}
+            <div onClick={()=>{navigate("/addcredit")}}>
+              <AddCredit>신용점수 구매</AddCredit>
+            </div>
+          </div>
           <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
         </Prodiv>
       </div>
-    </div>
+    </Wrap>
   );
 };
 
 export default Profile;
 
-
+const Wrap = styled.div`
+  /* background-color: skyblue; */
+  width: 80%;
+  max-width: 1000px;
+  margin: 50px auto;
+`
 
 
 const Prodiv = styled.div`
+  /* background-color: pink; */
   display: flex;
-  margin: 0 auto;
-  width: 80%;
   border-bottom: 1px solid #D9DCFB;
+  padding: 10px 0;
 `;
 
 const ImgArea = styled.div`
-    width:80px; 
-    height:80px; 
-    border-radius:100%; 
-    overflow:hidden;
-    margin: 20px 10px 20px 0;
+  width:80px; 
+  height:80px; 
+  border-radius:100%; 
+  overflow:hidden;
+  margin: 20px 10px 20px 10px;
 
 `
 
@@ -147,27 +158,53 @@ const Img = styled.img`
 `;
 
 const BtnSet = styled.div`
-display: grid;
-align-items: center;
-width:100%;
-grid-template-columns: repeat(3, 1fr);
-place-content:center;
-margin-top: 10px;
+  display: grid;
+  align-items: center;
+  width:100%;
+  grid-template-columns: repeat(3, 1fr);
+  place-content:center;
+  margin-top: 30px;
+  margin-bottom: 10px;
 `
+
 const Btn = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 `
 
 const IconBtn = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-border-radius:50%;
-background-color: #6B68F3;
-width: 70px;
-height: 70px;
-color:white;
-cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  background-color: #6B68F3;
+  width: 70px;
+  height: 70px;
+  color:white;
+  cursor:pointer;
+`
+
+const AddCredit = styled.button`
+  width: 100px;
+  background-color: #D9DCFB;
+  border: none;
+  border-radius: 20px;
+  color: #3E09D1;
+  cursor: pointer;
+  margin: 20px auto;
+  padding: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 3px 0 rgb(0,0,0,0.1);
+  &:hover {
+    background-color: #3E09D1;;
+    color: white;
+  }
+  &:active {
+    background-color: #3E09D1;;
+    color: white;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.1);
+    position: relative;
+    top:2px;
+  }
 `

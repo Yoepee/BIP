@@ -1,9 +1,7 @@
 import Profile from "../../components/profile/Profile";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
-import ProfileMenu from "../../components/profile/ProfileMenu";
 import WebHeader from "../../components/header/WebHeader";
-import styled from "styled-components";
 
 
 
@@ -18,8 +16,6 @@ const ProfilePage = () =>{
         </div>            
             {/* 프로필 내역보기  */}
             <Profile/>
-            {/* 신용점수 구매 */}
-            <ProfileMenu/>
             {/* 푸터 무시공간 */}
             <div style={{height:"50px"}}></div>
             {/* 푸터 */}
