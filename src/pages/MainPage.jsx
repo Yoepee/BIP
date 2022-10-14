@@ -10,6 +10,7 @@ import { __getPromise } from "../redux/modules/promise";
 import Week from "../components/main/calendar/Week";
 import axios from "axios";
 import WebHeader from "../components/header/WebHeader";
+import logo from "../img/제목을-입력해주세요_-001.png";
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const MainPage = () => {
     return (
       <>
         <Wrap>
+          <img src={logo} width="70px"/>
             <WebHeader />
             <StHeaderContainer>
             <Week day={day} setDay={setDay}/>
