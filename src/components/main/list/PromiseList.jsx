@@ -50,7 +50,7 @@ const PromiseList = ({ day }) => {
         <div>
           <p style={{ fontWeight: "bold" }}>오늘 해야할 일</p>
         </div>
-        <Cards>
+        {promiseList?.data?.data?.length === 0? <NotListCard onClick={()=>{navigate('/addpromise')}}><span style={{margin:"0 auto"}}>새로운 약속을 잡는 건 어떠세요?</span></NotListCard>: <Cards>
           {/* 약속시간까지 시간이 아직 남은 약속들 */}
           {promiseList?.data?.data?.map((promise, i) => {
             if (promise.lastTime === "이미 지난 약속입니다.") {
@@ -142,6 +142,9 @@ const PromiseList = ({ day }) => {
             );
           })}
         </Cards>
+
+        }
+       
       </Wrap>
       <Wrap>
         <div>
@@ -268,3 +271,20 @@ const People = styled.p`
   margin-left: auto;
   margin-right: 2px;
 `;
+
+const NotListCard = styled.div`
+  display: flex; 
+  align-items: center;
+  height: 140px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1); 
+  background-color: #FAFAFA; 
+  border-radius: 4px;
+  color: #494949;
+  @media screen and (min-width: 769px) {
+    width: 280px;
+  }
+  &:hover{
+    color: black;
+    font-weight: bold;
+  }
+`

@@ -184,7 +184,7 @@ const Title = styled.div`
    span{
      background-color: #3E09D1;
      border-radius: 50%;
-     padding: 0 4px;
+     padding: 0 5px;
      margin-right: 2px;
      color: white;
    }
@@ -218,6 +218,7 @@ const People = styled.div`
   font-weight: bold;
   font-size: 15px;
   flex-wrap: wrap;
+
   /* margin: 10% 15%; */
   span {
     /* margin-right: 2%; */
