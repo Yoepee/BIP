@@ -65,10 +65,11 @@ const Option7 = ({ setType }) => {
             width: "120px",
             position: "absolute",
             backgroundColor: "white",
-            top: "50px", left: "5px",
+            top: "50px", right: "250px",
             textAlign: "center",
             borderRadius: "5px",
-            border: "1px solid #292929"
+            border: "1px solid #292929",
+            zIndex:"10"
           }}>
             <OptionMenu
               onClick={() => { setSort("닉네임"); setChk(!chk); }}>닉네임</OptionMenu>
