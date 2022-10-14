@@ -48,59 +48,82 @@ const AddCredit = () => {
   }
 
   return (
-    <div>
-      <div>
-        나의 신용점수 구매
-        <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
-          <p>신용점수 1점 구매</p>
+    <>
+    <Wrap>
+      <Container>
+        <span style={{padding:"10px", fontWeight:"bold"}}>나의 신용점수</span>
+        <StBox>
+          <p style={{padding:"0 2%"}}>신용점수 1점</p>
           <p><PointIcon>P</PointIcon>2000</p>
           <AddBox onClick={() => {
             __isToken().then(()=>{
             __getMyCredit(1);
           })
-          }}>선택</AddBox>
-        </div>
-        <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
-          <p>신용점수 5점 구매</p>
+          }}>구매</AddBox>
+        </StBox>
+        <StBox>
+          <p style={{padding:"0 2%"}}>신용점수 5점</p>
           <p><PointIcon>P</PointIcon>10000</p>
           <AddBox onClick={() => {
             __isToken().then(()=>{
               __getMyCredit(5);
             })
-          }}>선택</AddBox>
-        </div>
-      </div>
+          }}>구매</AddBox>
+        </StBox>
+      </Container>
       {/* 선택시 친구목록으로 연결 */}
-      <div>
-        친구의 신용점수 구매
-        <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
-          <p>신용점수 1점 구매</p>
+      <Container>
+        <span style={{padding:"10px", fontWeight:"bold"}}>친구의 신용점수</span>
+        <StBox>
+          <p style={{padding:"0 2%"}}>신용점수 1점</p>
           <p><PointIcon>P</PointIcon>2000</p>
           <AddBox onClick={() => {
             navigate("/member/add1");
-          }}>선택</AddBox>
-        </div>
-        <div style={{ display: "flex", border: "1px solid black", margin: "10px", alignItems: "center" }}>
-          <p>신용점수 5점 구매</p>
+          }}>구매</AddBox>
+        </StBox>
+        <StBox>
+          <p style={{padding:"0 2%"}}>신용점수 5점</p>
           <p><PointIcon>P</PointIcon>10000</p>
           <AddBox onClick={() => {
             navigate("/member/add5");
-          }}>선택</AddBox>
-        </div>
-      </div>
-    </div>
+          }}>구매</AddBox>
+        </StBox>
+      </Container>
+    </Wrap>
+    </>
   )
 }
 
 export default AddCredit;
 
+const Wrap = styled.div`
+  /* background-color: pink; */
+  width: 80%;
+  margin: 30px auto;
+`
+
+const Container = styled.div`
+  /* background-color: skyblue; */
+  margin-bottom: 40px;
+`
+
+
+const StBox = styled.div`
+  background-color: #FAFAFA;
+  display: flex;
+  border: 0.8px solid #e0e0e0;
+  border-radius: 10px;
+  margin: 18px 10px;
+  align-items: center;  
+`
+
 const AddBox = styled.p`
 margin-left:auto;
 margin-right:2%;
-background-color:#6D09D1;
-color:white;
-border-radius:6px;
-padding:5px;
+background-color:#D9DCFB;
+border-radius: 10px;
+padding: 4px 8px;
+font-size: 14px;
 cursor:pointer;
 `
 
