@@ -110,6 +110,7 @@ const MyHistory = () => {
               </div>
               <div>
                 <div style={{ display: "flex" }}>
+                  <p>{item.eventDateTime.split("-")[0]}년 {item.eventDateTime.split("-")[1]}월 {item.eventDateTime.split("-")[2]}일　</p>
                   {/* 시간값 split으로 잘라서 사용 */}
                   {Number(item.eventDateTime.split("-")[3]) < 12 ? (
                     <>
@@ -132,7 +133,6 @@ const MyHistory = () => {
                   <p style={{ marginRight: "10px" }}>
                     {item.eventDateTime.split("-")[4]}분
                   </p>
-                  <p className="lastTime">종료</p>
                 </div>
               </div>
             </PromiseCard>
