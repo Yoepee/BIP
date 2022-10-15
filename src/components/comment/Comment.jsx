@@ -231,7 +231,7 @@ const CommentWrap = styled.div`
     @media screen and (min-width: 769px) {
     max-width: 1400px;
   }
-
+  width: 80%;
   margin: 10px auto;
 `
 
