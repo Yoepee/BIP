@@ -10,6 +10,8 @@ import { __getPromise } from "../redux/modules/promise";
 import Week from "../components/main/calendar/Week";
 import axios from "axios";
 import WebHeader from "../components/header/WebHeader";
+import logo1 from "../img/logo/blueberrymain.png"
+import logo2 from "../img/logo/blueberry7logo.png"
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,7 @@ const MainPage = () => {
     return (
       <>
         <Wrap>
+          <LogoImg src={logo1} width="84px" onClick={() => { navigate("/") }} style={{margin:"20px 0 0 20px"}}/>
             <WebHeader />
             <StHeaderContainer>
             <Week day={day} setDay={setDay}/>
@@ -68,6 +71,13 @@ const Wrap = styled.div`
   /* padding: 20px 0; */
 
 `
+const LogoImg = styled.img`
+  cursor: pointer;
+  @media screen and (min-width: 769px) {
+   display:none;
+  }
+`
+
 const Plus = styled.div`
 position : fixed;
 bottom : 0;

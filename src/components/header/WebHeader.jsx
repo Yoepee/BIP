@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import logo1 from "../../img/logo/blueberrymain.png"
+import logo2 from "../../img/logo/blueberry7logo.png"
 
 const WebHeader = () => {
   const navigate = useNavigate();
@@ -7,10 +9,14 @@ const WebHeader = () => {
   return (
     <>
     <StWebHeader>
-      <div onClick={() => { navigate("/") }}>홈</div>
-      <div onClick={() => { navigate("/donation") }}>재능기부</div>
-      <div onClick={() => { navigate("/member") }}>친구목록</div>
-      <div onClick={() => { navigate("/profile") }}>마이페이지</div>
+      <img src={logo1} width="84px" onClick={() => { navigate("/") }} style={{cursor:"pointer"}}/>
+      {/* <img src={logo2} width="100px"/> */}
+      <div style={{display:"flex", paddingTop:"10px"}}>
+        <div onClick={() => { navigate("/") }}>홈</div>
+        <div onClick={() => { navigate("/donation") }}>재능기부</div>
+        <div onClick={() => { navigate("/member") }}>친구목록</div>
+        <div onClick={() => { navigate("/profile") }}>마이페이지</div>
+      </div>
     </StWebHeader>    
     </>
   )
@@ -24,7 +30,7 @@ const StWebHeader = styled.div`
   display: none;
   @media screen and (min-width: 769px) {
     /* background-color: pink; */
-    width: 420px;
+    width: 700px;
     display: flex;
     /* margin: 20px 20px; */
     padding: 20px 20px;
