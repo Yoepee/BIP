@@ -191,7 +191,7 @@ const Member = ({ type, setType }) => {
               {/* 신용도 출력 */}
               <Credit>
                 <span style={{ backgroundColor: "#D9DCFB", borderRadius: "50%" }}>C</span>
-                <span>{friend.creditScore}</span>
+                <span>{Number(friend.creditScore).toFixed(1)}</span>
               </Credit>
             </Card>
           )
