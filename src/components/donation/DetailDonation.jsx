@@ -37,16 +37,6 @@ const DetailDonation = () => {
     })
   }, []);
 
-  useEffect(() => {
-    if (donation?.data?.data !== undefined) {
-      if (like === true) {
-        dispatch(likeDonate());
-      } else {
-        dispatch(unlikeDonate());
-      }
-    }
-  }, [like])
-
   const __getLike = async () => {
     await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/like/check/${id}`, {
       headers: {
@@ -186,11 +176,11 @@ const DetailDonation = () => {
             </div>
             <div style={{ display: "flex" }}>
               {like ?
-                <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __unLike() }) }}>
+                <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __unLike();dispatch(unlikeDonate()); }) }}>
                   <div style={{ color: "red" }}><FavoriteIcon /></div>
                   공감하기
                 </div>
-                : <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __doLike() }) }}><FavoriteBorderIcon />공감하기</div>
+                : <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __doLike();dispatch(likeDonate()); }) }}><FavoriteBorderIcon />공감하기</div>
               }
               <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __notifyPost() }) }}>🚨신고하기</div>
             </div>
