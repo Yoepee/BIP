@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { readSocial } from "../../redux/modules/social";
 
 // 카카오 로그인
-const Kakao = () => {
+const Kakao = ({__isSSE}) => {
   const navigate= useNavigate();
   const dispatch = useDispatch();
   // 네이버 로그인시 받아와야하는 값 존재 (code)
@@ -27,6 +27,7 @@ const Kakao = () => {
         }else{
           // 닉네임이 있다면, 닉네임을 로컬스토리지 저장
           localStorage.setItem("name", response.data.data.nickname);
+          __isSSE();
           navigate("/")
         }
 

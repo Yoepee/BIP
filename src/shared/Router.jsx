@@ -75,11 +75,9 @@ const Router = () => {
                             navigate("/intro");
                         }
                     });
+            // 알림기능
+            __isSSE();
             });
-                        // 크롬 알림기능
-        console.log("매번 실행되는지");
-        console.log("listening", listening);
-        __isSSE();
         }
     }, [])
 
@@ -106,6 +104,8 @@ const Router = () => {
             }
         }).then((res)=>{
         // if(res.data.data){}
+        console.log("매번 실행되는지");
+        console.log("listening", listening);
 
         if (!listening) {
             eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe`,{
@@ -174,13 +174,13 @@ const Router = () => {
             {/* 시작페이지 */}
             <Route path="/intro" exact element={<IntroPage />} />
             {/* 회원가입 */}
-            <Route path="/signup" exact element={<SignUp />} />
+            <Route path="/signup" exact element={<SignUp __isSSE={__isSSE} />} />
             {/* 전화번호 변경시 이메일 로그인 */}
-            <Route path="/signup/email" exact element={<SignUpEmail />} />
+            <Route path="/signup/email" exact element={<SignUpEmail/>} />
             {/* 닉네임 설정이 안된 계정 닉네임 설정 페이지 */}
-            <Route path="/signup/nickname" exact element={<SignUpNickname />} />
+            <Route path="/signup/nickname" exact element={<SignUpNickname __isSSE={__isSSE} />} />
             {/* 카카오 최초 로그인시 휴대폰 번호 설정하도록, 이메일 계정시에는 별도 동작 */}
-            <Route path="/signup/change/:type" exact element={<SignUpChange />} />
+            <Route path="/signup/change/:type" exact element={<SignUpChange __isSSE={__isSSE} />} />
             {/* 친구목록 */}
             <Route path="/member" exact element={<MemberPage />} />
             {/* 약속 멤버 초대하기 */}
@@ -214,8 +214,8 @@ const Router = () => {
             {/* 재능기부 상세페이지 */}
             <Route path="/detaildonation/:id" exact element={<DetailDonationPage />} />
             {/* 소셜로그인 */}
-            <Route path="/login/kakao" exact element={<KakaoPage />} />
-            <Route path="/login/naver" exact element={<NaverPage />} />
+            <Route path="/login/kakao" exact element={<KakaoPage __isSSE={__isSSE} />} />
+            <Route path="/login/naver" exact element={<NaverPage __isSSE={__isSSE}/>} />
             {/* 채팅 */}
             <Route path="/chat/:id" exact element={<ChatPage />} />
             {/* 없는 페이지 */}

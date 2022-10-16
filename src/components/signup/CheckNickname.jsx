@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // 닉네임 수정하는 페이지 (카카오 로그인, 네이버 로그인시 닉네임이 없으면 닉네임 입력페이지)
-const CheckNickname = () => {
+const CheckNickname = ({__isSSE}) => {
   const navigate = useNavigate();
 
   const initialState = {
@@ -51,6 +51,7 @@ const CheckNickname = () => {
         }).then((response) => {
           // 성공시 로컬 스토리지 저장 후 메인페이지 이동
           localStorage.setItem("name", response.data.data.nickname);
+          __isSSE();
           navigate("/")
         })
       })
