@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 // 휴대폰번호 미입력 계정 번호 입력 페이지 (카카오 최초 로그인 or 이메일 로그인)
-const ChangePhone = () => {
+const ChangePhone = ({__isSSE}) => {
   const navigate = useNavigate();
   const social = useSelector((state) => state.social);
   // type : mail - 이메일 로그인, kakao - 카카오 최초 로그인
@@ -128,6 +128,7 @@ const ChangePhone = () => {
               navigate("/signup/nickname")
             } else {
               // 이상 없으면 메인페이지
+              __isSSE();
               navigate("/")
             }
           } else {
@@ -154,6 +155,7 @@ const ChangePhone = () => {
               navigate("/signup/nickname")
               // 이상 없으면 메인페이지
             } else {
+              __isSSE();
               navigate("/")
             }
           } else {

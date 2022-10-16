@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 // 시작하기(휴대폰 번호)
-const CheckPhone = () => {
+const CheckPhone = ({__isSSE}) => {
   // 인증번호 받기 버튼을 클릭 여부 조사하는 변수들
   const [visble, setVisble] = useState(false);
   const [chkBtn, setChkBtn] = useState("인증번호 받기")
@@ -131,6 +131,7 @@ const CheckPhone = () => {
           localStorage.setItem("Authorization", response.headers.authorization);
           localStorage.setItem("RefreshToken", response.headers.refreshtoken);
           localStorage.setItem("name", response.data.data.nickname);
+          __isSSE();
           navigate("/")
         } else {
           Swal.fire(response.data.data, "　", "error");
