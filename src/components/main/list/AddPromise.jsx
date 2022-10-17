@@ -52,6 +52,8 @@ const AddPromise = ({
   const [openAddr, setOpenAddr] = useState(false)
   // id값 확인
   const {id} = useParams();
+  const hourList = ["1", "2","3","4","5","6","7","8","9","10","11","12"];
+  const minList = ["00", "10","20","30","40","50"];
 
   // 주소 값을 통해 좌표를 찾는 함수
   const kakaoGeocode = (address) => {
@@ -320,32 +322,23 @@ const AddPromise = ({
               )}
             </div>
           </div>
-          {/* 시간 입력칸 */}
-          <div>
-            <InputTime
-              type="text"
-              name="hour"
-              value={time.hour}
-              onChange={onChange}
-              min={1}
-              max={12}
-              maxLength={2}
-            />
-            시
-          </div>
-          <div>
-            <InputTime
-              type="text"
-              name="min"
-              value={time.min}
-              onChange={onChange}
-              min={0}
-              max={60}
-              maxLength={2}
-              onKeyPress={handleKeyPress}
-            />
-            분
-          </div>
+          {/* 시, 분 select로 설정 */}
+          <select>
+            {hourList.map((hour)=>{
+              return(
+                <option value={hour}>{hour}</option>
+              )
+            })}
+          </select>
+          <div>시</div>
+          <select>
+            {minList.map((min)=>{
+              return(
+                <option value={min}>{min}</option>
+              )
+            })}
+          </select>
+          <div>분</div>
         </When>
         {/* 달력 아이콘 클릭시 출력되는 달력 */}
         {check ? (
