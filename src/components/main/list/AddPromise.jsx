@@ -33,7 +33,7 @@ const AddPromise = ({
   time,
   am,
   setAm,
-  handleKeyPress
+  setTime
 }) => {
   // 날짜 선택 달력 출력 여부 결정
   const [check, setCheck] = useState(false);
@@ -198,6 +198,9 @@ const AddPromise = ({
     }
   }, [time, date, am]);
 
+  console.log(promise);
+  console.log(time)
+
   return (
     <>
       <Wrap>
@@ -323,7 +326,7 @@ const AddPromise = ({
             </div>
           </div>
           {/* 시, 분 select로 설정 */}
-          <select>
+          <select  onChange={(e)=>{setTime({...time,hour:e.target.value})}}>
             {hourList.map((hour)=>{
               return(
                 <option value={hour}>{hour}</option>
@@ -331,7 +334,7 @@ const AddPromise = ({
             })}
           </select>
           <div>시</div>
-          <select>
+          <select  onChange={(e)=>{setTime({...time,min:e.target.value})}}>
             {minList.map((min)=>{
               return(
                 <option value={min}>{min}</option>
