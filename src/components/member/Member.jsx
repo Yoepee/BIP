@@ -7,6 +7,7 @@ import { __invitePromise } from "../../redux/modules/detailPromise";
 import { __getMember, removeFriend, __secondName } from "../../redux/modules/member";
 import Swal from "sweetalert2";
 import userImg from "../../img/user_svg.svg";
+import AddMember from "./AddMember";
 
 // 친구목록 컴포넌트
 // type = none - 무반응, give - 별칭 주기, remove - 삭제
@@ -144,7 +145,7 @@ const Member = ({ type, setType }) => {
   return (
     <div>
       <Wrap>
-        {member?.data?.data?.map((friend, i) => {
+      {member?.data?.data?.length === 0? <NotListCard><span style={{margin:"0 auto"}}>새로운 친구를 추가해보세요</span></NotListCard>: member?.data?.data?.map((friend, i) => {
           return (
             <Card key={i}
               onClick={() => {
@@ -197,6 +198,9 @@ const Member = ({ type, setType }) => {
             </Card>
           )
         })}
+        
+       
+       
       </Wrap>
     </div>
   )
@@ -299,5 +303,23 @@ const Credit = styled.p`
       height: 14px;
       line-height: 12px;
     }
+  }
+`
+
+const NotListCard = styled.div`
+  display: flex; 
+  align-items: center;
+  height: 140px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1); 
+  background-color: #FAFAFA; 
+  border-radius: 4px;
+  color: #494949;
+  @media screen and (min-width: 769px) {
+    width: 280px;
+  }
+  &:hover{
+    color: black;
+    font-weight: bold;
+    cursor:pointer;
   }
 `
