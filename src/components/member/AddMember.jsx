@@ -5,6 +5,7 @@ import { clearSearch } from "../../redux/modules/searchMember";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import axios from "axios";
+import userImg from "../../img/user_svg.svg";
 
 // 친구 추가 컴포넌트
 const AddMember = ({member, type, setChk}) => {
@@ -57,7 +58,7 @@ const AddMember = ({member, type, setChk}) => {
     <Card>
       {/* 프로필 사진이 없으면 기본이미지 출력 */}
         {user?.data?.data?.profileImgUrl === null ?
-          <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}}/>
+          <img src={userImg} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}}/>
           : <img src={user?.data?.data?.profileImgUrl} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px",  backgroundColor:"#C7FEC1"}} />
         }
         {/* 친구 닉네임 */}

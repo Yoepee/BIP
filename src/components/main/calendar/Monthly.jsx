@@ -191,23 +191,23 @@ const StyledBody = styled.div`
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background : #D9DCFB;
+    background : #6B68F3;
     font-weight: 700;
-    color: white;
+    /* color: white; */
   }
   .promise{
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background : #EDFFEB;
+    background : #D9DCFB;
     font-weight: 700;
     /* color: #fff; */
   }
   .today{
     border-radius: 50%;
     font-weight: 700;
-    background : #D9DCFB;
-    /* border: 1px solid #3E09D1; */
+    background : #6B68F3;
+    color: white;
   }
   .isSelected{
     position: relative;

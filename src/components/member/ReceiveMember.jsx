@@ -6,6 +6,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Header from "../header/Header";
 import Swal from "sweetalert2";
+import userImg from "../../img/user_svg.svg";
 
 // 친구요청 받은 친구목록 컴포넌트
 const ReceiveMember = ({ type, setChk }) => {
@@ -69,7 +70,7 @@ const ReceiveMember = ({ type, setChk }) => {
           return (
             <Card key={info.id}>
               {info.profileImgUrl === null ?
-                <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{ width: "50px", height: "50px", borderRadius: "100%", margin: "15px" }} />
+                <img src={userImg} style={{ width: "50px", height: "50px", borderRadius: "100%", margin: "15px" }} />
                 : <img src={info.profileImgUrl} style={{ width: "50px", height: "50px", borderRadius: "100%", margin: "15px" }} />
               }
               <p>{info.nicknameByFriend}</p>

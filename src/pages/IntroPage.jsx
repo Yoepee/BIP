@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import ItrSwipe from "../components/intro/Carousel";
-import kakao_login from '../img/kakao_login.png'
-import naver_login from '../img/naver_login.png'
+import kakao_login from '../img/intro/kakao_login.png'
+import naver_login from '../img/intro/naver_login.png'
 
 
 const IntroPage = () => {
