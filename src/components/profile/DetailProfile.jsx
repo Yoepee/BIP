@@ -80,7 +80,7 @@ const DetailProfile = () => {
       </TypeDiv>
       <TypeDiv>
         <div style={{ display: "flex" }}>
-        <p>전화번호</p>
+        <p>휴대폰 번호</p>
           <div onClick={()=>{navigate("/editprofile/call")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
             <p><EditOutlinedIcon style={{color:"#6B68F3", cursor:"pointer"}}/></p>
