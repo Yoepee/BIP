@@ -146,7 +146,7 @@ const CheckPhone = ({__isSSE}) => {
           if (!visble) {
             setVisble(!visble);
             setChkBtn("인증번호 확인하기");
-            __testPhone(member);
+            __examPhone(member);
             timer.current = setInterval(() => {
               countDown();
             }, 1000);
@@ -202,7 +202,7 @@ const CheckPhone = ({__isSSE}) => {
 
         <BtnArea>
           {/* 인증번호 발급키를 누르면 인증번호 재발급 버튼 생성, 타이머 동작도 출력 */}
-          {visble && <Button variant="contained" className="default_btn" onClick={() => { reset();__testPhone(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+          {visble && <Button variant="contained" className="default_btn" onClick={() => { reset();__examPhone(member); }}>인증번호 다시 받기({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
           {/* 번호가 이상이 없을 시 버튼 색깔 변경 */}
           {!regexPhone.test(member.value) ?
             <Button
@@ -212,7 +212,7 @@ const CheckPhone = ({__isSSE}) => {
                   if (!visble) {
                     setVisble(!visble);
                     setChkBtn("인증번호 확인하기");
-                    __testPhone(member);
+                    __examPhone(member);
                     timer.current = setInterval(() => {
                       countDown();
                     }, 1000);
@@ -237,7 +237,7 @@ const CheckPhone = ({__isSSE}) => {
                   if (!visble) {
                     setVisble(!visble);
                     setChkBtn("인증번호 확인하기");
-                    __testPhone(member);
+                    __examPhone(member);
                     timer.current = setInterval(() => {
                       countDown();
                     }, 1000);
