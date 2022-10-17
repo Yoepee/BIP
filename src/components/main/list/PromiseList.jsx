@@ -246,6 +246,7 @@ const PromiseCard = styled.div`
   border-radius: 4px;
   font-size: 13px;
   position: relative;
+  cursor:pointer;
 
   .lastTime {
     position: absolute;
@@ -286,5 +287,6 @@ const NotListCard = styled.div`
   &:hover{
     color: black;
     font-weight: bold;
+    cursor:pointer;
   }
 `
