@@ -147,33 +147,33 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
           </div>
         </div>
         : null}
-        <UnderLine>
+        <UnderLine style={{position:"relative"}}>
         {!chkPost ?
-          <p style={{ marginBottom: "20px" ,marginRight: "20px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
-          : <p style={{ marginBottom: "20px" ,marginRight: "20px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          <p style={{ marginBottom: "20px" ,marginRight: "40px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub", cursor:"pointer" }} /></p>
+          : <p style={{ marginBottom: "20px" ,marginRight: "40px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub", cursor:"pointer" }} /></p>
         }
         {chkPost ?
        
-          <Category>
-            <div onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "request" }) }}>재능요청</div>
-            <div onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "donation" }) }}>재능기부</div>
-          </Category>
+          <CategoryModal>
+            <OptionMenu onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "request" }) }}>재능요청</OptionMenu>
+            <OptionMenu onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "donation" }) }}>재능기부</OptionMenu>
+          </CategoryModal>
           : null}
  
     
         {!chkCategory ?
-          <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
-          : <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub", cursor:"pointer" }} /></p>
+          : <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub", cursor:"pointer" }} /></p>
         }
         {chkCategory ?
-          <CategoryKind style={{ display: "flex", flexDirection: "column", borderRadius: "8px", boxShadow: "3px 3px 3px 3px #EFEEF0", width: "90px", padding: "10px", marginBottom: "10px" }}>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "volunteer" }) }}>봉사</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "care" }) }}>돌봄</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "edu" }) }}>교육</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "share" }) }}>나눔</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "people" }) }}>모임/구인</div>
-            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "etc" }) }}>기타</div>
+          <CategoryKind>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "volunteer" }) }}>봉사</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "care" }) }}>돌봄</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "edu" }) }}>교육</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "share" }) }}>나눔</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "people" }) }}>모임/구인</OptionMenu>
+            <OptionMenu onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "etc" }) }}>기타</OptionMenu>
           </CategoryKind >
           : null}
       </UnderLine>
@@ -233,42 +233,41 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
 }
 export default AddDonation;
 
-const Category = styled.div`
-  display: flex;
+const CategoryModal = styled.div`
   position : absolute;
-  align-items: center;
-  flex-direction: column;
-  width: 90px;
-  padding: 5px;
+  border: 0.8px solid #e0e0e0; 
   border-radius: 8px; 
   box-shadow:3px 3px 3px 3px #EFEEF0;
   top: 40px;
-  left: -10px;
+  /* left: 0px; */
   cursor: pointer;
   z-index: 10;
   background-color: #fff;
-  div{
-  &:hover{
-    cursor: pointer;
-    background-color: #3E09D1;
-    color:#fff;
-  }
- }
+  
 `
+const OptionMenu = styled.div`
+font-size: 14px;
+cursor: pointer;
+padding:5px 15px;
+text-align: center;
+/* border-radius: 8px; */
+&:hover{
+  border-radius: 7px;
+  background-color:#3E09D1;
+  color:white;
+}`
+
+// style={{ display: "flex", flexDirection: "column", borderRadius: "8px", boxShadow: "3px 3px 3px 3px #EFEEF0", width: "90px", padding: "10px", marginBottom: "10px" }}
 const CategoryKind = styled.div`
-  display: flex;
   position : absolute;
-  align-items: center;
-  flex-direction: column;
-  width: 90px;
-  margin-bottom:10px;
-  padding: 10px;
+  border: 0.8px solid #e0e0e0; 
   border-radius: 8px; 
   box-shadow:3px 3px 3px 3px #EFEEF0;
   top: 40px;
   left: 100px;
-  background-color: #fff;
+  cursor: pointer;
   z-index: 10;
+  background-color: #fff;
   div{
  
   &:hover{    
@@ -299,7 +298,7 @@ padding: 0;
 const UnderLine = styled.div`
   
   display: flex;
-  position: relative;
+  /* position: relative; */
   align-items: center;
   border-bottom: 0.8px solid #D9DCFB;
   margin: 5% 5% 5% 12%;
