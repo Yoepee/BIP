@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from "axios"
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import userImg from "../../img/user_svg.svg";
 
 // 프로필 사진 수정 컴포넌트
 // setImg, img 이미지 url을 담는 값
@@ -60,7 +61,7 @@ const ProEditPicture = ({ setImg, img }) => {
         <ImgArea>
           {/* 사진 미리보기 (수정 필요) */}
           {img.imgUrl === "" ?
-            <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
+            <img src={userImg} />
             : <img src={img.imgUrl} />
           }
           <label className="input_file_button" htmlFor="input_file"><CameraAltIcon fontSize="large" /></label>
