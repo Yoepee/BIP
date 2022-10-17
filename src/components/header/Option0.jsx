@@ -16,7 +16,7 @@ const Option0 = ({head}) =>{
         navigate(-1);
       }
     }}>
-    <BackIcon><ArrowBackIosNewRoundedIcon style={{ marginTop:"7px"}} /></BackIcon>
+    <BackIcon><ArrowBackIosNewRoundedIcon style={{ marginTop:"7px", cursor:"pointer"}} /></BackIcon>
 
     </div>
     <div style={{marginLeft:"1%", fontWeight:"bold", fontSize:"20px"}}>
