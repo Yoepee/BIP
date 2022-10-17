@@ -167,13 +167,13 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
         }
         {chkCategory ?
           <CategoryKind style={{ display: "flex", flexDirection: "column", borderRadius: "8px", boxShadow: "3px 3px 3px 3px #EFEEF0", width: "90px", padding: "10px", marginBottom: "10px" }}>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "volunteer" }) }}>봉사</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "care" }) }}>돌봄</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "edu" }) }}>교육</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "share" }) }}>나눔</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "people" }) }}>모임/구인</span>
-            <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "etc" }) }}>기타</span>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "volunteer" }) }}>봉사</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "care" }) }}>돌봄</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "edu" }) }}>교육</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "share" }) }}>나눔</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "cultureart" }) }}>문화/예술</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "people" }) }}>모임/구인</div>
+            <div onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "etc" }) }}>기타</div>
           </CategoryKind >
           : null}
       </UnderLine>
@@ -236,17 +236,16 @@ const Category = styled.div`
   align-items: center;
   flex-direction: column;
   width: 90px;
-  padding: 10px;
+  padding: 5px;
   border-radius: 8px; 
   box-shadow:3px 3px 3px 3px #EFEEF0;
   top: 40px;
+  left: -10px;
   cursor: pointer;
   z-index: 10;
   background-color: #fff;
   div{
- 
   &:hover{
-    
     cursor: pointer;
     background-color: #3E09D1;
     color:#fff;
@@ -267,7 +266,7 @@ const CategoryKind = styled.div`
   left: 100px;
   background-color: #fff;
   z-index: 10;
-  span{
+  div{
  
   &:hover{
     

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { IosShareSharp } from "@mui/icons-material";
 
 // 신용도 추가하기 페이지
 const AddCredit = () => {
@@ -38,7 +39,9 @@ const AddCredit = () => {
             RefreshToken: localStorage.getItem('RefreshToken')
           }
         }).then((response) => {
-          console.log(response)
+          if(response.data.success){
+            Swal.fire(response.data.data.context,"　","success");
+          }
         })
         return;
       } else {
