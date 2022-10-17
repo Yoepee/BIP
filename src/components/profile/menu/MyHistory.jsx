@@ -160,9 +160,11 @@ const MyHistory = () => {
                   <p style={{ fontSize: "18px", fontWeight: "bold" }}>{item.content}</p>
                   <p><PointIcon>P</PointIcon>{item.point}</p>
                 </div>
+                <div>
                 {item.firstImgUrl !== null ?
-                  <img src={item.firstImgUrl} />
+                  <img style={{width:"100%", height:"100%", objectFit:"cover"}} src={item.firstImgUrl} />
                   : null}
+                </div>
                 <div style={{ fontSize: "14px", color: "#757575" }}>{item.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
@@ -196,9 +198,11 @@ const MyHistory = () => {
                   <p style={{ fontSize: "18px", fontWeight: "bold" }}>{item.content}</p>
                   <p><PointIcon>P</PointIcon>{item.point}</p>
                 </div>
-                {item.firstImgUrl !== null ?
-                  <img src={item.firstImgUrl} />
+                <div>
+                  {item.firstImgUrl !== null ?
+                  <img style={{width:"100%", height:"100%", objectFit:"cover"}} src={item.firstImgUrl} />
                   : null}
+                </div>
                 <div style={{ fontSize: "14px", color: "#757575" }}>{item.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
@@ -222,12 +226,10 @@ const Cards = styled.div`
   min-width: 360px;
   max-width: 1000px;
   margin: 30px auto;
+ 
 
   @media screen and (min-width: 769px) {
-    /* background-color: pink; */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 14px;
+    max-width :769px ;
   }
 `;
 
