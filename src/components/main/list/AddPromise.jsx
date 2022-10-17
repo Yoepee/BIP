@@ -32,6 +32,7 @@ const AddPromise = ({
   time,
   am,
   setAm,
+  handleKeyPress
 }) => {
   // 날짜 선택 달력 출력 여부 결정
   const [check, setCheck] = useState(false);
@@ -349,6 +350,7 @@ const AddPromise = ({
               min={0}
               max={60}
               maxLength={2}
+              onKeyPress={handleKeyPress}
             />
             분
           </div>
