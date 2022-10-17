@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import logo1 from "../../img/logo/blueberrymain.png"
-import logo2 from "../../img/logo/blueberry7logo.png"
 
 const WebHeader = () => {
   const navigate = useNavigate();

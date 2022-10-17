@@ -11,7 +11,6 @@ import Week from "../components/main/calendar/Week";
 import axios from "axios";
 import WebHeader from "../components/header/WebHeader";
 import logo1 from "../img/logo/blueberrymain.png"
-import logo2 from "../img/logo/blueberry7logo.png"
 
 const MainPage = () => {
   const dispatch = useDispatch();

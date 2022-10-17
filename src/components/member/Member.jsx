@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { __invitePromise } from "../../redux/modules/detailPromise";
 import { __getMember, removeFriend, __secondName } from "../../redux/modules/member";
 import Swal from "sweetalert2";
+import userImg from "../../img/user_svg.svg";
 
 // 친구목록 컴포넌트
 // type = none - 무반응, give - 별칭 주기, remove - 삭제
@@ -176,7 +177,7 @@ const Member = ({ type, setType }) => {
               }}>
               {/* 사진이 없으면 기본이미지, 있다면 프로필 사진 출력 */}
               {friend.profileImgUrl === null ?
-                <ProfileImg src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} />
+                <ProfileImg src={userImg} />
                 : <ProfileImg src={friend.profileImgUrl} />
               }
               <div style={{ fontSize: "0" }}>
