@@ -164,7 +164,7 @@ const Comment = () => {
   return (
     <>
       <CommentWrap>
-        댓글 목록
+        <p style={{fontWeight:"bold", marginBottom:"10px"}}>Comment</p>
         <CommentFooter />
         {commentList?.data?.data?.map((comment) => {
           if (comment.id === chkEdit) {
