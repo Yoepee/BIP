@@ -135,7 +135,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   return (
     <div style={{ width: "70%", margin: "0 auto", minWidth: "500px",maxWidth: "800px"}}>
       {openAddr ?
-        <div style={{ position: "relative", justifyContent: "center", width:"%", margin:"0 auto" }}>
+        <div style={{ position: "relative", justifyContent: "center", width:"70%", margin:"0 auto" }}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div style={{ backgroundColor: "#D9DCFB", cursor:"pointer", fontWeight:"bold", borderRadius:"6px", padding:"3px" }}
               onClick={() => { setOpenAddr(false) }}>닫기</div>
@@ -182,8 +182,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
         <input style={{ border: "none", outline: "none", marginLeft:"10px",marginBottom: "20px" }} placeholder="추가 제공할 포인트를 적어주세요" name="point" value={donate.point === 0 ? "" : donate.point} onChange={(e) => { onChangeHandler(e) }} />
       </UnderLine>
       <UnderLine >
-        <span style={{ marginRight: "10px",marginBottom: "20px" }}>내용</span>
-        <input style={{ border: "none", outline: "none",marginBottom: "20px"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
+        <span style={{ marginRight: "10px",marginBottom: "20px", width:"7%" }}>내용</span>
+        <input style={{ border: "none", outline: "none",marginBottom: "20px", width:"100%"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </UnderLine>
       <UnderLine>
         <div>
@@ -302,7 +302,7 @@ const UnderLine = styled.div`
   align-items: center;
   border-bottom: 0.8px solid #D9DCFB;
   margin: 5% 5% 5% 12%;
-  width: 80%;
+  width: 70%;
 `
 
 
