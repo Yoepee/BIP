@@ -6,6 +6,8 @@ import WebHeader from "../components/header/WebHeader";
 
 const MemberPage = () =>{
   const [type, setType] = useState("none");
+  const [chk, setChk] = useState(0);
+  const [chktype, setChktype] = useState("name");
   return (
     <>
     <div style={{display:"flex"}}>
@@ -14,10 +16,10 @@ const MemberPage = () =>{
       // 검색 기능시 헤더 변경 (헤더옵션 7)
       <Header option={7} setType={setType}/>
       // 평소 상태 헤더 옵션 4
-      :<Header option={4} setType={setType} type={type} />}
+      :<Header option={4} setType={setType} type={type} chk={chk} setChk={setChk} chktype={chktype} setChktype={setChktype}/>}
     </div>    
     {/* 친구목록 */}
-    <Member type={type} setType={setType}/>
+    <Member type={type} setType={setType} setChk={setChk} setChktype={setChktype}/>
     {/* 푸터메뉴 2번째 항목 선택 (0,1,2,3) */}
     <Footer foot={2}/>
     <div style={{height:"50px"}}></div>
