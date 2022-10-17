@@ -195,7 +195,7 @@ const Comment = () => {
                       <OptionMenu onClick={() => { __isToken().then(()=>{__givePoint(comment.nickname)}) }}>포인트 전달</OptionMenu>
                     </Modaldiv>)
                     : chkNick === comment.id && (<Modaldiv>
-                      <div onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</div>
+                      <OptionMenu onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</OptionMenu>
                     </Modaldiv>)}
 
                   {comment.nickname === localStorage.getItem("name") ?
@@ -268,6 +268,6 @@ cursor: pointer;
 padding:10px 5px;
 border-radius: 8px;
 &:hover{
-  background-color:#6D09D1;
+  background-color:#3E09D1;
   color:white;
 }`
