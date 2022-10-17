@@ -94,6 +94,12 @@ const Router = () => {
                 localStorage.setItem("RefreshToken", res.headers.refreshtoken);
             }
         })
+        .catch((error)=>{
+            localStorage.removeItem('Authorization');
+            localStorage.removeItem('RefreshToken');
+            localStorage.removeItem('name');
+            navigate("/intro")
+        })
     }
 
     const __isSSE= async () => {
