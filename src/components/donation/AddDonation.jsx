@@ -92,6 +92,11 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   }
 
   const onChange = async (e) => {
+    if(donate.imgUrlList.length===4){
+      e.preventDefault();
+      Swal.fire("사진은 최대 4장까지 입니다.","　","error")
+      return;
+    }
     // input file에서 선택된 file을 img로 지정
     const image = e.target.files[0];
     // 이미지 파일이 아니면 이후 동작을 생략하고 경고문구 출력
