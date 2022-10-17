@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
 // 카카오 지도
 // props : lat - 위도, lng - 경도, width - 맵 가로, height - 맵 세로 
@@ -29,8 +30,18 @@ const KaKaoMap = (props) => {
 
   return (
     // 상속값으로 크기 조절
-  <div ref={mapElement} style={{ width: props.width, height: props.height, margin:" 0 auto" }} />
+  <Mapdiv ref={mapElement} width={props.width} height={props.height} />
   )
 }
 
 export default KaKaoMap;
+
+const Mapdiv = styled.div`
+width : ${props=>props.width};
+height : ${props=>props.height};
+margin: 0 auto;
+@media screen and (max-width: 452px) {
+  width: 260px;
+  height:260px;
+}
+`
