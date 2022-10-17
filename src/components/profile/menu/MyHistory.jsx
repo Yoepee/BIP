@@ -81,8 +81,9 @@ const MyHistory = () => {
 
   return (
     <>
-    <Cards>
-      {list?.data?.data.map((item) => {
+    {type === "promise"?
+    <PromiseCards>
+    {list?.data?.data.map((item) => {
         if (type === "promise") {
           return (
             <PromiseCard
@@ -136,7 +137,12 @@ const MyHistory = () => {
               </div>
             </PromiseCard>
           )
-        } else if (type === "like") {
+        } 
+      })}
+    </PromiseCards>
+    :<Cards>
+      {list?.data?.data.map((item) => {
+        if (type === "like") {
           return (
             <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "10px" }} key={item.id}
               onClick={() => { navigate(`/detaildonation/${item.id}`) }}>
@@ -214,7 +220,7 @@ const MyHistory = () => {
           )
         }
       })}
-    </Cards>
+    </Cards>}
     </>    
   )
 }
@@ -232,6 +238,19 @@ const Cards = styled.div`
     max-width :769px ;
   }
 `;
+
+const PromiseCards = styled.div`
+  width: 80%;
+  min-width: 360px;
+  max-width: 1000px;
+  margin: 30px auto;
+  
+  @media screen and (min-width: 769px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 14px;
+  }
+`
 
 const Category = styled.div`
   padding: 5px;
