@@ -79,7 +79,6 @@ const MyHistory = () => {
     })
   }, [])
 
-  console.log(list);
   return (
     <>
     <Cards>

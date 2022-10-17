@@ -73,6 +73,10 @@ const CommentBtn = styled.div`
   line-height: 35px;
   border: 1px solid black;
   border-radius: 20px;
-  font-size: 15px; 
-  
+  font-size: 15px;
+  cursor:pointer;
+  &:hover{
+    color:white;
+    background-color:#3E09D1;
+  }
 `
