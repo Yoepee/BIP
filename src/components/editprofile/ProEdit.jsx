@@ -232,7 +232,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                 // 인증코드 형식에 어긋나면 경고문구 출력
                 regtest.test(set.authCode) ? null : (<><div style={{ color: "red", fonSize: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
               {/* 인증번호 발급 시 재발급 버튼 및 카운트 다운 */}
-              {visible && <Button style={{ marginTop: "15px" }} variant="contained" className="default_btn" onClick={() => { reset();__testPhone(set.phonenumber); }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
+              {visible && <Button style={{ marginTop: "15px" }} variant="contained" className="default_btn" onClick={() => { reset();__examPhone(set.phonenumber); }}>인증번호 다시 받기 ({min}:{sec < 10 ? <>0{sec}</> : <>{sec}</>})</Button>}
               {/* 휴대폰 번호 입력에 따른 버튼 색상 변경 */}
               {!visible &&
                 regexPhone.test(set.phonenumber) ?
@@ -243,7 +243,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                     if (regexPhone.test(set.phonenumber)) {
                       if (!visible) {
                         setChkBtn("인증번호 확인하기");
-                        __testPhone(set.phonenumber);
+                        __examPhone(set.phonenumber);
                         timer.current = setInterval(() => {
                           countDown();
                         }, 1000);
@@ -267,7 +267,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
                     if (regexPhone.test(set.phonenumber)) {
                       if (!visible) {
                         setChkBtn("인증번호 확인하기");
-                        __testPhone(set.phonenumber);
+                        __examPhone(set.phonenumber);
                         timer.current = setInterval(() => {
                           countDown();
                         }, 1000);
