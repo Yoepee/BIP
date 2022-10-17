@@ -73,7 +73,6 @@ const CheckEmail = () => {
   const __examEmail = async (payload) => {
     await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/email", payload)
       .then((response) => {
-        console.log(response)
         if (!response.data.success) {
           Swal.fire(response.data.data, "　", "error");
           setVisble(false)

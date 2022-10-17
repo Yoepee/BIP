@@ -149,12 +149,6 @@ const Chat = () => {
 
   // 메세지 보내는 함수
   const submit = () => {
-    console.log(JSON.stringify({
-      // 타입 1 = 메세지 보내기
-      type: 1,
-      message: inputRef.current.value,
-      roomId: id,
-    }));
     // 값이 없으면 전달 x
     if (inputRef.current.value === "") {
       return;
