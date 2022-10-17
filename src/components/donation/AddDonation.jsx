@@ -135,8 +135,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       // }
     })
   }
-  console.log(imgList)
-  console.log(donate.imgUrlList)
+  
+  
   return (
     <div style={{ width: "70%", margin: "0 auto", minWidth: "500px",maxWidth: "800px"}}>
       {openAddr ?

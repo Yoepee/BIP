@@ -33,7 +33,7 @@ const Option6 = ({ head }) => {
             RefreshToken: localStorage.getItem('RefreshToken'),
         }
     }).then((res) => {
-        console.log(res)
+        
     })
 }
 
@@ -54,7 +54,7 @@ const Option6 = ({ head }) => {
             RefreshToken: localStorage.getItem('RefreshToken'),
           }
         }).then(async (response) => {
-          console.log(response)
+          
           if (response.data.success) {
             localStorage.removeItem('Authorization');
             localStorage.removeItem('RefreshToken');

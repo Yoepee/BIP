@@ -58,7 +58,7 @@ const AddDonationPage = () => {
       __isToken().then(() => {
         dispatch(__getDetailDonation(id))
           .then((response) => {
-            console.log(response)
+            
             setDonate({
               ...initialState,
               board: response.payload.data.board,

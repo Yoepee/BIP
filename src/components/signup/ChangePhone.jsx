@@ -145,7 +145,7 @@ const ChangePhone = ({__isSSE}) => {
             RefreshToken: localStorage.getItem('RefreshToken'),
           }
         }).then((response) => {
-          console.log(response)
+          
           if (response.data.success) {
             // 카카오 최초 로그인시 토큰 재발급으로 새로 저장필요
             localStorage.setItem("Authorization", response.headers.authorization);

@@ -36,7 +36,7 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      console.log(res);
+      
       setList(res);
     });
   };
@@ -49,7 +49,7 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      console.log(res);
+      
       setList(res);
     });
   };
@@ -62,7 +62,7 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      console.log(res);
+      
       setList(res);
     });
   };

@@ -101,7 +101,7 @@ const Comment = () => {
             RefreshToken: localStorage.getItem('RefreshToken')
           }
         }).then((res) => {
-          console.log(res)
+          
           if(res.data.success===false){
             Swal.fire(res.data.data, "　", 'error')
           }else{
@@ -150,7 +150,7 @@ const Comment = () => {
           Authorization: localStorage.getItem('Authorization'),
           RefreshToken: localStorage.getItem('RefreshToken'),
     }}).then((res)=>{
-      console.log(res)
+      
       if(res.data.success){
         Swal.fire(res.data.data, "　", "success");
       }else{

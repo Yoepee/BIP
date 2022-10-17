@@ -150,7 +150,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const __testPhone = async (payload) => {
     let a = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/test", { value: payload })
       .then((response) => {
-        console.log(response)
+        
         if (response.data.success) {
           Swal.fire(response.data.data, "　", "success");
         } else {
@@ -163,7 +163,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const __examPhone = async (payload) => {
     await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/auth/sms", { value: payload })
       .then((response) => {
-        console.log(response)
+        
         if (response.data.success) {
           Swal.fire(response.data.data, "　", "success");
         } else {
