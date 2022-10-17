@@ -258,21 +258,12 @@ const AddPromise = ({
                 </div>}
           {/* 선택에 따른 약속 생성 값 수정 */}
           {modal === true ?
-            <div style={{
-              width: "150px",
-              position: "relative",
-              backgroundColor: "white",
-              top: "30px", right: "110px",
-              textAlign: "center",
-              borderRadius: "5px",
-              border: "1px solid #292929",
-              zIndex: "10"
-            }}>
+            <ModalArea>
               <OptionMenu
                 onClick={() => { setPromise({ ...promise, point: "0" }); setModal(false); }}>자신과의 약속</OptionMenu>
               <OptionMenu
                 onClick={() => { setPromise({ ...promise, point: "100" }); setModal(false); }}>타인과의 약속</OptionMenu>
-            </div>
+            </ModalArea>
             : null
           }
         </Who>
@@ -463,3 +454,15 @@ cursor: pointer;
   background-color:#3E09D1;
   color:white;
 }`
+
+const ModalArea = styled.div`
+background-color: #FAFAFA;
+position: relative;
+text-align: center;
+top: 30px;
+right: 110px;
+width: 150px;
+border: 1px solid #e0e0e0; 
+box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+border-radius: 8px;
+`
