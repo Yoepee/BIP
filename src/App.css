@@ -1,6 +1,9 @@
 *{
   font-family: "NotoSansKR-Regular";
 }
+*:focus {
+  outline:none;
+}
 
 div, p{
 color: #292929;

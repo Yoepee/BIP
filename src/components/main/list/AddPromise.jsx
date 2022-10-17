@@ -198,9 +198,6 @@ const AddPromise = ({
     }
   }, [time, date, am]);
 
-  console.log(promise);
-  console.log(time)
-
   return (
     <>
       <Wrap>
@@ -326,21 +323,24 @@ const AddPromise = ({
             </div>
           </div>
           {/* 시, 분 select로 설정 */}
-          <select  onChange={(e)=>{setTime({...time,hour:e.target.value})}}>
+
+          <Select  onChange={(e)=>{setTime({...time,hour:e.target.value})}}>
             {hourList.map((hour)=>{
               return(
                 <option value={hour}>{hour}</option>
               )
             })}
-          </select>
+          </Select>
           <div>시</div>
-          <select  onChange={(e)=>{setTime({...time,min:e.target.value})}}>
+
+
+          <Select  onChange={(e)=>{setTime({...time,min:e.target.value})}}>
             {minList.map((min)=>{
               return(
                 <option value={min}>{min}</option>
               )
             })}
-          </select>
+          </Select>
           <div>분</div>
         </When>
         {/* 달력 아이콘 클릭시 출력되는 달력 */}
@@ -397,6 +397,19 @@ const Input = styled.input`
   border-radius: 5px;
 `;
 
+const Select = styled.select`
+  border-radius: 5px;
+  /* border: none; */
+  border: 1px solid #D9DCFB;
+  padding: 2px 5px;
+  text-align: center;
+  .option {
+    background: black;
+  }  
+`
+
+
+
 const When = styled.div`
   /* background-color: skyblue; */
   width: 70%;
@@ -405,16 +418,16 @@ const When = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
-const InputTime = styled.input`
-  width: 30px;
-  text-align: center;
-  border: none;
-  border-bottom: 1px solid black;
-  font-weight: bold;
-  &:focus {
-    outline: none;
-  }
-`;
+// const InputTime = styled.input`
+//   width: 30px;
+//   text-align: center;
+//   border: none;
+//   border-bottom: 1px solid black;
+//   font-weight: bold;
+//   &:focus {
+//     outline: none;
+//   }
+// `;
 
 const Who = styled.div`
   border-bottom: 0.8px solid #D9DCFB;
@@ -428,7 +441,7 @@ const Who = styled.div`
   }
 
   select{
-    border-color:#A67EED;
+    /* border-color:#A67EED; */
     margin-bottom: 20px;
     width: 30%;
     padding: 2%;
@@ -449,6 +462,7 @@ cursor: pointer;
 &:hover{
   background-color:#3E09D1;
   color:white;
+  border-radius: 6px;
 }`
 
 const ModalArea = styled.div`
