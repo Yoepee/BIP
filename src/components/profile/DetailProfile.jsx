@@ -62,10 +62,10 @@ const DetailProfile = () => {
       </div>
       <TypeDiv>
         <div style={{ display: "flex" }}>
-          <img/>사진
+          <p>사진</p>
           <div onClick={()=>{navigate("/editprofile/picture")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex"}}>
-            <p><EditOutlinedIcon style={{color:"#A67EED"}}/></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3"}}/></p>
           </div>
         </div>
       </TypeDiv>
@@ -74,7 +74,7 @@ const DetailProfile = () => {
           <p>닉네임</p>
           <div onClick={()=>{navigate("/editprofile/name")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#A67EED"}} /></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3"}} /></p>
           </div>
         </div>
       </TypeDiv>
@@ -83,7 +83,7 @@ const DetailProfile = () => {
         <p>전화번호</p>
           <div onClick={()=>{navigate("/editprofile/call")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#A67EED"}}/></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3"}}/></p>
           </div>
         </div>
       </TypeDiv>
@@ -92,7 +92,7 @@ const DetailProfile = () => {
         <p>이메일</p>
           <div onClick={()=>{navigate("/editprofile/mail")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#A67EED"}} /></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3"}} /></p>
           </div>
         </div>
       </TypeDiv>
@@ -103,9 +103,9 @@ const DetailProfile = () => {
 export default DetailProfile;
 
 const TypeDiv = styled.div`
-border-bottom: 1px solid #F5EAFB;
+border-bottom: 1px solid #D9DCFB;
 width: 90%;
-margin: 0 auto;
+margin: 20px auto;
 `
 
 const ImgArea = styled.div`
