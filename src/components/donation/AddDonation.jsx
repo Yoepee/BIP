@@ -133,9 +133,9 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   console.log(imgList)
   console.log(donate.imgUrlList)
   return (
-    <div style={{ width: "80%", margin: "0 auto"}}>
+    <div style={{ width: "70%", margin: "0 auto", minWidth: "500px",maxWidth: "800px"}}>
       {openAddr ?
-        <div style={{ position: "relative", justifyContent: "center" }}>
+        <div style={{ position: "relative", justifyContent: "center", width:"%", margin:"0 auto" }}>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div style={{ backgroundColor: "#D9DCFB", cursor:"pointer", fontWeight:"bold", borderRadius:"6px", padding:"3px" }}
               onClick={() => { setOpenAddr(false) }}>닫기</div>
@@ -147,22 +147,23 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
           </div>
         </div>
         : null}
-      <div>
+        <UnderLine>
         {!chkPost ?
-          <p style={{ marginBottom: "0" }} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
-          : <p style={{ marginBottom: "0" }} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          <p style={{ marginBottom: "20px" ,marginRight: "20px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          : <p style={{ marginBottom: "20px" ,marginRight: "20px"}} onClick={() => { setChkPost(!chkPost) }}>{post}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
         }
         {chkPost ?
+       
           <Category>
-            <span onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "request" }) }}>재능요청</span>
-            <span onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "donation" }) }}>재능기부</span>
+            <div onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "request" }) }}>재능요청</div>
+            <div onClick={() => { setChkPost(!chkPost); setDonate({ ...donate, board: "donation" }) }}>재능기부</div>
           </Category>
           : null}
-      </div>
-      <div>
+ 
+    
         {!chkCategory ?
-          <p style={{ marginBottom: "0" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
-          : <p style={{ marginBottom: "0" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowDownOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
+          : <p style={{ marginBottom: "20px" }} onClick={() => { setChkCategory(!chkCategory) }}>{category}<KeyboardArrowUpOutlinedIcon style={{ verticalAlign: "sub" }} /></p>
         }
         {chkCategory ?
           <CategoryKind style={{ display: "flex", flexDirection: "column", borderRadius: "8px", boxShadow: "3px 3px 3px 3px #EFEEF0", width: "90px", padding: "10px", marginBottom: "10px" }}>
@@ -175,18 +176,19 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
             <span onClick={() => { setChkCategory(!chkCategory); setDonate({ ...donate, category: "etc" }) }}>기타</span>
           </CategoryKind >
           : null}
-      </div>
-      <div style={{ margin: "10px 0" }}>
-        <span style={{ marginRight: "10px" }}>포인트</span>
-        <input style={{ border: "none", outline: "none", width: "80%" }} placeholder="추가 제공할 포인트를 적어주세요" name="point" value={donate.point === 0 ? "" : donate.point} onChange={(e) => { onChangeHandler(e) }} />
-      </div>
-      <div style={{ margin: "10px 0" }}>
-        <span style={{ marginRight: "10px" }}>내용</span>
-        <input style={{ border: "none", outline: "none", width: "80%" }} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
-      </div>
-      <div>사진
-        <input style={{ marginLeft: "10px" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
-      </div>
+      </UnderLine>
+      <UnderLine>
+        <span style={{ marginBottom: "20px" }}>포인트</span>
+        <input style={{ border: "none", outline: "none", marginLeft:"10px",marginBottom: "20px" }} placeholder="추가 제공할 포인트를 적어주세요" name="point" value={donate.point === 0 ? "" : donate.point} onChange={(e) => { onChangeHandler(e) }} />
+      </UnderLine>
+      <UnderLine >
+        <span style={{ marginRight: "10px",marginBottom: "20px" }}>내용</span>
+        <input style={{ border: "none", outline: "none",marginBottom: "20px"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
+      </UnderLine>
+      <UnderLine>
+        <span style={{ marginBottom:"20px"}}>사진</span>
+        <input style={{ marginLeft: "10px",marginBottom: "20px" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
+      </UnderLine>
       {imgList.map((img) => {
           return (
             <ImgArea key={img.id}>
@@ -213,6 +215,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
             
           )
         })}
+      <When>
       <div>장소</div>
       {openAddr ? null :
         roadAddress === null ?
@@ -220,7 +223,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
             onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
           : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
       }
-      <KaKaoMap lat={lat} lng={lng} width={"400px"} height={"400px"} />
+      </When>
+      <KaKaoMap lat={lat} lng={lng} width={"380px"} height={"300px"} />
     </div>
   )
 }
@@ -228,20 +232,50 @@ export default AddDonation;
 
 const Category = styled.div`
   display: flex;
+  position : absolute;
+  align-items: center;
   flex-direction: column;
   width: 90px;
   padding: 10px;
   border-radius: 8px; 
   box-shadow:3px 3px 3px 3px #EFEEF0;
+  top: 40px;
+  cursor: pointer;
+  z-index: 10;
+  background-color: #fff;
+  div{
+ 
+  &:hover{
+    
+    cursor: pointer;
+    background-color: #3E09D1;
+    color:#fff;
+  }
+ }
 `
 const CategoryKind = styled.div`
   display: flex;
+  position : absolute;
+  align-items: center;
   flex-direction: column;
   width: 90px;
   margin-bottom:10px;
   padding: 10px;
   border-radius: 8px; 
   box-shadow:3px 3px 3px 3px #EFEEF0;
+  top: 40px;
+  left: 100px;
+  background-color: #fff;
+  z-index: 10;
+  span{
+ 
+  &:hover{
+    
+    cursor: pointer;
+    background-color: #3E09D1;
+    color:#fff;
+  }
+}
 `
 
 const ImgArea = styled.div`
@@ -262,3 +296,23 @@ position: absolute;
 margin: 2px 70px;
 padding: 0;
 `
+
+const UnderLine = styled.div`
+  
+  display: flex;
+ position: relative;
+  align-items: center;
+  border-bottom: 0.8px solid #D9DCFB;
+  margin: 5% 5% 5% 12%;
+  width: 70%;
+`
+
+
+const When = styled.div`
+  /* background-color: skyblue; */
+  width: 70%;
+  display: flex;
+  margin: 5% 5% 5% 12%;
+  justify-content: space-around;
+  align-items: center;
+`;
