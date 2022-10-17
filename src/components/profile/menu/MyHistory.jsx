@@ -36,7 +36,6 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      
       setList(res);
     });
   };
@@ -49,7 +48,6 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      
       setList(res);
     });
   };
@@ -62,7 +60,6 @@ const MyHistory = () => {
       },
     }
     ).then((res) => {
-      
       setList(res);
     });
   };
@@ -82,7 +79,7 @@ const MyHistory = () => {
   return (
     <>
     {type === "promise"?
-    <PromiseCards>
+    <div>
     {list?.data?.data.map((item) => {
         if (type === "promise") {
           return (
@@ -139,7 +136,7 @@ const MyHistory = () => {
           )
         } 
       })}
-    </PromiseCards>
+    </div>
     :<Cards>
       {list?.data?.data.map((item) => {
         if (type === "like") {
@@ -238,19 +235,6 @@ const Cards = styled.div`
     max-width :769px ;
   }
 `;
-
-const PromiseCards = styled.div`
-  width: 80%;
-  min-width: 360px;
-  max-width: 1000px;
-  margin: 30px auto;
-  
-  @media screen and (min-width: 769px) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 14px;
-  }
-`
 
 const Category = styled.div`
   padding: 5px;

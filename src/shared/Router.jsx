@@ -119,7 +119,7 @@ const Router = () => {
             
 
             eventSource.onopen = event => {
-                console.log("connection opened");
+                // console.log("connection opened");
             };
 
             eventSource.onmessage = event => {
@@ -147,7 +147,7 @@ const Router = () => {
             eventSource.onerror = event => {
                 
                 if (event.target.readyState === EventSourcePolyfill.CLOSED) {
-                    console.log("eventsource closed (" + event.target.readyState + ")");
+                    // console.log("eventsource closed (" + event.target.readyState + ")");
                 }
                 eventSource.close();
             };
