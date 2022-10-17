@@ -89,7 +89,7 @@ const DetailDonation = () => {
             RefreshToken: localStorage.getItem('RefreshToken'),
           }
         }).then((res) => {
-          console.log(res)
+          
           if (res.data.success) {
             Swal.fire(res.data.data, "　", "success");
           } else {

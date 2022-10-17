@@ -64,7 +64,7 @@ export const __removeComment = createAsyncThunk(
   "/api/comment/delete/{commentId}",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload)
+      
       const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/comments/delete/${payload}`, null, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),

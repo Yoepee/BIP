@@ -27,7 +27,7 @@ export const __addMemberName = createAsyncThunk(
   "api/friends/nickname",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload)
+      
       const data = await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/friends/nickname", payload, {
         headers: {
           Authorization: localStorage.getItem('Authorization'),

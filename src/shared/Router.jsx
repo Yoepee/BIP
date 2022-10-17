@@ -50,7 +50,7 @@ const Router = () => {
                 RefreshToken: localStorage.getItem('RefreshToken'),
             }
         }).then((res) => {
-            console.log(res)
+            
         })
     }
 
@@ -104,8 +104,6 @@ const Router = () => {
             }
         }).then((res)=>{
         // if(res.data.data){}
-        console.log("매번 실행되는지");
-        console.log("listening", listening);
 
         if (!listening) {
             eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe`,{
@@ -118,14 +116,14 @@ const Router = () => {
 
             msetEventSource(eventSource);
 
-            console.log("eventSource", eventSource);
+            
 
             eventSource.onopen = event => {
                 console.log("connection opened");
             };
 
             eventSource.onmessage = event => {
-                console.log("result", event.data);
+                
                 setData(old => [...old, event.data]);
                 setValue(event.data);
                 // 최초 입장 메세지 출력 x
@@ -147,7 +145,7 @@ const Router = () => {
             };
 
             eventSource.onerror = event => {
-                console.log(event.target.readyState);
+                
                 if (event.target.readyState === EventSourcePolyfill.CLOSED) {
                     console.log("eventsource closed (" + event.target.readyState + ")");
                 }
@@ -159,7 +157,7 @@ const Router = () => {
 
         return () => {
             eventSource.close();
-            console.log("eventsource closed");
+            
         };
         })
 

@@ -104,7 +104,7 @@ const Chat = () => {
         RefreshToken: localStorage.getItem('RefreshToken'),
       },
       debug: function (str) {
-        console.log(str);
+        
       },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
@@ -140,7 +140,6 @@ const Chat = () => {
   const subscribe = () => {
     client.current.subscribe(`/sub/chat/room/${id}`, function (chat) {
       let content = JSON.parse(chat.body);
-      console.log(content);
       setMessages((_messages) => [
         ..._messages,
         { message: content.message, sender: content.sender, sendTime: content.sendTime },
@@ -213,8 +212,6 @@ const Chat = () => {
       submit();
     }
   }
-  console.log(messages);
-  console.log(chatList)
   return (
     <>
       <Wrap>

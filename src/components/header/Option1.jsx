@@ -33,7 +33,7 @@ const Option1 = ({ head, payload, chk, image }) => {
     if (chk) {
       dispatch(__editNickname(payload))
         .then((response) => {
-          (console.log(response))
+          
           if (response.payload.success) {
             Swal.fire("성공적으로 변경되었습니다.", "　", "success");
           } else {
