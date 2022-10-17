@@ -199,7 +199,7 @@ const AddPromise = ({
       <Wrap>
         {/* 주소 검색창 출력 여부에 따라 표시 */}
         {openAddr ?
-          <div style={{ position: "relative", justifyContent: "center" }}>
+          <div style={{ position: "relative", justifyContent: "center", width:"80%", margin:"0 auto" }}>
             <div style={{ display: "flex", justifyContent: "flex-end", margin:"5px" }}>
               <div style={{ backgroundColor: "#D9DCFB", cursor:"pointer", fontWeight:"bold", borderRadius:"6px", padding:"3px" }}
                 onClick={() => { setOpenAddr(false) }}>닫기</div>
