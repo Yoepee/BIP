@@ -11,9 +11,10 @@ import WebHeader from "../../components/header/WebHeader";
 // 약속 추가
 const AddPromisePage = () => {
   // 서버에 약속 추가하는 내용 initialState값 request api명세서 참조
+  const now = new Date();
   const initialState = {
     title: "",
-    eventDateTime: "",
+    eventDateTime: dayjs(now).format(`YYYY-MM-DD-01-00-00`),
     place: "",
     content: "",
     point: "0",
@@ -21,8 +22,8 @@ const AddPromisePage = () => {
   }
   // 시간값 형식에 맞춰 넣기위한 초기값
   const initialState2 = {
-    hour: "",
-    min: ""
+    hour: "1",
+    min: "0"
   }
   // 생성, 수정 구분하기 위한 인자
   const { id } = useParams();
@@ -96,43 +97,7 @@ const AddPromisePage = () => {
     setTime({ ...time, [name]: value.replace(/[^0-9]/g, "") })
   }
 
-  const handleKeyPress = e => {
-    if (e.key === '1') {
-      setTime({ ...time, min: 10 });
-    }else if (e.key === '2') {
-      setTime({ ...time, min: 20 });
-    }else if (e.key === '3') {
-      setTime({ ...time, min: 30 });
-    }else if (e.key === '4') {
-      setTime({ ...time, min: 40 });
-    }else if (e.key === '5') {
-      setTime({ ...time, min: 50 });
-    }else if (e.key === '0') {
-      setTime({ ...time, min: 0 });
-    }else if (e.key === '7') {
-      setTime({ ...time, min: 0 });
-    }else if (e.key === '8') {
-      setTime({ ...time, min: 0 });
-    }else if (e.key === '9') {
-      setTime({ ...time, min: 0 });
-    }
-  }
-  // 60분 이상의 시간 입력 제한(강제 할당)
-  if (Number(time.min) > 59) {
-    setTime({ ...time, min: 50 })
-  }else if(Number(time.min) < 60 && Number(time.min) > 50 ){
-    setTime({ ...time, min: 50 });
-  }else if(Number(time.min) < 50 && Number(time.min) > 40 ){
-    setTime({ ...time, min: 40 });
-  }else if(Number(time.min) < 40 && Number(time.min) > 30 ){
-    setTime({ ...time, min: 30 });
-  }else if(Number(time.min) < 30 && Number(time.min) > 20 ){
-    setTime({ ...time, min: 20 });
-  }else if(Number(time.min) < 20 && Number(time.min) > 10 ){
-    setTime({ ...time, min: 10 });
-  }else if(Number(time.min) < 10 && Number(time.min) > 0){
-    setTime({ ...time, min: "" });
-  }
+  
   // 12시 이후의 시간 입력 제한(강제 할당)
   if (Number(time.hour) > 12) {
     setTime({ ...time, hour: 12 })
@@ -147,7 +112,7 @@ const AddPromisePage = () => {
       {/* 헤더 옵션 2 */}
       <Header head={"약속하기"} option={2} payload={promise} />
       {/* 약속 생성 수정할 수 있는 값 전달 */}
-      <AddPromise promise={promise} setPromise={setPromise} onChangeHandler={onChangeHandler} onChange={onChange} time={time} am={am} setAm={setAm} handleKeyPress={handleKeyPress}/>
+      <AddPromise promise={promise} setPromise={setPromise} onChangeHandler={onChangeHandler} onChange={onChange} time={time} am={am} setAm={setAm} setTime={setTime}/>
     </>
   )
 }
