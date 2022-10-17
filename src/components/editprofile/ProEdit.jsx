@@ -25,7 +25,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const [ment, setMent] = useState("");
   // 입력코드 입력창 출력여부 및 버튼 조정
   const [visible, setVisible] = useState(false);
-  const [chkBtn, setChkBtn] = useState("인증하기 받기")
+  const [chkBtn, setChkBtn] = useState("인증번호 받기")
 
   const __isToken = async () => {
     await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
@@ -51,7 +51,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       } else {
         setMent("")
       }
-      // 전화번호
+      // 휴대폰 번호
     } else if (type === "call") {
       if (regexPhone.test(set.phonenumber)) {
         __chkPhone({ value: set.phonenumber })
@@ -212,8 +212,8 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
         // 휴대폰번호 수정 시에 동작하는 내용
         : type === "call" ?
           <>
-            <p>전화번호</p>
-            <Input placeholder="전화번호"
+            <p>휴대폰 번호</p>
+            <Input placeholder="예시) 01012345678"
               name="phonenumber"
               type="text"
               value={set.phonenumber}
