@@ -186,13 +186,15 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
         <input style={{ border: "none", outline: "none",marginBottom: "20px"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </UnderLine>
       <UnderLine>
+        <div>
+        <div style={{display:"flex"}}>
         <span style={{ marginBottom:"20px"}}>사진</span>
         <input style={{ marginLeft: "10px",marginBottom: "20px" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
-      </UnderLine>
-      {imgList.map((img) => {
+        </div>
+        <div style={{display:"flex"}}>
+        {imgList.map((img) => {
           return (
             <ImgArea key={img.id}>
-              <div style={{ display:"flex", alignItems:"start"}}>
               <img src={donate.imgUrlList[img.id]}  style={{ width:"90px", height:"90px", objectFit: "cover"}}/>
               <Btn onClick={() => {
                 let count = img.id;
@@ -210,11 +212,12 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
                 urlList.splice(img.id, 1);
                 setDonate({ ...donate, imgUrlList: [...urlList] });
               }}><CloseIcon style={{fontSize:"12px"}}/></Btn>
-            </div>
-          </ImgArea>
-            
+          </ImgArea>            
           )
         })}
+        </div>    
+        </div>  
+        </UnderLine>
       <When>
       <div>장소</div>
       {openAddr ? null :
@@ -268,8 +271,7 @@ const CategoryKind = styled.div`
   z-index: 10;
   div{
  
-  &:hover{
-    
+  &:hover{    
     cursor: pointer;
     background-color: #3E09D1;
     color:#fff;
@@ -278,11 +280,9 @@ const CategoryKind = styled.div`
 `
 
 const ImgArea = styled.div`
-display: inline-block;
-position : relative;
-width:90px; 
-margin-top:10px; 
-margin-right: 10px;
+ display: flex;
+ align-items: start;
+ margin-bottom: 20px;
 `
 
 const Btn = styled.button`
@@ -299,17 +299,17 @@ padding: 0;
 const UnderLine = styled.div`
   
   display: flex;
- position: relative;
+  position: relative;
   align-items: center;
   border-bottom: 0.8px solid #D9DCFB;
   margin: 5% 5% 5% 12%;
-  width: 70%;
+  width: 80%;
 `
 
 
 const When = styled.div`
   /* background-color: skyblue; */
-  width: 70%;
+  width: 80%;
   display: flex;
   margin: 5% 5% 5% 12%;
   justify-content: space-around;
