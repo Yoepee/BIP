@@ -40,10 +40,7 @@ const CommentFooter = () =>{
           <CommentInput  onKeyPress={handleKeyPress} placeholder="댓글 작성" name="content" value={comment.content} onChange={onChangeHandler}/>
       </div>
       
-      <CommentBtn 
-      onClick={()=>{
-        AddComment()
-      }}>작성</CommentBtn>
+      <CommentBtn onClick={()=>{ AddComment() }}>작성</CommentBtn>
     </CommentWrap>
   )
 }
@@ -67,13 +64,16 @@ const CommentInput = styled.input`
 `
 
 const CommentBtn = styled.div`
+  background-color: #D9DCFB;
   margin-left: 10px;
   padding:0 3.5%;
   width:35px; 
   line-height: 35px;
-  border: 1px solid black;
+  border: 1px solid #FAFAFA;
   border-radius: 20px;
   font-size: 15px;
+  font-weight: bold;
+  text-align: center;
   cursor:pointer;
   &:hover{
     color:white;
