@@ -176,13 +176,13 @@ const DetailDonation = () => {
             </div>
             <div style={{ display: "flex" }}>
               {like ?
-                <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __unLike();dispatch(unlikeDonate()); }) }}>
+                <div style={{ display: "flex", margin: "15px", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __unLike();dispatch(unlikeDonate()); }) }}>
                   <div style={{ color: "red" }}><FavoriteIcon /></div>
                   공감하기
                 </div>
-                : <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __doLike();dispatch(likeDonate()); }) }}><FavoriteBorderIcon />공감하기</div>
+                : <div style={{ display: "flex", margin: "15px", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __doLike();dispatch(likeDonate()); }) }}><FavoriteBorderIcon />공감하기</div>
               }
-              <div style={{ display: "flex", margin: "15px", color: "#9e9e9e" }} onClick={() => { __isToken().then(() => { __notifyPost() }) }}>🚨신고하기</div>
+              <div style={{ display: "flex", margin: "15px", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __notifyPost() }) }}>🚨신고하기</div>
             </div>
           </div>
         </div>
