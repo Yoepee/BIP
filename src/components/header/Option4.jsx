@@ -9,10 +9,8 @@ import { useDispatch } from 'react-redux';
 import { clearSearch } from '../../redux/modules/searchMember';
 
 {/* 친구목록 제목 검색 친구추가 메뉴(친구수정(별칭), 친구삭제)) */}
-const Option4 = ({ head, setType, type }) => {
+const Option4 = ({ head, setType, type, chk, setChk, chktype, setChktype }) => {
   const dispatch = useDispatch();
-  const [chk, setChk] = useState(0);
-  const [chktype, setChktype] = useState("name");
   return (
     <>{chk===3?
       <AddMemberArea>

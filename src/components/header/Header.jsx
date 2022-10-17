@@ -18,7 +18,7 @@ import Option9 from './Option9';
 // image - 프로필 수정시 보내지는 image값
 // type, setType - 헤더에서 기능을 나누는 변수값
 // onChangeHandle - 헤더에서 입력창 수정구문이 생길 때 사용하는 변수 값
-const Header = ({ head, option, payload, chk, image, setType, type, onChangeHandle}) => {
+const Header = ({ head, option, payload, chk, setChk, image, setType, type, onChangeHandle, chktype, setChktype}) => {
   
   return (
     <div style={{ display: "flex", margin:"0 auto", width:"90%" }}>
@@ -49,7 +49,7 @@ const Header = ({ head, option, payload, chk, image, setType, type, onChangeHand
       
       {/* 친구목록 제목 검색 친구추가 메뉴(친구수정(별칭), 친구삭제)) */}
       {option===4?
-      <Option4 head={head} setType={setType} type={type}/>
+      <Option4 head={head} setType={setType} type={type} chk={chk} setChk={setChk} chktype={chktype} setChktype={setChktype}/>
       :null}
 
        {/* 친구추가 뒤로가기(친구) 제목 완료 */}
