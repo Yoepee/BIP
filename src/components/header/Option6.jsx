@@ -61,6 +61,11 @@ const Option6 = ({ head }) => {
             localStorage.removeItem('name');
             navigate("/intro")
             remove();
+          }else{
+            localStorage.removeItem('Authorization');
+            localStorage.removeItem('RefreshToken');
+            localStorage.removeItem('name');
+            navigate("/intro")
           }
         })
       } else {
@@ -82,7 +87,11 @@ const Option6 = ({ head }) => {
           localStorage.removeItem('name');
           navigate("/intro")
         } else {
-          alert(response.data.data)
+          localStorage.removeItem('Authorization');
+            localStorage.removeItem('RefreshToken');
+            localStorage.removeItem('name');
+            navigate("/intro")
+          Swal.fire(response.data.data,"　","error")
         }
       })
     } else {
@@ -109,7 +118,14 @@ const Option6 = ({ head }) => {
           border: "1px solid #292929"
         }}>
           <OptionMenu
-            onClick={() => { __isToken().then(() => { logout(); }) }}>로그아웃</OptionMenu>
+            onClick={() => { __isToken()
+              .then((res) => { console.log(res);logout(); })
+            .catch((error)=>{
+            localStorage.removeItem('Authorization');
+            localStorage.removeItem('RefreshToken');
+            localStorage.removeItem('name');
+            navigate("/intro")
+            }) }}>로그아웃</OptionMenu>
           <OptionMenu
             onClick={() => { __isToken().then(() => { quit(); }) }}>회원 탈퇴</OptionMenu>
           <OptionMenu
