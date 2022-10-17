@@ -16,6 +16,7 @@ import DaumPostcode from 'react-daum-postcode';
 import { useParams } from "react-router-dom";
 // 달력 날짜표시 한국어 세팅
 import 'dayjs/locale/ko'
+import '../calendar/Month.css';
 dayjs.locale("ko");
 
 // promise = 약속 생성시 필요 값 (출력)
@@ -358,7 +359,8 @@ const AddPromise = ({
         {/* 달력 아이콘 클릭시 출력되는 달력 */}
         {check ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Calendar onChange={setDate} value={date} name="birthDate" />
+            <Calendar onChange={setDate} value={date} name="birthDate" 
+             formatDay={(locale, date) => date.toLocaleString("en", {day: "numeric"})}/>
           </div>
         ) : null}
         {/* 장소 입력인데 동일 styled적용 확인후 수정필요 여부 결정 */}
