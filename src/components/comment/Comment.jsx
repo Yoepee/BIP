@@ -170,10 +170,10 @@ const Comment = () => {
           if (comment.id === chkEdit) {
             return (
               <CommentCard key={comment.id}>
-                <div style={{ display: "flex", fontWeight: "bold", marginLeft: "10px" }}> <div>{comment.nickname}</div> {comment.nickname === localStorage.getItem("name") ?
+                <div style={{ display: "flex", marginLeft: "10px" }}> <div>{comment.nickname}</div> {comment.nickname === localStorage.getItem("name") ?
                   <div style={{ display: "flex", marginLeft: "auto" }}>
-                    <div onClick={() => { __isToken().then(()=>{editComment(comment.id)}) }}><CheckIcon /></div>
-                    <div onClick={() => { setChkEdit(0) }}><CloseIcon /></div>
+                    <div style={{paddingRight:"2px", cursor:"pointer", color:"green"}} onClick={() => { __isToken().then(()=>{editComment(comment.id)}) }}><CheckIcon /></div>
+                    <div style={{paddingRight:"2px", cursor:"pointer", color:"tomato"}} onClick={() => { setChkEdit(0) }}><CloseIcon /></div>
                   </div>
                   : null} </div>
 
@@ -184,33 +184,33 @@ const Comment = () => {
           } else {
             return (
               <CommentCard key={comment.id}>
-                <div style={{ display: "flex", fontWeight: "bold", marginLeft: "10px" }}>
-                  <div onClick={() => {
+                <div style={{ display: "flex", marginLeft: "10px" }}>
+                  <Nickname onClick={() => {
                     if (chkNick !== 0) { setChkNick(0) }
                     else { setChkNick(comment.id); setNotify(0); }
-                  }}>{comment.nickname}</div>
+                  }}>{comment.nickname}</Nickname>
                   {detailDonation?.data?.data?.nickname === localStorage.getItem("name") ?
-                    chkNick === comment.id && (<Modaldiv>
+                    chkNick === comment.id && (<ModalLeft>
                       <OptionMenu onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</OptionMenu>
                       <OptionMenu onClick={() => { __isToken().then(()=>{__givePoint(comment.nickname)}) }}>포인트 전달</OptionMenu>
-                    </Modaldiv>)
-                    : chkNick === comment.id && (<Modaldiv>
+                    </ModalLeft>)
+                    : chkNick === comment.id && (<ModalLeft>
                       <OptionMenu onClick={() => { __isToken().then(()=>{__addMember(comment.nickname)}) }}>친구추가</OptionMenu>
-                    </Modaldiv>)}
+                    </ModalLeft>)}
 
                   {comment.nickname === localStorage.getItem("name") ?
                     <div style={{ display: "flex", marginLeft: "auto" }}>
-                      <div onClick={() => { setChkEdit(comment.id); setEdit({ ...edit, content: comment.content }) }}><EditIcon /></div>
-                      <div onClick={() => { __isToken().then(()=>{removeComment(comment.id)}) }}><DeleteIcon /></div>
-                      <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
+                      <div style={{paddingRight:"2px", cursor:"pointer", color:"#6B68F3"}} onClick={() => { setChkEdit(comment.id); setEdit({ ...edit, content: comment.content }) }}><EditIcon /></div>
+                      <div style={{paddingRight:"2px", cursor:"pointer", color:"#6B68F3"}} onClick={() => { __isToken().then(()=>{removeComment(comment.id)}) }}><DeleteIcon /></div>
+                      <div style={{paddingRight:"2px", cursor:"pointer", color:"#6B68F3"}} onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
                     </div>
                     : <div style={{ display: "flex", marginLeft: "auto" }}>
-                      <div onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
+                      <div style={{paddingRight:"2px", cursor:"pointer", color:"#6B68F3"}} onClick={() => { if (notify !== 0) { setNotify(0) } else { setNotify(comment.id);setChkNick(0); } }}><MoreVertIcon /></div>
                     </div>}
                   {notify === comment.id ?
-                    <Modaldiv>
+                    <ModalRight>
                       <OptionMenu onClick={()=>{__isToken().then(()=>{__notifyComment(comment.id)})}}>신고하기</OptionMenu>
-                    </Modaldiv>
+                    </ModalRight>
                     : null}
                 </div>
                 <div style={{ marginLeft: "10px" }}>{comment.content}</div>
@@ -244,7 +244,7 @@ const EditInput = styled.input`
   outline: none;  
   height: 35px;
   border-radius:10px;
-  
+
 `
 const CommentCard = styled.div`
   display: flex; 
@@ -255,19 +255,42 @@ const CommentCard = styled.div`
   border: none; 
   border-radius: 8px;
   box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+  position: relative;
+`
+const Nickname = styled.div`
+  cursor: pointer;
+  font-weight: bold;
+  &:hover {
+    color: #3E09D1;
+  }
 `
 
-const Modaldiv = styled.div`
-position:relative;
-border: none; 
-border-radius: 8px;
+const ModalLeft = styled.div`
+background-color: #FAFAFA;
+position: absolute;
+top: 36px;
+border: 1px solid #e0e0e0; 
 box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
-`
-const OptionMenu = styled.div`
-cursor: pointer;
-padding:10px 5px;
 border-radius: 8px;
+`
+const ModalRight = styled.div`
+background-color: #FAFAFA;
+position: absolute;
+top: 36px;
+right: 10px;
+border: 1px solid #e0e0e0; 
+box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+border-radius: 8px;
+`
+
+const OptionMenu = styled.div`
+font-size: 14px;
+cursor: pointer;
+padding:5px 8px;
+text-align: center;
+/* border-radius: 8px; */
 &:hover{
+  border-radius: 7px;
   background-color:#3E09D1;
   color:white;
 }`

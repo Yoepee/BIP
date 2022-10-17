@@ -35,7 +35,7 @@ const DetailProfile = () => {
       });
     },[dispatch])
   return (
-    <div style={{margin:"40px"}}>
+    <div style={{margin:"40px auto", maxWidth:"1000px"}}>
       <div style={{display: "flex", width:"80%", marginLeft:"5%", marginBottom:"30px"}}>
      
           {!profile?.data?.data?.profileImgUrl ? (
@@ -65,7 +65,7 @@ const DetailProfile = () => {
           <p>사진</p>
           <div onClick={()=>{navigate("/editprofile/picture")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex"}}>
-            <p><EditOutlinedIcon style={{color:"#6B68F3"}}/></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3", cursor:"pointer"}}/></p>
           </div>
         </div>
       </TypeDiv>
@@ -74,7 +74,7 @@ const DetailProfile = () => {
           <p>닉네임</p>
           <div onClick={()=>{navigate("/editprofile/name")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#6B68F3"}} /></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3", cursor:"pointer"}} /></p>
           </div>
         </div>
       </TypeDiv>
@@ -83,7 +83,7 @@ const DetailProfile = () => {
         <p>전화번호</p>
           <div onClick={()=>{navigate("/editprofile/call")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#6B68F3"}}/></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3", cursor:"pointer"}}/></p>
           </div>
         </div>
       </TypeDiv>
@@ -92,7 +92,7 @@ const DetailProfile = () => {
         <p>이메일</p>
           <div onClick={()=>{navigate("/editprofile/mail")}}
           style={{ marginLeft: "auto", alignItems: "center", display: "flex" }}>
-            <p><EditOutlinedIcon style={{color:"#6B68F3"}} /></p>
+            <p><EditOutlinedIcon style={{color:"#6B68F3", cursor:"pointer"}} /></p>
           </div>
         </div>
       </TypeDiv>
