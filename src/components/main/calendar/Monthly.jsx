@@ -47,6 +47,13 @@ const Calendar = ({ setDay, day }) => {
     });
   }, [selectDate])
 
+  useEffect(()=>{
+    __isToken().then(() => {
+      dispatch(__getMonth({ unit: "month", date: viewDate.format('YYYY-MM-DD-00-00-00') }));
+      dispatch(__getPromise({ unit: "day", date: viewDate.format('YYYY-MM-DD-00-00-00') }))
+    });
+  },[viewDate])
+
   let e = monthList?.data?.data?.map((a) => `${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[0]}`)
   const createCalendar = () => {
     const startWeek = viewDate.startOf('month').week();
@@ -66,9 +73,10 @@ const Calendar = ({ setDay, day }) => {
             let isSelected = selectDate.format('YYYYMMDD') === current.format('YYYYMMDD') ? 'selected' : '';
             let isToday = today.format('YYYYMMDD') === current.format('YYYYMMDD') ? 'today' : '';
             let isNone = current.format('MM') === viewDate.format('MM') ? '' : 'none';
-            let test = monthList?.data?.data?.map((a) => `${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[0]}`)
+            let test = monthList?.data?.data?.map((a) => {
+              if(a.numberOfEventInToday!==0){
+                return(`${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[0]}`)}})
             let isPromise = test?.find((x) => x === String(current.format("DD-MM-YYYY"))) ? 'promise' : "";
-
             return (
               <div className={`box`} key={`${week}_${i}`} >
                 <div className={`text ${isSelected} ${isToday} ${isNone} ${isPromise}`} onClick={() => { setSelectDate(current) }}>
