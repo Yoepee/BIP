@@ -327,7 +327,7 @@ const AddPromise = ({
           <Select  onChange={(e)=>{setTime({...time,hour:e.target.value})}}>
             {hourList.map((hour)=>{
               return(
-                <option value={hour}>{hour}</option>
+                <option style={{background:"white"}} value={hour}>{hour}</option>
               )
             })}
           </Select>
@@ -337,7 +337,7 @@ const AddPromise = ({
           <Select  onChange={(e)=>{setTime({...time,min:e.target.value})}}>
             {minList.map((min)=>{
               return(
-                <option value={min}>{min}</option>
+                <option style={{background:"white"}} value={min}>{min}</option>
               )
             })}
           </Select>
