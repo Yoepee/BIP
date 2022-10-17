@@ -45,9 +45,6 @@ export const __CheckIn = createAsyncThunk(
   }
 );
 
-
-
-
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const checkIn = createSlice({
   name: "checkIn",

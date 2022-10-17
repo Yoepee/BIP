@@ -136,7 +136,6 @@ export const comment = createSlice({
     },
     [__removeComment.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      console.log(action.payload)
       const index = state.data.data.findIndex(user => user.id === action.payload);
       state.data.data.splice(index, 1, { ...state.data.data[index], content: "댓글 작성자가 삭제한 댓글입니다." })
     },
