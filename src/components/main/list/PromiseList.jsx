@@ -83,7 +83,12 @@ const PromiseList = ({ day }) => {
                   {promise.weatherResponseDto.sky === "돌풍" && <img src={돌풍} width={"70px"} height={"70px"} />}
                   {promise.weatherResponseDto.sky === "폭풍" && <img src={돌풍} width={"70px"} height={"70px"} />}
                   <div style={{ display: "flex", marginTop: "10px" }}>
+                    {/* <p>날씨 : {promise.weatherResponseDto.sky}</p> */}
                     <p> {promise.weatherResponseDto.temperature}　</p>
+                    {/* <p>
+                      최고/최저 : {promise.weatherResponseDto.minTemp} /{" "}
+                      {promise.weatherResponseDto.maxTemp}{" "}
+                    </p> */}
                     <p>💧{promise.weatherResponseDto.probability}</p>
                   </div>
                 </div>
@@ -92,6 +97,7 @@ const PromiseList = ({ day }) => {
                     <p style={{ fontSize: "15px", fontWeight: "bold" }}>
                       {promise.title}
                     </p>
+                    {/* 포인트 받아야할듯 */}
                     <People>
                       <PersonIcon />
                     </People>

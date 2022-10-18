@@ -138,8 +138,12 @@ const MyHistory = () => {
       })}
     </div>
     :<Cards>
-      {list?.data?.data?.length === 0?<div style={{display:"flex", margin:"0 auto", width:"80%"}}><p style={{margin:"0 auto"}}>관심 내역이 없습니다</p></div>:list?.data?.data.map((item) => {
-        if (type === "like") {
+      {list?.data?.data?.length === 0&& type=="like" ?<div style={{display:"flex", margin:"0 auto", width:"80%"}}><p style={{margin:"0 auto"}}>관심 내역이 없습니다</p></div>:null}
+      {list?.data?.data?.length === 0&& type=="write"?<div style={{display:"flex", margin:"0 auto", width:"80%"}}><p style={{margin:"0 auto"}}>작성 내역이 없습니다</p></div>:null}
+     
+      {list?.data?.data.map((item) => {
+        if (type === "like") { 
+
           return (
             <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "10px" }} key={item.id}
               onClick={() => { navigate(`/detaildonation/${item.id}`) }}>
@@ -178,6 +182,7 @@ const MyHistory = () => {
             </div>
           )
         } else {
+        
           return (
             <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "10px" }} key={item.id}
               onClick={() => { navigate(`/detaildonation/${item.id}`) }}>
