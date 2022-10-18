@@ -194,6 +194,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
     <div style={{ display: "flex", flexDirection: "column", margin: "0 auto", width: "76%" }}>
       {/* 닉네임 수정 시에 동작하는 내용 */}
       {type === "name" ?
+      <>
         <div style={{ margin: "0 auto", width: "100%", borderBottom: "1px solid #D9DCFB" }}>
           <p>닉네임</p>
           <input style={{ outline: "none", border: "none" }} placeholder="닉네임"
@@ -201,14 +202,15 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
             type="text"
             value={set.value}
             onChange={(e) => { onChangeHandler(e) }} />
-          {/* 닉네임 정규식 유효성 검사 */}
-          {set.value === "" ? null : regexNickname.test(set.value) ?
+        </div>
+        {/* 닉네임 정규식 유효성 검사 */}
+        {set.value === "" ? null : regexNickname.test(set.value) ?
             // 유효성 검사 통과 시 중복검사 결과 출력
-            ment === "사용 가능한 닉네임 입니다" ?
+            ment === "사용 가능한 닉네임 입니다." ?
               (<div style={{ color: "#00766c", fontSize: "14px" }}>{ment}</div>)
               : (<div style={{ color: "red", fonSize: "14px" }}>{ment}</div>)
             : (<div style={{ color: "red", fonSize: "14px" }}>사용가능한 닉네임이 아닙니다</div>)}
-        </div>
+        </>
         // 휴대폰번호 수정 시에 동작하는 내용
         : type === "call" ?
           <>

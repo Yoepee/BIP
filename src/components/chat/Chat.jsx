@@ -76,7 +76,10 @@ const Chat = () => {
   }, []);
 
   // 인피니티 스크롤 기능 (다음페이지 데이터 받아옴)
-  const fetch = useCallback(() => { __isToken().then(() => { dispatch(__getChat({ id, page: page.current })); page.current += 1; }) }, []);
+  const fetch = useCallback(() => { 
+    __isToken().then(() => { dispatch(__getChat({ id, page: page.current })); page.current += 1; }) 
+  }, []);
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetch();
@@ -104,7 +107,6 @@ const Chat = () => {
         RefreshToken: localStorage.getItem('RefreshToken'),
       },
       debug: function (str) {
-        
       },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
@@ -200,7 +202,7 @@ const Chat = () => {
 
   };
 
-  // 엔터로 댓글쓰기
+  // 엔터로 채팅쓰기
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
       submit();

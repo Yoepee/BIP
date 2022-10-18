@@ -66,7 +66,7 @@ const CheckPhone = ({__isSSE}) => {
     setMember({ ...member, [name]: value })
   }
 
-  // 휴대폰번호 중복여부를 확인하여 결과값 출력
+  // 휴대폰번호 중복여부를 확인하여 결과값 출력 (회원가입 - 로그인 판별 함수)
   const __chkPhone = async (payload) => {
     if (regexPhone.test(member.value)) {
       await axios.post(process.env.REACT_APP_SERVER_HOST + "/api/member/chkphonenumber", payload)

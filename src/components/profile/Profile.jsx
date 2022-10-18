@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { __getProfile } from "../../redux/modules/profile";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 // 프로필 페이지
 const Profile = () => {
@@ -111,6 +112,9 @@ const Profile = () => {
             </div>
           </div>
           <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
+        </Prodiv>
+        <Prodiv style={{ flexDirection: "column", paddingLeft:"10px", paddingRight:"10px" }}>
+          <p onClick={()=>{Swal.fire("준비중입니다.")}}>이용방법</p>
         </Prodiv>
       </div>
     </Wrap>

@@ -9,7 +9,6 @@ const WebHeader = () => {
     <>
     <StWebHeader>
       <img src={logo1} width="84px" onClick={() => { navigate("/") }} style={{cursor:"pointer"}}/>
-      {/* <img src={logo2} width="100px"/> */}
       <div style={{display:"flex", paddingTop:"10px"}}>
         <div onClick={() => { navigate("/") }}>홈</div>
         <div onClick={() => { navigate("/donation") }}>재능기부</div>

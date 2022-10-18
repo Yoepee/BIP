@@ -118,6 +118,7 @@ const DetailDonation = () => {
       </div>
 
       <Card>
+        {/* 이미지 */}
         {donation?.data?.data?.imgUrlList?.map((x, i) => {
            if(donation.data.data.imgUrlList.length===3){
                 return (<Wrapper key={i}>
@@ -144,15 +145,12 @@ const DetailDonation = () => {
                     </Container4>
                   </Wrapper>)
               }
-           
-           
-
-          
         })}
+        {/* 내용 */}
         <div style={{ border: "none", fontWeight: "bold", display: "flex", justifyContent: "space-between" }}>
           <p>{donation?.data?.data?.content}</p>
           <div>
-
+        {/* 포인트 */}
             {donation?.data?.data?.point === 0 ?
               <p style={{ marginRight: "2%" }}><PointIcon>P</PointIcon>{donation?.data?.data?.point}</p>
               : null
@@ -160,7 +158,6 @@ const DetailDonation = () => {
           </div>
         </div>
         <div style={{ border: "none" }}>
-          {/* 이미지 */}
           <div>
             <div style={{ fontSize: "15px" }}>
               <div>{donation?.data?.data?.address}</div>
@@ -170,19 +167,19 @@ const DetailDonation = () => {
                 : <Map><KaKaoMap lat={donation?.data?.data?.coordinate.split(",")[0]} lng={donation?.data?.data?.coordinate.split(",")[1]} width={"340px"} height={"340px"} /></Map>}
             </div>
             <div style={{ fontSize: "14px", color: "#757575", margin: "10px 0" }}>{donation?.data?.data?.nickname}</div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div style={{ fontSize: "14px", color: "#757575" }}>관심 {donation?.data?.data?.likes} 조회수 {donation?.data?.data?.views} </div>
-              <div style={{ fontSize: "14px", color: "#757575" }}>{donation?.data?.data?.createdAt}</div>
-            </div>
             <div style={{ display: "flex" }}>
               {like ?
                 <div style={{ display: "flex", margin: "15px 0", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __unLike();dispatch(unlikeDonate()); }) }}>
                   <div style={{ color: "red" }}><FavoriteIcon /></div>
                   공감하기
                 </div>
-                : <div style={{ display: "flex", margin: "15px 15px 15px 0", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __doLike();dispatch(likeDonate()); }) }}><FavoriteBorderIcon />공감하기</div>
+                : <div style={{ display: "flex", margin: "15px 0", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __doLike();dispatch(likeDonate()); }) }}><div><FavoriteBorderIcon /></div>공감하기</div>
               }
               <div style={{ display: "flex", margin: "15px", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __notifyPost() }) }}>🚨신고하기</div>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ fontSize: "15px", color: "#757575" }}>관심 {donation?.data?.data?.likes} 조회수 {donation?.data?.data?.views} </div>
+              <div style={{ fontSize: "15px", color: "#757575" }}>{donation?.data?.data?.createdAt}</div>
             </div>
           </div>
         </div>

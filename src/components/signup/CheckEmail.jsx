@@ -150,7 +150,7 @@ const CheckEmail = () => {
           {visble && <input variant="outlined" label="인증번호" placeholder="인증번호를 입력해주세요" value={test} onKeyPress={handleKeyPress} onChange={(e) => { setTest(e.target.value) }} minLength={6} maxLength={6} />}
           {/* 인증번호 오류 시 경고 문구 */}
           {test === "" ? null :
-            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px", margin: "0 10%" }}>6자리 인증번호를 입력해주세요</div></>)}
+            regtest.test(test) ? null : (<><div style={{ color: "red", fonSizen: "14px" }}>6자리 인증번호를 입력해주세요</div></>)}
 
         </form>
 
@@ -190,7 +190,7 @@ const CheckEmail = () => {
             </Button>
             : <Button
               variant="contained"
-              style={{ backgroundColor: "#6D09D1" }}
+              style={{ backgroundColor: "#3E09D1" }}
               onClick={() => {
                 // 이메일 이상여부 검사
                 if (regexEmail.test(member.value)) {

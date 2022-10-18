@@ -184,7 +184,7 @@ const Member = ({ type, setType, setChk, setChktype }) => {
                 <ProfileImg src={userImg} />
                 : <ProfileImg src={friend.profileImgUrl} />
               }
-              <div style={{ fontSize: "0" }}>
+              <div>
                 {friend.nicknameByOwner === null ?
                   // 닉네임 출력
                   <Username>{friend.nicknameByFriend}</Username>

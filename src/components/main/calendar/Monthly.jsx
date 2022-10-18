@@ -54,7 +54,6 @@ const Calendar = ({ setDay, day }) => {
     });
   },[viewDate])
 
-  let e = monthList?.data?.data?.map((a) => `${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[0]}`)
   const createCalendar = () => {
     const startWeek = viewDate.startOf('month').week();
     const endWeek = viewDate.endOf('month').week() === 1 ? 53 : viewDate.endOf('month').week();

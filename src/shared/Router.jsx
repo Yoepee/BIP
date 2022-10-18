@@ -31,33 +31,16 @@ const Router = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        __isToken();
-    }, [])
-
     const [listening, setListening] = useState(false);
-    const [data, setData] = useState([]);
-    const [value, setValue] = useState(null);
 
     const [meventSource, msetEventSource] = useState(undefined);
 
     let eventSource = undefined;
 
-    const remove = async () => {
-        const data = await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/sse/delete`, {
-            headers: {
-                Authorization: localStorage.getItem('Authorization'),
-                RefreshToken: localStorage.getItem('RefreshToken'),
-            }
-        }).then((res) => {
-            
-        })
-    }
-
 
     useEffect(() => {
         let array = window.location.href.split("/");
-        let index = array.findIndex((item) => item === "localhost:3000");
+        let index = array.findIndex((item) => item === "localhost:3000" || item === "berryimportantpromise.com");
         if (array[index + 1] !== "login" && array[index + 1] !== "signup" && array[index + 1] !== "intro") {
             if (localStorage.getItem("Authorization") === null) {
                 navigate("/intro")
@@ -103,13 +86,6 @@ const Router = () => {
     }
 
     const __isSSE= async () => {
-        await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/sse/getSubInfo`, {
-            headers: {
-                Authorization: localStorage.getItem('Authorization'),
-                RefreshToken: localStorage.getItem('RefreshToken'),
-            }
-        }).then((res)=>{
-        // if(res.data.data){}
 
         if (!listening) {
             eventSource = new EventSourcePolyfill(process.env.REACT_APP_SERVER_HOST + `/api/member/subscribe`,{
@@ -123,18 +99,13 @@ const Router = () => {
             msetEventSource(eventSource);
 
             
-
             eventSource.onopen = event => {
                 // console.log("connection opened");
             };
 
             eventSource.onmessage = event => {
-                
-                setData(old => [...old, event.data]);
-                setValue(event.data);
                 // 최초 입장 메세지 출력 x
-                if(event.data === "입장"){
-                }
+                if(event.data === "입장"){}
                 else{
                 if (Notification.permission !== "granted") {
                     Notification.requestPermission().then((permission) => {
@@ -165,7 +136,6 @@ const Router = () => {
             eventSource.close();
             
         };
-        })
 
     }
 
