@@ -96,8 +96,8 @@ const PromiseLeader = () => {
       {promise?.data?.data?.map((member) => {
         if (promise?.data?.data?.length === 1) {
           return (
-            <div>
-              다른 멤버가 없습니다.
+            <div style={{display:"flex", margin:"0 auto", width:"80%"}}>
+              <p style={{margin:"0 auto"}}>다른 멤버가 없습니다</p>
             </div>
           )
         }
@@ -105,10 +105,10 @@ const PromiseLeader = () => {
           return;
         } else {
           return (
-            <div style={{ display: "flex", border: "1px solid black", margin: "10px" }} key={member.id}>
+            <Card  key={member.id}>
               {member.profileImageUrl === null ?
-                <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{ width: "50px" }} />
-                : <img src={member.profileImageUrl} style={{ width: "50px" }} />
+                <img src={process.env.PUBLIC_URL + `/assets/user_svg.svg`} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px", backgroundColor:"#C7FEC1"}} />
+                : <img src={member.profileImageUrl} style={{width:"50px", height:"50px",  borderRadius:"50%",margin:"15px",  backgroundColor:"#C7FEC1"}} />
               }
               {member.nicknameByOwner === null ?
                 <p>{member.nicknameByFriend}</p>
@@ -126,7 +126,7 @@ const PromiseLeader = () => {
                   }
                 })
               }}>선택</AddFriend>
-            </div>
+            </Card>
           )
         }
       })}
@@ -137,11 +137,28 @@ const PromiseLeader = () => {
 export default PromiseLeader;
 
 const AddFriend = styled.p`
+display: flex;
 margin-left:auto;
-margin-right:2%;
-background-color:#6D09D1;
+width: 45px;
+height: 22px;
+margin-right:20px;
+align-items: center;
+justify-content: center;
+background-color:#3E09D1;
+font-weight: bold;
 color:white;
+padding: 10px;
 border-radius:6px;
-padding:5px;
 cursor:pointer;
+`
+
+const Card = styled.div`
+display:flex;
+height: 80px;
+border:none;
+border-radius: 8px;
+background-color: #D9DCFB;
+margin:10px auto;
+width: 400px;
+
 `
