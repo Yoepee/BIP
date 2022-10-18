@@ -28,7 +28,7 @@ const StWebHeader = styled.div`
   display: none;
   @media screen and (min-width: 769px) {
     /* background-color: pink; */
-    width: 800px;
+    width: 820px;
     display: flex;
     /* margin: 20px 20px; */
     padding: 20px 20px;

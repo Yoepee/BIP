@@ -68,16 +68,16 @@ const Option9 = ({ head }) => {
   }
   return (
     <>
-      <div onClick={() => { navigate("/donation") }}>
-        <p><ArrowBackIosNewRoundedIcon style={{ cursor:"pointer" }} /></p>
-      </div>
+      <BackIcon onClick={() => { navigate("/donation") }}>
+        <p><ArrowBackIosNewRoundedIcon style={{ color: "#6B68F3", cursor:"pointer" }} /></p>
+      </BackIcon>
       <div style={{ marginLeft: "1%", fontWeight: "bold", fontSize: "20px" }}>
         <p style={{ marginTop: "13px" }}>{head}</p>
       </div>
       <div style={{ marginLeft: "auto", marginRight: "2%", display: "flex" }}>
         {donate?.data?.data?.nickname === localStorage.getItem("name") ?
           <div onClick={() => { setChk(!chk) }} style={{ marginRight: "2%" }}>
-            <p style={{ color: "#6B68F3" }}><MoreVertIcon /></p>
+            <p style={{ color: "#6B68F3", cursor:"pointer" }}><MoreVertIcon /></p>
           </div>
           : null}
         {chk == 1 ?
@@ -113,3 +113,10 @@ cursor: pointer;
   background-color:#6B68F3;
   color:white;
 }`
+
+const BackIcon = styled.div`
+  /* background-color: pink; */
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+`
