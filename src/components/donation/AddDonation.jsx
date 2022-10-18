@@ -4,6 +4,7 @@ import DaumPostcode from 'react-daum-postcode';
 import axios from "axios";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from "styled-components"
 import { useParams } from "react-router-dom";
@@ -92,6 +93,9 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
   }
 
   const onChange = async (e) => {
+    if(e.target.files[0]===undefined){
+      return;
+    }
     if(donate.imgUrlList.length===4){
       e.preventDefault();
       Swal.fire("사진은 최대 4장까지 입니다.","　","error")
@@ -194,13 +198,17 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
         <div>
         <div style={{display:"flex"}}>
         <span style={{ marginBottom:"20px"}}>사진</span>
-        <input style={{ marginLeft: "10px",marginBottom: "20px" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
+        <STcamera className="input_file_button" htmlFor="input_file">
+          <CameraAltIcon fontSize="large" />
+          <div style={{color:"rgb(133, 133, 133)", marginLeft:"5px", marginTop:"5px", fontSize:"13px"}}>사진은 최소 0장 ~ 최대 4장까지 올리실 수 있습니다</div>
+        </STcamera>
+        <input style={{ marginLeft: "10px",marginBottom: "20px", display:"none" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
         </div>
         <div style={{display:"flex"}}>
         {imgList.map((img) => {
           return (
             <ImgArea key={img.id}>
-              <img src={donate.imgUrlList[img.id]}  style={{ width:"90px", height:"90px", objectFit: "cover"}}/>
+              <img src={donate.imgUrlList[img.id]}  style={{ width:"90px", height:"90px", objectFit: "cover", margin:"10px 10px 0 0"}}/>
               <Btn onClick={() => {
                 let count = img.id;
                 let copy = [...imgList];
@@ -319,3 +327,10 @@ const When = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
+const STcamera = styled.label`
+margin-left : 20px;
+color: #D9DCFB;
+cursor:pointer;
+display:flex;
+`
