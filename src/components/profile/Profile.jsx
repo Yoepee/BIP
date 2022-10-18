@@ -85,19 +85,19 @@ const Profile = () => {
             <Btn onClick={() => { navigate("/profile/history/like") }}>
               <label>
                 <IconBtn><FavoriteIcon /></IconBtn>
-                <p style={{textAlign:"center", fontSize:"14px"}}>관심목록</p>
+                <p style={{textAlign:"center", fontSize:"14px"}}>관심 목록</p>
               </label>
             </Btn>
             <Btn onClick={() => { navigate("/profile/history/promise") }}>
               <label>
                 <IconBtn><ReceiptIcon /></IconBtn>
-                <p style={{textAlign:"center", fontSize:"14px"}}>약속내역</p>
+                <p style={{textAlign:"center", fontSize:"14px"}}>지난 약속</p>
               </label>
             </Btn>
             <Btn onClick={() => { navigate("/profile/history/write") }}>
               <label>
-                <IconBtn><VolunteerActivismIcon /></IconBtn>
-                <p style={{textAlign:"center", fontSize:"14px"}}>작성목록</p>
+                <IconBtn style={{}}><VolunteerActivismIcon/></IconBtn>
+                <p style={{textAlign:"center", fontSize:"14px"}}>기부 작성 목록</p>
               </label>
             </Btn>
           </BtnSet>
@@ -187,6 +187,7 @@ const IconBtn = styled.div`
   height: 70px;
   color:white;
   cursor:pointer;
+  margin: auto;
 `
 
 const AddCredit = styled.button`
