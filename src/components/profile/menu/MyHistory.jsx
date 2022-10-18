@@ -80,7 +80,7 @@ const MyHistory = () => {
     <>
     {type === "promise"?
     <div>
-    {list?.data?.data.map((item) => {
+    {list?.data?.data?.length === 0?<div style={{display:"flex", margin:"0 auto", width:"80%"}}><p style={{margin:"0 auto"}}>지난 약속이 없습니다</p></div>:list?.data?.data.map((item) => {
         if (type === "promise") {
           return (
             <PromiseCard
@@ -138,7 +138,7 @@ const MyHistory = () => {
       })}
     </div>
     :<Cards>
-      {list?.data?.data.map((item) => {
+      {list?.data?.data?.length === 0?<div style={{display:"flex", margin:"0 auto", width:"80%"}}><p style={{margin:"0 auto"}}>관심 내역이 없습니다</p></div>:list?.data?.data.map((item) => {
         if (type === "like") {
           return (
             <div style={{ boxShadow: "rgb(0 0 0 / 10%) 0 1px 20px 0px", borderRadius: "8px", padding: "10px 20px", marginBottom: "10px" }} key={item.id}
