@@ -60,11 +60,15 @@ const ProEditPicture = ({ setImg, img }) => {
       <div style={{ width: "100%" }}>
         <ImgArea>
           {/* 사진 미리보기 (수정 필요) */}
-          {img.imgUrl === "" ?
+          {/* {img.imgUrl === "" ?
             <img src={userImg} />
             : <img src={img.imgUrl} />
+          } */}
+          {img.imgUrl === "" ?
+            <Img src={userImg} />
+            : <Img src={img.imgUrl} />
           }
-          <label className="input_file_button" htmlFor="input_file"><CameraAltIcon fontSize="large" /></label>
+          <STcamera className="input_file_button" htmlFor="input_file"><CameraAltIcon fontSize="large" /></STcamera>
           <input type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" style={{ display: "none" }} />
         </ImgArea>
       </div>
@@ -91,13 +95,11 @@ const ImgArea = styled.div`
   height: 200px;
   border-radius: 50%;
   background-color: #26a69a;
-  img{
-    margin: 45px 30px;
-    width: 70%;
-    height: 50%;
-    
-  }
-  .input_file_button{
+}
+`;
+
+const STcamera = styled.label`
+position:relative;
   display: flex;
   justify-content: center;
   width: 1%;
@@ -107,11 +109,12 @@ const ImgArea = styled.div`
   border-radius: 50%;
   background-color: #fff;
   color:black;
-  
   cursor: pointer;
-  
-  
-}
-  
- 
+`
+
+const Img = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 `;
