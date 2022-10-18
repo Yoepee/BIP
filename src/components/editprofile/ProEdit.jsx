@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 
 // 프로필 수정 사진 외 (닉네임, 휴대폰번호, 이메일) 수정
 // set = 입력값 담는 변수
@@ -18,6 +19,8 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
   const regexEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
   // 인증코드 정규식
   const regtest = /^[0-9]{6}$/;
+
+  const profile = useSelector((state)=>state.profile);
 
   // 수정하는 값 선택 ( 닉네임, 휴대폰번호, 이메일)
   const { type } = useParams();
@@ -197,7 +200,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
       <>
         <div style={{ margin: "0 auto", width: "100%", borderBottom: "1px solid #D9DCFB" }}>
           <p>닉네임</p>
-          <input style={{ outline: "none", border: "none" }} placeholder="닉네임"
+          <input style={{ outline: "none", border: "none" }} placeholder={profile?.data?.data?.nickname}
             name="value"
             type="text"
             value={set.value}
@@ -215,7 +218,7 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
         : type === "call" ?
           <>
             <p>휴대폰 번호</p>
-            <Input placeholder="예시) 01012345678"
+            <Input placeholder={profile?.data?.data?.phoneNumber}
               name="phonenumber"
               type="text"
               value={set.phonenumber}
@@ -292,11 +295,18 @@ const ProEdit = ({ set, onChangeHandler, setChk }) => {
           // 이메일 수정 시에 동작하는 내용
           : <>
             <p>이메일</p>
+            {profile?.data?.data?.email!==null?
+            <Input placeholder={profile?.data?.data?.email}
+              name="email"
+              type="text"
+              value={set.email}
+              onChange={(e) => { onChangeHandler(e) }} />:
             <Input placeholder="이메일"
               name="email"
               type="text"
               value={set.email}
               onChange={(e) => { onChangeHandler(e) }} />
+            }
             {/* 이메일 유효성 검사 경고문구 출력 */}
             {set.email === "" ? null : regexEmail.test(set.email) ?
               ment === "사용 가능한 이메일 입니다" ?
