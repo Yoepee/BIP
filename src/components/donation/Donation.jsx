@@ -78,8 +78,8 @@ const Donation = () => {
                 <div style={{ fontSize: "14px", color: "#757575" }}>{post.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
-                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub" }} /> {post.numOfComment}</div>
-                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub" }} />{post.likes}</div>
+                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub", color:"#d0d0d0" }} /> {post.numOfComment}</div>
+                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub", color:"pink" }} />{post.likes}</div>
                 <div style={{ marginLeft: "auto", fontSize: "14px", color: "#757575" }}>{post.timePast}</div>
               </div>
             </Card>

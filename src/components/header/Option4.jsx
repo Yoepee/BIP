@@ -1,7 +1,6 @@
 import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
 import styled from 'styled-components';
 import AddMemberPage from '../../pages/AddMemberPage';
 import ReceiveMember from '../member/ReceiveMember';

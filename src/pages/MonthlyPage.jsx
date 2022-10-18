@@ -8,7 +8,6 @@ import Monthly from "../components/main/calendar/Monthly";
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch } from "react-redux";
 import { __getPromise } from "../redux/modules/promise";
-import Header from ".././components/header/Header";
 import axios from "axios";
 import WebHeader from "../components/header/WebHeader";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -43,7 +42,6 @@ const MonthlyPage = () => {
       <>
         <Wrap>
             <WebHeader />
-            {/* <Header  head={""} option={0}/> */}
             <BackIcon onClick={()=>{navigate('/')}}><ArrowBackIcon /></BackIcon>
             <div style={{marginTop:"30px"}}><Monthly setDay={setDay} day={day}/></div>
             {/* 약속 리스트 불러오기 */}

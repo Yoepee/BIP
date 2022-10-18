@@ -12,7 +12,6 @@ import detailDonation from "./modules/detailDonation";
 import comment from "./modules/comment";
 import month from "./modules/month";
 import login from "./modules/login";
-import token from "./modules/token";
 
 export default configureStore({
   reducer: {
@@ -42,7 +41,5 @@ export default configureStore({
     month : month.reducer,
     // 로그인 여부 확인
     login : login.reducer,
-    // 토큰 재발급 확인
-    token : token.reducer
   }
 });
