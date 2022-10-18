@@ -77,7 +77,7 @@ const Option9 = ({ head }) => {
       <div style={{ marginLeft: "auto", marginRight: "2%", display: "flex" }}>
         {donate?.data?.data?.nickname === localStorage.getItem("name") ?
           <div onClick={() => { setChk(!chk) }} style={{ marginRight: "2%" }}>
-            <p style={{ color: "#D9DCFB" }}><MoreVertIcon /></p>
+            <p style={{ color: "#6B68F3" }}><MoreVertIcon /></p>
           </div>
           : null}
         {chk == 1 ?
