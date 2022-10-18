@@ -188,7 +188,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       </UnderLine>
       <UnderLine >
         <span style={{ marginRight: "10px",marginBottom: "20px", width:"40px" }}>내용</span>
-        <input style={{ border: "none", outline: "none",marginBottom: "20px", width:"100%"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요." name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
+        <input style={{ border: "none", outline: "none",marginBottom: "20px", width:"100%"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요" name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </UnderLine>
       <UnderLine>
         <div>
