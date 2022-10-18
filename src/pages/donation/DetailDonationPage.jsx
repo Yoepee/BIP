@@ -9,8 +9,10 @@ import styled from "styled-components";
 const DetailDonationPage = () =>{
   return (
     <>
-    <WebHeader />
-    <StHeader><Header head={"기부 상세"} option={9}/></StHeader>
+    <div style={{display:"flex"}}>
+      <WebHeader />
+      <Header option={9}/>
+    </div>
     <DetailDonation/>
     <Comment/>
     </>
@@ -19,9 +21,3 @@ const DetailDonationPage = () =>{
 
 export default DetailDonationPage;
 
-const StHeader = styled.div`
-  @media screen and (min-width: 769px) {
-    
-    visibility: hidden;
-  }
-`
