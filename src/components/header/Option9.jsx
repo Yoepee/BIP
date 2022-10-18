@@ -48,7 +48,9 @@ const Option9 = ({ head }) => {
       cancelButtonText: '취소',
     }).then(async (result) => {
       if (result.isConfirmed) {
+
         await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/delete/${id}`, null, {
+
           headers: {
             Authorization: localStorage.getItem('Authorization'),
             RefreshToken: localStorage.getItem('RefreshToken'),
