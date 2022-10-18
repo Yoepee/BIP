@@ -213,7 +213,7 @@ const Comment = () => {
                     </ModalRight>
                     : null}
                 </div>
-                <div style={{ marginLeft: "10px" }}>{comment.content}</div>
+                <StComent>{comment.content}</StComent>
                 <div style={{ marginLeft: "10px", marginRight: "10px", color: "#757575", fontSize: "14px" }}>{comment.createdAt}</div>
 
               </CommentCard>
@@ -294,3 +294,11 @@ text-align: center;
   background-color:#3E09D1;
   color:white;
 }`
+
+const StComent = styled.div `
+  margin-left: 10px;
+  width: 95%;
+  @media screen and (min-width: 769px){
+    width:89%
+  }
+`
