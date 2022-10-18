@@ -137,7 +137,7 @@ const ChangePhone = ({__isSSE}) => {
           // 카카오 최초 로그인
         })
       })
-    } else {
+    } else if (type==="kakao"){
       __isToken().then(async () => {
         await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/kakao", { authCode: test, phoneNumber: payload.value }, {
           headers: {
@@ -148,6 +148,32 @@ const ChangePhone = ({__isSSE}) => {
           
           if (response.data.success) {
             // 카카오 최초 로그인시 토큰 재발급으로 새로 저장필요
+            localStorage.setItem("Authorization", response.headers.authorization);
+            localStorage.setItem("RefreshToken", response.headers.refreshtoken);
+            // 닉네임 없으면 닉네임 설정 페이지 이동
+            if (response?.data?.data?.nickname === null) {
+              navigate("/signup/nickname")
+              // 이상 없으면 메인페이지
+            } else {
+              __isSSE();
+              navigate("/")
+            }
+          } else {
+            Swal.fire(response.data.data, "　", "error");
+          }
+        })
+      })
+      // 네이버 최초 로그인
+    }else{
+      __isToken().then(async () => {
+        await axios.put(process.env.REACT_APP_SERVER_HOST + "/api/user/phonenumber/naver", { authCode: test, phoneNumber: payload.value }, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        }).then((response) => {
+          if (response.data.success) {
+            // 네이버 최초 로그인시 토큰 재발급으로 새로 저장필요
             localStorage.setItem("Authorization", response.headers.authorization);
             localStorage.setItem("RefreshToken", response.headers.refreshtoken);
             // 닉네임 없으면 닉네임 설정 페이지 이동
