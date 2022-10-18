@@ -23,7 +23,7 @@ export const __getDetailDonation = createAsyncThunk(
 );
 // 재능기부 게시글 추가하기 
 export const __addDonation = createAsyncThunk(
-  "/api/posts/{postId}",
+  "/api/posts/{postId}_add",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/posts`, payload, {
@@ -32,8 +32,6 @@ export const __addDonation = createAsyncThunk(
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
       })
-      if (data.data.success === false)
-        Swal.fire(data.data.error.message, "　", "error");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -42,7 +40,7 @@ export const __addDonation = createAsyncThunk(
 );
 //재능기부 게시글 수정하기 (payload = {id:"게시글 번호", data:"수정내용"})
 export const __editDonation = createAsyncThunk(
-  "/api/posts/{postId}",
+  "/api/posts/{postId}_edit",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.put(process.env.REACT_APP_SERVER_HOST + `/api/posts/${payload.id}`, payload.data, {
@@ -51,8 +49,6 @@ export const __editDonation = createAsyncThunk(
           RefreshToken: localStorage.getItem('RefreshToken'),
         }
       })
-      if (data.data.success === false)
-        Swal.fire(data.data.error.message, "　", "error");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -99,7 +95,8 @@ export const detailDonation = createSlice({
     },
     [__addDonation.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.data = action.payload; // 받아온 데이터 값을 data에 입력
+      if(action.payload.data.success)
+        state.data = action.payload; // 받아온 데이터 값을 data에 입력
     },
     [__addDonation.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
@@ -111,7 +108,8 @@ export const detailDonation = createSlice({
     },
     [__editDonation.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.data = action.payload; // 받아온 데이터 값을 data에 입력
+      if(action.payload.data.success)
+        state.data = action.payload; // 받아온 데이터 값을 data에 입력
     },
     [__editDonation.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

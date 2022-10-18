@@ -64,7 +64,7 @@ export const __editPromise = createAsyncThunk(
 
 // 멤버 초대 (닉네임 값을 이용해서 멤버초대)
 export const __invitePromise = createAsyncThunk(
-  "/api/events/{eventId}",
+  "/api/events/{eventId}a",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/events/${payload.id}`, { nickname: payload.nickname }, {

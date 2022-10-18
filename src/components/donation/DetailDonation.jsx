@@ -29,7 +29,6 @@ const DetailDonation = () => {
       }
     })
   }
-
   useEffect(() => {
     __isToken().then(() => {
       dispatch(__getDetailDonation(id));

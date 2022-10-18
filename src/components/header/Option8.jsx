@@ -53,12 +53,17 @@ const Option8 = ({ head, payload }) => {
           __isToken().then(() => {
             dispatch(__addDonation(payload))
               .then((response) => {
-                navigate(`/detaildonation/${response.payload.data.id}`);
+                if(response.payload.success){
+                  navigate(`/detaildonation/${response.payload.data.id}`);
+                }else{
+                  Swal.fire(response.payload.data,"　","error");
+                  return;
+                }
               })
           })
         } else {
           Swal.fire({
-            title: `약속을 수정하시겠습니까?`,
+            title: `게시물을 수정하시겠습니까?`,
             showCancelButton: true,
             confirmButtonColor: '#3E09D1',
             cancelButtonColor: 'tomato',
@@ -68,8 +73,13 @@ const Option8 = ({ head, payload }) => {
             if (result.isConfirmed) {
               __isToken().then(() => {
                 dispatch(__editDonation({ id: id, data: payload }))
-                  .then(() => {
-                    navigate(`/detaildonation/${id}`);
+                  .then((response) => {
+                    if(response.payload.success){
+                      navigate(`/detaildonation/${id}`);
+                    }else{
+                      Swal.fire(response.payload.data,"　","error");
+                      return;
+                    }
                   })
               })
             }
