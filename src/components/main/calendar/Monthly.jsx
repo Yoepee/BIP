@@ -75,7 +75,7 @@ const Calendar = ({ setDay, day }) => {
             let test = monthList?.data?.data?.map((a) => {
               if(a.numberOfEventInToday!==0){
                 return(`${a.eventDateTime.split("-")[2]}-${a.eventDateTime.split("-")[1]}-${a.eventDateTime.split("-")[0]}`)}})
-            let isPromise = test?.find((x) => x === String(current.format("DD-MM-YYYY"))) ? 'promise' : "";
+            let isPromise = test?.find((x) => x === String(current.format("DD-MM-YYYY"))) ? isSelected?'':"promise" : "";
             return (
               <div className={`box`} key={`${week}_${i}`} >
                 <div className={`text ${isSelected} ${isToday} ${isNone} ${isPromise}`} onClick={() => { setSelectDate(current) }}>
