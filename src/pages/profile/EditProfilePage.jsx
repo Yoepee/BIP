@@ -5,6 +5,7 @@ import ProEditText from "../../components/editprofile/ProEditText"
 import Header from "../../components/header/Header";
 import axios from "axios";
 import WebHeader from "../../components/header/WebHeader";
+import { useSelector } from "react-redux";
 
 
 // 프로필 수정 페이지
@@ -20,6 +21,9 @@ const EditProfilePage = () => {
         phonenumber:"",
         authCode:""
     }
+    
+    const profile = useSelector((state)=>state.profile);
+
     // 초기값 지정
     const [set, setSet] = useState(initialState);
     // 값이 제대로 들어갔는지 확인하는 용도 (중복 및 유효성검사 걸리는지 여부 체크)
@@ -30,9 +34,14 @@ const EditProfilePage = () => {
     const onChangeHandler = (e) => {
         const {name, value} = e.target;
         setSet({...set, [name]: value})
-      }
-    
+    }
 
+    useEffect(()=>{
+        if(profile?.data?.data?.profileImgUrl!==null){
+            setImg({...img,imgUrl:profile?.data?.data?.profileImgUrl})
+          }
+      },[])
+    
     return (
         <div>
             <WebHeader />
