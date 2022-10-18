@@ -100,7 +100,7 @@ const DetailDonation = () => {
     })
   }
   return (
-    <Wrap style={{ width: "80%", margin: "0 auto" }}>
+    <Wrap >
       <div style={{ display: "flex", marginBottom: "10px" }}>
         <Category style={{ marginRight: "10px" }}>
           {donation?.data?.data?.board === "request" && <div> 재능요청</div>}
@@ -189,13 +189,15 @@ const DetailDonation = () => {
 }
 export default DetailDonation;
 
+
+
 const Wrap = styled.div`
-  
+  width: 80%;
+  margin: 30px auto;
+
   @media screen and (min-width: 769px) {
     max-width: 1400px;
   }
-  margin: 0 auto;
-
 `
 
 const Category = styled.div`

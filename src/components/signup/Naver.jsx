@@ -22,7 +22,9 @@ const Naver = ({__isSSE}) => {
         localStorage.setItem("RefreshToken", response.headers.refreshtoken);
         dispatch(readSocial(response.data.data));
         // 닉네임 없으면 수정하는 페이지로 전달
-        if(response.data.data.nickname===null){
+        if( response.data.data.phoneNumber===null){
+          navigate("/signup/change/naver");
+        }else if(response.data.data.nickname===null){
           navigate("/signup/nickname");
         }else{
           // 닉네임이 있다면, 닉네임을 로컬스토리지 저장
