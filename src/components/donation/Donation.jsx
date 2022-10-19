@@ -125,6 +125,7 @@ const Card = styled.div`
   border-radius: 8px;
   padding: 10px 20px;
   margin-bottom: 20px;
+  cursor: pointer;
   @media screen and (min-width:769px) {
    max-width :769px ;
   }

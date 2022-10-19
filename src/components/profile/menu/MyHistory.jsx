@@ -214,8 +214,8 @@ const MyHistory = () => {
                 <div style={{ fontSize: "14px", color: "#757575" }}>{item.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
-                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub" }} /> {item.numOfComment}</div>
-                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub" }} />{item.likes}</div>
+                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub", color:"#d0d0d0" }} /> {item.numOfComment}</div>
+                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub", color:"pink" }} />{item.likes}</div>
                 <div style={{ marginLeft: "auto", fontSize: "14px", color: "#757575" }}>{item.createdAt}</div>
               </div>
             </div>
@@ -234,7 +234,7 @@ const Cards = styled.div`
   min-width: 360px;
   max-width: 1000px;
   margin: 30px auto;
- 
+  cursor: pointer;
 
   @media screen and (min-width: 769px) {
     max-width :769px ;
@@ -265,15 +265,16 @@ const PointIcon = styled.span`
 
 const PromiseCard = styled.div`
   /* min-width: 350px; */
-  height: 100%;
+  width: 80%;
   background-color: #FAFAFA;
   /* border: 1px solid #F0F0F0; */
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+  margin: 10px auto;
   padding: 0 10px;
   border-radius: 4px;
   font-size: 13px;
   position: relative;
+  cursor: pointer;
   
   .lastTime {
     position: absolute;
