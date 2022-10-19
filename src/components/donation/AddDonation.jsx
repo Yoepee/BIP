@@ -192,7 +192,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       </UnderLine>
       <UnderLine >
         <span style={{ marginRight: "10px",marginBottom: "20px", width:"40px" }}>내용</span>
-        <input style={{ border: "none", outline: "none",marginBottom: "20px", width:"100%"}} placeholder="재능 기부를 할 내용 혹은 기부 요청할 내용을 적으세요" name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
+        <input style={{ border: "none", outline: "none",marginBottom: "20px", width:"100%"}} placeholder="재능 기부를 하거나 기부 요청할 내용을 적어주세요" name="content" value={donate.content} onChange={(e) => { onChangeHandler(e) }} />
       </UnderLine>
       <UnderLine>
         <div>
@@ -200,7 +200,8 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
         <span style={{ marginBottom:"20px", width:"40px"}}>사진</span>
         <STcamera className="input_file_button" htmlFor="input_file">
           <CameraAltIcon fontSize="large" style={{marginLeft: "0"}} />
-          <div style={{color:"rgb(133, 133, 133)", marginLeft:"5px", marginTop:"5px", fontSize:"13px",width:"100%"}}>사진은 최소 0장 ~ 최대 4장까지 올리실 수 있습니다</div>
+          <div style={{color:"rgb(133, 133, 133)", marginLeft:"5px", marginTop:"5px", fontSize:"13px", width:"100%"}}>사진은 최소 0장 ~ 최대 4장까지 올릴 수 있습니다</div>
+
         </STcamera>
         <input style={{ marginLeft: "10px",marginBottom: "20px", display:"none" }} type="file" id="input_file" onChange={onChange} accept="image/jpg,/impge/png,image/jpeg" />
         </div>
@@ -235,7 +236,7 @@ const AddDonation = ({ donate, setDonate, onChangeHandler, imgList, setImgList }
       <div>장소</div>
       {openAddr ? null :
         roadAddress === null ?
-          <div style={{ color: "#D9D9D9" }}
+          <div style={{ color: "rgb(133, 133, 133)", cursor:"pointer" }}
             onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
           : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
       }
