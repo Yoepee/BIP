@@ -33,15 +33,16 @@ const AddPromise = ({
   time,
   am,
   setAm,
-  setTime
+  setTime,
+  date,
+  setDate
 }) => {
   // 날짜 선택 달력 출력 여부 결정
   const [check, setCheck] = useState(false);
-  // 오늘 날짜 기본 세팅
-  const now = new Date();
-  const [date, setDate] = useState(now);
   // 약속 선택 (자신과의 약속, 타인과의 약속)
   const [modal, setModal] = useState(false);
+  const [hourModal, setHourModal] = useState(false);
+  const [minModal, setMinModal] = useState(false);
   const { kakao } = window;
   // 주소 검색 후 나온 결과 주소값 지정
   const [roadAddress, setRoadAddress] = useState(null);
@@ -197,7 +198,7 @@ const AddPromise = ({
       }
     }
   }, [time, date, am]);
-
+  
   return (
     <>
       <Wrap>
@@ -240,7 +241,7 @@ const AddPromise = ({
           />
         </UnderLine>
         {/* 약속 대상 선택 */}
-        <Who>
+        <Who style={{position:"relative"}}>
           {/* 선택값에 따른 div표시 변경 */}
           <label style={{ fontWeight: "bold" }}>약속 대상</label>
           {promise.point === "0" && !modal ?
@@ -324,24 +325,32 @@ const AddPromise = ({
           </div>
           {/* 시, 분 select로 설정 */}
 
-          <Select  onChange={(e)=>{setTime({...time,hour:e.target.value})}}>
+          <div style={{position:"relative", display:"flex", cursor:"pointer"}} onClick={()=>{setHourModal(!hourModal)}}>
+          <div style={{width:"20px"}}>{time.hour}</div>
+          <div>시</div>
+          {hourModal?
+          <STHour>
             {hourList.map((hour)=>{
               return(
-                <option style={{background:"white"}} value={hour}>{hour}</option>
+                <OptionMenu key={hour} onClick={()=>{setTime({...time,hour:hour});setHourModal(!hourModal);}}>{hour}</OptionMenu>
               )
             })}
-          </Select>
-          <div>시</div>
-
-
-          <Select  onChange={(e)=>{setTime({...time,min:e.target.value})}}>
+          </STHour>
+          :null}
+          </div>
+          <div style={{position:"relative", display:"flex", cursor:"pointer"}} onClick={()=>{setMinModal(!minModal)}}>
+          <div style={{width:"20px"}}>{time.min}</div>
+          <div></div>
+          <div>분</div>
+          {minModal?<STMin>
             {minList.map((min)=>{
               return(
-                <option style={{background:"white"}} value={min}>{min}</option>
+                <OptionMenu key={min} onClick={()=>{setTime({...time,min:min});setMinModal(!minModal);}}>{min}</OptionMenu>
               )
             })}
-          </Select>
-          <div>분</div>
+          </STMin>
+          :null}
+          </div>
         </When>
         {/* 달력 아이콘 클릭시 출력되는 달력 */}
         {check ? (
@@ -355,7 +364,7 @@ const AddPromise = ({
           <div style={{fontWeight:"bold"}}>장소</div>
           {openAddr ? null :
             roadAddress === null ?
-              <div style={{ color: "#D9D9D9" }}
+              <div style={{ color: "rgb(133, 133, 133)", cursor:"pointer" }}
                 onClick={() => { setOpenAddr(!openAddr) }}>주소검색</div>
               : <div onClick={() => { setOpenAddr(!openAddr) }}>{roadAddress}</div>
           }
@@ -414,6 +423,7 @@ const When = styled.div`
   /* background-color: skyblue; */
   width: 70%;
   display: flex;
+  position: relative;
   margin: 5% 5% 5% 12%;
   justify-content: space-around;
   align-items: center;
@@ -467,12 +477,37 @@ cursor: pointer;
 
 const ModalArea = styled.div`
 background-color: #FAFAFA;
-position: relative;
+position: absolute;
 text-align: center;
 top: 30px;
-right: 110px;
+left: 60px;
 width: 150px;
 border: 1px solid #e0e0e0; 
 box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
 border-radius: 8px;
+z-index:20;
+`
+
+const STHour = styled.div`
+background-color: #FAFAFA;
+position: absolute;
+text-align: center;
+border: 1px solid #e0e0e0; 
+box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+border-radius: 8px;
+width: 30px;
+top: 30px;
+z-index:20;
+`
+
+const STMin = styled.div`
+background-color: #FAFAFA;
+position: absolute;
+text-align: center;
+border: 1px solid #e0e0e0; 
+box-shadow: rgb(0 0 0 / 10%) 0 1px 20px 0px;
+border-radius: 8px;
+width: 30px;
+z-index:20;
+top: 30px;
 `

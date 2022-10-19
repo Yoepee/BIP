@@ -12,6 +12,7 @@ import WebHeader from "../../components/header/WebHeader";
 const AddPromisePage = () => {
   // 서버에 약속 추가하는 내용 initialState값 request api명세서 참조
   const now = new Date();
+  const [date, setDate] = useState(now);
   const initialState = {
     title: "",
     eventDateTime: dayjs(now).format(`YYYY-MM-DD-01-00-00`),
@@ -61,6 +62,7 @@ const AddPromisePage = () => {
               eventDateTime: dayjs(new Date(response.payload.data.eventDateTime.split("-")[0], Number(response.payload.data.eventDateTime.split("-")[1]) - 1, response.payload.data.eventDateTime.split("-")[2])).format(`YYYY-MM-DD-${response.payload.data.eventDateTime.split("-")[3]}-${response.payload.data.eventDateTime.split("-")[4]}-00`),
               point: response.payload.data.point
             });
+            setDate(new Date(response.payload.data.eventDateTime.split("-")[0], response.payload.data.eventDateTime.split("-")[1], response.payload.data.eventDateTime.split("-")[2] ));
             if(Number(response.payload.data.eventDateTime.split("-")[3])>12){
               setTime({ ...initialState2, hour: Number(response.payload.data.eventDateTime.split("-")[3])-12, min: response.payload.data.eventDateTime.split("-")[4] });
             }else{
@@ -112,7 +114,7 @@ const AddPromisePage = () => {
       {/* 헤더 옵션 2 */}
       <Header head={"약속하기"} option={2} payload={promise} />
       {/* 약속 생성 수정할 수 있는 값 전달 */}
-      <AddPromise promise={promise} setPromise={setPromise} onChangeHandler={onChangeHandler} onChange={onChange} time={time} am={am} setAm={setAm} setTime={setTime}/>
+      <AddPromise promise={promise} setPromise={setPromise} onChangeHandler={onChangeHandler} onChange={onChange} time={time} am={am} setAm={setAm} setTime={setTime} date={date} setDate={setDate}/>
     </>
   )
 }
