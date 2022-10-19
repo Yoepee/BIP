@@ -271,7 +271,7 @@ text-align: center;
   color:white;
 }`
 
-// style={{ display: "flex", flexDirection: "column", borderRadius: "8px", boxShadow: "3px 3px 3px 3px #EFEEF0", width: "90px", padding: "10px", marginBottom: "10px" }}
+
 const CategoryKind = styled.div`
   position : absolute;
   border: 0.8px solid #e0e0e0; 
