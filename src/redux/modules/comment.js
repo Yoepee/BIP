@@ -102,7 +102,6 @@ export const comment = createSlice({
       console.log(action.payload)
       if (action.payload.page === 0) {
         // 처음 불러오기때 데이터 변경
-        if(action.payload.data.data.length!==0)
           state.data = action.payload.data;
       } else {
         // 이후 인피니티 스크롤 시 데이터 앞에 저장
