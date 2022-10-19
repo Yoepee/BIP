@@ -305,7 +305,7 @@ border-radius: 50%;
 border: none;  
 background-color:#ffffff6f;
 position: absolute; 
-margin: 2px 70px;
+margin: 10px 70px;
 padding: 0;
 `
 
