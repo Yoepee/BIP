@@ -63,7 +63,7 @@ const Chat = () => {
       }).then((res) => {
         if (res.data.data) {
           connect();
-          dispatch(__getChat({ id, page: page.current }));
+          dispatch(__getChat({ id, page: 0 }));
         } else {
           Swal.fire("채팅방 멤버가 아닙니다.", "　", "error")
         }

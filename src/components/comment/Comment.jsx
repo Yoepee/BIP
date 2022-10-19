@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { __editComment, __getComment, __removeComment } from "../../redux/modules/comment";
@@ -11,6 +11,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import styled from 'styled-components'
 import axios from "axios";
 import { __addMemberName } from "../../redux/modules/member";
+import { useInView } from 'react-intersection-observer';
 import Swal from "sweetalert2";
 
 const Comment = () => {
@@ -18,6 +19,11 @@ const Comment = () => {
   const dispatch = useDispatch();
   const commentList = useSelector((state) => state.comment);
   const detailDonation = useSelector((state) => state.detailDonation);
+  // 인피니티 스크롤
+  const page = useRef(0);
+  const [ref, inView] = useInView();
+  const [hasNextPage, setHasNextPage] = useState(true);
+
   const initialState = {
     content: ""
   }
@@ -45,7 +51,18 @@ const Comment = () => {
     __isToken().then(()=>{
     dispatch(__getComment({ id: id, page: 0 }));
     })
-  }, [dispatch, id])
+  }, [id])
+
+  // 인피니티 스크롤 기능 (다음페이지 데이터 받아옴)
+  const fetch = useCallback(() => { 
+    __isToken().then(() => { dispatch(__getComment({ id, page: page.current })); page.current += 1; }) 
+  }, []);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetch();
+    }
+  }, [fetch, hasNextPage, inView]);
 
   const editComment = (CommentId) => {
     Swal.fire({
@@ -160,7 +177,7 @@ const Comment = () => {
     }
   })
   }
-
+  console.log(commentList)
   return (
     <>
       <CommentWrap>
@@ -220,6 +237,8 @@ const Comment = () => {
             )
           }
         })}
+        {/* 인피니티 스크롤 인식 ref */}
+        <div ref={ref} style={{backgroundColor:"pink", width:"50px"}} />
       </CommentWrap>
     </>
   )

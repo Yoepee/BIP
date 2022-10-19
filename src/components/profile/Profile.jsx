@@ -113,7 +113,7 @@ const Profile = () => {
           </div>
           <p>약속이행 : {profile?.data?.data?.numOfDone}</p>
         </Prodiv>
-        <Prodiv style={{ flexDirection: "column", paddingLeft:"10px", paddingRight:"10px" }}>
+        <Prodiv style={{ flexDirection: "column", paddingLeft:"10px", paddingRight:"10px", cursor:"pointer" }}>
           <p onClick={()=>{Swal.fire("준비중입니다.")}}>이용방법</p>
         </Prodiv>
       </div>

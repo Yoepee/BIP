@@ -70,7 +70,7 @@ const Option5 = ({ head, payload, onChangeHandle }) => {
             }
           })
         }}
-        style={{ marginLeft: "auto", marginRight: "2%" }}>
+        style={{ marginLeft: "auto", marginRight: "2%", cursor:"pointer" }}>
         <p>찾기</p>
       </div>
     </>
