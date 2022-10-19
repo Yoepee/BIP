@@ -104,7 +104,6 @@ const Router = () => {
             };
 
             eventSource.onmessage = event => {
-                console.log(JSON.parse(event.data))
                 // 최초 입장 메세지 출력 x
                 if(JSON.parse(event.data).message === "입장"){
                 }else if(JSON.parse(event.data).message === "채팅"){
