@@ -15,7 +15,7 @@ export const __getComment = createAsyncThunk(
       })
       if (data.data.success === false)
         Swal.fire(data.data.data, "　", "error");
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue({ data: data.data, page: payload.page });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -99,7 +99,16 @@ export const comment = createSlice({
     },
     [__getComment.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.data = action.payload; // 받아온 데이터 값을 data에 입력
+      console.log(action.payload)
+      if (action.payload.page === 0) {
+        // 처음 불러오기때 데이터 변경
+        if(action.payload.data.data.length!==0)
+          state.data = action.payload.data;
+      } else {
+        // 이후 인피니티 스크롤 시 데이터 앞에 저장
+        state.data.data.push(...action.payload.data.data);
+      } // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      // state.data = action.payload; // 받아온 데이터 값을 data에 입력
     },
     [__getComment.rejected]: (state, action) => {
       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

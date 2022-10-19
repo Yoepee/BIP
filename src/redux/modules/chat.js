@@ -53,7 +53,7 @@ export const chat = createSlice({
         // 이후 인피니티 스크롤 시 데이터 앞에 저장
 
         state.data.unshift(...action.payload.data.data.reverse());
-      } // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      }
     }
     },
     [__getChat.rejected]: (state, action) => {
