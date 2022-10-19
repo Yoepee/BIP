@@ -104,19 +104,63 @@ const Router = () => {
             };
 
             eventSource.onmessage = event => {
+                console.log(JSON.parse(event.data))
                 // 최초 입장 메세지 출력 x
-                if(event.data === "입장"){}
+                if(JSON.parse(event.data).message === "입장"){
+                }else if(JSON.parse(event.data).message === "채팅"){
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission().then((permission) => {
+                            if (permission === "granted") {
+                                /* 권한을 요청받고 nofi를 생성해주는 부분 */
+                                const noti = new Notification("읽지않은 채팅이 있습니다.", { body: "채팅을 확인해주세요." });
+                                noti.addEventListener("click",()=>{
+                                    navigate(`/chat/${JSON.parse(event.data).eventId}`)
+                                })
+                            }
+                        });
+                    } else {
+                        /* 권한이 있을때 바로 noti 생성해주는 부분 */
+                        const noti = new Notification("읽지않은 채팅이 있습니다.", { body: "채팅을 확인해주세요." });
+                        noti.addEventListener("click",()=>{
+                            navigate(`/chat/${JSON.parse(event.data).eventId}`)
+                        })
+                    }
+                }else if(JSON.parse(event.data).message === "댓글"){
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission().then((permission) => {
+                            if (permission === "granted") {
+                                /* 권한을 요청받고 nofi를 생성해주는 부분 */
+                                const noti = new Notification("새로운 댓글이 있습니다.", { body: "내용을 확인해주세요." });
+                                noti.addEventListener("click",()=>{
+                                    navigate(`/detaildonation/${JSON.parse(event.data).eventId}`)
+                                })
+                            }
+                        });
+                    } else {
+                        /* 권한이 있을때 바로 noti 생성해주는 부분 */
+                        const noti = new Notification("새로운 댓글이 있습니다.", { body: "내용을 확인해주세요." });
+                        noti.addEventListener("click",()=>{
+                            navigate(`/detaildonation/${JSON.parse(event.data).eventId}`)
+                        })
+                    }
+                }
                 else{
                 if (Notification.permission !== "granted") {
                     Notification.requestPermission().then((permission) => {
                         if (permission === "granted") {
                             /* 권한을 요청받고 nofi를 생성해주는 부분 */
-                            new Notification(event.data, { body: "약속을 확인해주세요." });
+                            const noti = new Notification(JSON.parse(event.data).message, { body: "약속을 확인해주세요." });
+                            noti.addEventListener("click",()=>{
+                                navigate(`/detailpromise/${JSON.parse(event.data).eventId}`)
+                            })
                         }
                     });
                 } else {
                     /* 권한이 있을때 바로 noti 생성해주는 부분 */
-                    new Notification(event.data, { body: "약속을 확인해주세요." });
+                    const noti = new Notification(JSON.parse(event.data).message, { body: "약속을 확인해주세요." });
+                    noti.addEventListener("click",()=>{
+                        navigate(`/detailpromise/${JSON.parse(event.data).eventId}`)
+                    })
                 }
                 }
             };
