@@ -40,6 +40,7 @@ const Router = () => {
 
     const locationHook = useLocation();
 	const [currentLastUrl, setCurrentLastUrl] = useState(null);
+    const [currentLastId, setCurrentLastId] = useState(null);
     //채팅 나가기 식별 
     const exitChat = async(id) => {
         await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/disconnect/${id}`, null, {
@@ -54,15 +55,18 @@ const Router = () => {
         const splitUrl = locationHook?.pathname?.split('/') ?? null;
         const location =
             splitUrl?.length > 1 ? splitUrl[splitUrl.length - 2] : null;
+        const lastId = 
+            splitUrl?.length > 1 ? splitUrl[splitUrl.length - 1] : null;
         setCurrentLastUrl(location);
-        if(location==="chat"){
+        setCurrentLastId(lastId);
+        if(currentLastUrl==="chat"){
             __isToken().then(() => {
                 dispatch(__getLogin())
                     .then((res) => {
                         if(!res.payload.data){
                             navigate("/intro");
                         }else{
-                            exitChat(splitUrl[splitUrl.length - 1])
+                            exitChat(currentLastId)
                         }
                     });
                 });
