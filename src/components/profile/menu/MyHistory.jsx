@@ -175,8 +175,8 @@ const MyHistory = () => {
                 <div style={{ fontSize: "14px", color: "#757575" }}>{item.nickname}</div>
               </div>
               <div style={{ display: "flex", marginTop: "10px", color: "#a1a0a0" }}>
-                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub" }} /> {item.numOfComment}</div>
-                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub" }} />{item.likes}</div>
+                <div><ChatBubbleIcon style={{ fontSize: "18px", verticalAlign: "sub", color:"#d0d0d0" }} /> {item.numOfComment}</div>
+                <div><FavoriteIcon style={{ marginLeft: "5px", fontSize: "18px", verticalAlign: "sub", color:"pink"  }} />{item.likes}</div>
                 <div style={{ marginLeft: "auto", fontSize: "14px", color: "#757575" }}>{item.timePast}</div>
               </div>
             </div>
@@ -266,6 +266,7 @@ const PointIcon = styled.span`
 const PromiseCard = styled.div`
   /* min-width: 350px; */
   width: 80%;
+  max-width: 1000px;
   background-color: #FAFAFA;
   /* border: 1px solid #F0F0F0; */
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
@@ -280,12 +281,12 @@ const PromiseCard = styled.div`
     position: absolute;
     right: 10px;
   }
-  @media screen and (min-width: 769px) {
+  /* @media screen and (min-width: 769px) {
     width: 220px;
-    /* height: 120px; */
+    height: 120px;
     font-size: 12px;
     margin: 0 auto;
-  }
+  } */
 `;
 
 const People = styled.p`
