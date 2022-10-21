@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import SignUpNickname from "../pages/signup/SignUpNickname"
 import SignUp from "../pages/signup/SignUp"
 import SignUpEmail from "../pages/signup/SignUpEmail"
@@ -26,6 +26,7 @@ import { useDispatch } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 import  {  NativeEventSource ,  EventSourcePolyfill  }  from  'event-source-polyfill' ;
+import { current } from "@reduxjs/toolkit"
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -37,6 +38,36 @@ const Router = () => {
 
     let eventSource = undefined;
 
+    const locationHook = useLocation();
+	const [currentLastUrl, setCurrentLastUrl] = useState(null);
+    //채팅 나가기 식별 
+    const exitChat = async(id) => {
+        await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/disconnect/${id}`, null, {
+          headers: {
+            Authorization: localStorage.getItem('Authorization'),
+            RefreshToken: localStorage.getItem('RefreshToken'),
+          }
+        });
+      }
+
+    useEffect(() => {
+        const splitUrl = locationHook?.pathname?.split('/') ?? null;
+        const location =
+            splitUrl?.length > 1 ? splitUrl[splitUrl.length - 2] : null;
+        setCurrentLastUrl(location);
+        if(location==="chat"){
+            __isToken().then(() => {
+                dispatch(__getLogin())
+                    .then((res) => {
+                        if(!res.payload.data){
+                            navigate("/intro");
+                        }else{
+                            exitChat(splitUrl[splitUrl.length - 1])
+                        }
+                    });
+                });
+        }
+    }, [locationHook]);
 
     useEffect(() => {
         let array = window.location.href.split("/");

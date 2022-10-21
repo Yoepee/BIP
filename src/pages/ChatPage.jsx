@@ -12,8 +12,7 @@ const ChatPage = () =>{
   const dispatch = useDispatch();
   const {id} = useParams();
   const detail = useSelector((state)=>state.detailPromise);
-
-  console.log(detail)
+  
   return (
     <>
     <div style={{backgroundColor:"#FAFAFA"}}>

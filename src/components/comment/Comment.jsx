@@ -177,7 +177,7 @@ const Comment = () => {
     }
   })
   }
-  console.log(commentList)
+
   return (
     <>
       <CommentWrap>

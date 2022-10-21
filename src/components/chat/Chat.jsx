@@ -37,6 +37,33 @@ const Chat = () => {
 
   const scrollRef = useRef(null); //스크롤 하단 고정
 
+  // 새로고침 막기 변수
+  const preventClose = (e) => {
+    e.preventDefault();
+    e.returnValue = ""; // chrome에서는 설정이 필요해서 넣은 코드
+  }
+
+  const exitChat = async(e) => {
+    e.preventDefault();
+    await axios.post(process.env.REACT_APP_SERVER_HOST + `/api/chat/member/disconnect/${id}`, null, {
+      headers: {
+        Authorization: localStorage.getItem('Authorization'),
+        RefreshToken: localStorage.getItem('RefreshToken'),
+      }
+    });
+  }
+
+// 브라우저에 렌더링 시 한 번만 실행하는 코드
+useEffect(() => {
+  (() => {
+      window.addEventListener("beforeunload", exitChat);    
+  })();
+
+  return () => {
+      window.removeEventListener("beforeunload", exitChat);
+  };
+},[]);
+
   const __isToken = async () => {
     await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
       headers: {
@@ -74,6 +101,8 @@ const Chat = () => {
         disconnect();
       })
   }, []);
+
+
 
   // 인피니티 스크롤 기능 (다음페이지 데이터 받아옴)
   const fetch = useCallback(() => { 
