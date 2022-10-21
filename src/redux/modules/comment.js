@@ -99,7 +99,6 @@ export const comment = createSlice({
     },
     [__getComment.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      console.log(action.payload)
       if (action.payload.page === 0) {
         // 처음 불러오기때 데이터 변경
           state.data = action.payload.data;
