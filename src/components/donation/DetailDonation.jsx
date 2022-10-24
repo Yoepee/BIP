@@ -165,7 +165,7 @@ const DetailDonation = () => {
                 <Map><KaKaoMap lat={37.5656} lng={126.9769} width={"340px"} height={"340px"} /></Map>
                 : <Map><KaKaoMap lat={donation?.data?.data?.coordinate.split(",")[0]} lng={donation?.data?.data?.coordinate.split(",")[1]} width={"340px"} height={"340px"} /></Map>}
             </div>
-            <div style={{ fontSize: "14px", color: "#757575", margin: "10px 0" }}>{donation?.data?.data?.nickname}</div>
+            <div style={{ fontSize: "14px", color: "#757575", margin: "10px 0" }}>작성자 : {donation?.data?.data?.nickname}</div>
             <div style={{ display: "flex" }}>
               {like ?
                 <div style={{ display: "flex", margin: "15px 0", color: "#9e9e9e", cursor:"pointer" }} onClick={() => { __isToken().then(() => { __unLike();dispatch(unlikeDonate()); }) }}>
