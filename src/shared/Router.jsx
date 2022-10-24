@@ -27,6 +27,7 @@ import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 import  {  NativeEventSource ,  EventSourcePolyfill  }  from  'event-source-polyfill' ;
 import { current } from "@reduxjs/toolkit"
+import Guide from "../components/profile/Guide"
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -272,6 +273,7 @@ const Router = () => {
             <Route path="/chat/:id" exact element={<ChatPage />} />
             {/* 없는 페이지 */}
             <Route path="*" element={<div>404 Not Found</div>} />
+            <Route path="/profile/guide"  element={<Guide/>} />
         </Routes>
     )
 }
