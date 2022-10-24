@@ -26,8 +26,8 @@ import { useDispatch } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 import  {  NativeEventSource ,  EventSourcePolyfill  }  from  'event-source-polyfill' ;
-import Guide from "../components/profile/Guide"
 import { clearChat } from "../redux/modules/chat"
+import GuidePage from "../pages/profile/GuidePage"
 
 
 const Router = () => {
@@ -273,9 +273,10 @@ const Router = () => {
             <Route path="/login/naver" exact element={<NaverPage __isSSE={__isSSE}/>} />
             {/* 채팅 */}
             <Route path="/chat/:id" exact element={<ChatPage />} />
+            {/* 이용방법 페이지 */}
+            <Route path="/profile/guide"  element={<GuidePage/>} />
             {/* 없는 페이지 */}
             <Route path="*" element={<div>404 Not Found</div>} />
-            <Route path="/profile/guide"  element={<Guide/>} />
         </Routes>
     )
 }
