@@ -2,7 +2,7 @@ import React from 'react'
 import guide from '../../img/guide.png'
 import styled from 'styled-components'
 
-function Guide() {
+const Guide = () => {
   return (
     <StDiv >
         <img  style={{width:"100%"}} src={guide} />
@@ -10,7 +10,7 @@ function Guide() {
   )
 }
 
-export default Guide
+export default Guide;
 
 const StDiv = styled.div`
     display: flex; 
