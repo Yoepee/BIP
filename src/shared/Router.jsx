@@ -26,7 +26,7 @@ import { useDispatch } from "react-redux"
 import { __getLogin } from "../redux/modules/login"
 import MyHistoryPage from "../pages/profile/MyHistoryPage"
 import  {  NativeEventSource ,  EventSourcePolyfill  }  from  'event-source-polyfill' ;
-import { current } from "@reduxjs/toolkit"
+import { clearChat } from "../redux/modules/chat"
 
 const Router = () => {
     const dispatch = useDispatch();
@@ -67,6 +67,7 @@ const Router = () => {
                             navigate("/intro");
                         }else{
                             exitChat(currentLastId)
+                            dispatch(clearChat());
                         }
                     });
                 });
@@ -146,7 +147,7 @@ const Router = () => {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
                                 /* 권한을 요청받고 nofi를 생성해주는 부분 */
-                                const noti = new Notification("읽지않은 채팅이 있습니다.", { body: "채팅을 확인해주세요." });
+                                const noti = new Notification(`[${JSON.parse(event.data).title}]읽지않은 채팅이 있습니다.`, { body: "채팅을 확인해주세요." });
                                 noti.addEventListener("click",()=>{
                                     navigate(`/chat/${JSON.parse(event.data).eventId}`)
                                 })
@@ -154,7 +155,7 @@ const Router = () => {
                         });
                     } else {
                         /* 권한이 있을때 바로 noti 생성해주는 부분 */
-                        const noti = new Notification("읽지않은 채팅이 있습니다.", { body: "채팅을 확인해주세요." });
+                        const noti = new Notification(`[${JSON.parse(event.data).title}]읽지않은 채팅이 있습니다.`, { body: "채팅을 확인해주세요." });
                         noti.addEventListener("click",()=>{
                             navigate(`/chat/${JSON.parse(event.data).eventId}`)
                         })
@@ -164,7 +165,7 @@ const Router = () => {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
                                 /* 권한을 요청받고 nofi를 생성해주는 부분 */
-                                const noti = new Notification("새로운 댓글이 있습니다.", { body: "내용을 확인해주세요." });
+                                const noti = new Notification(`[${JSON.parse(event.data).title}]새로운 댓글이 있습니다.`, { body: "내용을 확인해주세요." });
                                 noti.addEventListener("click",()=>{
                                     navigate(`/detaildonation/${JSON.parse(event.data).eventId}`)
                                 })
@@ -172,7 +173,7 @@ const Router = () => {
                         });
                     } else {
                         /* 권한이 있을때 바로 noti 생성해주는 부분 */
-                        const noti = new Notification("새로운 댓글이 있습니다.", { body: "내용을 확인해주세요." });
+                        const noti = new Notification(`[${JSON.parse(event.data).title}]새로운 댓글이 있습니다.`, { body: "내용을 확인해주세요." });
                         noti.addEventListener("click",()=>{
                             navigate(`/detaildonation/${JSON.parse(event.data).eventId}`)
                         })

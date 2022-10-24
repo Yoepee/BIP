@@ -72,7 +72,7 @@ const Header = ({ head, option, payload, chk, setChk, image, setType, type, onCh
       <Option8 head={head} payload={payload}/>
       :null}
 
-      {/* 재능기부생성 뒤로가기(홈) 제목 완료 */}
+      {/* 재능기부 상세 */}
       {option===9?
       <Option9 head={head}/>
       :null}
