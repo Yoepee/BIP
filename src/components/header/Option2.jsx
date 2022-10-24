@@ -11,6 +11,8 @@ const Option2 = ({ head, payload }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  
+  let blank = "　";
 
   const __isToken = async () => {
     await axios.get(process.env.REACT_APP_SERVER_HOST + `/api/member/reissue`, {
@@ -30,8 +32,12 @@ const Option2 = ({ head, payload }) => {
   const isEmptyObj = (obj) => {
     if (obj.constructor === Object) {
       for (const key in obj) {
-        if (obj[key] === "")
+        if (obj[key] === ""){
+          if(key==="title") blank = "제목";
+          else if(key==="content") blank = "내용";
+          else if(key==="place"|| key === "coordinate") blank = "장소";
           return true;
+        }
       }
     }
     return false;
@@ -48,7 +54,7 @@ const Option2 = ({ head, payload }) => {
       <div onClick={() => {
         if (id === undefined) {
           if (isEmptyObj(payload)) {
-            Swal.fire("작성하지 않은 내용이 있습니다.", "　", "error")
+            Swal.fire("작성하지 않은 내용이 있습니다.", `[ ${blank} ]`, "error")
             return;
           }
           __isToken().then(() => {
