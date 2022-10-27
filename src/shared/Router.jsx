@@ -274,7 +274,7 @@ const Router = () => {
             {/* 채팅 */}
             <Route path="/chat/:id" exact element={<ChatPage />} />
             {/* 이용방법 페이지 */}
-            <Route path="/profile/guide"  element={<GuidePage/>} />
+            <Route path="/profile/guide" exact element={<GuidePage/>} />
             {/* 없는 페이지 */}
             <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
