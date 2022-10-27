@@ -1,16 +1,20 @@
+![blueberrymain](https://user-images.githubusercontent.com/110077966/198212589-53111471-d79b-4ece-a60f-1285ee721531.png)
+
 ## 프로젝트 명 : BIP (Berry Important Promise)
 
+ ![프로젝트 설명](https://user-images.githubusercontent.com/110077966/198213619-652adc49-1070-4a29-a212-61c60f69ffaf.jpg)
 ### 프로젝트 설명
 - 올바른 약속 문화 만들기
 - 상호 합의간에 조건을 걸고 조건을 지키면 서로 패널티가 없으나, 한쪽 상대방이 어기면 패널티를 지급하는 사이트
 - 자신과의 약속, 상대방과의 약속, 팀과의 약속으로 구분하여 다양한 약속을 처리하는 기능
 
+### 추가 주제 : 재능 기부 게시판을 통한 약속 나누기
+- 재능 또는 도움이 필요한 사람들에게 도움을 나눠줄 수 있고, 나눔을 요청할 수 있는 기능 추가
+
  FE github : https://github.com/Yoepee/Week8.git
 
  BE github : https://github.com/LimeKIWI/Week8.git
  
-  #### 추가 주제 : 재능 기부 게시판을 통한 약속 나누기
-  - 재능 또는 도움이 필요한 사람들에게 도움을 나눠줄 수 있고, 나눔을 요청할 수 있는 기능 추가 예정
 
 <div align=center><h1>기술 📚 STACKS</h1></div>
 <div>
@@ -38,6 +42,9 @@
   <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
   <img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=Sourcetree&logoColor=white">
   <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white">
+  <img src="https://img.shields.io/badge/EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
+  <img src="https://img.shields.io/badge/ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black">
+  <img src="https://img.shields.io/badge/FileZilla-BF0000?style=for-the-badge&logo=FileZilla&logoColor=white">
 </div>
 
 
@@ -45,21 +52,28 @@
 ## 프로젝트 구조
 
 - 프로젝트 구조
-    - 회원가입 & 로그인
-    - 약속 리스트
-    - 멤버 리스트 (약속 상대)
-    - 나의 정보
+    - 회원가입 & 로그인 (네이버 SENS, SMTP 문자 & 메일인증 구현 + Oauth 소셜 로그인 [ 네이버, 카카오 ], 슬라이드 [ MUI ])
+    - 약속 리스트 (주간, 월간달력 [ React-Calendar, dayjs ], 실시간 날씨 정보 [ OpenWeather API ], 지도 [ KAKAO MAP, KAKAO GEOCODE, DAUM POSTCODE ])
+    - 채팅방 ( WebSocket, STOMP, SockJS, 무한스크롤 [ Intersection Observer ] )
+    - 재능기부 커뮤니티 (좋아요, 댓글, 신고하기, 이미지 리사이저 [ java-image-scaling ])
+    - 멤버 리스트 (약속 상대 추가 [닉네임, 연락처 ], 친구 검색, 별명부여)
+    - 나의 정보 ( 프로필, 신용점수 관리, 이용방법 )
+    - 실시간 알림 ( 약속시간 하루, 1시간, 10분전 알림, 약속 초대, 채팅, 게시물 댓글 [ SSE ] )
+    - 체크인
+    - 반응형 웹 (PC, 모바일, PWA)
+    - HTTPS ( EC2, CertBot, Nginx, node )
     
     #### 추가 기획안
-    
-    - 채팅 기능 (약속 대상자와의 채팅 기능)
     - 결제를 통한 약속 패널티 제공 기능 (기프티콘, 계좌이체 등)
-    - 지도 제공으로 약속 위치 구체화 (약속 생성?지정 시 위치 공유 용이)
-    - 약속시간 알림기 ( 약속시간 1시간, 30분, 10분전 알람기능 탑재 )
-    - 재능기부 주제 추가 (추가 주제)
+    - 지도 검색 기능 개선
+    - 관리자 페이지
+    - GPS 연동
+    - 구글, 애플 스토어 배포
+    - 카카오 알림톡 약속 
     
-  ### 와이어 프레임 ( 초안 )
-![와이어프레임 초안](https://user-images.githubusercontent.com/110077966/190945757-84515769-7567-46ef-b5eb-58f6b8286974.png)
+  ### 프로젝트 가이드
+  ![guide](https://user-images.githubusercontent.com/110077966/198209024-f88ced2c-1107-4ad1-8bef-f91c83f58b8f.png)
+
   
   # 프로젝트 계획 (9/16 ~ 10/28)
 
